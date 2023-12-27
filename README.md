@@ -4,3 +4,4 @@ hello evryone!
 hello Noam
 hananel world!!!!
 minip
+finish stge0
