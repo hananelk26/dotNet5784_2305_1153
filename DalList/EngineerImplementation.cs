@@ -37,16 +37,33 @@ public class EngineerImplementation : IEngineer
 
     public Engineer? Read(int id)
     {
-        throw new NotImplementedException();
+        foreach (var Engineer in DataSource.Engineers)
+        {
+            if (Engineer.Id == id)
+            {
+                return Engineer;
+            }
+        }
+        return null;
     }
 
     public List<Engineer> ReadAll()
     {
-        throw new NotImplementedException();
+        return new List<Engineer>(DataSource.Engineers);
     }
 
     public void Update(Engineer item)
     {
-        throw new NotImplementedException();
+        foreach (var Engineer in DataSource.Engineers)
+        {
+            if (Engineer.Id == item.Id)
+            {
+                DataSource.Engineers.Remove(Engineer);
+                DataSource.Engineers.Add(item);
+                break;
+            }
+        }
+        throw new Exception("Engineer object with such ID does not exist");
     }
+
 }
