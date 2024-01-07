@@ -5,10 +5,10 @@ public record Engineer
     string Email,
     double Cost,
     string Name,
-    DO.EngineerExpereience Level
-    
+    DO.EngineerExperience Level
+
 )
 {
-    public Engineer() : this(0, 0, 0, 0) { };
+    public Engineer() : this(0, "", 0, "",0) { }
 
 }

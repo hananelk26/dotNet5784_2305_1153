@@ -5,22 +5,22 @@ namespace DO;
 public record Task
 (
     int id,
-    string? Alias,
-    string? Description,
-    datetime?  createdAtDate,
-    TimeSpan? RequiredEffortTime,
-    bool? isMileStone,
-    DO.EngineerExperience? Copmlexity,
-    DateTime? StartDate,
-    DateTime? ScheduledDate,
-    DateTime? DeadlineDate,
-    DateTime? CompleteDate,
-    string? Deliverables,
-    string? Remarks,
-    int Engineerld
+    string Alias,
+    string Description,
+    DateTime  createdAtDate,
+     bool isMileStone=false,
+    TimeSpan? RequiredEffortTime = null,
+    DO.EngineerExperience? Copmlexity = null,
+    DateTime? StartDate = null,
+    DateTime? ScheduledDate = null,
+    DateTime? DeadlineDate = null,
+    DateTime? CompleteDate = null,
+    string? Deliverables = null,
+    string? Remarks = null,
+    int? Engineerld = null
 )
 {
-    public Task() : this() { };
+    public Task() : this(0,"","",DateTime.Now) { }
    
 
 }
