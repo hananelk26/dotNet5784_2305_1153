@@ -32,7 +32,17 @@ public class EngineerImplementation : IEngineer
 
     public void Delete(int id)
     {
-        throw new NotImplementedException();
+        bool flag = false;
+        foreach (Engineer item in DataSource.Engineers)
+        {
+            if (item.Id == id)
+            {
+                DataSource.Engineers.Remove(item);
+                flag = true;
+            }
+
+        }
+        if (!flag) { throw new Exception("An object of type T with such an ID does not exist"); }
     }
 
     public Engineer? Read(int id)

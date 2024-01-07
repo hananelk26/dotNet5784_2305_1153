@@ -16,7 +16,17 @@ public class DependencyImplementation : IDependency
 
     public void Delete(int id)
     {
-        throw new NotImplementedException();
+        bool flag = false;
+        foreach (Dependency item in DataSource.Dependencies)
+        {
+            if (item.Id == id)
+            {
+                DataSource.Dependencies.Remove(item);
+                flag = true;
+            }
+
+        }
+        if (!flag) { throw new Exception("An object of type T with such an ID does not exist"); }
     }
 
     public Dependency? Read(int id)
