@@ -17,7 +17,16 @@ public class TaskImplementation : ITask
 
     public void Delete(int id)
     {
-        throw new NotImplementedException();
+        bool flag = false;
+        foreach (Task item in DataSource.Tasks)
+        {
+            if (item.id == id) { 
+                DataSource.Tasks.Remove(item);
+                flag = true;
+            }
+            
+        }
+        if (!flag) { throw new Exception("An object of type T with such an ID does not exist"); }
     }
 
     public Task? Read(int id)
