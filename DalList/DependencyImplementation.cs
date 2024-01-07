@@ -18,16 +18,32 @@ public class DependencyImplementation : IDependency
 
     public Dependency? Read(int id)
     {
-        throw new NotImplementedException();
+        foreach (var Dependency in DataSource.Dependencies)
+        {
+            if (Dependency.Id == id)
+            {
+                return Dependency;
+            }
+        }
+        return null;
     }
 
     public List<Dependency> ReadAll()
     {
-        throw new NotImplementedException();
+        return new List<Dependency>(DataSource.Dependencies);
     }
 
     public void Update(Dependency item)
     {
-        throw new NotImplementedException();
+        foreach (var Dependency in DataSource.Dependencies)
+        {
+            if (Dependency.Id == item.Id)
+            {
+                DataSource.Dependencies.Remove(Dependency);
+                DataSource.Dependencies.Add(item);
+                break;
+            }
+        }
+        throw new Exception("Dependency object with such ID does not exist");
     }
 }

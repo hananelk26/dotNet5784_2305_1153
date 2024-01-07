@@ -17,18 +17,34 @@ public class TaskImplementation : ITask
         throw new NotImplementedException();
     }
 
-    public Task Read(int id)
+    public Task? Read(int id)
     {
-        throw new NotImplementedException();
+        foreach (var task in DataSource.Tasks)
+        {
+            if (task.id == id)
+            {
+                return task;
+            }
+        }
+        return null;
     }
 
     public List<Task> ReadAll()
     {
-        throw new NotImplementedException();
+        return new List<Task>(DataSource.Tasks);
     }
 
     public void Update(Task item)
     {
-        throw new NotImplementedException();
+        foreach (var task in DataSource.Tasks)
+        {
+            if(task.id == item.id)
+            {
+                DataSource.Tasks.Remove(task);
+                DataSource.Tasks.Add(item);
+                break;
+            }
+        }
+        throw new Exception("Task object with such ID does not exist");
     }
 }

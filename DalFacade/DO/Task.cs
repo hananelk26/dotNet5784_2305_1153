@@ -7,7 +7,7 @@ public record Task
     int id,
     string? Alias,
     string? Description,
-    datetime?  createdAtDate,
+    DateTime?  createdAtDate,
     TimeSpan? RequiredEffortTime,
     bool? isMileStone,
     DO.EngineerExperience? Copmlexity,
