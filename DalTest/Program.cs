@@ -422,14 +422,45 @@ internal class Program
                 case 0: 
                     break;
                 case 1:
-                    SubMenu("Engineer");
+                    try
+                    {
+                        SubMenu("Engineer");
+                        break;
+                    }
+                    catch (Exception me)
+                    {
+
+                        Console.WriteLine(me.Message);
+                    }
                     break;
+
                 case 2:
-                    SubMenu("Task");
-                    break;
+                    try
+                    {
+                        SubMenu("Task");
+                        break;
+                    }
+                    catch (Exception me)
+                    {
+                        Console.WriteLine(me.Message);
+                        break;
+                    }
+
                 case 3:
-                    SubMenu("Dependency");
-                    break;
+
+                    try
+                    {
+                        SubMenu("Dependency");
+                        break;
+                    }
+                    catch (Exception me)
+                    {
+                        Console.WriteLine(me.Message);
+                        break;
+
+                    }
+
+
                 default:
                     break;
             }

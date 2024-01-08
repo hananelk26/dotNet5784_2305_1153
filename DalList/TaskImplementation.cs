@@ -54,7 +54,7 @@ public class TaskImplementation : ITask
             {
                 DataSource.Tasks.Remove(task);
                 DataSource.Tasks.Add(item);
-                break;
+                return;
             }
         }
         throw new Exception($"Task object with ID = {item.id} does not exist");
