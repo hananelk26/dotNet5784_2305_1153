@@ -64,6 +64,12 @@ internal class Program
 
     private static void createEng()
     {
+        int Id = int.Parse(Console.ReadLine());
+        string Email = Console.ReadLine();
+        double Cost = double.Parse(Console.ReadLine());
+        string Name = Console.ReadLine();
+
+
 
 
     }
