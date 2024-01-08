@@ -35,7 +35,7 @@ public static class Initialization
             int _id;
             do
                 _id = s_rand.Next(MIN, MAX);
-            while (s_dalDependency!.Read(_id) != null);
+            while (s_dalEngineer!.Read(_id) != null);
 
             string _email;
             _email = engineerEmail[i];
@@ -53,15 +53,27 @@ public static class Initialization
 
     private static void createTask()
     {
-       
+        (string,string)[] names = new (string,string)[] { ( "t3", "Project Kickoff Meeting" ), ( "t4", "RequirZement Elicitation and Analysis" ),
+            ( "g5", "Feasibility Study" ), ( "H5", "Project Planning" ), ( "h8", "System Architecture Design" ), ( "h1", "Prototyping" ),
+            ("B3", "Database Design" ), ( "b4", "Development Environment Setup" ), ( "b5", "Development Environment Setup" ), 
+            ( "B6", "Initial Coding" ), ( "b7", "Unit Testing" ), ( "b8", "Integration Testing" ), ( "b9", "User Interface (UI) Development" ),
+            ( "V1", "User Acceptance Testing (UAT) Preparation" ), ( "V2", "Beta Release" ), ( "g1", "UAT Execution" ), 
+            ( "g2", "Refinement and Bug Fixing" ), ( "g3", "Documentation Update" ), ( "g4", "Deployment Planning" ), ( "g6", "Production Deployment" ) };
 
 
+        foreach (var (name1,name2) in names)
+        {
+         
+            DateTime start = new DateTime(1995, 1, 1);
+            int range = (DateTime.Today - start).Days;
+            DateTime _bdt = start.AddDays(s_rand.Next(range));
 
+            Task newTask = new Task(0,name1,name2,_bdt);
+            s_dalTask!.Create(newTask);
+        }
 
-        Task newTask = new Task();
-        s_dalTask!.Create(newTask);
     }
-
+  
 
     private static void createDependency()
     {
