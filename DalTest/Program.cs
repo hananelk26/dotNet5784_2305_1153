@@ -28,7 +28,7 @@ internal class Program
         Console.WriteLine("Press 6 to Delete");
     }
 
-    private static void SubMenuEngineer()
+    private static void SubMenu(string entity)
     {
         PrintSubMenu();
         int ch = int.Parse(Console.ReadLine());
@@ -36,23 +36,84 @@ internal class Program
         {
             case 1:
                 return;
+
             case 2:
-                createEng();
+
+                if (entity == "Engineer")
+                {
+                    createEng();
+                }
+                else if (entity == "Task")
+                {
+                    createTsk();
+                }
+                else
+                {
+                    createDepend(); 
+                }
                 break;
+
             case 3:
-                readEng();
+
+                if (entity == "Engineer")
+                {
+                    readEng();
+                }
+                else if (entity == "Task")
+                {
+                    readTsk();
+                }
+                else
+                {
+                    readDepend();
+                }
                 break;
 
             case 4:
-                readAllEng();
+
+                if (entity == "Engineer")
+                {
+                    readAllEng();
+                }
+                else if (entity == "Task")
+                {
+                    readAllTsk();
+                }
+                else
+                {
+                    readAllDepend();
+                }
                 break;
 
             case 5:
-                updateEng();
+
+                if (entity == "Engineer")
+                {
+                    updateEng();
+                }
+                else if (entity == "Task")
+                {
+                    updateTsk();
+                }
+                else
+                {
+                    updateDepend();
+                }
                 break;
 
             case 6:
-                deleteEng();
+                if (entity == "Engineer")
+                {
+                    deleteEng();
+                }
+                else if (entity == "Task")
+                {
+                    deleteTsk();
+                }
+                else
+                {
+                    deleteDepend();
+                }
                 break;
 
             default:
@@ -93,37 +154,8 @@ internal class Program
     }
     
 
-    private static void SubMenuTask()
-    {
-        PrintSubMenu();
-        int ch = int.Parse(Console.ReadLine());
-        switch (ch)
-        {
-            case 1:
-                return;
-            case 2:
-                createTsk();
-                break;
-            case 3:
-                readTsk();
-                break;
 
-            case 4:
-                readAllTsk();
-                break;
 
-            case 5:
-                updateTsk();
-                break;
-
-            case 6:
-                deleteTsk();
-                break;
-
-            default:
-                break;
-        }
-    }
 
     private static void createTsk()
     {
@@ -161,37 +193,7 @@ internal class Program
     }
 
 
-    private static void SubMenuDependency()
-    {
-        PrintSubMenu();
-        int ch = int.Parse(Console.ReadLine());
-        switch (ch)
-        {
-            case 1:
-                return;
-            case 2:
-                createDepend();
-                break;
-            case 3:
-                readDepend();
-                break;
 
-            case 4:
-                readAllDepend();
-                break;
-
-            case 5:
-                updateDepend();
-                break;
-
-            case 6:
-                deleteDepend();
-                break;
-
-            default:
-                break;
-        }
-    }
 
     private static void createDepend()
     {
@@ -228,9 +230,6 @@ internal class Program
 
     }
 
-
-
-
     static void Main(string[] args)
     {
         Initialization.Do(s_dalEngineer, s_dalTask, s_dalDependency);
@@ -244,13 +243,13 @@ internal class Program
                 case 0: 
                     break;
                 case 1:
-                    SubMenuEngineer();
+                    SubMenu("Engineer");
                     break;
                 case 2:
-                    SubMenuTask();
+                    SubMenu("Task");
                     break;
                 case 3:
-                    SubMenuDependency();
+                    SubMenu("Dependency");
                     break;
                 default:
                     break;
