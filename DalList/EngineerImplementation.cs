@@ -25,7 +25,7 @@ public class EngineerImplementation : IEngineer
             DataSource.Engineers.Add(item);
             return item.Id;
         }
-        throw new Exception($"An object of type T with ID = {item.ID} already exists");
+        throw new Exception($"An object of type T with ID = {item.Id} already exists");
     }
 
 
