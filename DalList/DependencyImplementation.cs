@@ -26,16 +26,16 @@ public class DependencyImplementation : IDependency
             }
 
         }
-        if (!flag) { throw new Exception("An object of type T with such an ID does not exist"); }
+        if (!flag) { throw new Exception($"An object of type T with ID = {id} does not exist"); }
     }
 
     public Dependency? Read(int id)
     {
-        foreach (var Dependency in DataSource.Dependencies)
+        foreach (var Depend in DataSource.Dependencies)
         {
-            if (Dependency.Id == id)
+            if (Depend.Id == id)
             {
-                return Dependency;
+                return Depend;
             }
         }
         return null;
@@ -48,15 +48,15 @@ public class DependencyImplementation : IDependency
 
     public void Update(Dependency item)
     {
-        foreach (var Dependency in DataSource.Dependencies)
+        foreach (var Depend in DataSource.Dependencies)
         {
-            if (Dependency.Id == item.Id)
+            if (Depend.Id == item.Id)
             {
-                DataSource.Dependencies.Remove(Dependency);
+                DataSource.Dependencies.Remove(Depend);
                 DataSource.Dependencies.Add(item);
                 break;
             }
         }
-        throw new Exception("Dependency object with such ID does not exist");
+        throw new Exception($"Dependency object with ID = {item.Id} does not exist");
     }
 }

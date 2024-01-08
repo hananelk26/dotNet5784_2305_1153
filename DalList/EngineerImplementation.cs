@@ -11,7 +11,6 @@ public class EngineerImplementation : IEngineer
 {
     public int Create(Engineer item)
     {
-        //if(DataSource.Engineers.Contains(item.Id))
         bool notFounded = true;
         foreach (Engineer x in DataSource.Engineers)
         {
@@ -26,7 +25,7 @@ public class EngineerImplementation : IEngineer
             DataSource.Engineers.Add(item);
             return item.Id;
         }
-        throw new Exception("An object of type T with such an ID already exists");
+        throw new Exception($"An object of type T with ID = {item.ID} already exists");
     }
 
 
@@ -42,7 +41,7 @@ public class EngineerImplementation : IEngineer
             }
 
         }
-        if (!flag) { throw new Exception("An object of type T with such an ID does not exist"); }
+        if (!flag) { throw new Exception($"An object of type T with ID = {id} does not exist"); }
     }
 
     public Engineer? Read(int id)
@@ -73,7 +72,7 @@ public class EngineerImplementation : IEngineer
                 break;
             }
         }
-        throw new Exception("Engineer object with such ID does not exist");
+        throw new Exception($"Engineer object with such ID = {item.Id} does not exist");
     }
 
 }

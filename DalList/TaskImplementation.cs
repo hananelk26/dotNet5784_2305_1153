@@ -26,7 +26,7 @@ public class TaskImplementation : ITask
             }
             
         }
-        if (!flag) { throw new Exception("An object of type T with such an ID does not exist"); }
+        if (!flag) { throw new Exception($"An object of type T with ID = {id} does not exist"); }
     }
 
     public Task? Read(int id)
@@ -57,6 +57,6 @@ public class TaskImplementation : ITask
                 break;
             }
         }
-        throw new Exception("Task object with such ID does not exist");
+        throw new Exception($"Task object with ID = {item.id} does not exist");
     }
 }
