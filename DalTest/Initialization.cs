@@ -53,27 +53,65 @@ public static class Initialization
 
     private static void createTask()
     {
-        // Noam
-        // אתה מוזמן לממש
+       
 
 
 
 
-        Task newTask = new Task(0);
+        Task newTask = new Task();
         s_dalTask!.Create(newTask);
     }
 
 
     private static void createDependency()
     {
-
-
-        // אתה מוזמן לממש
-
-
-
-        Dependency newTask = new Dependency(0);
-        s_dalDependency!.Create(newTask);
+        Dependency[] deps =
+        {
+            new Dependency(1,),
+            new Dependency(2,),
+            new Dependency(3,),
+            new Dependency(4,),
+            new Dependency(5,),
+            new Dependency(6,),
+            new Dependency(7,),
+            new Dependency(8,),
+            new Dependency(9,),
+            new Dependency(10,),
+            new Dependency(11,),
+            new Dependency(12,),
+            new Dependency(13,),
+            new Dependency(14,),
+            new Dependency(15,),
+            new Dependency(16,),
+            new Dependency(17,),
+            new Dependency(18,),
+            new Dependency(19,),
+            new Dependency(20,),
+            new Dependency(21,),
+            new Dependency(22,),
+            new Dependency(23,),
+            new Dependency(24,),
+            new Dependency(25,),
+            new Dependency(26,),
+            new Dependency(27,),
+            new Dependency(28,),
+            new Dependency(29,),
+            new Dependency(30,),
+            new Dependency(31,),
+            new Dependency(32,),
+            new Dependency(33,),
+            new Dependency(34,),
+            new Dependency(35,),
+            new Dependency(36,),
+            new Dependency(37,),
+            new Dependency(38,),
+            new Dependency(39,),
+            new Dependency(40,),
+        };
+        foreach (var dep in deps)
+        {
+            s_dalDependency!.Create(dep);
+        }
     }
 
     
