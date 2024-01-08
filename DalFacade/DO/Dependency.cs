@@ -7,6 +7,6 @@ public record Dependency
 )
 
 {
-    public Dependency(): this(0,0,0) {}
+    public Dependency(): this(0) {}
 
 }
