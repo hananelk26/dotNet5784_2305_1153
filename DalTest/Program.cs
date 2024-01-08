@@ -1,7 +1,8 @@
 ﻿using Dal;
 using DalApi;
-using System.Diagnostics;
-using System.Linq.Expressions;
+using DO;
+using System.Collections.Generic;
+using System.Linq;
 namespace DalTest;
 
 internal class Program
@@ -125,42 +126,92 @@ internal class Program
 
     private static void createEng()
     {
+        Console.WriteLine("Enter Id:");
         int Id = int.Parse(Console.ReadLine());
+        Console.WriteLine("Enter Email:");
         string Email = Console.ReadLine();
+        Console.WriteLine("Enter Cost:");
         double Cost = double.Parse(Console.ReadLine());
+        Console.WriteLine("Enter Name");
         string Name = Console.ReadLine();
-
-
-
-
+        Console.WriteLine("Enter experience");
+        EngineerExperience experience = (EngineerExperience)int.Parse(Console.ReadLine());
+        Engineer x =new Engineer(Id, Email, Cost, Name , experience);
+       int y = s_dalEngineer.Create(x);
+        Console.WriteLine(y);
     }
 
     private static void readEng()
     {
-
-
+        Console.WriteLine("Enter Id");
+       int id =  int.Parse(Console.ReadLine());
+        Engineer x = s_dalEngineer.Read(id);
+        printEng(x);
     }
 
     private static void readAllEng()
     {
-
-
+        foreach(var en in  s_dalEngineer.ReadAll())
+        {
+            printEng(en);
+        }
     }
 
     private static void updateEng()
     {
+        Console.WriteLine("Enter Id:");
+        int Id = int.Parse(Console.ReadLine());
 
+        Engineer eng = s_dalEngineer.Read(Id);
 
+        Console.WriteLine("Enter Email:");
+        string? Email = Console.ReadLine();
+        if (Email  == null || Email == "")
+        {
+            Email = eng.Email;
+        }
+
+        Console.WriteLine("Enter Cost:");
+        double Cost = 0;
+        string? tmp = Console.ReadLine();
+        if (tmp == null || tmp == "")
+        {
+            Cost = eng.Cost;
+        }
+        else
+        {
+            Cost = double.Parse(tmp);
+        }
+        
+        Console.WriteLine("Enter Name");
+        string? Name = Console.ReadLine();
+        if (Name == null || Name == "")
+        {
+            Name = eng.Name;
+        }
+
+        Console.WriteLine("Enter experience");
+        EngineerExperience experience = EngineerExperience.Beginner;
+        tmp = Console.ReadLine();
+        if (tmp == null || tmp == "")
+        {
+            experience = eng.Level;
+        }
+        else
+        {
+            experience = (EngineerExperience)int.Parse(tmp);
+        }
+
+        Engineer x = new Engineer(Id, Email, Cost, Name, experience);
+        s_dalEngineer.Update(x);
     }
 
     private static void deleteEng()
     {
-
-
+        Console.WriteLine("Enter Id");
+        int y = int.Parse(Console.ReadLine());
+        s_dalEngineer.Delete(y);
     }
-    
-
-
 
 
     private static void createTsk()
@@ -198,9 +249,6 @@ internal class Program
 
     }
 
-
-
-
     private static void createDepend()
     {
 
@@ -210,16 +258,18 @@ internal class Program
 
     private static void readDepend()
     {
-
-
-
+        Console.WriteLine("Enter Id");
+        int id = int.Parse(Console.ReadLine());
+        Dependency y = s_dalDependency.Read(id);
+        printDepe(y);
     }
 
     private static void readAllDepend()
     {
-
-
-
+        foreach (var en in s_dalDependency.ReadAll())
+        {
+            printDepe(en);
+        }
     }
 
     private static void updateDepend()
@@ -231,9 +281,30 @@ internal class Program
 
     private static void deleteDepend()
     {
+        Console.WriteLine("Enter Id");
+        int y = int.Parse(Console.ReadLine());
+        s_dalDependency.Delete(y);
+    }
 
-
-
+    public static void printEng(Engineer? en)
+    {
+        if (en != null)
+        {
+            Console.WriteLine($" The Id is: {en.Id}");
+            Console.WriteLine($"The Name is: {en.Name}");
+            Console.WriteLine($"The Email is: {en.Email}");
+            Console.WriteLine($"The Cost is: {en.Cost}");
+            Console.WriteLine($"The experience is: {en.Level}");
+        }
+    }
+    public static void printDepe(Dependency dep)
+    {
+        if(dep != null)
+        {
+            Console.WriteLine($"The Id:{dep.Id}");
+            Console.WriteLine($"The DependentTask: {dep.DependentTask}");
+            Console.WriteLine($"The Dependent DependsOnTask: {dep.DependsOnTask}");
+        }
     }
 
     static void Main(string[] args)
