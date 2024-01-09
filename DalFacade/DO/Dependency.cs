@@ -1,12 +1,12 @@
 ﻿namespace DO;
-public record Dependency
+public record Dependency  
 (
-    int Id,
+    int Id,  
     int? DependentTask = null,
     int? DependsOnTask = null
 )
 
 {
-    public Dependency(): this(0) {}
+    public Dependency(): this(0) {} /// empty ctor 
 
 }

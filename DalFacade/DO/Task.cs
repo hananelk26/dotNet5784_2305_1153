@@ -1,14 +1,12 @@
-﻿
-
-namespace DO;
+﻿namespace DO;
 
 public record Task
 (
-    int id,
+    int Id,
     string Alias,
     string Description,
     DateTime  createdAtDate,
-     bool isMileStone=false,
+    bool isMileStone=false,
     TimeSpan? RequiredEffortTime = null,
     DO.EngineerExperience? Copmlexity = null,
     DateTime? StartDate = null,
@@ -20,7 +18,6 @@ public record Task
     int? Engineerld = null
 )
 {
-    public Task() : this(0,"","",DateTime.Now) { }
-   
+    public Task() : this(0,"","",DateTime.Now) { }/// empty ctor
 
 }

@@ -1,6 +1,4 @@
-﻿
-
-namespace Dal;
+﻿namespace Dal;
 using DalApi;
 using DO;
 using System.Collections.Generic;
@@ -10,7 +8,7 @@ public class TaskImplementation : ITask
     public int Create(Task item)
     {
         int i_d = DataSource.Config.NextTaskId;
-        Task newObject = item with { id = i_d };
+        Task newObject = item with { Id = i_d };
         DataSource.Tasks.Add(newObject);
         return i_d;
     }
@@ -20,7 +18,7 @@ public class TaskImplementation : ITask
         bool flag = false;
         foreach (Task item in DataSource.Tasks)
         {
-            if (item.id == id) { 
+            if (item.Id == id) { 
                 DataSource.Tasks.Remove(item);
                 flag = true;
             }
@@ -33,7 +31,7 @@ public class TaskImplementation : ITask
     {
         foreach (var task in DataSource.Tasks)
         {
-            if (task.id == id)
+            if (task.Id == id)
             {
                 return task;
             }
@@ -50,13 +48,13 @@ public class TaskImplementation : ITask
     {
         foreach (var task in DataSource.Tasks)
         {
-            if(task.id == item.id)
+            if(task.Id == item.Id)
             {
                 DataSource.Tasks.Remove(task);
                 DataSource.Tasks.Add(item);
                 return;
             }
         }
-        throw new Exception($"Task object with ID = {item.id} does not exist");
+        throw new Exception($"Task object with ID = {item.Id} does not exist");
     }
 }
