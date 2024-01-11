@@ -28,21 +28,13 @@ internal class TaskImplementation : ITask
     /// <exception cref="Exception">Thrown if the Task object with the specified ID does not exist.</exception>
     public void Delete(int id)
     {
-        bool found = false;
-        foreach (Task item in DataSource.Tasks.ToList())
+        if (Read(id) == null)
         {
-            if (item.Id == id)
-            {
-                DataSource.Tasks.Remove(item);
-                found = true;
-                break;
-            }
+            throw new DalDoesNotExistException($"A Task object with ID = {id} does not exist.");
         }
 
-        if (!found)
-        {
-            throw new Exception($"A Task object with ID = {id} does not exist.");
-        }
+        DataSource.Tasks.Remove(Read(id));
+
     }
 
     /// <summary>
@@ -71,15 +63,14 @@ internal class TaskImplementation : ITask
     /// <exception cref="Exception">Thrown if the Task object with the specified ID does not exist.</exception>
     public void Update(Task item)
     {
-        Task existingTask = DataSource.Tasks.FirstOrDefault(task => task.Id == item.Id);
-        if (existingTask != null)
+        if (Read(item.Id) == null)
         {
-            DataSource.Tasks.Remove(existingTask);
-            DataSource.Tasks.Add(item);
+            throw new DalDoesNotExistException($"A Task object with ID = {item.Id} does not exist.");
         }
         else
         {
-            throw new Exception($"A Task object with ID = {item.Id} does not exist.");
+            DataSource.Tasks.Remove(Read(item.Id));
+            DataSource.Tasks.Add(item);
         }
     }
 }

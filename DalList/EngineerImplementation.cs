@@ -19,23 +19,16 @@ internal class EngineerImplementation : IEngineer
     /// <returns>The ID assigned to the newly created Engineer object.</returns>
     public int Create(Engineer item)
     {
-        bool notFound = true;
-        foreach (Engineer existingEngineer in DataSource.Engineers)
+        Engineer eng;
+        eng = Read(item.Id);
+
+        if (eng != null)
         {
-            if (existingEngineer.Id == item.Id)
-            {
-                notFound = false;
-                break;
-            }
+            throw new DalAlreadyExistsException($"An Engineer object with ID = {item.Id} already exists.");
         }
 
-        if (notFound)
-        {
-            DataSource.Engineers.Add(item);
-            return item.Id;
-        }
-
-        throw new Exception($"An Engineer object with ID = {item.Id} already exists.");
+        DataSource.Engineers.Add(item);
+        return item.Id;
     }
 
     /// <summary>
@@ -45,21 +38,12 @@ internal class EngineerImplementation : IEngineer
     /// <exception cref="Exception">Thrown if the Engineer object with the specified ID does not exist.</exception>
     public void Delete(int id)
     {
-        bool found = false;
-        foreach (Engineer item in DataSource.Engineers.ToList())
+        if (Read(id) == null)
         {
-            if (item.Id == id)
-            {
-                DataSource.Engineers.Remove(item);
-                found = true;
-                break;
-            }
+            throw new DalDoesNotExistException($"An Engineer object with ID = {id} does not exist.");
         }
 
-        if (!found)
-        {
-            throw new Exception($"An Engineer object with ID = {id} does not exist.");
-        }
+        DataSource.Engineers.Remove(Read(id));
     }
 
     /// <summary>
@@ -88,15 +72,13 @@ internal class EngineerImplementation : IEngineer
     /// <exception cref="Exception">Thrown if the Engineer object with the specified ID does not exist.</exception>
     public void Update(Engineer item)
     {
-        Engineer existingEngineer = DataSource.Engineers.FirstOrDefault(engineer => engineer.Id == item.Id);
-        if (existingEngineer != null)
+        Engineer? existingEngineer = Read(item.Id); //DataSource.Engineers.FirstOrDefault(engineer => engineer.Id == item.Id);
+        if (existingEngineer == null)
         {
-            DataSource.Engineers.Remove(existingEngineer);
-            DataSource.Engineers.Add(item);
+            throw new DalDoesNotExistException($"An Engineer object with ID = {item.Id} does not exist.");
         }
-        else
-        {
-            throw new Exception($"An Engineer object with ID = {item.Id} does not exist.");
-        }
+        
+        DataSource.Engineers.Remove(existingEngineer);
+        DataSource.Engineers.Add(item);
     }
 }
