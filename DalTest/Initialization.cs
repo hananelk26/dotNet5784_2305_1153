@@ -36,9 +36,11 @@ public static class Initialization
 
             int _id;
             do
+            {
                 _id = s_rand.Next(MIN, MAX);
-            while (s_dalEngineer!.Read(_id) != null);
-
+            }
+            while (s_dal!.Engineer.Read(_id) != null);
+            // while (s_dalEngineer!.Read(_id) != null);
             string _email;
             _email = engineerEmail[i];
 
@@ -48,7 +50,8 @@ public static class Initialization
 
             Engineer newEng = new(_id, _email, _cost, _name, _level);
 
-            s_dalEngineer!.Create(newEng);
+            //s_dalEngineer!.Create(newEng);
+            s_dal!.Engineer.Create(newEng);
             i++;
         }
     }
@@ -71,7 +74,8 @@ public static class Initialization
             DateTime _bdt = start.AddDays(s_rand.Next(range));
 
             Task newTask = new Task(0,name1,name2,_bdt);
-            s_dalTask!.Create(newTask);
+            //s_dalTask!.Create(newTask);
+            s_dal!.Task.Create(newTask);
         }
 
     }
@@ -124,16 +128,18 @@ public static class Initialization
         };
         foreach (var dep in deps)
         {
-            s_dalDependency!.Create(dep);
+           // s_dalDependency!.Create(dep);
+           s_dal!.Dependency.Create(dep);
         }
     }
 
 
     public static void Do(IDal dal) 
     {
-        s_dalEngineer = dalEngineer ?? throw new NullReferenceException("DAL can not be null!");
-        s_dalTask = dalTask ?? throw new NullReferenceException("DAL can not be null!");
-        s_dalDependency = dalDependency ?? throw new NullReferenceException("DAL can not be null!");
+        //s_dalEngineer = dalEngineer ?? throw new NullReferenceException("DAL can not be null!");
+        //s_dalTask = dalTask ?? throw new NullReferenceException("DAL can not be null!");
+        //s_dalDependency = dalDependency ?? throw new NullReferenceException("DAL can not be null!");
+        s_dal = dal ?? throw new NullReferenceException("DAL object can not be null!");
 
         createEngineers();
         createTask();
