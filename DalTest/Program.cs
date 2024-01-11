@@ -7,9 +7,11 @@ namespace DalTest;
 
 internal class Program
 {
-    private static IEngineer? s_dalEngineer = new EngineerImplementation();
-    private static ITask? s_dalTask = new TaskImplementation();
-    private static IDependency? s_dalDependency = new DependencyImplementation();
+    //private static IEngineer? s_dalEngineer = new EngineerImplementation();
+    //private static ITask? s_dalTask = new TaskImplementation();
+    //private static IDependency? s_dalDependency = new DependencyImplementation();
+
+    private static readonly IDal s_dal = new DalList();
     private static void printTaskFields(DO.Task p)
     {
         Console.WriteLine($"ID is: {p.Id} ");
@@ -157,7 +159,7 @@ internal class Program
         Console.WriteLine("Enter experience");
         EngineerExperience experience = (EngineerExperience)int.Parse(Console.ReadLine());
         Engineer x =new Engineer(Id, Email, Cost, Name , experience);
-       int y = s_dalEngineer.Create(x);
+       int y = s_dal.Engineer.Create(x);
         Console.WriteLine(y);
     }
 
@@ -165,13 +167,13 @@ internal class Program
     {
         Console.WriteLine("Enter Id");
        int id =  int.Parse(Console.ReadLine());
-        Engineer x = s_dalEngineer.Read(id);
+        Engineer x = s_dal.Engineer.Read(id);
         printEng(x);
     }
 
     private static void readAllEng()
     {
-        foreach(var en in  s_dalEngineer.ReadAll())
+        foreach(var en in  s_dal.Engineer.ReadAll())
         {
             printEng(en);
         }
@@ -182,7 +184,7 @@ internal class Program
         Console.WriteLine("Enter Id:");
         int Id = int.Parse(Console.ReadLine());
 
-        Engineer eng = s_dalEngineer.Read(Id);
+        Engineer eng = s_dal.Engineer.Read(Id);
 
         Console.WriteLine("Enter Email:");
         string? Email = Console.ReadLine();
@@ -223,14 +225,14 @@ internal class Program
         }
 
         Engineer x = new Engineer(Id, Email, Cost, Name, experience);
-        s_dalEngineer.Update(x);
+        s_dal.Engineer.Update(x);
     }
 
     private static void deleteEng()
     {
         Console.WriteLine("Enter Id");
         int y = int.Parse(Console.ReadLine());
-        s_dalEngineer.Delete(y);
+        s_dal.Engineer.Delete(y);
     }
 
 
@@ -266,7 +268,7 @@ internal class Program
         int? Engineerld = int.Parse( Console.ReadLine());   
 
         DO.Task p = new DO.Task(Id, alias, Description, createdAtDate, isMail, RequiredEffortTime, Copmlex, StartDate, ScheduledDate, DeadlineDate, CompleteDate, Deliverables, Remarks, Engineerld);
-        int id = s_dalTask!.Create(p);
+        int id = s_dal.Task!.Create(p);
         Console.WriteLine($"The ID task is:{id}");
 
     }
@@ -275,13 +277,13 @@ internal class Program
     {
         Console.WriteLine("Enter ID");
         int id = int.Parse(Console.ReadLine());
-        DO.Task p = s_dalTask.Read(id);
+        DO.Task p = s_dal.Task.Read(id);
         printTaskFields(p);
     }
 
     private static void readAllTsk()
     {
-        List<DO.Task> p = s_dalTask.ReadAll();
+        List<DO.Task> p = s_dal.Task.ReadAll();
         foreach (var item in p)
         {
             printTaskFields(item);
@@ -319,18 +321,18 @@ internal class Program
         Console.WriteLine("Enter Engineerld:");
         int? Engineerld = int.Parse(Console.ReadLine());
 
-        DO.Task p =  s_dalTask.Read(Id);
+        DO.Task p =  s_dal.Task.Read(Id);
         printTaskFields(p);
 
         DO.Task t = new DO.Task(Id, alias, Description, createdAtDate, isMail, RequiredEffortTime, Copmlex, StartDate, ScheduledDate, DeadlineDate, CompleteDate, Deliverables, Remarks, Engineerld);
-        s_dalTask.Update(t);
+        s_dal.Task.Update(t);
     }
 
     private static void deleteTsk()
     {
         Console.WriteLine("Enter id:");
         int id = int.Parse(Console.ReadLine());
-        s_dalTask!.Delete(id);
+        s_dal.Task!.Delete(id);
     }
 
     private static void createDepend()
@@ -343,7 +345,7 @@ internal class Program
         int? DependsOnTask = int.Parse(Console.ReadLine()); 
 
         DO.Dependency dep = new DO.Dependency(id,DependentTask,DependsOnTask);
-        s_dalDependency.Create(dep);
+        s_dal.Dependency.Create(dep);
         Console.WriteLine($"The ID Dependency is:{id}");
     }
 
@@ -351,13 +353,13 @@ internal class Program
     {
         Console.WriteLine("Enter Id");
         int id = int.Parse(Console.ReadLine());
-        Dependency y = s_dalDependency.Read(id);
+        Dependency y = s_dal.Dependency.Read(id);
         printDepe(y);
     }
 
     private static void readAllDepend()
     {
-        foreach (var en in s_dalDependency.ReadAll())
+        foreach (var en in s_dal.Dependency.ReadAll())
         {
             printDepe(en);
         }
@@ -372,11 +374,11 @@ internal class Program
         Console.WriteLine("Enter DependsOnTask");
         int? DependsOnTask = int.Parse(Console.ReadLine());
 
-        DO.Dependency p =  s_dalDependency.Read(id);
+        DO.Dependency p =  s_dal.Dependency.Read(id);
         printDepe(p);
 
         DO.Dependency dep = new DO.Dependency(id, DependentTask, DependsOnTask);
-        s_dalDependency.Update(dep);
+        s_dal.Dependency.Update(dep);
 
     }
 
@@ -384,7 +386,7 @@ internal class Program
     {
         Console.WriteLine("Enter Id");
         int y = int.Parse(Console.ReadLine());
-        s_dalDependency.Delete(y);
+        s_dal.Dependency.Delete(y);
     }
 
     public static void printEng(Engineer? en)
@@ -410,60 +412,60 @@ internal class Program
 
     static void Main(string[] args)
     {
-        Initialization.Do(s_dalEngineer, s_dalTask, s_dalDependency);
+        Initialization.Do(s_dal);
         int choice = 0;
-        do
-        {
-            printMainMenu();
-            choice = int.Parse(Console.ReadLine());
-            switch(choice)
+            do
             {
-                case 0: 
-                    break;
-                case 1:
-                    try
-                    {
-                        SubMenu("Engineer");
+                printMainMenu();
+                choice = int.Parse(Console.ReadLine());
+                switch (choice)
+                {
+                    case 0:
                         break;
-                    }
-                    catch (Exception me)
-                    {
+                    case 1:
+                        try
+                        {
+                            SubMenu("Engineer");
+                            break;
+                        }
+                        catch (Exception me)
+                        {
 
-                        Console.WriteLine(me.Message);
-                    }
-                    break;
-
-                case 2:
-                    try
-                    {
-                        SubMenu("Task");
-                        break;
-                    }
-                    catch (Exception me)
-                    {
-                        Console.WriteLine(me.Message);
-                        break;
-                    }
-
-                case 3:
-
-                    try
-                    {
-                        SubMenu("Dependency");
-                        break;
-                    }
-                    catch (Exception me)
-                    {
-                        Console.WriteLine(me.Message);
+                            Console.WriteLine(me.Message);
+                        }
                         break;
 
-                    }
+                    case 2:
+                        try
+                        {
+                            SubMenu("Task");
+                            break;
+                        }
+                        catch (Exception me)
+                        {
+                            Console.WriteLine(me.Message);
+                            break;
+                        }
+
+                    case 3:
+
+                        try
+                        {
+                            SubMenu("Dependency");
+                            break;
+                        }
+                        catch (Exception me)
+                        {
+                            Console.WriteLine(me.Message);
+                            break;
+
+                        }
 
 
-                default:
-                    break;
-            }
-
+                    default:
+                        break;
+                }
+            
 
         } while (choice != 0);
 

@@ -1,7 +1,6 @@
-﻿namespace DalList
-{
-    public class Class1
-    {
+﻿namespace Dal;
 
-    }
+public class Class1
+{
+
 }
