@@ -1,12 +1,11 @@
 ﻿/// interface for dependencies
 namespace DalApi;
 using DO;
-public interface IDependency
+/// <summary>
+/// Represents an interface for Dependency with CRUD operations.
+/// </summary>
+/// <typeparam name="Dependency">The type of Dependency managed by the CRUD operations.</typeparam>
+public interface IDependency: ICrud<Dependency>
 {
-    int Create(Dependency item); 
-    ///Creates new entity object in DAL
-    Dependency? Read(int id); ///Reads entity object by its ID 
-    List<Dependency> ReadAll(); /// Reads all entity objects
-    void Update(Dependency item); ///Updates entity object
-    void Delete(int id); ///Deletes an object by its Id
+
 }

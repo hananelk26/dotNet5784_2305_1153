@@ -1,12 +1,11 @@
-﻿/// interface for task
+﻿
 namespace DalApi;
 using DO;
-public interface ITask
+/// <summary>
+/// Represents an interface for tasks with CRUD operations.
+/// </summary>
+/// <typeparam name="Task">The type of tasks managed by the CRUD operations.</typeparam>
+public interface ITask : ICrud<Task>
 {
-    int Create(Task item);
-    /// Creates new entity object in DAL
-    Task Read(int id); ///Reads entity object by its ID 
-    List<Task> ReadAll(); /// Reads all entity objects
-    void Update(Task item); ///Updates entity object
-    void Delete(int id); ///Deletes an object by its Id
+
 }

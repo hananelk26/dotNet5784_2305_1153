@@ -10,7 +10,6 @@ internal class Program
     private static IEngineer? s_dalEngineer = new EngineerImplementation();
     private static ITask? s_dalTask = new TaskImplementation();
     private static IDependency? s_dalDependency = new DependencyImplementation();
-
     private static void printTaskFields(DO.Task p)
     {
         Console.WriteLine($"ID is: {p.id} ");
