@@ -7,72 +7,96 @@ using DO;
 using System.Collections.Generic;
 using System.Linq;
 
-public class EngineerImplementation : IEngineer
+/// <summary>
+/// Implementation of the IEngineer interface providing CRUD operations for Engineer objects.
+/// </summary>
+internal class EngineerImplementation : IEngineer
 {
+    /// <summary>
+    /// Creates a new Engineer object.
+    /// </summary>
+    /// <param name="item">The Engineer object to be created.</param>
+    /// <returns>The ID assigned to the newly created Engineer object.</returns>
     public int Create(Engineer item)
     {
-        bool notFounded = true;
-        foreach (Engineer x in DataSource.Engineers)
+        bool notFound = true;
+        foreach (Engineer existingEngineer in DataSource.Engineers)
         {
-            if (x.Id == item.Id)
+            if (existingEngineer.Id == item.Id)
             {
-                notFounded = false;
+                notFound = false;
+                break;
             }
         }
 
-        if (notFounded)
+        if (notFound)
         {
             DataSource.Engineers.Add(item);
             return item.Id;
         }
-        throw new Exception($"An object of type T with ID = {item.Id} already exists");
+
+        throw new Exception($"An Engineer object with ID = {item.Id} already exists.");
     }
 
-
+    /// <summary>
+    /// Deletes an Engineer object by its ID.
+    /// </summary>
+    /// <param name="id">The ID of the Engineer object to be deleted.</param>
+    /// <exception cref="Exception">Thrown if the Engineer object with the specified ID does not exist.</exception>
     public void Delete(int id)
     {
-        bool flag = false;
-        foreach (Engineer item in DataSource.Engineers)
+        bool found = false;
+        foreach (Engineer item in DataSource.Engineers.ToList())
         {
             if (item.Id == id)
             {
                 DataSource.Engineers.Remove(item);
-                flag = true;
+                found = true;
+                break;
             }
-
         }
-        if (!flag) { throw new Exception($"An object of type T with ID = {id} does not exist"); }
+
+        if (!found)
+        {
+            throw new Exception($"An Engineer object with ID = {id} does not exist.");
+        }
     }
 
+    /// <summary>
+    /// Retrieves an Engineer object by its ID.
+    /// </summary>
+    /// <param name="id">The ID of the Engineer object to retrieve.</param>
+    /// <returns>The retrieved Engineer object, or null if not found.</returns>
     public Engineer? Read(int id)
     {
-        foreach (var Engineer in DataSource.Engineers)
-        {
-            if (Engineer.Id == id)
-            {
-                return Engineer;
-            }
-        }
-        return null;
+        return DataSource.Engineers.FirstOrDefault(engineer => engineer.Id == id);
     }
 
+    /// <summary>
+    /// Retrieves all Engineer objects.
+    /// </summary>
+    /// <returns>A list containing all Engineer objects.</returns>
     public List<Engineer> ReadAll()
     {
         return new List<Engineer>(DataSource.Engineers);
     }
 
+    /// <summary>
+    /// Updates an existing Engineer object.
+    /// </summary>
+    /// <param name="item">The Engineer object with updated data.</param>
+    /// <exception cref="Exception">Thrown if the Engineer object with the specified ID does not exist.</exception>
     public void Update(Engineer item)
     {
-        foreach (var Engineer in DataSource.Engineers)
+        Engineer existingEngineer = DataSource.Engineers.FirstOrDefault(engineer => engineer.Id == item.Id);
+        if (existingEngineer != null)
         {
-            if (Engineer.Id == item.Id)
-            {
-                DataSource.Engineers.Remove(Engineer);
-                DataSource.Engineers.Add(item);
-                break;
-            }
+            DataSource.Engineers.Remove(existingEngineer);
+            DataSource.Engineers.Add(item);
         }
-        throw new Exception($"Engineer object with such ID = {item.Id} does not exist");
+        else
+        {
+            throw new Exception($"An Engineer object with ID = {item.Id} does not exist.");
+        }
     }
-
 }
