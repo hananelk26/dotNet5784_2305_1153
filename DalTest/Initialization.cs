@@ -7,9 +7,11 @@ public static class Initialization
     const int MIN = 200000000;
     const int MAX = 400000000;
 
-    private static ITask? s_dalTask; //stage 1
-    private static IEngineer? s_dalEngineer; //stage 1
-    private static IDependency? s_dalDependency; //stage 1
+    private static IDal? s_dal;
+
+    //private static ITask? s_dalTask; //stage 1
+    //private static IEngineer? s_dalEngineer; //stage 1
+    //private static IDependency? s_dalDependency; //stage 1
 
     private static readonly Random s_rand = new();
 
@@ -127,7 +129,7 @@ public static class Initialization
     }
 
 
-    public static void Do(IEngineer? dalEngineer,ITask? dalTask,IDependency? dalDependency) 
+    public static void Do(IDal dal) 
     {
         s_dalEngineer = dalEngineer ?? throw new NullReferenceException("DAL can not be null!");
         s_dalTask = dalTask ?? throw new NullReferenceException("DAL can not be null!");
