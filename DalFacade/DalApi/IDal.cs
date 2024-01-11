@@ -9,5 +9,6 @@ namespace DalApi;
 public interface IDal
 {
     IDependency dependency { get; }
-
+    IEngineer engineer { get; }
+    ITask task { get; }
 }
