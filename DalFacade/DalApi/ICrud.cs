@@ -3,6 +3,7 @@
 /// Interface for basic CRUD (Create, Read, Update, Delete) operations for objects of type T.
 /// </summary>
 /// <typeparam name="T">The type of objects being manipulated.</typeparam>
+namespace DalApi;
 public interface ICrud<T> where T : class
 {
     /// <summary>

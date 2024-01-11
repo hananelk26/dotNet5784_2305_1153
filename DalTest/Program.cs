@@ -12,7 +12,7 @@ internal class Program
     private static IDependency? s_dalDependency = new DependencyImplementation();
     private static void printTaskFields(DO.Task p)
     {
-        Console.WriteLine($"ID is: {p.id} ");
+        Console.WriteLine($"ID is: {p.Id} ");
         Console.WriteLine($"Alias is: {p.Alias} ");
         Console.WriteLine($"Description is: {p.Description} ");
         Console.WriteLine($"createdAtDate is: {p.createdAtDate} ");
