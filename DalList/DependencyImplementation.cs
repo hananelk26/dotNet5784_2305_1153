@@ -4,59 +4,83 @@ using DalApi;
 using DO;
 using System.Collections.Generic;
 
-public class DependencyImplementation : IDependency
+/// <summary>
+/// Implementation of the IDependency interface providing CRUD operations for Dependency objects.
+/// </summary>
+internal class DependencyImplementation : IDependency
 {
+    /// <summary>
+    /// Creates a new Dependency object.
+    /// </summary>
+    /// <param name="item">The Dependency object to be created.</param>
+    /// <returns>The ID assigned to the newly created Dependency object.</returns>
     public int Create(Dependency item)
     {
-        int i_d = DataSource.Config.NextDependencyId;
-        Dependency newObject = item with { Id = i_d };
+        int newId = DataSource.Config.NextDependencyId;
+        Dependency newObject = item with { Id = newId };
         DataSource.Dependencies.Add(newObject);
-        return i_d;
+        return newId;
     }
 
+    /// <summary>
+    /// Deletes a Dependency object by its ID.
+    /// </summary>
+    /// <param name="id">The ID of the Dependency object to be deleted.</param>
+    /// <exception cref="Exception">Thrown if the Dependency object with the specified ID does not exist.</exception>
     public void Delete(int id)
     {
-        bool flag = false;
-        foreach (Dependency item in DataSource.Dependencies)
+        bool found = false;
+        foreach (Dependency item in DataSource.Dependencies.ToList())
         {
             if (item.Id == id)
             {
                 DataSource.Dependencies.Remove(item);
-                flag = true;
+                found = true;
+                break;
             }
-
         }
-        if (!flag) { throw new Exception($"An object of type T with ID = {id} does not exist"); }
+        if (!found)
+        {
+            throw new Exception($"A Dependency object with ID = {id} does not exist.");
+        }
     }
 
+    /// <summary>
+    /// Retrieves a Dependency object by its ID.
+    /// </summary>
+    /// <param name="id">The ID of the Dependency object to retrieve.</param>
+    /// <returns>The retrieved Dependency object, or null if not found.</returns>
     public Dependency? Read(int id)
     {
-        foreach (var Depend in DataSource.Dependencies)
-        {
-            if (Depend.Id == id)
-            {
-                return Depend;
-            }
-        }
-        return null;
+        return DataSource.Dependencies.FirstOrDefault(dependency => dependency.Id == id);
     }
 
+    /// <summary>
+    /// Retrieves all Dependency objects.
+    /// </summary>
+    /// <returns>A list containing all Dependency objects.</returns>
     public List<Dependency> ReadAll()
     {
         return new List<Dependency>(DataSource.Dependencies);
     }
 
+    /// <summary>
+    /// Updates an existing Dependency object.
+    /// </summary>
+    /// <param name="item">The Dependency object with updated data.</param>
+    /// <exception cref="Exception">Thrown if the Dependency object with the specified ID does not exist.</exception>
     public void Update(Dependency item)
     {
-        foreach (var Depend in DataSource.Dependencies)
+        Dependency existingDependency = DataSource.Dependencies.FirstOrDefault(dependency => dependency.Id == item.Id);
+        if (existingDependency != null)
         {
-            if (Depend.Id == item.Id)
-            {
-                DataSource.Dependencies.Remove(Depend);
-                DataSource.Dependencies.Add(item);
-                break;
-            }
+            DataSource.Dependencies.Remove(existingDependency);
+            DataSource.Dependencies.Add(item);
         }
-        throw new Exception($"Dependency object with ID = {item.Id} does not exist");
+        else
+        {
+            throw new Exception($"A Dependency object with ID = {item.Id} does not exist.");
+        }
     }
 }
+

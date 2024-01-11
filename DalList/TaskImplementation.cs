@@ -3,58 +3,84 @@ using DalApi;
 using DO;
 using System.Collections.Generic;
 
-public class TaskImplementation : ITask
+/// <summary>
+/// Implementation of the ITask interface providing CRUD operations for Task objects.
+/// </summary>
+internal class TaskImplementation : ITask
 {
+    /// <summary>
+    /// Creates a new Task object.
+    /// </summary>
+    /// <param name="item">The Task object to be created.</param>
+    /// <returns>The ID assigned to the newly created Task object.</returns>
     public int Create(Task item)
     {
-        int i_d = DataSource.Config.NextTaskId;
-        Task newObject = item with { Id = i_d };
+        int newId = DataSource.Config.NextTaskId;
+        Task newObject = item with { Id = newId };
         DataSource.Tasks.Add(newObject);
-        return i_d;
+        return newId;
     }
 
+    /// <summary>
+    /// Deletes a Task object by its ID.
+    /// </summary>
+    /// <param name="id">The ID of the Task object to be deleted.</param>
+    /// <exception cref="Exception">Thrown if the Task object with the specified ID does not exist.</exception>
     public void Delete(int id)
     {
-        bool flag = false;
-        foreach (Task item in DataSource.Tasks)
+        bool found = false;
+        foreach (Task item in DataSource.Tasks.ToList())
         {
-            if (item.Id == id) { 
+            if (item.Id == id)
+            {
                 DataSource.Tasks.Remove(item);
-                flag = true;
+                found = true;
+                break;
             }
-            
         }
-        if (!flag) { throw new Exception($"An object of type T with ID = {id} does not exist"); }
+
+        if (!found)
+        {
+            throw new Exception($"A Task object with ID = {id} does not exist.");
+        }
     }
 
+    /// <summary>
+    /// Retrieves a Task object by its ID.
+    /// </summary>
+    /// <param name="id">The ID of the Task object to retrieve.</param>
+    /// <returns>The retrieved Task object, or null if not found.</returns>
     public Task? Read(int id)
     {
-        foreach (var task in DataSource.Tasks)
-        {
-            if (task.Id == id)
-            {
-                return task;
-            }
-        }
-        return null;
+        return DataSource.Tasks.FirstOrDefault(task => task.Id == id);
     }
 
+    /// <summary>
+    /// Retrieves all Task objects.
+    /// </summary>
+    /// <returns>A list containing all Task objects.</returns>
     public List<Task> ReadAll()
     {
         return new List<Task>(DataSource.Tasks);
     }
 
+    /// <summary>
+    /// Updates an existing Task object.
+    /// </summary>
+    /// <param name="item">The Task object with updated data.</param>
+    /// <exception cref="Exception">Thrown if the Task object with the specified ID does not exist.</exception>
     public void Update(Task item)
     {
-        foreach (var task in DataSource.Tasks)
+        Task existingTask = DataSource.Tasks.FirstOrDefault(task => task.Id == item.Id);
+        if (existingTask != null)
         {
-            if(task.Id == item.Id)
-            {
-                DataSource.Tasks.Remove(task);
-                DataSource.Tasks.Add(item);
-                return;
-            }
+            DataSource.Tasks.Remove(existingTask);
+            DataSource.Tasks.Add(item);
         }
-        throw new Exception($"Task object with ID = {item.Id} does not exist");
+        else
+        {
+            throw new Exception($"A Task object with ID = {item.Id} does not exist.");
+        }
     }
 }
+
