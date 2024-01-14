@@ -52,11 +52,13 @@ internal class TaskImplementation : ITask
     /// Retrieves all Task objects.
     /// </summary>
     /// <returns>A list containing all Task objects.</returns>
-    public IEnumerable<Task> ReadAll()
-    { 
-           return DataSource.Tasks.Select(item => item);
+    public IEnumerable<Task> ReadAll(Func<Task, bool>? filter = null)
+    {
+        if (filter == null)
+            return DataSource.Tasks.Select(item => item);
+        else
+            return DataSource.Tasks.Where(filter);
     }
-
 
     /// <summary>
     /// Updates an existing Task object.
