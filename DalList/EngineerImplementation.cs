@@ -6,6 +6,7 @@ using DalApi;
 using DO;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 
 
 /// <summary>
@@ -55,6 +56,11 @@ internal class EngineerImplementation : IEngineer
     public Engineer? Read(int id)
     {
         return DataSource.Engineers.FirstOrDefault(engineer => engineer.Id == id);
+    }
+
+    Engineer? Read(Func<Engineer, bool> filter)
+    {
+        return DataSource.Engineers.FirstOrDefault(filter);
     }
 
     /// <summary>

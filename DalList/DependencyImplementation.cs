@@ -51,6 +51,12 @@ internal class DependencyImplementation : IDependency
         return DataSource.Dependencies.FirstOrDefault(dependency => dependency.Id == id);
     }
 
+    Dependency? Read(Func<Dependency, bool> filter)
+    {
+        return DataSource.Dependencies.FirstOrDefault(filter);
+    }
+}
+
     /// <summary>
     /// Retrieves all Dependency objects.
     /// </summary>

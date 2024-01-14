@@ -20,6 +20,8 @@ public interface ICrud<T> where T : class
     /// <returns>The item of type T if found; otherwise, null.</returns>
     T? Read(int id);
 
+    T? Read(Func<T, bool> filter);
+
     /// <summary>
     /// Retrieves all items of type T from the data storage.
     /// </summary>
@@ -36,6 +38,7 @@ public interface ICrud<T> where T : class
     /// Deletes an item of type T from the data storage by its ID.
     /// </summary>
     /// <param name="id">The ID of the item to delete.</param>
-    void Delete(int id);
+    void Delete(int id)
+
 }
 

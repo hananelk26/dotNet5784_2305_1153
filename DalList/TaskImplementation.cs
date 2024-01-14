@@ -48,6 +48,11 @@ internal class TaskImplementation : ITask
         return DataSource.Tasks.FirstOrDefault(task => task.Id == id);
     }
 
+    Task? Read(Func<Task, bool> filter)
+    {
+        return DataSource.Tasks.FirstOrDefault(filter);
+    }
+
     /// <summary>
     /// Retrieves all Task objects.
     /// </summary>
