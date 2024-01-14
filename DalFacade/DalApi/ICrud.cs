@@ -38,7 +38,7 @@ public interface ICrud<T> where T : class
     /// Deletes an item of type T from the data storage by its ID.
     /// </summary>
     /// <param name="id">The ID of the item to delete.</param>
-    void Delete(int id)
+    void Delete(int id);
 
 }
 

@@ -55,7 +55,7 @@ internal class DependencyImplementation : IDependency
     {
         return DataSource.Dependencies.FirstOrDefault(filter);
     }
-}
+
 
     /// <summary>
     /// Retrieves all Dependency objects.
