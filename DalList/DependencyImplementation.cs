@@ -57,7 +57,7 @@ internal class DependencyImplementation : IDependency
     /// <returns>A list containing all Dependency objects.</returns>
     public IEnumerable<Dependency> ReadAll()
     {
-        return DataSource.Dependencies.Select(item => item);
+        return DataSource.Dependencies.Select(item => item); 
     }
 
     /// <summary>
