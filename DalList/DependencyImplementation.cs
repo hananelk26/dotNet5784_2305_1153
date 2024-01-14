@@ -5,6 +5,8 @@ using DO;
 using System.Collections.Generic;
 using System;
 
+
+
 /// <summary>
 /// Implementation of the IDependency interface providing CRUD operations for Dependency objects.
 /// </summary>
@@ -53,9 +55,9 @@ internal class DependencyImplementation : IDependency
     /// Retrieves all Dependency objects.
     /// </summary>
     /// <returns>A list containing all Dependency objects.</returns>
-    public List<Dependency> ReadAll()
+    public IEnumerable<Dependency> ReadAll()
     {
-        return new List<Dependency>(DataSource.Dependencies);
+        return DataSource.Dependencies.Select(item => item);
     }
 
     /// <summary>
