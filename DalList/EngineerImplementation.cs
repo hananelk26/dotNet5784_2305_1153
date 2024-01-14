@@ -58,7 +58,7 @@ internal class EngineerImplementation : IEngineer
         return DataSource.Engineers.FirstOrDefault(engineer => engineer.Id == id);
     }
 
-    Engineer? Read(Func<Engineer, bool> filter)
+    public Engineer? Read(Func<Engineer, bool> filter)
     {
         return DataSource.Engineers.FirstOrDefault(filter);
     }

@@ -32,8 +32,8 @@ internal class DependencyImplementation : IDependency
     /// <exception cref="Exception">Thrown if the Dependency object with the specified ID does not exist.</exception>
     public void Delete(int id)
     {
-       
-        if (Read(id) == null )
+
+        if (Read(id) == null)
         {
             throw new DalDoesNotExistException($"A Dependency object with ID = {id} does not exist.");
         }
@@ -55,7 +55,7 @@ internal class DependencyImplementation : IDependency
     {
         return DataSource.Dependencies.FirstOrDefault(filter);
     }
-}
+
 
     /// <summary>
     /// Retrieves all Dependency objects.
@@ -73,7 +73,7 @@ internal class DependencyImplementation : IDependency
         }
 
 
-       // return DataSource.Dependencies.Select(item => item);
+        // return DataSource.Dependencies.Select(item => item);
     }
 
     /// <summary>
@@ -83,8 +83,8 @@ internal class DependencyImplementation : IDependency
     /// <exception cref="Exception">Thrown if the Dependency object with the specified ID does not exist.</exception>
     public void Update(Dependency item)
     {
-      
-        if(Read(item.Id) == null)
+
+        if (Read(item.Id) == null)
         {
             throw new DalDoesNotExistException($"A Dependency object with ID = {item.Id} does not exist.");
         }
@@ -92,5 +92,5 @@ internal class DependencyImplementation : IDependency
         DataSource.Dependencies.Remove(Read(item.Id));
         DataSource.Dependencies.Add(item);
     }
-}
 
+}
