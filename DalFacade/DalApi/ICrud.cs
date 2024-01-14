@@ -24,7 +24,7 @@ public interface ICrud<T> where T : class
     /// Retrieves all items of type T from the data storage.
     /// </summary>
     /// <returns>A list of all items of type T.</returns>
-    List<T> ReadAll();
+    IEnumerable<T?> ReadAll(Func<T, bool>? filter = null);
 
     /// <summary>
     /// Updates an existing item of type T in the data storage.
