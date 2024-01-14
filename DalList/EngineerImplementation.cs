@@ -4,8 +4,9 @@ namespace Dal;
 
 using DalApi;
 using DO;
+using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
+
 
 /// <summary>
 /// Implementation of the IEngineer interface providing CRUD operations for Engineer objects.
@@ -60,9 +61,9 @@ internal class EngineerImplementation : IEngineer
     /// Retrieves all Engineer objects.
     /// </summary>
     /// <returns>A list containing all Engineer objects.</returns>
-    public List<Engineer> ReadAll()
+    public IEnumerable<Engineer> ReadAll()
     {
-        return new List<Engineer>(DataSource.Engineers);
+        return DataSource.Engineers.Select(item => item);
     }
 
     /// <summary>

@@ -2,6 +2,7 @@
 using DalApi;
 using DO;
 using System.Collections.Generic;
+using System;
 
 /// <summary>
 /// Implementation of the ITask interface providing CRUD operations for Task objects.
@@ -51,10 +52,11 @@ internal class TaskImplementation : ITask
     /// Retrieves all Task objects.
     /// </summary>
     /// <returns>A list containing all Task objects.</returns>
-    public List<Task> ReadAll()
-    {
-        return new List<Task>(DataSource.Tasks);
+    public IEnumerable<Task> ReadAll()
+    { 
+           return DataSource.Tasks.Select(item => item);
     }
+
 
     /// <summary>
     /// Updates an existing Task object.
