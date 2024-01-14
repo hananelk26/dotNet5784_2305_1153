@@ -55,9 +55,19 @@ internal class DependencyImplementation : IDependency
     /// Retrieves all Dependency objects.
     /// </summary>
     /// <returns>A list containing all Dependency objects.</returns>
-    public IEnumerable<Dependency> ReadAll()
+    public IEnumerable<Dependency?> ReadAll(Func<Dependency, bool>? filter)
     {
-        return DataSource.Dependencies.Select(item => item);
+        if (filter != null)
+        {
+            return DataSource.Dependencies.Where(filter);
+        }
+        else
+        {
+            return DataSource.Dependencies.Select(item => item);
+        }
+
+
+       // return DataSource.Dependencies.Select(item => item);
     }
 
     /// <summary>
