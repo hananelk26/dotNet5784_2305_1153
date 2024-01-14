@@ -61,7 +61,7 @@ internal class EngineerImplementation : IEngineer
     /// Retrieves all Engineer objects.
     /// </summary>
     /// <returns>A list containing all Engineer objects.</returns>
-    public IEnumerable<Engineer> ReadAll(Func<Engineer, bool>? filter = null)
+    public IEnumerable<Engineer> ReadAll(Func<Engineer, bool>? filter)
     {
         if (filter == null)
             return DataSource.Engineers.Select(item => item);
