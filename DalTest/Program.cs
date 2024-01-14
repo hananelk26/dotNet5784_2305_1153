@@ -283,7 +283,7 @@ internal class Program
 
     private static void readAllTsk()
     {
-        List<DO.Task> p = s_dal.Task.ReadAll();
+        IEnumerable<DO.Task> p = s_dal.Task.ReadAll();
         foreach (var item in p)
         {
             printTaskFields(item);
