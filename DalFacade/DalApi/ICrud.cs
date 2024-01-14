@@ -20,12 +20,26 @@ public interface ICrud<T> where T : class
     /// <returns>The item of type T if found; otherwise, null.</returns>
     T? Read(int id);
 
+    /// <summary>
+    /// Reads an object of type T from the data source based on the provided filter.
+    /// </summary>
+    /// <param name="filter">A function that takes an object of type T and returns a boolean indicating whether it meets the filtering criteria.</param>
+    /// <returns>
+    /// The first object of type T that satisfies the filter, or null if no such object is found.
+    /// </returns>
     T? Read(Func<T, bool> filter);
 
     /// <summary>
-    /// Retrieves all items of type T from the data storage.
+    /// Reads all objects of type T from the data source based on an optional filter.
     /// </summary>
-    /// <returns>A list of all items of type T.</returns>
+    /// <param name="filter">
+    /// An optional filter function that takes an object of type T and returns a boolean indicating whether it meets the filtering criteria.
+    /// If not provided (null), all objects of type T will be returned.
+    /// </param>
+    /// <returns>
+    /// An IEnumerable of objects of type T that satisfy the filter if provided, 
+    /// or all objects of type T if no filter is specified.
+    /// </returns>
     IEnumerable<T?> ReadAll(Func<T, bool>? filter = null);
 
     /// <summary>

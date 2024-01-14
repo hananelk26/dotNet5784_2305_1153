@@ -51,6 +51,11 @@ internal class DependencyImplementation : IDependency
         return DataSource.Dependencies.FirstOrDefault(dependency => dependency.Id == id);
     }
 
+    /// <summary>
+    /// Reads a dependency from the data source based on the provided filter.
+    /// </summary>
+    /// <param name="filter">A function that takes a dependency and returns a boolean indicating whether the dependency meets the filtering criteria.</param>
+    /// <returns>The first dependency that satisfies the filter, or null if no such dependency is found.</returns>
     public Dependency? Read(Func<Dependency, bool> filter)
     {
         return DataSource.Dependencies.FirstOrDefault(filter);
@@ -58,9 +63,13 @@ internal class DependencyImplementation : IDependency
 
 
     /// <summary>
-    /// Retrieves all Dependency objects.
+    /// Reads all dependencies from the data source based on an optional filter.
     /// </summary>
-    /// <returns>A list containing all Dependency objects.</returns>
+    /// <param name="filter">An optional filter function that takes a dependency and returns a boolean indicating whether the dependency meets the filtering criteria.</param>
+    /// <returns>
+    /// An IEnumerable of dependencies that satisfy the filter if provided, 
+    /// or all dependencies if no filter is specified.
+    /// </returns>
     public IEnumerable<Dependency?> ReadAll(Func<Dependency, bool>? filter)
     {
         if (filter != null)
@@ -72,8 +81,6 @@ internal class DependencyImplementation : IDependency
             return DataSource.Dependencies.Select(item => item);
         }
 
-
-        // return DataSource.Dependencies.Select(item => item);
     }
 
     /// <summary>

@@ -48,15 +48,24 @@ internal class TaskImplementation : ITask
         return DataSource.Tasks.FirstOrDefault(task => task.Id == id);
     }
 
-   public Task? Read(Func<Task, bool> filter)
+    /// <summary>
+    /// Reads a task from the data source based on the provided filter.
+    /// </summary>
+    /// <param name="filter">A function that takes a task and returns a boolean indicating whether the task meets the filtering criteria.</param>
+    /// <returns>The first task that satisfies the filter, or null if no such task is found.</returns>
+    public Task? Read(Func<Task, bool> filter)
     {
         return DataSource.Tasks.FirstOrDefault(filter);
     }
 
     /// <summary>
-    /// Retrieves all Task objects.
+    /// Reads all tasks from the data source based on an optional filter.
     /// </summary>
-    /// <returns>A list containing all Task objects.</returns>
+    /// <param name="filter">An optional filter function that takes a task and returns a boolean indicating whether the task meets the filtering criteria.</param>
+    /// <returns>
+    /// An IEnumerable of tasks that satisfy the filter if provided, 
+    /// or all tasks if no filter is specified.
+    /// </returns>
     public IEnumerable<Task> ReadAll(Func<Task, bool>? filter)
     {
         if (filter == null)

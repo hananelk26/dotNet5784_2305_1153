@@ -58,15 +58,24 @@ internal class EngineerImplementation : IEngineer
         return DataSource.Engineers.FirstOrDefault(engineer => engineer.Id == id);
     }
 
+    /// <summary>
+    /// Reads an engineer from the data source based on the provided filter.
+    /// </summary>
+    /// <param name="filter">A function that takes an engineer and returns a boolean indicating whether the engineer meets the filtering criteria.</param>
+    /// <returns>The first engineer that satisfies the filter, or null if no such engineer is found.</returns>
     public Engineer? Read(Func<Engineer, bool> filter)
     {
         return DataSource.Engineers.FirstOrDefault(filter);
     }
 
     /// <summary>
-    /// Retrieves all Engineer objects.
+    /// Reads all engineers from the data source based on an optional filter.
     /// </summary>
-    /// <returns>A list containing all Engineer objects.</returns>
+    /// <param name="filter">An optional filter function that takes an engineer and returns a boolean indicating whether the engineer meets the filtering criteria.</param>
+    /// <returns>
+    /// An IEnumerable of engineers that satisfy the filter if provided, 
+    /// or all engineers if no filter is specified.
+    /// </returns>
     public IEnumerable<Engineer> ReadAll(Func<Engineer, bool>? filter)
     {
         if (filter == null)
