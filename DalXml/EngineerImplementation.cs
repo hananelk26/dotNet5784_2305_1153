@@ -5,6 +5,8 @@ using DalApi;
 using DO;
 using System;
 using System.Collections.Generic;
+using System.Data.Common;
+using System.Xml.Linq;
 
 internal class EngineerImplementation : IEngineer
 {
@@ -12,12 +14,43 @@ internal class EngineerImplementation : IEngineer
 
     public int Create(Engineer item)
     {
-        throw new NotImplementedException();
+        Engineer eng;
+        eng = Read(item.Id);
+
+        if (eng != null)
+        {
+            throw new DalXMLFileLoadCreateException($"An Engineer object with ID = {item.Id} already exists.");
+        }
+
+        XElement ex;
+        ex = XMLTools.LoadListFromXMLElement(s_engineer_xml);
+
+        XElement Id = new XElement("Id",item.Id);
+        XElement Email = new XElement("Email", item.Email);
+        XElement Cost = new XElement("Cost", item.Cost);
+        XElement Name = new XElement("Name", item.Name);
+        XElement Level = new XElement("Level", item.Level);
+
+        ex.Add(new XElement("Engineer",Id,Email,Cost,Name,Level));
+
+        XMLTools.SaveListToXMLElement(ex, s_engineer_xml);
+        
+        return item.Id;
     }
 
     public void Delete(int id)
     {
-        throw new NotImplementedException();
+        if (Read(id) == null)
+        {
+            throw new DalXMLFileLoadCreateException($"An Engineer object with ID = {id} does not exist.");
+        }
+
+        XElement ex = XMLTools.LoadListFromXMLElement(s_engineer_xml);
+        XElement toDelete = from item in ex.Elements()
+                            where Convert.ToInt32(item.Element("Id").Value) == id
+                            select item;
+
+        DataSource.Engineers.Remove(Read(id));
     }
 
     public Engineer? Read(int id)
