@@ -15,35 +15,69 @@ internal class DependencyImplementation : IDependency
     {
         List<Dependency> l;
         l = XMLTools.LoadListFromXMLSerializer<Dependency>(s_dependency_xml);
-            
-        int newId = DataSource.Config.NextDependencyId;
+        int newId = Config.NextDependencyId;
         Dependency newObject = item with { Id = newId };
-        DataSource.Dependencies.Add(newObject);
+        l.Add( newObject );
+        XMLTools.SaveListToXMLSerializer<Dependency>(l, s_dependency_xml);
         return newId;
     }
 
     public void Delete(int id)
     {
-        throw new NotImplementedException();
+
+        if (Read(id) == null)
+        {
+            throw new DalXMLFileLoadCreateException($"A Dependency object with ID = {id} does not exist.");
+        }
+
+        List<Dependency> l;
+        l = XMLTools.LoadListFromXMLSerializer<Dependency>(s_dependency_xml);
+        l.Remove(Read(id));
+        XMLTools.SaveListToXMLSerializer<Dependency>(l, s_dependency_xml);
     }
 
     public Dependency? Read(int id)
     {
-        throw new NotImplementedException();
+        List<Dependency> l;
+        l = XMLTools.LoadListFromXMLSerializer<Dependency>(s_dependency_xml);
+        return l.FirstOrDefault(dependency => dependency.Id == id);
     }
 
     public Dependency? Read(Func<Dependency, bool> filter)
     {
-        throw new NotImplementedException();
+        List<Dependency> l;
+        l = XMLTools.LoadListFromXMLSerializer<Dependency>(s_dependency_xml);
+        return l.FirstOrDefault(filter);
     }
 
-    public IEnumerable<Dependency?> ReadAll(Func<Dependency, bool>? filter = null)
+    public IEnumerable<Dependency?> ReadAll(Func<Dependency, bool>? filter)
     {
-        throw new NotImplementedException();
+        List<Dependency> l;
+        l = XMLTools.LoadListFromXMLSerializer<Dependency>(s_dependency_xml);
+        if (filter != null)
+        {
+            return l.Where(filter);
+        }
+        else
+        {
+            return l.Select(item => item);
+        }
     }
 
     public void Update(Dependency item)
     {
-        throw new NotImplementedException();
+
+        if (Read(item.Id) == null)
+        {
+            throw new DalXMLFileLoadCreateException($"A Dependency object with ID = {item.Id} does not exist.");
+        }
+
+        Delete(item.Id);
+
+        List<Dependency> l;
+        l = XMLTools.LoadListFromXMLSerializer<Dependency>(s_dependency_xml);
+        l.Add(item);
+
+        XMLTools.SaveListToXMLSerializer<Dependency>(l, s_dependency_xml);
     }
 }
