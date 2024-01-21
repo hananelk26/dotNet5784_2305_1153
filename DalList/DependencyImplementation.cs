@@ -4,8 +4,6 @@ using DalApi;
 using DO;
 using System.Collections.Generic;
 using System;
-using System.Runtime.CompilerServices;
-using System.Data.SqlTypes;
 
 
 
@@ -21,7 +19,7 @@ internal class DependencyImplementation : IDependency
     /// <returns>The ID assigned to the newly created Dependency object.</returns>
     public int Create(Dependency item)
     {
-        int newId = DalXml.Config.NextDependencyId();
+        int newId = DataSource.Config.NextDependencyId;
         Dependency newObject = item with { Id = newId };
         DataSource.Dependencies.Add(newObject);
         return newId;
