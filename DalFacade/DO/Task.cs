@@ -19,5 +19,5 @@ public record Task
 )
 {
     public Task() : this(0,"","",DateTime.Now) { }/// empty ctor
-
+    public static bool 
 }

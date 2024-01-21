@@ -50,7 +50,7 @@ internal class EngineerImplementation : IEngineer
                             where Convert.ToInt32(item.Element("Id").Value) == id
                             select item;
 
-        DataSource.Engineers.Remove(Read(id));
+        
     }
 
     public Engineer? Read(int id)
@@ -70,6 +70,24 @@ internal class EngineerImplementation : IEngineer
 
     public void Update(Engineer item)
     {
-        XElement 
+        Engineer eng;
+        eng = Read(item.Id)!;
+
+        if (eng == null)
+        {
+            throw new DalDoesNotExistException($"An Engineer object with ID = {item.Id} does not exist.");
+        }
+
+        XElement ex;
+        ex = XMLTools.LoadListFromXMLElement(s_engineer_xml);
+        XElement? found = ex.Elements().FirstOrDefault(xElement => xElement.Element("Id")!.Value == item.Id.ToString());
+        if (found == null) { return; }
+
+        found.Element("Name")!.Value = item.Name;
+        found.Element("Email")!.Value = item.Email;
+        found.Element("Cost")!.Value = item.Cost.ToString();
+        found.Element("Level")!.Value = item.Level.ToString();
+
+        XMLTools.SaveListToXMLElement(ex, s_engineer_xml);
     }
 }
