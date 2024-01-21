@@ -9,14 +9,26 @@ using System.ComponentModel.DataAnnotations;
 using System.Data.Common;
 using System.Xml.Linq;
 
+/// <summary>
+/// Represents a class for managing Engineer objects using XML serialization.
+/// Implements the IEngineer interface.
+/// </summary>
 internal class EngineerImplementation : IEngineer
 {
+    /// <summary>
+    /// The XML file name for storing Engineer objects.
+    /// </summary>
     readonly string s_engineer_xml = "engineer";
 
+    /// <summary>
+    /// Creates a new Engineer object and adds it to the XML file.
+    /// </summary>
+    /// <param name="item">The Engineer object to be created.</param>
+    /// <returns>The ID of the newly created Engineer object.</returns>
     public int Create(Engineer item)
     {
         Engineer eng;
-        eng = Read(item.Id);
+        eng = Read(item.Id)!;
 
         if (eng != null)
         {
@@ -39,6 +51,10 @@ internal class EngineerImplementation : IEngineer
         return item.Id;
     }
 
+    /// <summary>
+    /// Deletes an Engineer object from the XML file based on its ID.
+    /// </summary>
+    /// <param name="id">The ID of the Engineer object to be deleted.</param>
     public void Delete(int id)
     {
         if (Read(id) == null)
@@ -48,14 +64,19 @@ internal class EngineerImplementation : IEngineer
 
         XElement ex = XMLTools.LoadListFromXMLElement(s_engineer_xml);
         XElement toDelete = (from item in ex.Elements()
-                            where Convert.ToInt32(item.Element("Id").Value) == id
-                            select item).FirstOrDefault();
+                            where Convert.ToInt32(item.Element("Id")!.Value) == id
+                            select item).FirstOrDefault()!;
         toDelete?.Remove();
         XMLTools.SaveListToXMLElement (ex, s_engineer_xml);
 
         
     }
 
+    /// <summary>
+    /// Reads an Engineer object from the XML file based on its ID.
+    /// </summary>
+    /// <param name="id">The ID of the Engineer object to be retrieved.</param>
+    /// <returns>The Engineer object with the specified ID, or null if not found.</returns>
     public Engineer? Read(int id)
     {
         XElement ex = XMLTools.LoadListFromXMLElement(s_engineer_xml);
@@ -74,6 +95,11 @@ internal class EngineerImplementation : IEngineer
         return toRead;
     }
 
+    /// <summary>
+    /// Reads an Engineer object from the XML file based on a custom filter.
+    /// </summary>
+    /// <param name="filter">The filter condition for selecting an Engineer object.</param>
+    /// <returns>The first Engineer object that satisfies the filter condition, or null if not found.</returns>
     public Engineer? Read(Func<Engineer, bool> filter)
     {
         XElement ex = XMLTools.LoadListFromXMLElement(s_engineer_xml);
@@ -89,8 +115,13 @@ internal class EngineerImplementation : IEngineer
                                  }).ToList();
         Engineer eng = toRead.FirstOrDefault(filter)! ;
         return eng;
-    } 
+    }
 
+    /// <summary>
+    /// Reads all Engineer objects from the XML file, optionally filtered.
+    /// </summary>
+    /// <param name="filter">The optional filter condition for selecting Engineer objects.</param>
+    /// <returns>An IEnumerable of Engineer objects that satisfy the filter condition, or all objects if no filter is provided.</returns>
     public IEnumerable<Engineer?> ReadAll(Func<Engineer, bool>? filter)
     {
         XElement ex = XMLTools.LoadListFromXMLElement(s_engineer_xml);
@@ -111,6 +142,10 @@ internal class EngineerImplementation : IEngineer
             return toRead.Where(filter);
     }
 
+    /// <summary>
+    /// Updates an Engineer object in the XML file.
+    /// </summary>
+    /// <param name="item">The updated Engineer object.</param>
     public void Update(Engineer item)
     {
         Engineer eng;
