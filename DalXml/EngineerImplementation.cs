@@ -20,7 +20,7 @@ internal class EngineerImplementation : IEngineer
 
         if (eng != null)
         {
-            throw new DalXMLFileLoadCreateException($"An Engineer object with ID = {item.Id} already exists.");
+            throw new DalAlreadyExistsException($"An Engineer object with ID = {item.Id} already exists.");
         }
 
         XElement ex;
@@ -43,7 +43,7 @@ internal class EngineerImplementation : IEngineer
     {
         if (Read(id) == null)
         {
-            throw new DalXMLFileLoadCreateException($"An Engineer object with ID = {id} does not exist.");
+            throw new DalDoesNotExistException($"An Engineer object with ID = {id} does not exist.");
         }
 
         XElement ex = XMLTools.LoadListFromXMLElement(s_engineer_xml);
