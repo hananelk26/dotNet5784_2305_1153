@@ -5,6 +5,7 @@ using DalApi;
 using DO;
 using System;
 using System.Collections.Generic;
+using System.Data.Common;
 
 internal class DependencyImplementation : IDependency
 {
@@ -12,7 +13,13 @@ internal class DependencyImplementation : IDependency
 
     public int Create(Dependency item)
     {
-        throw new NotImplementedException();
+        List<Dependency> l;
+        l = XMLTools.LoadListFromXMLSerializer<Dependency>(s_dependency_xml);
+            
+        int newId = DataSource.Config.NextDependencyId;
+        Dependency newObject = item with { Id = newId };
+        DataSource.Dependencies.Add(newObject);
+        return newId;
     }
 
     public void Delete(int id)
