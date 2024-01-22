@@ -3,6 +3,8 @@ using DalApi;
 using DO;
 using System.Collections.Generic;
 using System.Linq;
+using System.Xml.Linq;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 namespace DalTest;
 
 internal class Program
@@ -411,11 +413,23 @@ internal class Program
         }
     }
 
+    //public static void DeletingAlDataFromXML()
+    //{
+    //    XElement eng = new XElement("ArrayOfEngineer");
+    //    XElement dep = new XElement("ArrayOfdependency");
+    //    XElement tas = new XElement("ArrayOfTask");
+
+    //    DalXml.XMLTools.SaveListToXMLElement(eng, DalXml.EngineerImplementation.s_engineer_xml);
+    //    XMLTools.SaveListToXMLElement(eng, DalXml.EngineerImplementation.s_engineer_xml);
+    //    XMLTools.SaveListToXMLElement(eng, DalXml.EngineerImplementation.s_engineer_xml);
+    //}
+
     static void Main(string[] args)
     {
         Console.Write("Would you like to create Initial data? (Y/N)"); //stage 3
         string? ans = Console.ReadLine() ?? throw new FormatException("Wrong input"); //stage 3
         if (ans == "Y") //stage 3
+            //DeletingAlDataFromXML();
             Initialization.Do(s_dal); //stage 2
         //Initialization.Do(s_dal);
         int choice = 0;
