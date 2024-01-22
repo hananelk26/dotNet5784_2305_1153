@@ -30,7 +30,8 @@ internal class Program
         Console.WriteLine($"CompleteDate is: {p.CompleteDate} ");
         Console.WriteLine($"Deliverables is: {p.Deliverables} ");
         Console.WriteLine($"Remarks is: {p.Remarks} ");
-        Console.WriteLine($"Engineerld is: {p.Engineerld} ");
+        Console.WriteLine($"Engineerid is: {p.Engineerld} ");
+        Console.WriteLine();
     
     
     }
@@ -409,6 +410,7 @@ internal class Program
             Console.WriteLine($"The Id:{dep.Id}");
             Console.WriteLine($"The DependentTask: {dep.DependentTask}");
             Console.WriteLine($"The Dependent DependsOnTask: {dep.DependsOnTask}");
+            Console.WriteLine();
         }
     }
 
