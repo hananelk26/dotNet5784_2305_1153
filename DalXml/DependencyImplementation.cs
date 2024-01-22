@@ -120,7 +120,7 @@ internal class DependencyImplementation : IDependency
 
     public void DeleteAll()
     {
-        XElement dep = new XElement("ArrayOfdependency");
+        XElement dep = new XElement("ArrayOfDependency");
         XMLTools.SaveListToXMLElement(dep, s_dependency_xml);
     }
 

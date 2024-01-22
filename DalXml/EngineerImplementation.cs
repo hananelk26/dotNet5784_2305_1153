@@ -128,7 +128,7 @@ internal class EngineerImplementation : IEngineer
         List<Engineer> toRead = (from item in ex.Elements()
                            select new Engineer()
                            {
-                               Id = Convert.ToInt32(item.Element("Id")!.Value),
+                               Id = item.ToIntNullable("Id")!.Value,
                                Email = item.Element("Email")!.Value,
                                Cost = Convert.ToDouble(item.Element("Cost")!.Value),
                                Name = item.Element("Name")!.Value,
