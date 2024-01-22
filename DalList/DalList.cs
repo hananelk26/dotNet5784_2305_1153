@@ -1,13 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Dal;
+﻿namespace Dal;
 using DalApi;
-using System.Diagnostics.CodeAnalysis;
-
 /// <summary>
 /// Represents a sealed class implementing the IDal interface.
 /// </summary>
