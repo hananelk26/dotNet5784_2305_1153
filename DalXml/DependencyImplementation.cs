@@ -6,6 +6,7 @@ using DO;
 using System;
 using System.Collections.Generic;
 using System.Data.Common;
+using System.Xml.Linq;
 
 /// <summary>
 /// Represents a class for managing Dependency objects using XML serialization.
@@ -116,4 +117,14 @@ internal class DependencyImplementation : IDependency
 
         XMLTools.SaveListToXMLSerializer<Dependency>(l, s_dependency_xml);
     }
+
+    public void DeleteAll()
+    {
+        XElement dep = new XElement("ArrayOfdependency");
+        XMLTools.SaveListToXMLElement(dep, s_dependency_xml);
+    }
+
+
 }
+
+

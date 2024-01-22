@@ -413,24 +413,17 @@ internal class Program
         }
     }
 
-    public static void DeletingAlDataFromXML()
-    {
-        XElement eng = new XElement("ArrayOfEngineer");
-        XElement dep = new XElement("ArrayOfdependency");
-        XElement tas = new XElement("ArrayOfTask");
-
-        DalXml.XMLTools.SaveListToXMLElement(eng, DalXml.EngineerImplementation.s_engineer_xml);
-        XMLTools.SaveListToXMLElement(eng, DalXml.EngineerImplementation.s_engineer_xml);
-        XMLTools.SaveListToXMLElement(eng, DalXml.EngineerImplementation.s_engineer_xml);
-    }
+    
 
     static void Main(string[] args)
     {
-        Console.Write("Would you like to create Initial data? (Y/N)"); //stage 3
-        string? ans = Console.ReadLine() ?? throw new FormatException("Wrong input"); //stage 3
-        if (ans == "Y") //stage 3
+        Console.Write("Would you like to create Initial data? (Y/N)"); 
+        string? ans = Console.ReadLine() ?? throw new FormatException("Wrong input"); 
+        if (ans == "Y") 
         {
-            DeletingAlDataFromXML();
+            s_dal.Engineer.DeleteAll();
+            s_dal.Task.DeleteAll();
+            s_dal.Dependency.DeleteAll();
             Initialization.Do(s_dal);
         }
         int choice = 0;

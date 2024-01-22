@@ -1,4 +1,5 @@
 ﻿using DO;
+using System.Xml.Linq;
 /// <summary>
 /// Interface for basic CRUD (Create, Read, Update, Delete) operations for objects of type T.
 /// </summary>
@@ -53,6 +54,9 @@ public interface ICrud<T> where T : class
     /// </summary>
     /// <param name="id">The ID of the item to delete.</param>
     void Delete(int id);
+
+    void DeleteAll();
+
 
 }
 
