@@ -21,16 +21,42 @@ public record Task
     public Task() : this(0,"","",DateTime.Now) { }
 
   
-    public  bool ShouldSerializeRemarks()
-    {
-        return !string.IsNullOrEmpty(Remarks);
-    }
-
-    
     public  bool ShouldSerializeEngineerld()
     { 
         return Engineerld.HasValue; 
     }
+    public bool ShouldSerializeRemarks()
+    {
+        return !string.IsNullOrEmpty(Remarks);
+    }
 
+    public bool ShouldSerializeDeliverables()
+    {
+        return !string.IsNullOrEmpty(Deliverables);
+    }
+    public bool ShouldSerializeCompleteDate()
+    {
+        return !string.IsNullOrEmpty(CompleteDate.ToString());
+    }
+    public bool ShouldSerializeDeadlineDate()
+    {
+        return !string.IsNullOrEmpty(DeadlineDate.ToString());
+    }
+    public bool ShouldSerializeScheduledDate()
+    {
+        return !string.IsNullOrEmpty(ScheduledDate.ToString());
+    }
+    public bool ShouldSerializeStartDate()
+    {
+        return !string.IsNullOrEmpty(StartDate.ToString());
+    }
+    public bool ShouldSerializeCopmlexity()
+    {
+        return !string.IsNullOrEmpty(Copmlexity.ToString());
+    }
+    public bool ShouldSerializeRequiredEffortTime()
+    {
+        return !string.IsNullOrEmpty(RequiredEffortTime.ToString());
+    }
 
 }
