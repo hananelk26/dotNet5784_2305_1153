@@ -17,7 +17,7 @@ internal class DependencyImplementation : IDependency
     /// <summary>
     /// The XML file name for storing Dependency objects.
     /// </summary>
-    readonly string s_dependency_xml = "dependencys";
+    readonly string s_dependency_xml = "dependencys"; 
 
     /// <summary>
     /// Creates a new Dependency object and adds it to the XML file.
