@@ -22,7 +22,7 @@ internal class EngineerImplementation : IEngineer
     public int Create(Engineer item)
     {
         Engineer eng;
-        eng = Read(item.Id);
+        eng = Read(item.Id)!;
 
         if (eng != null)
         {
@@ -99,5 +99,10 @@ internal class EngineerImplementation : IEngineer
         
         DataSource.Engineers.Remove(existingEngineer);
         DataSource.Engineers.Add(item);
+    }
+
+    public void DeleteAll()
+    {
+        DataSource.Engineers.Clear();
     }
 }

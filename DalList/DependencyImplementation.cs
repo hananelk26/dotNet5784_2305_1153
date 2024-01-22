@@ -4,6 +4,7 @@ using DalApi;
 using DO;
 using System.Collections.Generic;
 using System;
+using System.Xml.Linq;
 
 
 
@@ -38,7 +39,7 @@ internal class DependencyImplementation : IDependency
             throw new DalDoesNotExistException($"A Dependency object with ID = {id} does not exist.");
         }
 
-        DataSource.Dependencies.Remove(Read(id));
+        DataSource.Dependencies.Remove(Read(id)!);
     }
 
     /// <summary>
@@ -96,8 +97,13 @@ internal class DependencyImplementation : IDependency
             throw new DalDoesNotExistException($"A Dependency object with ID = {item.Id} does not exist.");
         }
 
-        DataSource.Dependencies.Remove(Read(item.Id));
+        DataSource.Dependencies.Remove(Read(item.Id)!);
         DataSource.Dependencies.Add(item);
+    }
+
+    public void DeleteAll()
+    {
+        DataSource.Dependencies.Clear();
     }
 
 }

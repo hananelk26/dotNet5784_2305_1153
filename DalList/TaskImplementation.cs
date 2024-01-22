@@ -87,9 +87,14 @@ internal class TaskImplementation : ITask
         }
         else
         {
-            DataSource.Tasks.Remove(Read(item.Id));
+            DataSource.Tasks.Remove(Read(item.Id)!);
             DataSource.Tasks.Add(item);
         }
+    }
+
+    public void DeleteAll()
+    {
+        DataSource.Tasks.Clear();
     }
 }
 

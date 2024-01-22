@@ -168,4 +168,10 @@ internal class EngineerImplementation : IEngineer
 
         XMLTools.SaveListToXMLElement(ex, s_engineer_xml);
     }
+
+    public void DeleteAll()
+    {
+        XElement eng = new XElement("ArrayOfEngineer");
+        XMLTools.SaveListToXMLElement(eng,s_engineer_xml);
+    }
 }

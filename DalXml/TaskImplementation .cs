@@ -5,6 +5,7 @@ using DO;
 using System;
 using System.Collections.Generic;
 using System.Data.Common;
+using System.Xml.Linq;
 
 /// <summary>
 /// Represents a class for managing Task objects using XML serialization.
@@ -112,5 +113,11 @@ internal class TaskImplementation : ITask
         }
         XMLTools.SaveListToXMLSerializer<Task>(tas, s_task_xml);
 
+    }
+
+    public void DeleteAll()
+    {
+        XElement tas = new XElement("ArrayOfTask");
+        XMLTools.SaveListToXMLElement(tas, s_task_xml);
     }
 }
