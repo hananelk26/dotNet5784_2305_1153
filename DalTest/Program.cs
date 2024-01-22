@@ -346,8 +346,8 @@ internal class Program
         int? DependsOnTask = int.Parse(Console.ReadLine()!); 
 
         DO.Dependency dep = new DO.Dependency(id,DependentTask,DependsOnTask);
-        s_dal.Dependency.Create(dep);
-        Console.WriteLine($"The ID Dependency is:{id}");
+       int cuurent= s_dal.Dependency.Create(dep);
+        Console.WriteLine($"The ID Dependency is:{cuurent}");
     }
 
     private static void readDepend()
