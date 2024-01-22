@@ -424,7 +424,7 @@ internal class Program
             s_dal.Engineer.DeleteAll();
             s_dal.Task.DeleteAll();
             s_dal.Dependency.DeleteAll();
-            Initialization.Do(s_dal);
+            //Initialization.Do(s_dal);
         }
         int choice = 0;
             do
