@@ -110,7 +110,7 @@ using System.Xml.Serialization;
 /// <summary>
 /// Provides XML utility functions for loading, saving, and manipulating XML data.
 /// </summary>
-static class XMLTools
+ static class XMLTools
 {
     // Directory for storing XML files.
     const string s_xml_dir = @"..\xml\";
