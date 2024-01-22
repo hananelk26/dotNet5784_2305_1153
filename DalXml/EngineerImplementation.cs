@@ -64,7 +64,7 @@ internal class EngineerImplementation : IEngineer
 
         XElement ex = XMLTools.LoadListFromXMLElement(s_engineer_xml);
         XElement toDelete = (from item in ex.Elements()
-                            where Convert.ToInt32(item.Element("Id")!.Value) == id
+                            where item.ToIntNullable("Id")!.Value == id
                             select item).FirstOrDefault()!;
         toDelete?.Remove();
         XMLTools.SaveListToXMLElement (ex, s_engineer_xml);
