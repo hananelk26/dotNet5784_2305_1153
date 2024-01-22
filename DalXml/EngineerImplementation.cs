@@ -84,11 +84,11 @@ internal class EngineerImplementation : IEngineer
                              where Convert.ToInt32(item.Element("Id")!.Value) == id
                              select new Engineer()
                              {
-                                 Id = Convert.ToInt32(item.Element("Id")!.Value),
+                                 Id = item.ToIntNullable("Id")!.Value,
                                  Email = item.Element("Email")!.Value,
-                                 Cost = Convert.ToDouble(item.Element("Cost")!.Value),
+                                 Cost = item.ToDoubleNullable("Cost")!.Value,
                                  Name = item.Element("Name")!.Value,
-                                 Level = (EngineerExperience)(Convert.ToInt32(item.Element("Level")!.Value))
+                                 Level = item.ToEnumNullable<EngineerExperience>("Level")!.Value
 
                              }).FirstOrDefault()!;
 
