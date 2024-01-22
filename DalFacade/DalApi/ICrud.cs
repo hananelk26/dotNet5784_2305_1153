@@ -55,7 +55,7 @@ public interface ICrud<T> where T : class
     /// <param name="id">The ID of the item to delete.</param>
     void Delete(int id);
 
-    void DeleteAll();
+   void DeleteAll();
 
 
 }
