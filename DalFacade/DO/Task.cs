@@ -20,13 +20,15 @@ public record Task
 {
     public Task() : this(0,"","",DateTime.Now) { }
 
-    public static bool ShouldSerializeRemarks()
+  
+    public  bool ShouldSerializeRemarks()
     {
         return !string.IsNullOrEmpty(Remarks);
     }
 
-    public static bool ShouldSerializeEngineerId()
+    
+    public  bool ShouldSerializeEngineerId()
     { 
-        return EngineerId.HasValue; 
+        return Engineerld.HasValue; 
     }
 }
