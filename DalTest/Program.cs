@@ -3,6 +3,7 @@ using DalApi;
 using DO;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.RegularExpressions;
 using System.Xml.Linq;
 using static System.Runtime.InteropServices.JavaScript.JSType;
 namespace DalTest;
@@ -30,7 +31,8 @@ internal class Program
         Console.WriteLine($"CompleteDate is: {p.CompleteDate} ");
         Console.WriteLine($"Deliverables is: {p.Deliverables} ");
         Console.WriteLine($"Remarks is: {p.Remarks} ");
-        Console.WriteLine($"Engineerld is: {p.Engineerld} ");
+        Console.WriteLine($"Engineerid is: {p.Engineerld} ");
+        Console.WriteLine();
     
     
     }
@@ -409,10 +411,31 @@ internal class Program
             Console.WriteLine($"The Id:{dep.Id}");
             Console.WriteLine($"The DependentTask: {dep.DependentTask}");
             Console.WriteLine($"The Dependent DependsOnTask: {dep.DependsOnTask}");
+            Console.WriteLine();
         }
     }
 
-    
+    public static void resetDataConfig()
+    {
+        XElement ?ex = null;
+
+        const string s_xml_dir = @"..\xml\";
+        string filePath = $"{s_xml_dir + "data-config"}.xml";
+        try
+        {
+            if (File.Exists(filePath))
+               ex =  XElement.Load(filePath);
+            
+        }
+        catch (Exception eex)
+        {
+            throw new DalXMLFileLoadCreateException($"fail to load xml file: {s_xml_dir + filePath}, {eex.Message}");
+        }
+        int num = 1;
+        ex.Element("NextTaskId")!.Value = num.ToString();
+        ex.Element("NextDependencyId")!.Value = num.ToString();
+        
+    }
 
     static void Main(string[] args)
     {
@@ -423,6 +446,7 @@ internal class Program
             s_dal.Engineer.DeleteAll();
             s_dal.Task.DeleteAll();
             s_dal.Dependency.DeleteAll();
+            resetDataConfig();
             Initialization.Do(s_dal);
         }
         int choice = 0;
