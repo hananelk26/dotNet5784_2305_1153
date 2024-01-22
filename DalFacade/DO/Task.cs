@@ -18,6 +18,15 @@ public record Task
     int? Engineerld = null
 )
 {
-    public Task() : this(0,"","",DateTime.Now) { }/// empty ctor
-    public static bool 
+    public Task() : this(0,"","",DateTime.Now) { }
+
+    public static bool ShouldSerializeRemarks()
+    {
+        return !string.IsNullOrEmpty(Remarks);
+    }
+
+    public static bool ShouldSerializeEngineerId()
+    { 
+        return EngineerId.HasValue; 
+    }
 }
