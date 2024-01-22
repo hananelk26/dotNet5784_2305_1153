@@ -399,6 +399,7 @@ internal class Program
             Console.WriteLine($"The Email is: {en.Email}");
             Console.WriteLine($"The Cost is: {en.Cost}");
             Console.WriteLine($"The experience is: {en.Level}");
+            Console.WriteLine();
         }
     }
     public static void printDepe(Dependency dep)
