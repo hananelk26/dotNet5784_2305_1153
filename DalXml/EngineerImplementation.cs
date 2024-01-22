@@ -18,7 +18,7 @@ internal class EngineerImplementation : IEngineer
     /// <summary>
     /// The XML file name for storing Engineer objects.
     /// </summary>
-    readonly string s_engineer_xml = "engineer";
+    readonly string s_engineer_xml = "engineers";
 
     /// <summary>
     /// Creates a new Engineer object and adds it to the XML file.

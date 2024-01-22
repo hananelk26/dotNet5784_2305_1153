@@ -13,7 +13,7 @@ using System.Xml.Linq;
 /// </summary>
 internal class TaskImplementation : ITask
 {
-    readonly string s_task_xml = "task";
+    readonly string s_task_xml = "tasks";
 
     /// <summary>
     /// Creates a new Task object and adds it to the XML file.

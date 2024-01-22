@@ -34,7 +34,7 @@ internal class TaskImplementation : ITask
             throw new DalDoesNotExistException($"A Task object with ID = {id} does not exist.");
         }
 
-        DataSource.Tasks.Remove(Read(id));
+        DataSource.Tasks.Remove(Read(id)!);
 
     }
 
