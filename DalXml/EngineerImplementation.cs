@@ -81,7 +81,7 @@ internal class EngineerImplementation : IEngineer
     {
         XElement ex = XMLTools.LoadListFromXMLElement(s_engineer_xml);
         Engineer toRead = (from item in ex.Elements()
-                             where Convert.ToInt32(item.Element("Id")!.Value) == id
+                             where item.ToIntNullable("Id")!.Value == id
                              select new Engineer()
                              {
                                  Id = item.ToIntNullable("Id")!.Value,
