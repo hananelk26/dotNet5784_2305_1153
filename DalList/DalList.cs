@@ -7,8 +7,12 @@ using DalApi;
 /// <remarks>
 /// This class provides specific implementations for the IDependency, IEngineer, and ITask properties.
 /// </remarks>
-sealed public class DalList : IDal
+sealed internal class DalList : IDal
 {
+
+    public static IDal Instance { get; } = new DalList();
+    private DalList() {; }
+
     /// <summary>
     /// Gets the dependency component for managing dependencies.
     /// </summary>
