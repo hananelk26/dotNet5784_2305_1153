@@ -15,7 +15,8 @@ internal class Program
     //private static IDependency? s_dalDependency = new DependencyImplementation();
 
     //static readonly IDal s_dal = new DalList(); //stage 2
-    static readonly IDal s_dal = new DalXml();
+    //static readonly IDal s_dal = new DalXml();
+    static readonly IDal s_dal = Factory.Get;
     private static void printTaskFields(DO.Task p)
     {
         Console.WriteLine($"ID is: {p.Id} ");
@@ -449,7 +450,7 @@ internal class Program
             s_dal.Task.DeleteAll();
             s_dal.Dependency.DeleteAll();
             resetDataConfig();
-            Initialization.Do(s_dal);
+            Initialization.Do();
         }
         int choice = 0;
             do
