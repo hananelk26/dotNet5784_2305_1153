@@ -1,5 +1,7 @@
-﻿namespace BL;
-public class Class1
+﻿namespace BL
 {
-   
+    public class Class1
+    {
+
+    }
 }
