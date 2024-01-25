@@ -1,7 +1,7 @@
 ﻿using DalApi;
 using System.Reflection;
 using System.Xml;
-
+namespace DalApi;
 
 public static class Factory
 {
