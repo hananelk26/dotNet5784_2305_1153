@@ -432,8 +432,10 @@ internal class Program
             throw new DalXMLFileLoadCreateException($"fail to load xml file: {s_xml_dir + filePath}, {eex.Message}");
         }
         int num = 1;
-        ex.Element("NextTaskId")!.Value = num.ToString();
+        ex!.Element("NextTaskId")!.Value = num.ToString();
         ex.Element("NextDependencyId")!.Value = num.ToString();
+
+        ex.Save(filePath);
         
     }
 
