@@ -1,10 +1,14 @@
 ﻿
+using DO;
+
 namespace BlApi;
 
 public interface IEngineer
 {
-    public IEnumerable<BO.EngineerInList> ReadAll();
-
-
+    public IEnumerable<BO.Engineer> ReadAll(Func<BO.Engineer, bool>? filter = null);
+    public BO.Engineer? Read(int id);
+    public int Create(BO.Engineer item);
+    public void Delete(int id);
+    public void Update(BO.Engineer item);
 
 }
