@@ -8,6 +8,7 @@ public interface ITask
     public int Create(BO.Task item);
     public void Update(BO.Task item);
     public void Delete(int id);
+    public void UpdateStartTask(int id, DateTime t);
 
 
 }
