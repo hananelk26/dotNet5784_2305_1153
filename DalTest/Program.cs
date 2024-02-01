@@ -23,7 +23,6 @@ internal class Program
         Console.WriteLine($"Alias is: {p.Alias} ");
         Console.WriteLine($"Description is: {p.Description} ");
         Console.WriteLine($"createdAtDate is: {p.createdAtDate} ");
-        Console.WriteLine($" isMileStone is: {p.isMileStone} ");
         Console.WriteLine($"RequiredEffortTime is: {p.RequiredEffortTime} ");
         Console.WriteLine($"Copmlexity is: {p.Copmlexity} ");
         Console.WriteLine($"StartDate is: {p.StartDate} ");
@@ -251,7 +250,6 @@ internal class Program
         Console.WriteLine("Enter created Date:");
         DateTime createdAtDate =DateTime.Parse( Console.ReadLine()!);
         Console.WriteLine("Enter isMileStone:");
-        bool isMail =bool.Parse( Console.ReadLine()!);
         Console.WriteLine("Enter Required Effort Time");
         TimeSpan? RequiredEffortTime =TimeSpan.Parse( Console.ReadLine()!);
         Console.WriteLine("Enter Copmlexity:");
@@ -271,7 +269,7 @@ internal class Program
         Console.WriteLine("Enter Engineerld:");
         int? Engineerld = int.Parse( Console.ReadLine()!);   
 
-        DO.Task p = new DO.Task(Id, alias!, Description!, createdAtDate, isMail, RequiredEffortTime, Copmlex, StartDate, ScheduledDate, DeadlineDate, CompleteDate, Deliverables, Remarks, Engineerld);
+        DO.Task p = new DO.Task(Id, alias!, Description!, createdAtDate, RequiredEffortTime, Copmlex, StartDate, ScheduledDate, DeadlineDate, CompleteDate, Deliverables, Remarks, Engineerld);
         int id = s_dal.Task!.Create(p);
         Console.WriteLine($"The ID task is:{id}");
 
@@ -305,7 +303,6 @@ internal class Program
         Console.WriteLine("Enter created Date:");
         DateTime createdAtDate = DateTime.Parse(Console.ReadLine()!);
         Console.WriteLine("Enter isMileStone:");
-        bool isMail = bool.Parse(Console.ReadLine()!);
         Console.WriteLine("Enter Required Effort Time");
         TimeSpan? RequiredEffortTime = TimeSpan.Parse(Console.ReadLine()!);
         Console.WriteLine("Enter Copmlexity:");
@@ -328,7 +325,7 @@ internal class Program
         DO.Task p =  s_dal.Task.Read(Id)!;
         printTaskFields(p);
 
-        DO.Task t = new DO.Task(Id, alias, Description, createdAtDate, isMail, RequiredEffortTime, Copmlex, StartDate, ScheduledDate, DeadlineDate, CompleteDate, Deliverables, Remarks, Engineerld);
+        DO.Task t = new DO.Task(Id, alias, Description, createdAtDate, RequiredEffortTime, Copmlex, StartDate, ScheduledDate, DeadlineDate, CompleteDate, Deliverables, Remarks, Engineerld);
         s_dal.Task.Update(t);
     }
 

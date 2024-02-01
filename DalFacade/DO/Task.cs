@@ -6,7 +6,6 @@ public record Task
     string Alias,
     string Description,
     DateTime  createdAtDate,
-    bool isMileStone=false,
     TimeSpan? RequiredEffortTime = null,
     DO.EngineerExperience? Copmlexity = null,
     DateTime? StartDate = null,
