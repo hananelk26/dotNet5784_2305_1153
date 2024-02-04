@@ -2,34 +2,220 @@
 
 namespace BlImplementation;
 using BlApi;
+using System.Text.RegularExpressions;
 
 internal class EngineerImplementation : IEngineer
 {
     private DalApi.IDal _dal = DalApi.Factory.Get;
 
 
-    public int Create(BO.Engineer item)
+    public int Create(BO.Engineer boEngineer)
     {
-        throw new NotImplementedException();
+        inputValidity(boEngineer);
+
+        DO.Engineer doEngineer = new DO.Engineer(boEngineer.Id, boEngineer.Email, boEngineer.Cost, boEngineer.Name, (DO.EngineerExperience)boEngineer.Level);
+        try
+        {
+            int IdEngineer = _dal.Engineer.Create(doEngineer);
+            return IdEngineer;
+        }
+        catch (DO.DalAlreadyExistsException ex)
+        {
+            throw new BO.BlAlreadyExistsException($"Engineer with ID={boEngineer.Id} already exists", ex);
+        }
+
     }
 
     public void Delete(int id)
     {
-        throw new NotImplementedException();
+        var temp = _dal.Task.ReadAll().Where(t => t!.EngineerId == id);
+        if (temp.Any())
+        {
+            throw BO.AnEngineerWhoHasATaskCannotBeDeleted("An engineer who has a task cannot be deleted")
+
+        }
+
+        try
+        {
+            _dal.Engineer.Delete(id);
+        }
+        catch (DO.DalAlreadyExistsException ex)
+        {
+            throw new BO.BlDoesNotExistException($"Engineer with ID={id} does Not exist", ex);
+        }
     }
 
     public BO.Engineer? Read(int id)
     {
-        throw new NotImplementedException();
+        DO.Engineer? doEngineer = _dal.Engineer.Read(id);
+        if (doEngineer == null)
+            throw new BO.BlDoesNotExistException($"Engineer with ID={id} does Not exist");
+        if (condition(doEngineer))
+        {
+            return new BO.Engineer()
+            {
+                Id = id,
+                Name = doEngineer.Name,
+                Email = doEngineer.Email,
+                Cost = doEngineer.Cost,
+                Level = (BO.EngineerExperience)doEngineer.Level,
+                Task = new BO.TaskInEngineer()
+                {
+                    Id = id,
+                    Alias = ((from item in _dal.Task.ReadAll()
+                              where (item.EngineerId == id && item.CompleteDate == null)
+                              select item).FirstOrDefault()!).Alias,
+                }
+
+            };
+
+        }
+        else
+        {
+            return new BO.Engineer()
+            {
+                Id = id,
+                Name = doEngineer.Name,
+                Email = doEngineer.Email,
+                Cost = doEngineer.Cost,
+                Level = (BO.EngineerExperience)doEngineer.Level,
+                Task = null
+
+            };
+        }
     }
+
 
     public IEnumerable<BO.Engineer> ReadAll(Func<BO.Engineer, bool>? filter = null)
     {
-        throw new NotImplementedException();
+        IEnumerable<BO.Engineer> ans;
+        ans = (from DO.Engineer item in _dal.Engineer.ReadAll()
+               select condition(item) ?
+               new BO.Engineer
+               {
+                   Id = item.Id,
+                   Cost = item.Cost,
+                   Name = item.Name,
+                   Email = item.Email,
+                   Level = (BO.EngineerExperience)item.Level,
+                   Task = new BO.TaskInEngineer()
+                   {
+                       Id = item.Id,
+                       Alias = _dal.Task.ReadAll().Where(t => t?.EngineerId == item.Id && t.CompleteDate == null).FirstOrDefault()!.Alias
+                   }
+               }
+
+               : new BO.Engineer
+               {
+                   Id = item.Id,
+                   Cost = item.Cost,
+                   Name = item.Name,
+                   Email = item.Email,
+                   Level = (BO.EngineerExperience)item.Level,
+                   Task = null
+               }
+               );
+        if (filter != null)
+        {
+            return ans.Where(filter);
+        }
+        return ans;
+    }
+
+    bool condition(DO.Engineer item)
+    {
+        var ret = _dal.Task.ReadAll().Where(t => t?.EngineerId == item.Id && t.CompleteDate == null).FirstOrDefault();
+        if (ret != null)
+            return true;
+        return false;
     }
 
     public void Update(BO.Engineer item)
     {
-        throw new NotImplementedException();
+        inputValidity(item);
+
+        DO.Engineer? doEng = _dal.Engineer.Read(item.Id);
+
+        if (doEng != null)
+        {
+            if (doEng.Level > (DO.EngineerExperience)item.Level)
+            {
+                throw new BO.BlinputValidity("There is a problem with the integrity of the level of the engineer");
+            }
+        }
+
+        DO.Engineer doEngineer = new DO.Engineer()
+        {
+            Id = item.Id,
+            Name = item.Name,
+            Email = item.Email,
+            Level = (DO.EngineerExperience)item.Level,
+            Cost = item.Cost
+        };
+        try
+        {
+            _dal.Engineer.Update(doEngineer);
+        }
+        catch (DO.DalDoesNotExistException)
+        {
+
+            throw BO.BlDoesNotExistException($"Engineer with ID={item.Id} does Not exist");
+        }
+
+        var task = _dal.Task.ReadAll().Where(t => t?.Id == item.Task?.Id).FirstOrDefault();
+        if (task != null)
+        {
+            DO.Task doTask = new DO.Task()
+            {
+                EngineerId = item.Id,
+                Id = task.Id,
+                Description = task.Description,
+                Alias = task.Alias,
+                createdAtDate = task.createdAtDate,
+                RequiredEffortTime = task.RequiredEffortTime,   
+                Copmlexity = task.Copmlexity,   
+                StartDate = task.StartDate,
+                ScheduledDate = task.ScheduledDate,
+                DeadlineDate = task.DeadlineDate,
+                CompleteDate = task.CompleteDate,
+                Deliverables = task.Deliverables,
+                Remarks = task.Remarks
+
+            };
+
+            try
+            {
+                _dal.Task.Update(doTask);
+            }
+            catch (DO.DalDoesNotExistException)
+            {
+
+                throw BO.BlDoesNotExistException($"Task with ID={doTask.Id} does Not exist");
+            }
+        }
     }
+
+    static public void inputValidity(BO.Engineer boEng)
+    {
+        if (!IsValidEmail(boEng.Email) || !IsValidName(boEng.Name) || boEng.Cost < 0 || boEng.Id < 0)
+        {
+            throw new BO.BlinputValidity("There is a problem with the integrity of the data");
+        }
+    }
+
+    static bool IsValidEmail(string email)
+    {
+        // Regular expression for a simple email validation
+        string emailPattern = @"^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$";
+        return Regex.IsMatch(email, emailPattern);
+    }
+
+    static bool IsValidName(string name)
+    {
+        // Regular expression for a simple name validation
+        // Allows letters, spaces, and some common special characters
+        string namePattern = @"^[a-zA-Z\s\.'-]*$";
+        return Regex.IsMatch(name, namePattern);
+    }
+
 }

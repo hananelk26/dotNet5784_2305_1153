@@ -14,15 +14,15 @@ public record Task
     DateTime? CompleteDate = null,
     string? Deliverables = null,
     string? Remarks = null,
-    int? Engineerld = null
+    int? EngineerId = null
 )
 {
     public Task() : this(0,"","",DateTime.Now) { }
 
   
-    public  bool ShouldSerializeEngineerld()
+    public bool ShouldSerializeEngineerId()
     { 
-        return Engineerld.HasValue; 
+        return EngineerId.HasValue; 
     }
     public bool ShouldSerializeRemarks()
     {

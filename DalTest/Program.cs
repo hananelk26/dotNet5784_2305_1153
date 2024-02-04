@@ -31,7 +31,7 @@ internal class Program
         Console.WriteLine($"CompleteDate is: {p.CompleteDate} ");
         Console.WriteLine($"Deliverables is: {p.Deliverables} ");
         Console.WriteLine($"Remarks is: {p.Remarks} ");
-        Console.WriteLine($"Engineerid is: {p.Engineerld} ");
+        Console.WriteLine($"Engineerid is: {p.EngineerId} ");
         Console.WriteLine();
     
     
@@ -266,10 +266,10 @@ internal class Program
         string? Deliverables = Console.ReadLine();
         Console.WriteLine("Enter Remarks:");
         string? Remarks = Console.ReadLine();
-        Console.WriteLine("Enter Engineerld:");
-        int? Engineerld = int.Parse( Console.ReadLine()!);   
+        Console.WriteLine("Enter EngineerId:");
+        int? EngineerId = int.Parse( Console.ReadLine()!);   
 
-        DO.Task p = new DO.Task(Id, alias!, Description!, createdAtDate, RequiredEffortTime, Copmlex, StartDate, ScheduledDate, DeadlineDate, CompleteDate, Deliverables, Remarks, Engineerld);
+        DO.Task p = new DO.Task(Id, alias!, Description!, createdAtDate, RequiredEffortTime, Copmlex, StartDate, ScheduledDate, DeadlineDate, CompleteDate, Deliverables, Remarks, EngineerId);
         int id = s_dal.Task!.Create(p);
         Console.WriteLine($"The ID task is:{id}");
 
@@ -319,13 +319,13 @@ internal class Program
         string? Deliverables = Console.ReadLine();
         Console.WriteLine("Enter Remarks:");
         string? Remarks = Console.ReadLine();
-        Console.WriteLine("Enter Engineerld:");
-        int? Engineerld = int.Parse(Console.ReadLine()!);
+        Console.WriteLine("Enter EngineerId:");
+        int? EngineerId = int.Parse(Console.ReadLine()!);
 
         DO.Task p =  s_dal.Task.Read(Id)!;
         printTaskFields(p);
 
-        DO.Task t = new DO.Task(Id, alias, Description, createdAtDate, RequiredEffortTime, Copmlex, StartDate, ScheduledDate, DeadlineDate, CompleteDate, Deliverables, Remarks, Engineerld);
+        DO.Task t = new DO.Task(Id, alias, Description, createdAtDate, RequiredEffortTime, Copmlex, StartDate, ScheduledDate, DeadlineDate, CompleteDate, Deliverables, Remarks, EngineerId);
         s_dal.Task.Update(t);
     }
 
