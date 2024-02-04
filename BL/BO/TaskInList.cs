@@ -9,17 +9,4 @@ public class TaskInList
    public Status? Status { get; set; }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
 }
