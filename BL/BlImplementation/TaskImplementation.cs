@@ -11,23 +11,9 @@ internal class TaskImplementation : ITask
 
     public int Create(BO.Task boTask)
     {
-       // List<int> dependIds = new List<int>();
         inputValidity(boTask);
-        //Console.WriteLine("Enter task IDs that the current task depends on to finish press -1");
-        //int num = int.Parse(Console.ReadLine()!);
 
-        //while (num != -1)
-        //{
-        //    var tsk = _dal.Task.Read(t => t.Id == num);
-        //    if (tsk == null)
-        //    {
-        //        throw new BO.BlDoesNotExistException($"No task with ID ={num} exists");
-        //    }
 
-        //    dependIds.Add(num);
-        //    num = int.Parse(Console.ReadLine()!);
-        //}
-        
         foreach (var dependId in boTask.Dependencies!)
         {
             DO.Dependency dependency = new DO.Dependency()
@@ -85,6 +71,23 @@ internal class TaskImplementation : ITask
     public void Update(BO.Task boTask)
     {
         inputValidity(boTask);
+
+        foreach (var dependId in boTask.Dependencies!)
+        {
+            DO.Dependency dep = _dal.Dependency.ReadAll(d => d.DependsOnTask == dependId.Id && d.DependentTask == boTask.Id).FirstOrDefault()!;
+            if (dep == null)
+            {
+                DO.Dependency dependency = new DO.Dependency()
+                {
+                    DependentTask = boTask.Id,
+                    DependsOnTask = dependId.Id
+                };
+                _dal.Dependency.Create(dependency);
+            }
+
+        }
+
+
         DO.Task task = new DO.Task()
         {
             Id = boTask.Id,
@@ -136,7 +139,7 @@ internal class TaskImplementation : ITask
 
     static public void inputValidity(BO.Task boTask)
     {
-        if ( !IsValidName(boTask.Alias!) ||  boTask.Id < 0)
+        if (!IsValidName(boTask.Alias!) || boTask.Id < 0)
         {
             throw new BO.BlinputValidity("There is a problem with the integrity of the data");
         }

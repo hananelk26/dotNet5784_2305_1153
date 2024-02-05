@@ -121,15 +121,6 @@ internal class EngineerImplementation : IEngineer
         }
         return ans;
     }
-
-    bool condition(DO.Engineer item)
-    {
-        var ret = _dal.Task.ReadAll().Where(t => t?.EngineerId == item.Id && t.CompleteDate == null).FirstOrDefault();
-        if (ret != null)
-            return true;
-        return false;
-    }
-
     public void Update(BO.Engineer item)
     {
         inputValidity(item);
@@ -194,6 +185,15 @@ internal class EngineerImplementation : IEngineer
             }
         }
     }
+
+    bool condition(DO.Engineer item)
+    {
+        var ret = _dal.Task.ReadAll().Where(t => t?.EngineerId == item.Id && t.CompleteDate == null).FirstOrDefault();
+        if (ret != null)
+            return true;
+        return false;
+    }
+
 
     static public void inputValidity(BO.Engineer boEng)
     {
