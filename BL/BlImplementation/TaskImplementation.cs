@@ -4,6 +4,7 @@ using BO;
 using System.Data;
 using System.Security.Cryptography;
 using System.Text.RegularExpressions;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 
 namespace BlImplementation;
@@ -64,7 +65,7 @@ internal class TaskImplementation : ITask
         foreach( var d in de) 
         {
             if (id == d.DependsOnTask)
-                throw "there is taska that depend in this task";
+                throw new BO.BlPartOfTheTaskDepends( "there is taska that depend in this task");
         }
         _dal.Task.Delete(id);
     }
@@ -197,9 +198,9 @@ internal class TaskImplementation : ITask
                     if(t.Id== id)
                     {
                         if (t.ScheduledDate == null)
-                            throw "";
-                        if(t.DeadlineDate > tim)
-                            throw "":
+                            throw new BLTheDateIsNotGood("Previous tasks have not been given a start date");
+                        if (t.DeadlineDate > tim)
+                            throw new BLTheDateIsNotGood("A previous task's end date is later than the entered start date");
                     }
                     
                 }

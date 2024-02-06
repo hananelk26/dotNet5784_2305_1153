@@ -31,3 +31,12 @@ public class BlinputValidity: Exception
     public BlinputValidity(string? message) : base(message) { }
 }
 
+public class BlPartOfTheTaskDepends :Exception
+{
+    public BlPartOfTheTaskDepends(string? me):base(me) { }
+}
+
+public class BLTheDateIsNotGood : Exception
+{
+    public BLTheDateIsNotGood(string? me):base(me) { }
+}
