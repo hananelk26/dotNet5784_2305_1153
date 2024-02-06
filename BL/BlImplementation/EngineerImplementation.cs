@@ -21,7 +21,7 @@ internal class EngineerImplementation : IEngineer
         }
         catch (DO.DalAlreadyExistsException ex)
         {
-            throw new BO.BlAlreadyExistsException($"Engineer with ID={boEngineer.Id} already exists", ex);
+            throw new BO.BlAlreadyExistsException($"Engineer with ID={boEngineer.Id} already exists"/*, ex*/);
         }
 
     }
@@ -31,7 +31,7 @@ internal class EngineerImplementation : IEngineer
         var temp = _dal.Task.ReadAll().Where(t => t!.EngineerId == id);
         if (temp.Any())
         {
-            throw BO.AnEngineerWhoHasATaskCannotBeDeleted("An engineer who has a task cannot be deleted")
+            throw new BO.BlAnEngineerWhoHasATaskCannotBeDeleted("An engineer who has a task cannot be deleted");
 
         }
 
@@ -41,7 +41,7 @@ internal class EngineerImplementation : IEngineer
         }
         catch (DO.DalAlreadyExistsException ex)
         {
-            throw new BO.BlDoesNotExistException($"Engineer with ID={id} does Not exist", ex);
+            throw new BO.BlDoesNotExistException($"Engineer with ID={id} does Not exist"/*, ex*/);
         }
     }
 
@@ -150,7 +150,7 @@ internal class EngineerImplementation : IEngineer
         catch (DO.DalDoesNotExistException)
         {
 
-            throw BO.BlDoesNotExistException($"Engineer with ID={item.Id} does Not exist");
+            throw new BO.BlDoesNotExistException($"Engineer with ID={item.Id} does Not exist");
         }
 
         var task = _dal.Task.ReadAll().Where(t => t?.Id == item.Task?.Id).FirstOrDefault();
@@ -181,7 +181,7 @@ internal class EngineerImplementation : IEngineer
             catch (DO.DalDoesNotExistException)
             {
 
-                throw BO.BlDoesNotExistException($"Task with ID={doTask.Id} does Not exist");
+                throw new BO.BlDoesNotExistException($"Task with ID={doTask.Id} does Not exist");
             }
         }
     }

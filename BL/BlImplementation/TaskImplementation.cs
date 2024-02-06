@@ -52,7 +52,7 @@ internal class TaskImplementation : ITask
         }
         catch (DO.DalAlreadyExistsException ex)
         {
-            throw new BO.BlAlreadyExistsException($"Task with ID={boTask.Id} already exists", ex);
+            throw new BO.BlAlreadyExistsException($"Task with ID={boTask.Id} already exists"/*, ex*/);
         }
     }
 
@@ -60,7 +60,6 @@ internal class TaskImplementation : ITask
     {
         var t = _dal.Task.Read(id);
         if (t == null) { throw new BO.BlDoesNotExistException($"Task with ID={id} does Not exist"); }
-        // צריך לבדוק שאין משיומות שהמשימה הזו קודמת להן
         var de = _dal.Dependency.ReadAll();
         foreach( var d in de) 
         {
@@ -179,22 +178,35 @@ internal class TaskImplementation : ITask
         catch (DO.DalDoesNotExistException)
         {
 
-            throw BO.BlDoesNotExistException($"Engineer with ID={item.Id} does Not exist");
+            throw new BO.BlDoesNotExistException($"Engineer with ID={task.Id} does Not exist");
         }
 
     }
 
-    public void UpdateStartTask(int id, DateTime t)
+    public void UpdateStartTask(int id, DateTime tim)
     {
+        var ta = _dal.Task.ReadAll();
         var task = _dal.Task.Read(id);
-        var dep  =  
+        var dep  = _dal.Dependency.ReadAll();
+        foreach(var d in dep)
+        {
+            if(id == d.DependsOnTask)
+            {
+               foreach(var t in ta)
+                {
+                    if(t.Id== id)
+                    {
+                        if (t.ScheduledDate == null)
+                            throw "";
+                        if(t.DeadlineDate > tim)
+                            throw "":
+                    }
+                    
+                }
 
-
-
-
-
-
-
+            }
+        }
+        _dal.Task.Update(task with { ScheduledDate = tim });
     }
 
     static bool IsValidName(string name)
