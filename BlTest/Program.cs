@@ -50,6 +50,7 @@ public class Program
         int id = int.Parse(Console.ReadLine()!);
         BO.Engineer x = s_bl.Engineer.Read(id)!;
         Console.WriteLine(x);
+       
 
     }
     private static void readAllEng()
