@@ -9,7 +9,7 @@ internal class EngineerImplementation : IEngineer
     private DalApi.IDal _dal = DalApi.Factory.Get;
 
 
-    public int Create(BO.Engineer boEngineer)    
+    public int Create(BO.Engineer boEngineer)
     {
         inputValidity(boEngineer);
 
@@ -50,8 +50,11 @@ internal class EngineerImplementation : IEngineer
         DO.Engineer? doEngineer = _dal.Engineer.Read(id);
         if (doEngineer == null)
             throw new BO.BlDoesNotExistException($"Engineer with ID={id} does Not exist");
-        if (condition(doEngineer))
+        if (condition(doEngineer)) // כלומר נמצאים בשלב 3 בלו"ז
         {
+            var ret = _dal.Task.ReadAll().Where(t => t?.EngineerId == doEngineer.Id && t.CompleteDate == null).FirstOrDefault();
+            int IdOfTask = ret!.Id; // RET זה המשימה של אותו מהנדס
+            string AliasOfTask = ret!.Alias;
             return new BO.Engineer()
             {
                 Id = id,
@@ -61,10 +64,8 @@ internal class EngineerImplementation : IEngineer
                 Level = (BO.EngineerExperience)doEngineer.Level,
                 Task = new BO.TaskInEngineer()
                 {
-                    Id = id,
-                    Alias = ((from item in _dal.Task.ReadAll()
-                              where (item.EngineerId == id && item.CompleteDate == null)
-                              select item).FirstOrDefault()!).Alias,
+                    Id = IdOfTask,
+                    Alias = AliasOfTask
                 }
 
             };
@@ -100,7 +101,7 @@ internal class EngineerImplementation : IEngineer
                    Level = (BO.EngineerExperience)item.Level,
                    Task = new BO.TaskInEngineer()
                    {
-                       Id = item.Id,
+                       Id = _dal.Task.ReadAll().Where(t => t?.EngineerId == item.Id && t.CompleteDate == null).FirstOrDefault()!.Id,
                        Alias = _dal.Task.ReadAll().Where(t => t?.EngineerId == item.Id && t.CompleteDate == null).FirstOrDefault()!.Alias
                    }
                }
@@ -153,42 +154,45 @@ internal class EngineerImplementation : IEngineer
             throw new BO.BlDoesNotExistException($"Engineer with ID={item.Id} does Not exist");
         }
 
-        var task = _dal.Task.ReadAll().Where(t => t?.Id == item.Task?.Id).FirstOrDefault();
-        if (task != null)
+        if (item.Task != null)
         {
-            DO.Task doTask = new DO.Task()
+            var task = _dal.Task.ReadAll().Where(t => t?.Id == item.Task.Id).FirstOrDefault();
+            if (task != null)
             {
-                EngineerId = item.Id,
-                Id = task.Id,
-                Description = task.Description,
-                Alias = task.Alias,
-                createdAtDate = task.createdAtDate,
-                RequiredEffortTime = task.RequiredEffortTime,   
-                Copmlexity = task.Copmlexity,   
-                StartDate = task.StartDate,
-                ScheduledDate = task.ScheduledDate,
-                DeadlineDate = task.DeadlineDate,
-                CompleteDate = task.CompleteDate,
-                Deliverables = task.Deliverables,
-                Remarks = task.Remarks
+                DO.Task doTask = new DO.Task()
+                {
+                    EngineerId = item.Id,
+                    Id = task.Id,
+                    Description = task.Description,
+                    Alias = task.Alias,
+                    createdAtDate = task.createdAtDate,
+                    RequiredEffortTime = task.RequiredEffortTime,
+                    Copmlexity = task.Copmlexity,
+                    StartDate = task.StartDate,
+                    ScheduledDate = task.ScheduledDate,
+                    DeadlineDate = task.DeadlineDate,
+                    CompleteDate = task.CompleteDate,
+                    Deliverables = task.Deliverables,
+                    Remarks = task.Remarks
 
-            };
+                };
 
-            try
-            {
-                _dal.Task.Update(doTask);
+                try
+                {
+                    _dal.Task.Update(doTask);
+                }
+                catch (DO.DalDoesNotExistException)
+                {
+                    throw new BO.BlDoesNotExistException($"Task with ID={doTask.Id} does Not exist");
+                }
             }
-            catch (DO.DalDoesNotExistException)
-            {
 
-                throw new BO.BlDoesNotExistException($"Task with ID={doTask.Id} does Not exist");
-            }
         }
     }
 
     bool condition(DO.Engineer item)
     {
-        var ret = _dal.Task.ReadAll().Where(t => t?.EngineerId == item.Id && t.CompleteDate == null).FirstOrDefault();
+        var ret = _dal.Task.ReadAll().Where(t =>t!.EngineerId != null && t.EngineerId == item.Id && t.CompleteDate == null).FirstOrDefault();
         if (ret != null)
             return true;
         return false;

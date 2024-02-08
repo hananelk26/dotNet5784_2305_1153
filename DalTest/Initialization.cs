@@ -141,6 +141,7 @@ public static class Initialization
         //s_dalDependency = dalDependency ?? throw new NullReferenceException("DAL can not be null!");
         s_dal = DalApi.Factory.Get;
 
+        s_dal.Time.reset();
         createEngineers();
         createTask();
         createDependency();

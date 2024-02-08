@@ -18,15 +18,22 @@ internal class TaskImplementation : ITask
         inputValidity(boTask);
 
 
-        foreach (var dependId in boTask.Dependencies!)
+        if (boTask.Dependencies != null)
         {
-            DO.Dependency dependency = new DO.Dependency()
+            foreach (var dependId in boTask.Dependencies!)
             {
-                DependentTask = boTask.Id,
-                DependsOnTask = dependId.Id
-            };
+                DO.Dependency dependency = new DO.Dependency()
+                {
+                    DependentTask = boTask.Id,
+                    DependsOnTask = dependId.Id
+                };
 
-            _dal.Dependency.Create(dependency);
+                var ret = _dal.Dependency.ReadAll(d => d.DependentTask == boTask.Id && d.DependsOnTask == dependId.Id).FirstOrDefault();
+                if (ret == null)
+                {
+                    _dal.Dependency.Create(dependency);
+                }
+            }
         }
 
         DO.Task task = new DO.Task()
@@ -37,13 +44,13 @@ internal class TaskImplementation : ITask
             createdAtDate = boTask.CreatedAtDate,
             RequiredEffortTime = boTask.RequiredEfforTime,
             Copmlexity = (DO.EngineerExperience)boTask.Complexyity!,
-            StartDate = boTask.StartDate,
-            ScheduledDate = boTask.ScheduledDate,
-            DeadlineDate = boTask.DeadLineDate,
-            CompleteDate = boTask.CompleteDate,
+            //StartDate = boTask.StartDate,
+            //ScheduledDate = boTask.ScheduledDate,
+            //DeadlineDate = boTask.DeadLineDate,
+            //CompleteDate = boTask.CompleteDate,
             Deliverables = boTask.Deliverables,
             Remarks = boTask.Remarks,
-            EngineerId = boTask.Engineer!.Id
+            // EngineerId = boTask.Engineer!.Id
 
         };
 
@@ -62,18 +69,23 @@ internal class TaskImplementation : ITask
         var t = _dal.Task.Read(id);
         if (t == null) { throw new BO.BlDoesNotExistException($"Task with ID={id} does Not exist"); }
         var de = _dal.Dependency.ReadAll();
-        foreach( var d in de) 
+        foreach (var d in de)
         {
-            if (id == d.DependsOnTask)
-                throw new BO.BlPartOfTheTaskDepends( "there is taska that depend in this task");
+            if (id == d!.DependsOnTask)
+                throw new BO.BlPartOfTheTaskDepends("there is task that depend in this task");
         }
         _dal.Task.Delete(id);
+        foreach (var d in de)
+        {
+            if (id == d!.DependentTask)
+                _dal.Dependency.Delete(d.Id);
+        }
     }
 
     public BO.Task? Read(int id)
     {
-       var dalTask =  _dal.Task.Read(id);
-        if(dalTask == null) { throw new BO.BlDoesNotExistException($"Task with ID={id} does Not exist"); }
+        var dalTask = _dal.Task.Read(id);
+        if (dalTask == null) { throw new BO.BlDoesNotExistException($"Task with ID={id} does Not exist"); }
         BO.Task boTask = new BO.Task()
         {
             Id = dalTask.Id,
@@ -81,7 +93,7 @@ internal class TaskImplementation : ITask
             Alias = dalTask.Alias,
             CreatedAtDate = dalTask.createdAtDate,
             Status = status(dalTask),
-            Dependencies = depe(dalTask) ,
+            Dependencies = depe(dalTask),
             RequiredEfforTime = dalTask.RequiredEffortTime,
             StartDate = dalTask.StartDate,
             ScheduledDate = dalTask.ScheduledDate,
@@ -90,11 +102,11 @@ internal class TaskImplementation : ITask
             CompleteDate = dalTask.CompleteDate,
             Deliverables = dalTask.Deliverables,
             Remarks = dalTask.Remarks,
-             Engineer = en(dalTask),
-            Complexyity = (BO.EngineerExperience)dalTask.Copmlexity!,
+            Engineer = en(dalTask),
+            Complexyity = (BO.EngineerExperience)dalTask.Copmlexity!
 
         };
-        
+
 
         return boTask;
 
@@ -111,7 +123,7 @@ internal class TaskImplementation : ITask
             Alias = dalTask.Alias,
             CreatedAtDate = dalTask.createdAtDate,
             Status = status(dalTask),
-            Dependencies = depe(dalTask) ,
+            Dependencies = depe(dalTask),
             RequiredEfforTime = dalTask.RequiredEffortTime,
             StartDate = dalTask.StartDate,
             ScheduledDate = dalTask.ScheduledDate,
@@ -120,7 +132,7 @@ internal class TaskImplementation : ITask
             CompleteDate = dalTask.DeadlineDate,
             Deliverables = dalTask.Deliverables,
             Remarks = dalTask.Remarks,
-            Engineer =en(dalTask) ,
+            Engineer = en(dalTask),
             Complexyity = (BO.EngineerExperience)dalTask.Copmlexity!,
 
 
@@ -188,21 +200,39 @@ internal class TaskImplementation : ITask
     {
         var ta = _dal.Task.ReadAll();
         var task = _dal.Task.Read(id);
-        var dep  = _dal.Dependency.ReadAll();
-        foreach(var d in dep)
+        var dep = _dal.Dependency.ReadAll();
+        //foreach (var d in dep)
+        //{
+        //    if (id == d.DependsOnTask)
+        //    {
+        //        foreach (var t in ta)
+        //        {
+        //            if (t.Id == id)
+        //            {
+        //                if (t.ScheduledDate == null)
+        //                    throw new BLTheDateIsNotGood("Previous tasks have not been given a start date");
+        //                if (t.DeadlineDate > tim)
+        //                    throw new BLTheDateIsNotGood("A previous task's end date is later than the entered start date");
+        //            }
+
+        //        }
+
+        //    }
+        //}
+        foreach (var d in dep)
         {
-            if(id == d.DependsOnTask)
+            if (d.DependentTask == id)
             {
-               foreach(var t in ta)
+                foreach (var t in ta)
                 {
-                    if(t.Id== id)
+                    if (t.Id == d.DependsOnTask)
                     {
                         if (t.ScheduledDate == null)
                             throw new BLTheDateIsNotGood("Previous tasks have not been given a start date");
-                        if (t.DeadlineDate > tim)
-                            throw new BLTheDateIsNotGood("A previous task's end date is later than the entered start date");
+                        if (t.ScheduledDate + t.RequiredEffortTime > tim)
+                            throw new BLTheDateIsNotGood("A task cannot start before the estimated end time of the task that precedes it");
                     }
-                    
+
                 }
 
             }
@@ -226,19 +256,26 @@ internal class TaskImplementation : ITask
         }
     }
 
-     private BO.Status status(DO.Task item)
-     {
-        if(item.StartDate==null) { return BO.Status.Unscheduled; }
-        if (item.CompleteDate != null) {  return BO.Status.Done; }
-        if(item.ScheduledDate!=null && item.StartDate == null) {  return BO.Status.Scheduled; }
+    private BO.Status status(DO.Task item)
+    {
+        //if (item.StartDate == null) { return BO.Status.Unscheduled; }
+        //if (item.CompleteDate != null) { return BO.Status.Done; }
+        //if (item.ScheduledDate != null && item.StartDate == null) { return BO.Status.Scheduled; }
+        //else
+        //{ return BO.Status.OnTrack; }
+
+        if (item.ScheduledDate == null) { return BO.Status.Unscheduled; }
+        if (item.ScheduledDate != null && item.StartDate == null) { return BO.Status.Scheduled; }
+        if (item.CompleteDate != null) { return BO.Status.Done; }
+
         else
         { return BO.Status.OnTrack; }
-     }
+    }
 
     private DateTime? ofrecastDate(DO.Task item)
     {
         DateTime? finish;
-        finish =(DateTime)( item.ScheduledDate > item.StartDate ?  item.ScheduledDate : item.StartDate)! ;
+        finish = (DateTime)(item.ScheduledDate > item.StartDate ? item.ScheduledDate : item.StartDate)!;
         finish = finish + item.RequiredEffortTime;
         return finish;
     }
@@ -248,9 +285,9 @@ internal class TaskImplementation : ITask
         var dep = _dal.Dependency.ReadAll();
         var ta = _dal.Task.ReadAll();
         List<BO.TaskInList> lis = new List<BO.TaskInList>();
-        foreach(var t  in dep)
+        foreach (var t in dep)
         {
-            if(t!.DependentTask==item.Id)
+            if (t!.DependentTask == item.Id)
             {
                 foreach (var a in ta)
                 {
@@ -269,16 +306,20 @@ internal class TaskImplementation : ITask
 
     }
 
-    private BO.EngineerInTask en(DO.Task item)
+    private BO.EngineerInTask? en(DO.Task item)
     {
         var theEn = item.EngineerId;
-        var eng = _dal.Engineer.ReadAll();
-        foreach(var a in eng)
+        if (theEn != null)
         {
-            if(theEn == a.Id)
+            var eng = _dal.Engineer.ReadAll();
+            foreach (var a in eng)
             {
-                return new BO.EngineerInTask() {  Id = a.Id, Name = a.Name };
+                if (theEn == a.Id)
+                {
+                    return new BO.EngineerInTask() { Id = a.Id, Name = a.Name };
+                }
             }
+
         }
 
         return null;
