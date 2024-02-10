@@ -228,9 +228,9 @@ internal class TaskImplementation : ITask
                     if (t.Id == d.DependsOnTask)
                     {
                         if (t.ScheduledDate == null)
-                            throw new BLTheDateIsNotGood("Previous tasks have not been given a start date");
+                            throw new BLTheDateIsNotGood($"Previous task With ID = {t.Id} have not been given a start date");
                         if (t.ScheduledDate + t.RequiredEffortTime > tim)
-                            throw new BLTheDateIsNotGood("A task cannot start before the estimated end time of the task that precedes it");
+                            throw new BLTheDateIsNotGood($"A task cannot start before the estimated end time ({t.ScheduledDate + t.RequiredEffortTime}) of the task WIt ID = {t.Id} that precedes it");
                     }
 
                 }

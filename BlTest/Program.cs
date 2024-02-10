@@ -1,6 +1,12 @@
 ﻿
+using BlApi;
+using BO;
 using DalApi;
 using DO;
+using Microsoft.VisualBasic;
+using System;
+using System.Runtime.CompilerServices;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace BlTest;
 
@@ -8,6 +14,69 @@ public class Program
 {
     static readonly BlApi.IBl s_bl = BlApi.Factory.Get();
 
+    private static void SettingDatesforProjectAndForTasks()
+    {
+        Console.WriteLine("Enter a start date for the project");
+        DateTime StartDateOfProject = DateTime.Parse(Console.ReadLine()!);
+        s_bl.Time.SetStartDate(StartDateOfProject);
+        foreach (var task in s_bl.Task.ReadAll()) // Initializes all tasks that do not depend on other tasks
+        {
+            if (task.Dependencies == null)
+            {
+                DateTime DateOfTask;
+                do
+                {
+                    Console.WriteLine($"Enter a date of task with ID = {task.Id}");
+                    DateOfTask = DateTime.Parse(Console.ReadLine()!);
+                    if (DateOfTask > StartDateOfProject)
+                    {
+                        task.ScheduledDate = DateOfTask;
+                        s_bl.Task.Update(task);
+                    }
+
+                } while (DateOfTask <= StartDateOfProject);
+            }
+        }
+
+        List<int> IDOfTasksWithoutAScheduledDate = new List<int>(); // A list with the IDs of all tasks that depend on other tasks
+        foreach (var task in s_bl.Task.ReadAll())
+        {
+            if (task.Dependencies != null)
+            {
+                IDOfTasksWithoutAScheduledDate.Add(task.Id);
+            }
+        }
+
+        Console.WriteLine("Here is the list of all the tasks that are left to be updated with a planned start date:");
+        foreach (var ID in IDOfTasksWithoutAScheduledDate)
+        {
+            Console.WriteLine($"Task with ID: {ID}");
+        }
+
+        while (IDOfTasksWithoutAScheduledDate.Any()) // Setting a date for all tasks that depend on other tasks
+        {
+            Console.WriteLine("Enter the ID of the tasjk you want to set a scheduled start date for");
+            int IDOfTask = int.Parse(Console.ReadLine()!);
+            Console.WriteLine("Enter the scheduledDate of the task you want to set a scheduled start date for");
+            DateTime DateOfTask = DateTime.Parse(Console.ReadLine()!);
+            while (DateOfTask <= StartDateOfProject)
+            {
+                Console.WriteLine("The start date must be after the project start time");
+                DateOfTask = DateTime.Parse(Console.ReadLine()!);
+            }
+
+            try
+            {
+                s_bl.Task.UpdateStartTask(IDOfTask, DateOfTask);// may throw an exception
+                IDOfTasksWithoutAScheduledDate.Remove(IDOfTask);
+            }
+            catch (Exception me)
+            {
+                Console.WriteLine(me.Message);
+            }
+
+        }
+    }
 
 
     private static void createEng()
@@ -56,7 +125,7 @@ public class Program
         }
 
     }
-    private static void updateEngStage1()
+    private static void updateEng()
     {
         Console.WriteLine("Enter Id:");
         int IdEng = int.Parse(Console.ReadLine()!);
@@ -111,9 +180,6 @@ public class Program
 
         Console.WriteLine("Enter Description:");
         string DescriptionTask = Console.ReadLine()!;
-
-        Console.WriteLine("Enter created Date:");
-        DateTime createdAtDateTask = DateTime.Parse(Console.ReadLine()!);
 
         Console.WriteLine("Enter Required Effort Time");
         TimeSpan? RequiredEffortTimeTask = TimeSpan.Parse(Console.ReadLine()!);
@@ -177,7 +243,7 @@ public class Program
             Id = IdTask,
             Alias = aliasTask,
             Description = DescriptionTask,
-            CreatedAtDate = createdAtDateTask,
+            CreatedAtDate = DateTime.Now,
             Status = BO.Status.Unscheduled,
             Dependencies = DependenciesOfTask,
             RequiredEfforTime = RequiredEffortTimeTask,
@@ -355,7 +421,6 @@ public class Program
             CreatedAtDate = x.CreatedAtDate,
             Dependencies = DependencyList,
             RequiredEfforTime = x.RequiredEfforTime,
-            StartDate = x.StartDate,
             Deliverables = x.Deliverables,
             Remarks = x.Remarks,
             Complexyity = (BO.EngineerExperience)x.Complexyity!
@@ -369,7 +434,7 @@ public class Program
     private static void readAllDep()
     {
         var tasks = s_bl.Task.ReadAll();
-        foreach (var item in tasks) 
+        foreach (var item in tasks)
         {
             if (item.Dependencies != null)
             {
@@ -464,7 +529,7 @@ public class Program
 
             case 5:
 
-                updateEngStage1();
+                updateEng();
                 break;
 
             case 6:
@@ -554,61 +619,235 @@ public class Program
         if (ans == "Y")
             DalTest.Initialization.Do();
         int choice = 0;
+        if (s_bl.Time.StartDate == null)
+        {
+
+            do
+            {
+                printMainMenu();
+                choice = int.Parse(Console.ReadLine()!);
+                switch (choice)
+                {
+                    case 0:
+                        break;
+                    case 1:
+                        try
+                        {
+                            SubMenu("Engineer");
+                            break;
+                        }
+                        catch (Exception me)
+                        {
+
+                            Console.WriteLine(me.Message);
+                        }
+                        break;
+
+                    case 2:
+                        try
+                        {
+                            SubMenu("Task");
+                            break;
+                        }
+                        catch (Exception me)
+                        {
+                            Console.WriteLine(me.Message);
+                            break;
+                        }
+
+                    case 3:
+                        try
+                        {
+                            SubMenu("Dependency");
+                        }
+                        catch (Exception me)
+                        {
+
+                            Console.WriteLine(me.Message);
+                        }
+                        break;
+
+                    case 4:
+                        SettingDatesforProjectAndForTasks();
+                        break;
+
+                    default:
+                        break;
+                }
+
+
+            } while (choice != 0 && s_bl.Time.StartDate == null);
+
+            Console.WriteLine("Project execution stage:");
+            executionStage();
+        }
+        else // We have moved to the project execution phase
+        {
+            Console.WriteLine("Project execution stage:");
+            executionStage();
+        }
+
+    }
+
+    private static void executionStage()
+    {
+        int choice = 0;
         do
         {
-            printMainMenu();
+            printMainMenuOfExecutionStage();
             choice = int.Parse(Console.ReadLine()!);
             switch (choice)
             {
                 case 0:
-                    break;
-                case 1:
-                    try
-                    {
-                        SubMenu("Engineer");
-                        break;
-                    }
-                    catch (Exception me)
-                    {
+                    return;
 
-                        Console.WriteLine(me.Message);
-                    }
+                case 1:
+                    SubMenu("Engineer");
                     break;
 
                 case 2:
-                    try
-                    {
-                        SubMenu("Task");
-                        break;
-                    }
-                    catch (Exception me)
-                    {
-                        Console.WriteLine(me.Message);
-                        break;
-                    }
+                    assignAnEngineerToTask();
+                    break;
 
                 case 3:
-                    try
-                    {
-                        SubMenu("Dependency");
-                    }
-                    catch (Exception me)
-                    {
-
-                        Console.WriteLine(me.Message);
-                    }
+                    ReportTaskComplete();
                     break;
 
                 case 4:
+                    foreach (var item in s_bl.Task.ReadAll())
+                    {
+                        Console.WriteLine(item);
+                    }
                     break;
+
+                case 5:
+                    foreach (var item in s_bl.Engineer.ReadAll())
+                    {
+                        Console.WriteLine(item);
+                    }
+                    break;
+
+                case 6:
+                    readAllDep();
+                    break;
+
+                case 7:
+                    foreach (var item in s_bl.Engineer.ReadAll(t => t.Task != null))
+                    {
+                        Console.WriteLine(item);
+                    }
+                    break;
+
+                case 8:
+                    foreach (var item in s_bl.Engineer.ReadAll(t => t.Task == null))
+                    {
+                        Console.WriteLine(item);
+                    }
+                    break;
+
+                case 9:
+                    foreach (var item in s_bl.Task.ReadAll(t => t.Status == Status.Done))
+                    {
+                        Console.WriteLine(item);
+                    }
+                    break;
+
+                case 10:
+                    foreach (var item in s_bl.Task.ReadAll(t => t.Status != Status.Done))
+                    {
+                        Console.WriteLine(item);
+                    }
+                    break;
+
+                case 11:
+                    foreach (var item in s_bl.Task.ReadAll(t => t.Status == Status.Scheduled))
+                    {
+                        Console.WriteLine(item);
+                    }
+                    break;
+
+                case 12:
+                    foreach (var item in s_bl.Task.ReadAll(t => t.Status == Status.OnTrack))
+                    {
+                        Console.WriteLine(item);
+                    }
+                    break;
+
 
                 default:
                     break;
             }
+        }
+        while (choice != 0);
 
+    }
 
-        } while (choice != 0);
+    private static void printMainMenuOfExecutionStage()
+    {
+        Console.WriteLine("Press 0 to exit the program");
+        Console.WriteLine("press 1 for actions on engineers");
+        Console.WriteLine("Press 2 to assign an engineer to the task");
+        Console.WriteLine("Tap 3 to report a completed task");
+        Console.WriteLine("Press 4 to print all the task");
+        Console.WriteLine("Press 5 to print the list of engineers");
+        Console.WriteLine("Press 6 to print the list of dependencies");
+        Console.WriteLine("Press 7 to print the list of engineers currently working on a task");
+        Console.WriteLine("Press 8 to print the list of available engineers");
+        Console.WriteLine("Press 9 to print the list of completed tasks");
+        Console.WriteLine("Press 10 to print all tasks that have not yet been completed");
+        Console.WriteLine("Press 11 to print all tasks that have not yet been started");
+        Console.WriteLine("Press 12 to print all tasks currently in progress");
+    }
 
+    private static void assignAnEngineerToTask()
+    {
+        Console.WriteLine("Enter the ID of the engineer you want to assign:");
+        int IdOfEngineer = int.Parse(Console.ReadLine()!);
+
+        Console.WriteLine("Enter the ID of the task you want to assign an engineer to:");
+        int IdOfTask = int.Parse(Console.ReadLine()!);
+
+        var task = s_bl.Task.Read(IdOfTask);
+        if (task == null)
+        {
+            Console.WriteLine($"task with ID={IdOfTask} does Not exist");
+        }
+        else
+        {
+            if (task.Engineer == null)
+            {
+                var Engineer = new BO.EngineerInTask()
+                {
+                    Id = IdOfTask,
+                    Name = ""
+                };
+                task.Engineer = Engineer;
+                task.StartDate = DateTime.Now;
+                s_bl.Task.Update(task);
+            }
+            else
+            {
+                Console.WriteLine("An engineer is already assigned to this task");
+            }
+        }
+
+    }
+
+    private static void ReportTaskComplete()
+    {
+        Console.WriteLine("Enter the Id of task");
+        int ID = int.Parse(Console.ReadLine()!);
+
+        var task = s_bl.Task.Read(ID);
+        if (task == null)
+        {
+            Console.WriteLine($"task with ID={ID} does Not exist");
+        }
+        else
+        {
+            task.CompleteDate = DateTime.Now;
+            s_bl.Task.Update(task);
+        }
 
     }
 
