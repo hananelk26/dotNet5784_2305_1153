@@ -97,13 +97,13 @@ internal class TaskImplementation : ITask
             RequiredEfforTime = dalTask.RequiredEffortTime,
             StartDate = dalTask.StartDate,
             ScheduledDate = dalTask.ScheduledDate,
-            ForecastDate = ofrecastDate(dalTask),
+            ForecastDate = forecastDate(dalTask),
             DeadLineDate = dalTask.DeadlineDate,
             CompleteDate = dalTask.CompleteDate,
             Deliverables = dalTask.Deliverables,
             Remarks = dalTask.Remarks,
             Engineer = en(dalTask),
-            Complexyity = (BO.EngineerExperience)dalTask.Copmlexity!
+            Complexyity = (BO.EngineerExperience?)dalTask.Copmlexity!
 
         };
 
@@ -115,7 +115,7 @@ internal class TaskImplementation : ITask
 
     public IEnumerable<BO.Task> ReadAll(Func<BO.Task, bool>? filter = null)
     {
-        IEnumerable<DO.Task> dalTasks = _dal.Task.ReadAll()!;
+        IEnumerable<DO.Task?> dalTasks = _dal.Task.ReadAll()!;
         IEnumerable<BO.Task> boTasks = dalTasks.Select(dalTask => new BO.Task()
         {
             Id = dalTask.Id,
@@ -127,13 +127,13 @@ internal class TaskImplementation : ITask
             RequiredEfforTime = dalTask.RequiredEffortTime,
             StartDate = dalTask.StartDate,
             ScheduledDate = dalTask.ScheduledDate,
-            ForecastDate = ofrecastDate(dalTask),
+            ForecastDate = forecastDate(dalTask),
             DeadLineDate = dalTask.DeadlineDate,
-            CompleteDate = dalTask.DeadlineDate,
+            CompleteDate = dalTask.CompleteDate,
             Deliverables = dalTask.Deliverables,
             Remarks = dalTask.Remarks,
             Engineer = en(dalTask),
-            Complexyity = (BO.EngineerExperience)dalTask.Copmlexity!,
+            Complexyity = (BO.EngineerExperience?)dalTask.Copmlexity!,
 
 
         });
@@ -172,14 +172,14 @@ internal class TaskImplementation : ITask
             Alias = boTask.Alias!,
             createdAtDate = boTask.CreatedAtDate,
             RequiredEffortTime = boTask.RequiredEfforTime,
-            Copmlexity = (DO.EngineerExperience)boTask.Complexyity!,
+            Copmlexity = (DO.EngineerExperience?)boTask.Complexyity!,
             StartDate = boTask.StartDate,
             ScheduledDate = boTask.ScheduledDate,
             DeadlineDate = boTask.DeadLineDate,
             CompleteDate = boTask.CompleteDate,
             Deliverables = boTask.Deliverables,
             Remarks = boTask.Remarks,
-            EngineerId = boTask.Engineer!.Id
+            EngineerId = boTask.Engineer != null ? boTask.Engineer.Id : null,
 
         };
 
@@ -201,24 +201,7 @@ internal class TaskImplementation : ITask
         var ta = _dal.Task.ReadAll();
         var task = _dal.Task.Read(id);
         var dep = _dal.Dependency.ReadAll();
-        //foreach (var d in dep)
-        //{
-        //    if (id == d.DependsOnTask)
-        //    {
-        //        foreach (var t in ta)
-        //        {
-        //            if (t.Id == id)
-        //            {
-        //                if (t.ScheduledDate == null)
-        //                    throw new BLTheDateIsNotGood("Previous tasks have not been given a start date");
-        //                if (t.DeadlineDate > tim)
-        //                    throw new BLTheDateIsNotGood("A previous task's end date is later than the entered start date");
-        //            }
-
-        //        }
-
-        //    }
-        //}
+       
         foreach (var d in dep)
         {
             if (d.DependentTask == id)
@@ -240,12 +223,14 @@ internal class TaskImplementation : ITask
         _dal.Task.Update(task with { ScheduledDate = tim });
     }
 
+    public void DeleteAll()
+    {
+        _dal.Task.DeleteAll();
+    }
+
     static bool IsValidName(string name)
     {
-        // Regular expression for a simple name validation
-        // Allows letters, spaces, and some common special characters
-        string namePattern = @"^[a-zA-Z\s\.'-]*$";
-        return Regex.IsMatch(name, namePattern);
+        return name != null && name.Length > 0;
     }
 
     static public void inputValidity(BO.Task boTask)
@@ -258,11 +243,6 @@ internal class TaskImplementation : ITask
 
     private BO.Status status(DO.Task item)
     {
-        //if (item.StartDate == null) { return BO.Status.Unscheduled; }
-        //if (item.CompleteDate != null) { return BO.Status.Done; }
-        //if (item.ScheduledDate != null && item.StartDate == null) { return BO.Status.Scheduled; }
-        //else
-        //{ return BO.Status.OnTrack; }
 
         if (item.ScheduledDate == null) { return BO.Status.Unscheduled; }
         if (item.ScheduledDate != null && item.StartDate == null) { return BO.Status.Scheduled; }
@@ -272,8 +252,13 @@ internal class TaskImplementation : ITask
         { return BO.Status.OnTrack; }
     }
 
-    private DateTime? ofrecastDate(DO.Task item)
+    private DateTime? forecastDate(DO.Task item)
     {
+        if (item.ScheduledDate == null || item.StartDate == null)
+        {
+            return null;
+        }
+
         DateTime? finish;
         finish = (DateTime)(item.ScheduledDate > item.StartDate ? item.ScheduledDate : item.StartDate)!;
         finish = finish + item.RequiredEffortTime;
@@ -293,8 +278,8 @@ internal class TaskImplementation : ITask
                 {
                     if (a.Id == t.DependsOnTask)
                     {
-                        var al = item.Alias;
-                        var ds = item.Description;
+                        var al = a.Alias;
+                        var ds = a.Description;
                         var ti = status(a);
                         lis.Add(new TaskInList() { Id = (int)t.DependsOnTask!, Alias = al, Description = ds, Status = ti });
                     }

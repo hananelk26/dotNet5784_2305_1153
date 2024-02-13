@@ -2,6 +2,8 @@
 namespace DalTest;
 using DalApi;
 using DO;
+using System.Security.Cryptography;
+
 public static class Initialization
 {
     const int MIN = 200000000;
@@ -58,6 +60,7 @@ public static class Initialization
 
     private static void createTask()
     {
+       
         (string,string)[] names = new (string,string)[] { ( "t3", "Project Kickoff Meeting" ), ( "t4", "RequirZement Elicitation and Analysis" ),
             ( "g5", "Feasibility Study" ), ( "H5", "Project Planning" ), ( "h8", "System Architecture Design" ), ( "h1", "Prototyping" ),
             ("B3", "Database Design" ), ( "b4", "Development Environment Setup" ), ( "b5", "Development Environment Setup" ), 
@@ -68,15 +71,18 @@ public static class Initialization
 
         foreach (var (name1,name2) in names)
         {
-         
+            int temp = s_rand.Next(0, 60 * 30 * 24 * 2);
+            TimeSpan RequiredEffortTime = TimeSpan.FromMinutes(temp);
+
             DateTime start = new DateTime(1995, 1, 1);
             int range = (DateTime.Today - start).Days;
             DateTime _bdt = start.AddDays(s_rand.Next(range));
 
-            Task newTask = new Task(0,name1,name2,_bdt);
+            Task newTask = new Task(0,name1,name2,_bdt,RequiredEffortTime);
             //s_dalTask!.Create(newTask);
             s_dal!.Task.Create(newTask);
         }
+
 
     }
   
@@ -86,45 +92,45 @@ public static class Initialization
         Dependency[] deps =
         {
             new Dependency(1,2,1),
-            new Dependency(2,3,2),
-            new Dependency(3,3,1),
-            new Dependency(4,4,3),
-            new Dependency(5,5,4),
+            new Dependency(2,6,4),
+            new Dependency(3,6,3),
+            new Dependency(4,6,2),
+            new Dependency(5,6,1),
             new Dependency(6,6,5),
-            new Dependency(7,7,6),
+            new Dependency(7,8,6),
             new Dependency(8,8,7),
-            new Dependency(9,9,8),
-            new Dependency(10,10,9),
-            new Dependency(11,11,10),
-            new Dependency(12,12,11),
-            new Dependency(13,13,12),
-            new Dependency(14,14,13),
-            new Dependency(15,15,14),
-            new Dependency(16,16,15),
-            new Dependency(17,17,16),
-            new Dependency(18,18,17),
-            new Dependency(19,19,18),
-            new Dependency(20,20,19),
-            new Dependency(21,20,18),
-            new Dependency(22,20,17),
-            new Dependency(23,20,16),
-            new Dependency(24,10,1),
-            new Dependency(25,9,2),
-            new Dependency(26,9,3),
+            new Dependency(9,8,2),
+            new Dependency(10,11,2),
+            new Dependency(24,11,4),
+            new Dependency(25,11,1),
+            new Dependency(26,11,8),
             new Dependency(27,11,3),
             new Dependency(28,11,5),
+            new Dependency(11,11,10),
+            new Dependency(12,12,11),
             new Dependency(29,12,6),
             new Dependency(30,12,5),
             new Dependency(31,12,4),
             new Dependency(32,13,5),
             new Dependency(33,13,6),
             new Dependency(34,13,4),
-            new Dependency(35,15,4),
-            new Dependency(36,15,2),
-            new Dependency(37,7,2),
+            new Dependency(13,13,12),
+            new Dependency(14,14,13),
+            new Dependency(15,14,8),
+            new Dependency(16,16,15),
+            new Dependency(35,16,2),
+            new Dependency(36,16,4),
+            new Dependency(37,16,5),
             new Dependency(38,16,10),
             new Dependency(39,16,1),
             new Dependency(40,16,3),
+            new Dependency(17,16,2),
+            new Dependency(18,20,8),
+            new Dependency(19,20,2),
+            new Dependency(23,20,16),
+            new Dependency(20,20,19),
+            new Dependency(21,20,18),
+            new Dependency(22,20,17),
         };
         foreach (var dep in deps)
         {

@@ -6,6 +6,7 @@ using DO;
 using Microsoft.VisualBasic;
 using System;
 using System.Runtime.CompilerServices;
+using System.Xml.Linq;
 using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace BlTest;
@@ -21,7 +22,7 @@ public class Program
         s_bl.Time.SetStartDate(StartDateOfProject);
         foreach (var task in s_bl.Task.ReadAll()) // Initializes all tasks that do not depend on other tasks
         {
-            if (task.Dependencies == null)
+            if (!task.Dependencies!.Any())
             {
                 DateTime DateOfTask;
                 do
@@ -41,7 +42,7 @@ public class Program
         List<int> IDOfTasksWithoutAScheduledDate = new List<int>(); // A list with the IDs of all tasks that depend on other tasks
         foreach (var task in s_bl.Task.ReadAll())
         {
-            if (task.Dependencies != null)
+            if (task.Dependencies!.Any())
             {
                 IDOfTasksWithoutAScheduledDate.Add(task.Id);
             }
@@ -56,13 +57,32 @@ public class Program
         while (IDOfTasksWithoutAScheduledDate.Any()) // Setting a date for all tasks that depend on other tasks
         {
             Console.WriteLine("Enter the ID of the tasjk you want to set a scheduled start date for");
-            int IDOfTask = int.Parse(Console.ReadLine()!);
+            int IDOfTask;
+            try
+            {
+                IDOfTask = int.Parse(Console.ReadLine()!);
+            }
+            catch (Exception me)
+            {
+                Console.WriteLine(me.Message);
+                continue;
+            }
             Console.WriteLine("Enter the scheduledDate of the task you want to set a scheduled start date for");
-            DateTime DateOfTask = DateTime.Parse(Console.ReadLine()!);
-            while (DateOfTask <= StartDateOfProject)
+            DateTime DateOfTask;
+            try
+            {
+                DateOfTask = DateTime.Parse(Console.ReadLine()!);
+            }
+            catch (Exception me)
+            {
+                Console.WriteLine(me.Message);
+                continue;
+
+            }
+            if (DateOfTask <= StartDateOfProject)
             {
                 Console.WriteLine("The start date must be after the project start time");
-                DateOfTask = DateTime.Parse(Console.ReadLine()!);
+                continue;
             }
 
             try
@@ -423,7 +443,7 @@ public class Program
             RequiredEfforTime = x.RequiredEfforTime,
             Deliverables = x.Deliverables,
             Remarks = x.Remarks,
-            Complexyity = (BO.EngineerExperience)x.Complexyity!
+            Complexyity = (BO.EngineerExperience?)x.Complexyity!
 
         };
 
@@ -436,7 +456,7 @@ public class Program
         var tasks = s_bl.Task.ReadAll();
         foreach (var item in tasks)
         {
-            if (item.Dependencies != null)
+            if (item.Dependencies.Any())
             {
                 Console.WriteLine($"The task with ID: {item.Id} depends on the tasks with ID:");
                 foreach (var it in item.Dependencies)
@@ -445,6 +465,7 @@ public class Program
                 }
             }
             else { Console.WriteLine($"The task with ID {item.Id} does not depend on any task"); }
+            Console.WriteLine("");
         }
 
     }
@@ -476,7 +497,6 @@ public class Program
         Console.WriteLine("Press 4 to ReadAll");
         Console.WriteLine("Press 5 to UpData");
         Console.WriteLine("Press 6 to Delete");
-        Console.WriteLine("Press 7 to UpdateStartTask");
     }
 
     private static void PrintSubMenuOfDependency()
@@ -617,9 +637,14 @@ public class Program
         Console.Write("Would you like to create Initial data? (Y/N)");
         string? ans = Console.ReadLine() ?? throw new FormatException("Wrong input");
         if (ans == "Y")
+        {
+            s_bl.ResetsAllEntitiesInTheData();
+            resetDataConfig();
             DalTest.Initialization.Do();
+        }
+
         int choice = 0;
-        if (s_bl.Time.StartDate == null)
+        if (s_bl.Time.StartDate() == null)
         {
 
             do
@@ -676,7 +701,7 @@ public class Program
                 }
 
 
-            } while (choice != 0 && s_bl.Time.StartDate == null);
+            } while (choice != 0 && s_bl.Time.StartDate() == null); ;
 
             Console.WriteLine("Project execution stage:");
             executionStage();
@@ -695,6 +720,14 @@ public class Program
         do
         {
             printMainMenuOfExecutionStage();
+            foreach (var task in s_bl.Task.ReadAll())
+            {
+                if (task.CompleteDate == null)
+                {
+                    task.ForecastDate = task.StartDate > task.ScheduledDate ? task.StartDate + task.RequiredEfforTime : task.ScheduledDate + task.RequiredEfforTime;
+                    s_bl.Task.Update(task);
+                }
+            }
             choice = int.Parse(Console.ReadLine()!);
             switch (choice)
             {
@@ -702,7 +735,14 @@ public class Program
                     return;
 
                 case 1:
-                    SubMenu("Engineer");
+                    try
+                    {
+                        SubMenu("Engineer");
+                    }
+                    catch (Exception me)
+                    {
+                        Console.WriteLine(me.Message);
+                    }
                     break;
 
                 case 2:
@@ -804,31 +844,48 @@ public class Program
         Console.WriteLine("Enter the ID of the engineer you want to assign:");
         int IdOfEngineer = int.Parse(Console.ReadLine()!);
 
-        Console.WriteLine("Enter the ID of the task you want to assign an engineer to:");
-        int IdOfTask = int.Parse(Console.ReadLine()!);
+        try
+        {
+            s_bl.Engineer.Read(IdOfEngineer); // may thrown exception
 
-        var task = s_bl.Task.Read(IdOfTask);
-        if (task == null)
-        {
-            Console.WriteLine($"task with ID={IdOfTask} does Not exist");
-        }
-        else
-        {
-            if (task.Engineer == null)
+            Console.WriteLine("Enter the ID of the task you want to assign an engineer to:");
+            int IdOfTask = int.Parse(Console.ReadLine()!);
+
+            var task = s_bl.Task.Read(IdOfTask);
+            if (task == null)
             {
-                var Engineer = new BO.EngineerInTask()
-                {
-                    Id = IdOfTask,
-                    Name = ""
-                };
-                task.Engineer = Engineer;
-                task.StartDate = DateTime.Now;
-                s_bl.Task.Update(task);
+                Console.WriteLine($"task with ID={IdOfTask} does Not exist");
             }
             else
             {
-                Console.WriteLine("An engineer is already assigned to this task");
+                if (/*task.Engineer == null || */task.CompleteDate == null && s_bl.Engineer.Read(IdOfEngineer)!.Task == null) // The task is free and that engineer also has no other task in progress
+                {
+                    var Engineer = new BO.EngineerInTask()
+                    {
+                        Id = IdOfEngineer,
+                        Name = ""
+                    };
+                    task.Engineer = Engineer;
+                    task.StartDate = DateTime.Now;
+                    s_bl.Task.Update(task);
+                }
+                else
+                {
+                    if (task.CompleteDate != null)
+                    {
+                        Console.WriteLine("The mission has already been completed");
+                    }
+                    else
+                    {
+                        Console.WriteLine("An engineer is already assigned to another task");
+
+                    }
+                }
             }
+        }
+        catch (Exception me)
+        {
+            Console.WriteLine(me.Message);
         }
 
     }
@@ -847,9 +904,33 @@ public class Program
         {
             task.CompleteDate = DateTime.Now;
             s_bl.Task.Update(task);
+            Console.WriteLine("The mission is complete");
+
         }
 
     }
 
+    public static void resetDataConfig()
+    {
+        XElement? ex = null;
 
+        const string s_xml_dir = @"..\xml\";
+        string filePath = $"{s_xml_dir + "data-config"}.xml";
+        try
+        {
+            if (File.Exists(filePath))
+                ex = XElement.Load(filePath);
+
+        }
+        catch (Exception eex)
+        {
+            throw new DalXMLFileLoadCreateException($"fail to load xml file: {s_xml_dir + filePath}, {eex.Message}");
+        }
+        int num = 1;
+        ex!.Element("NextTaskId")!.Value = num.ToString();
+        ex.Element("NextDependencyId")!.Value = num.ToString();
+
+        ex.Save(filePath);
+
+    }
 }
