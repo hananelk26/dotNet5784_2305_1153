@@ -11,10 +11,19 @@ using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace BlTest;
 
+/// <summary>
+/// Represents the main program class.
+/// </summary>
 public class Program
 {
+    /// <summary>
+    /// Represents the business logic instance.
+    /// </summary>
     static readonly BlApi.IBl s_bl = BlApi.Factory.Get();
 
+    /// <summary>
+    /// Sets start dates for the project and tasks based on user input.
+    /// </summary>
     private static void SettingDatesforProjectAndForTasks()
     {
         Console.WriteLine("Enter a start date for the project");
@@ -98,7 +107,9 @@ public class Program
         }
     }
 
-
+    /// <summary>
+    /// Creates a new engineer with user-provided information and displays the generated ID.
+    /// </summary>
     private static void createEng()
     {
         Console.WriteLine("Enter Id:");
@@ -129,6 +140,10 @@ public class Program
         Console.WriteLine($"The ID of the engineer is: {IdEngineer}");
 
     }
+
+    /// <summary>
+    /// Reads and displays information for an engineer based on user-provided ID.
+    /// </summary>
     private static void readEng()
     {
         Console.WriteLine("Enter Id");
@@ -137,6 +152,10 @@ public class Program
         Console.WriteLine(x);
 
     }
+
+    /// <summary>
+    /// Reads and displays information for all engineers.
+    /// </summary>
     private static void readAllEng()
     {
         foreach (var eng in s_bl.Engineer.ReadAll())
@@ -145,6 +164,10 @@ public class Program
         }
 
     }
+
+    /// <summary>
+    /// Updates the information for an engineer based on user-provided details.
+    /// </summary>
     private static void updateEng()
     {
         Console.WriteLine("Enter Id:");
@@ -179,6 +202,10 @@ public class Program
         s_bl.Engineer.Update(eng);
 
     }
+
+    /// <summary>
+    /// Deletes an engineer based on the user-provided ID.
+    /// </summary>
     private static void deleteEng()
     {
         Console.WriteLine("Enter Id of the Engineer");
@@ -187,9 +214,9 @@ public class Program
 
     }
 
-
-
-
+    /// <summary>
+    /// Creates a new task with user-provided information and displays the generated ID.
+    /// </summary>
     private static void createTask()
     {
         Console.WriteLine("Enter ID:");
@@ -278,6 +305,10 @@ public class Program
         Console.WriteLine($"The ID task is:{id}");
 
     }
+
+    /// <summary>
+    /// Reads and displays information for a task based on user-provided ID.
+    /// </summary>
     private static void readTask()
     {
         Console.WriteLine("Enter Id of the task");
@@ -285,6 +316,10 @@ public class Program
         BO.Task x = s_bl.Task.Read(id)!;
         Console.WriteLine(x);
     }
+
+    /// <summary>
+    /// Reads and displays information for all tasks.
+    /// </summary>
     private static void readAllTask()
     {
         foreach (var tsk in s_bl.Task.ReadAll())
@@ -292,6 +327,10 @@ public class Program
             Console.WriteLine(tsk);
         }
     }
+
+    /// <summary>
+    /// Updates the information for a task based on user-provided details (Stage 1).
+    /// </summary>
     private static void updateTaskStage1()
     {
 
@@ -403,6 +442,9 @@ public class Program
 
     }
 
+    /// <summary>
+    /// Deletes a task based on the user-provided ID.
+    /// </summary>
     private static void deleteTask()
     {
         Console.WriteLine("Enter Id of the Task");
@@ -410,6 +452,9 @@ public class Program
         s_bl.Task.Delete(Id);
     }
 
+    /// <summary>
+    /// Creates a dependency between two tasks based on user-provided IDs.
+    /// </summary>
     private static void createDep()
     {
         Console.WriteLine("Enter the pending task ID");
@@ -451,6 +496,9 @@ public class Program
 
     }
 
+    /// <summary>
+    /// Reads and displays information for all tasks with dependencies.
+    /// </summary>
     private static void readAllDep()
     {
         var tasks = s_bl.Task.ReadAll();
@@ -470,6 +518,9 @@ public class Program
 
     }
 
+    /// <summary>
+    /// Displays the main menu options.
+    /// </summary>
     private static void printMainMenu()
     {
         Console.WriteLine("Press 0 to exit from the program");
@@ -479,6 +530,9 @@ public class Program
         Console.WriteLine("Tap 4 to set the date the project will start and set a scheduled start date for each task.");
     }
 
+    /// <summary>
+    /// Displays the submenu options for the Engineer entity.
+    /// </summary>
     private static void PrintSubMenuOfEngineer()
     {
         Console.WriteLine("Press 1 to exit");
@@ -489,6 +543,9 @@ public class Program
         Console.WriteLine("Press 6 to Delete");
     }
 
+    /// <summary>
+    /// Displays the submenu options for the Task entity.
+    /// </summary>
     private static void PrintSubMenuOfTask()
     {
         Console.WriteLine("Press 1 to exit");
@@ -499,6 +556,9 @@ public class Program
         Console.WriteLine("Press 6 to Delete");
     }
 
+    /// <summary>
+    /// Displays the submenu options for the Dependency entity.
+    /// </summary>
     private static void PrintSubMenuOfDependency()
     {
         Console.WriteLine("Press 1 to exit");
@@ -507,6 +567,10 @@ public class Program
 
     }
 
+    // <summary>
+    /// Handles the submenu options based on the provided entity.
+    /// </summary>
+    /// <param name="entity">The entity for which the submenu is displayed.</param>
     private static void SubMenu(string entity)
     {
         if (entity == "Engineer")
@@ -523,6 +587,9 @@ public class Program
         }
     }
 
+    /// <summary>
+    /// Handles the submenu options for the Engineer entity.
+    /// </summary>
     private static void SubMenuOfEngineer()
     {
         PrintSubMenuOfEngineer();
@@ -563,6 +630,9 @@ public class Program
 
     }
 
+    /// <summary>
+    /// Handles the submenu options for the Task entity.
+    /// </summary>
     private static void SubMenuOfTask()
     {
         PrintSubMenuOfTask();
@@ -604,6 +674,9 @@ public class Program
 
     }
 
+    /// <summary>
+    /// Handles the submenu options for the Dependency entity.
+    /// </summary>
     private static void SubMenuOfDependency()
     {
         PrintSubMenuOfDependency();
@@ -654,7 +727,7 @@ $$ | $$ | $$ |$$   ____|      $$  __$$ |$$ |      $$   ____|      $$ |      $$ |
         Console.WriteLine("Welcome to the project");
         Console.Write("Would you like to create Initial data? (Y/N)");
         string? ans = Console.ReadLine() ?? throw new FormatException("Wrong input");
-        if (ans == "Y")
+        if (ans == "Y") // Initializes all entities and resets the project start date
         {
             s_bl.ResetsAllEntitiesInTheData();
             resetDataConfig();
@@ -662,7 +735,7 @@ $$ | $$ | $$ |$$   ____|      $$  __$$ |$$ |      $$   ____|      $$ |      $$ |
         }
 
         int choice = 0;
-        if (s_bl.Time.StartDate() == null)
+        if (s_bl.Time.StartDate() == null) // There is no start date for the project yet
         {
 
             do
@@ -711,7 +784,7 @@ $$ | $$ | $$ |$$   ____|      $$  __$$ |$$ |      $$   ____|      $$ |      $$ |
                         break;
 
                     case 4:
-                        SettingDatesforProjectAndForTasks();
+                        SettingDatesforProjectAndForTasks(); // Set project and task dates
                         break;
 
                     default:
@@ -732,6 +805,9 @@ $$ | $$ | $$ |$$   ____|      $$  __$$ |$$ |      $$   ____|      $$ |      $$ |
 
     }
 
+    /// <summary>
+    /// Handles the execution stage menu and related actions.
+    /// </summary>
     private static void executionStage()
     {
         int choice = 0;
@@ -840,6 +916,9 @@ $$ | $$ | $$ |$$   ____|      $$  __$$ |$$ |      $$   ____|      $$ |      $$ |
 
     }
 
+    /// <summary>
+    /// Displays the main menu options for the execution stage.
+    /// </summary>
     private static void printMainMenuOfExecutionStage()
     {
         Console.WriteLine("Press 0 to exit the program");
@@ -857,6 +936,9 @@ $$ | $$ | $$ |$$   ____|      $$  __$$ |$$ |      $$   ____|      $$ |      $$ |
         Console.WriteLine("Press 12 to print all tasks currently in progress");
     }
 
+    /// <summary>
+    /// Assigns an engineer to a task based on user input.
+    /// </summary>
     private static void assignAnEngineerToTask()
     {
         Console.WriteLine("Enter the ID of the engineer you want to assign:");
@@ -870,7 +952,7 @@ $$ | $$ | $$ |$$   ____|      $$  __$$ |$$ |      $$   ____|      $$ |      $$ |
             int IdOfTask = int.Parse(Console.ReadLine()!);
 
             var task = s_bl.Task.Read(IdOfTask);
-            if (task == null)
+            if (task == null) // the task with does Not exist
             {
                 Console.WriteLine($"task with ID={IdOfTask} does Not exist");
             }
@@ -889,7 +971,7 @@ $$ | $$ | $$ |$$   ____|      $$  __$$ |$$ |      $$   ____|      $$ |      $$ |
                 }
                 else
                 {
-                    if (task.CompleteDate != null)
+                    if (task.CompleteDate != null)// The mission has already been completed
                     {
                         Console.WriteLine("The mission has already been completed");
                     }
@@ -908,17 +990,20 @@ $$ | $$ | $$ |$$   ____|      $$  __$$ |$$ |      $$   ____|      $$ |      $$ |
 
     }
 
+    /// <summary>
+    /// Reports the completion of a task based on user input.
+    /// </summary>
     private static void ReportTaskComplete()
     {
         Console.WriteLine("Enter the Id of task");
         int ID = int.Parse(Console.ReadLine()!);
 
-        var task = s_bl.Task.Read(ID);
+        var task = s_bl.Task.Read(ID); // the task with does Not exist
         if (task == null)
         {
             Console.WriteLine($"task with ID={ID} does Not exist");
         }
-        else
+        else 
         {
             task.CompleteDate = DateTime.Now;
             s_bl.Task.Update(task);
@@ -928,6 +1013,9 @@ $$ | $$ | $$ |$$   ____|      $$  __$$ |$$ |      $$   ____|      $$ |      $$ |
 
     }
 
+    /// <summary>
+    /// Resets data configuration based on an XML file.
+    /// </summary>
     public static void resetDataConfig()
     {
         XElement? ex = null;
