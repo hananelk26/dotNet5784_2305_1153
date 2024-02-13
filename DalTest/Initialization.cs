@@ -4,6 +4,9 @@ using DalApi;
 using DO;
 using System.Security.Cryptography;
 
+/// <summary>
+/// Class responsible for initializing the application with sample data.
+/// </summary>
 public static class Initialization
 {
     const int MIN = 200000000;
@@ -11,13 +14,11 @@ public static class Initialization
 
     private static IDal? s_dal;
 
-    //private static ITask? s_dalTask; //stage 1
-    //private static IEngineer? s_dalEngineer; //stage 1
-    //private static IDependency? s_dalDependency; //stage 1
-
     private static readonly Random s_rand = new();
 
-
+    /// <summary>
+    /// Creates engineers with sample data.
+    /// </summary>
     private static void createEngineers()
     {
         string[] engineerNames =
@@ -58,6 +59,9 @@ public static class Initialization
         }
     }
 
+    /// <summary>
+    /// Creates tasks with sample data.
+    /// </summary>
     private static void createTask()
     {
        
@@ -85,7 +89,10 @@ public static class Initialization
 
 
     }
-  
+
+    /// <summary>
+    /// Creates dependencies between tasks with sample data.
+    /// </summary>
 
     private static void createDependency()
     {
@@ -139,12 +146,11 @@ public static class Initialization
         }
     }
 
-
+    /// <summary>
+    /// Initializes the application with sample data.
+    /// </summary>
     public static void Do() 
     {
-        //s_dalEngineer = dalEngineer ?? throw new NullReferenceException("DAL can not be null!");
-        //s_dalTask = dalTask ?? throw new NullReferenceException("DAL can not be null!");
-        //s_dalDependency = dalDependency ?? throw new NullReferenceException("DAL can not be null!");
         s_dal = DalApi.Factory.Get;
 
         s_dal.Time.reset();

@@ -9,14 +9,21 @@ using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace BlImplementation;
 
+/// <summary>
+/// Represents an implementation of the ITask interface.
+/// </summary>
 internal class TaskImplementation : ITask
 {
     private DalApi.IDal _dal = DalApi.Factory.Get;
 
+    /// <summary>
+    /// Creates a new task based on the provided BO.Task object.
+    /// </summary>
+    /// <param name="boTask">The BO.Task object containing task information.</param>
+    /// <returns>The ID of the created task.</returns>
     public int Create(BO.Task boTask)
     {
         inputValidity(boTask);
-
 
         if (boTask.Dependencies != null)
         {
@@ -44,14 +51,8 @@ internal class TaskImplementation : ITask
             createdAtDate = boTask.CreatedAtDate,
             RequiredEffortTime = boTask.RequiredEfforTime,
             Copmlexity = (DO.EngineerExperience)boTask.Complexyity!,
-            //StartDate = boTask.StartDate,
-            //ScheduledDate = boTask.ScheduledDate,
-            //DeadlineDate = boTask.DeadLineDate,
-            //CompleteDate = boTask.CompleteDate,
             Deliverables = boTask.Deliverables,
             Remarks = boTask.Remarks,
-            // EngineerId = boTask.Engineer!.Id
-
         };
 
         try
@@ -64,6 +65,10 @@ internal class TaskImplementation : ITask
         }
     }
 
+    /// <summary>
+    /// Deletes a task with the specified ID.
+    /// </summary>
+    /// <param name="id">The ID of the task to be deleted.</param>
     public void Delete(int id)
     {
         var t = _dal.Task.Read(id);
@@ -72,7 +77,7 @@ internal class TaskImplementation : ITask
         foreach (var d in de)
         {
             if (id == d!.DependsOnTask)
-                throw new BO.BlPartOfTheTaskDepends("there is task that depend in this task");
+                throw new BO.BlPartOfTheTaskDepends("there is a task that depends on this task");
         }
         _dal.Task.Delete(id);
         foreach (var d in de)
@@ -82,6 +87,13 @@ internal class TaskImplementation : ITask
         }
     }
 
+
+    /// <summary>
+    ///  Retrieves a task with the specified ID
+    /// </summary>
+    /// <param name="id"></param>
+    /// <returns>The retrieved task as a BO.Task object, or null if the task does not exist.</returns>
+    /// <exception cref="BO.BlDoesNotExistException"></exception>
     public BO.Task? Read(int id)
     {
         var dalTask = _dal.Task.Read(id);
@@ -113,6 +125,14 @@ internal class TaskImplementation : ITask
 
     }
 
+    /// <summary>
+    /// Retrieves all tasks from the data access layer and optionally applies a filter.
+    /// </summary>
+    /// <param name="filter">An optional filter function to apply to the tasks.</param>
+    /// <returns>
+    /// An IEnumerable collection of BO.Task objects representing all tasks retrieved from the data access layer.
+    /// If a filter is provided, only tasks that satisfy the filter conditions are included in the result.
+    /// </returns>
     public IEnumerable<BO.Task> ReadAll(Func<BO.Task, bool>? filter = null)
     {
         IEnumerable<DO.Task?> dalTasks = _dal.Task.ReadAll()!;
@@ -145,6 +165,11 @@ internal class TaskImplementation : ITask
 
     }
 
+    /// <summary>
+    /// Updates an existing task in the data access layer based on the provided business object.
+    /// </summary>
+    /// <param name="boTask">The business object representing the task to be updated.</param>
+    /// <exception cref="BO.BlDoesNotExistException">Thrown if the task with the specified ID does not exist.</exception>
     public void Update(BO.Task boTask)
     {
         inputValidity(boTask);
@@ -196,6 +221,12 @@ internal class TaskImplementation : ITask
 
     }
 
+    /// <summary>
+    /// Updates the scheduled start date of a task and performs validation based on dependencies.
+    /// </summary>
+    /// <param name="id">The ID of the task to be updated.</param>
+    /// <param name="tim">The new scheduled start date for the task.</param>
+    /// <exception cref="BLTheDateIsNotGood">Thrown if the scheduled start date is not valid based on dependencies.</exception>
     public void UpdateStartTask(int id, DateTime tim)
     {
         var ta = _dal.Task.ReadAll();
@@ -223,16 +254,31 @@ internal class TaskImplementation : ITask
         _dal.Task.Update(task with { ScheduledDate = tim });
     }
 
+    /// <summary>
+    /// Deletes all tasks and associated dependencies.
+    /// </summary>
     public void DeleteAll()
     {
         _dal.Task.DeleteAll();
     }
 
+    /// <summary>
+    /// Determines whether the provided name is valid.
+    /// </summary>
+    /// <param name="name">The name to validate.</param>
+    /// <returns>
+    ///   <c>true</c> if the name is valid; otherwise, <c>false</c>.
+    /// </returns>
     static bool IsValidName(string name)
     {
         return name != null && name.Length > 0;
     }
 
+    /// <summary>
+    /// Validates the input integrity of a Task object.
+    /// </summary>
+    /// <param name="boTask">The Task object to validate.</param>
+    /// <exception cref="BO.BlinputValidity">Thrown when there is a problem with the integrity of the data.</exception>
     static public void inputValidity(BO.Task boTask)
     {
         if (!IsValidName(boTask.Alias!) || boTask.Id < 0)
@@ -241,6 +287,11 @@ internal class TaskImplementation : ITask
         }
     }
 
+    /// <summary>
+    /// Determines the status of a Task based on its properties.
+    /// </summary>
+    /// <param name="item">The Task object for which to determine the status.</param>
+    /// <returns>The status of the Task.</returns>
     private BO.Status status(DO.Task item)
     {
 
@@ -252,6 +303,11 @@ internal class TaskImplementation : ITask
         { return BO.Status.OnTrack; }
     }
 
+    /// <summary>
+    /// Calculates the forecasted completion date for a Task based on its scheduled date, start date, and required effort time.
+    /// </summary>
+    /// <param name="item">The Task object for which to calculate the forecasted completion date.</param>
+    /// <returns>The forecasted completion date of the Task, or null if either the scheduled date or start date is not set.</returns>
     private DateTime? forecastDate(DO.Task item)
     {
         if (item.ScheduledDate == null || item.StartDate == null)
@@ -264,6 +320,12 @@ internal class TaskImplementation : ITask
         finish = finish + item.RequiredEffortTime;
         return finish;
     }
+
+    /// <summary>
+    /// Retrieves a list of dependent tasks for a given Task.
+    /// </summary>
+    /// <param name="item">The Task object for which to retrieve dependent tasks.</param>
+    /// <returns>A list of dependent tasks represented as TaskInList objects.</returns>
 
     private List<BO.TaskInList> depe(DO.Task item)
     {
@@ -291,6 +353,14 @@ internal class TaskImplementation : ITask
 
     }
 
+    /// <summary>
+    /// Retrieves an EngineerInTask object representing the engineer associated with the given Task.
+    /// </summary>
+    /// <param name="item">The Task object for which to retrieve the associated engineer.</param>
+    /// <returns>
+    /// An EngineerInTask object representing the engineer associated with the given Task,
+    /// or null if no engineer is associated.
+    /// </returns>
     private BO.EngineerInTask? en(DO.Task item)
     {
         var theEn = item.EngineerId;
