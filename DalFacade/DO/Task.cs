@@ -10,7 +10,7 @@ public record Task
     DO.EngineerExperience? Copmlexity = null,
     DateTime? StartDate = null,
     DateTime? ScheduledDate = null,
-   // DateTime? DeadlineDate = null,
+    DateTime? DeadlineDate = null,
     DateTime? CompleteDate = null,
     string? Deliverables = null,
     string? Remarks = null,
