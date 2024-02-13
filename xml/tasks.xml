@@ -23,6 +23,17 @@
     <EngineerId>308583874</EngineerId>
   </Task>
   <Task>
+    <Id>20</Id>
+    <Alias>g6</Alias>
+    <Description>Production Deployment</Description>
+    <createdAtDate>1997-07-21T00:00:00</createdAtDate>
+    <RequiredEffortTime>P21DT19M</RequiredEffortTime>
+    <StartDate>2024-02-13T10:23:59.4023255+02:00</StartDate>
+    <ScheduledDate>2027-01-01T00:00:00</ScheduledDate>
+    <CompleteDate>2024-02-13T18:07:12.237744+02:00</CompleteDate>
+    <EngineerId>214262305</EngineerId>
+  </Task>
+  <Task>
     <Id>1</Id>
     <Alias>t3</Alias>
     <Description>Project Kickoff Meeting</Description>
@@ -157,15 +168,5 @@
     <createdAtDate>2017-09-08T00:00:00</createdAtDate>
     <RequiredEffortTime>P7DT4H26M</RequiredEffortTime>
     <ScheduledDate>2025-07-01T00:00:00</ScheduledDate>
-  </Task>
-  <Task>
-    <Id>20</Id>
-    <Alias>g6</Alias>
-    <Description>Production Deployment</Description>
-    <createdAtDate>1997-07-21T00:00:00</createdAtDate>
-    <RequiredEffortTime>P21DT19M</RequiredEffortTime>
-    <StartDate>2024-02-13T10:23:59.4023255+02:00</StartDate>
-    <ScheduledDate>2027-01-01T00:00:00</ScheduledDate>
-    <EngineerId>214262305</EngineerId>
   </Task>
 </ArrayOfTask>

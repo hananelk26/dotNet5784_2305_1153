@@ -633,6 +633,24 @@ public class Program
 
     public static void Main(string[] args)
     {
+        Console.ForegroundColor = ConsoleColor.Cyan;
+       // Console.BackgroundColor = ConsoleColor.Yellow;
+        Console.WriteLine(@"                                                                                                $$\ 
+                                                                                                $$ |
+$$\  $$\  $$\  $$$$$$\         $$$$$$\   $$$$$$\   $$$$$$\         $$$$$$$\  $$$$$$\   $$$$$$\  $$ |
+$$ | $$ | $$ |$$  __$$\        \____$$\ $$  __$$\ $$  __$$\       $$  _____|$$  __$$\ $$  __$$\ $$ |
+$$ | $$ | $$ |$$$$$$$$ |       $$$$$$$ |$$ |  \__|$$$$$$$$ |      $$ /      $$ /  $$ |$$ /  $$ |$$ |
+$$ | $$ | $$ |$$   ____|      $$  __$$ |$$ |      $$   ____|      $$ |      $$ |  $$ |$$ |  $$ |$$ |
+\$$$$$\$$$$  |\$$$$$$$\       \$$$$$$$ |$$ |      \$$$$$$$\       \$$$$$$$\ \$$$$$$  |\$$$$$$  |$$ |
+ \_____\____/  \_______|       \_______|\__|       \_______|       \_______| \______/  \______/ \__|
+                                                                                                    
+                                                                                                    
+                                                                                                    ");
+        Console.WriteLine(@" __      __     _                        _                           _           _   
+ \ \    / /___ | | __  ___  _ __   ___  | |_  ___   _ __  _ _  ___  (_) ___  __ | |_ 
+  \ \/\/ // -_)| |/ _|/ _ \| '  \ / -_) |  _|/ _ \ | '_ \| '_|/ _ \ | |/ -_)/ _||  _|
+   \_/\_/ \___||_|\__|\___/|_|_|_|\___|  \__|\___/ | .__/|_|  \___/_/ |\___|\__| \__|
+                                                   |_|            |__/               ");
         Console.WriteLine("Welcome to the project");
         Console.Write("Would you like to create Initial data? (Y/N)");
         string? ans = Console.ReadLine() ?? throw new FormatException("Wrong input");
