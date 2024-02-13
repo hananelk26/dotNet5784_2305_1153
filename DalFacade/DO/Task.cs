@@ -10,7 +10,7 @@ public record Task
     DO.EngineerExperience? Copmlexity = null,
     DateTime? StartDate = null,
     DateTime? ScheduledDate = null,
-    DateTime? DeadlineDate = null,
+   // DateTime? DeadlineDate = null,
     DateTime? CompleteDate = null,
     string? Deliverables = null,
     string? Remarks = null,
@@ -37,10 +37,10 @@ public record Task
     {
         return !string.IsNullOrEmpty(CompleteDate.ToString());
     }
-    public bool ShouldSerializeDeadlineDate()
-    {
-        return !string.IsNullOrEmpty(DeadlineDate.ToString());
-    }
+    //public bool ShouldSerializeDeadlineDate()
+    //{
+    //    return !string.IsNullOrEmpty(DeadlineDate.ToString());
+    //}
     public bool ShouldSerializeScheduledDate()
     {
         return !string.IsNullOrEmpty(ScheduledDate.ToString());

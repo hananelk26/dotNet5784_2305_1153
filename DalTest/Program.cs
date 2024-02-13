@@ -27,7 +27,7 @@ internal class Program
         Console.WriteLine($"Copmlexity is: {p.Copmlexity} ");
         Console.WriteLine($"StartDate is: {p.StartDate} ");
         Console.WriteLine($"ScheduledDate is: {p.ScheduledDate} ");
-        Console.WriteLine($"DeadlineDate is: {p.DeadlineDate} ");
+       // Console.WriteLine($"DeadlineDate is: {p.DeadlineDate} ");
         Console.WriteLine($"CompleteDate is: {p.CompleteDate} ");
         Console.WriteLine($"Deliverables is: {p.Deliverables} ");
         Console.WriteLine($"Remarks is: {p.Remarks} ");
@@ -203,7 +203,7 @@ internal class Program
         {
             Cost = eng.Cost;
         }
-        else
+        else 
         {
             Cost = double.Parse(tmp);
         }
@@ -249,18 +249,18 @@ internal class Program
         string Description = Console.ReadLine()!;    
         Console.WriteLine("Enter created Date:");
         DateTime createdAtDate =DateTime.Parse( Console.ReadLine()!);
-        Console.WriteLine("Enter isMileStone:");
+        //Console.WriteLine("Enter isMileStone:");
         Console.WriteLine("Enter Required Effort Time");
         TimeSpan? RequiredEffortTime =TimeSpan.Parse( Console.ReadLine()!);
         Console.WriteLine("Enter Copmlexity:");
         DO.EngineerExperience? Copmlex = (DO.EngineerExperience)(int.Parse(Console.ReadLine()!));
-        Console.WriteLine("Enter StartDate:");
-        DateTime? StartDate = DateTime.Parse(Console.ReadLine()!);
-        Console.WriteLine("Enter Scheduled Date");
-        DateTime? ScheduledDate = DateTime.Parse(Console.ReadLine()!);
-        Console.WriteLine("Enter DeadlineDate:");
-        DateTime? DeadlineDate = DateTime.Parse(Console.ReadLine()!);
-        Console.WriteLine("Enter CompleteDate:");
+       // Console.WriteLine("Enter StartDate:");
+       // DateTime? StartDate = DateTime.Parse(Console.ReadLine()!);
+       // Console.WriteLine("Enter Scheduled Date");
+       // DateTime? ScheduledDate = DateTime.Parse(Console.ReadLine()!);
+       // Console.WriteLine("Enter DeadlineDate:");
+        //DateTime? DeadlineDate = DateTime.Parse(Console.ReadLine()!);
+       // Console.WriteLine("Enter CompleteDate:");
         DateTime? CompleteDate = DateTime.Parse(Console.ReadLine()!);
         Console.WriteLine("Enter Deliverables:");
         string? Deliverables = Console.ReadLine();
@@ -269,7 +269,7 @@ internal class Program
         Console.WriteLine("Enter EngineerId:");
         int? EngineerId = int.Parse( Console.ReadLine()!);   
 
-        DO.Task p = new DO.Task(Id, alias!, Description!, createdAtDate, RequiredEffortTime, Copmlex, StartDate, ScheduledDate, DeadlineDate, CompleteDate, Deliverables, Remarks, EngineerId);
+        DO.Task p = new DO.Task(Id, alias!, Description!, createdAtDate, RequiredEffortTime, Copmlex, StartDate, ScheduledDate, /*DeadlineDate,*/ CompleteDate, Deliverables, Remarks, EngineerId);
         int id = s_dal.Task!.Create(p);
         Console.WriteLine($"The ID task is:{id}");
 
