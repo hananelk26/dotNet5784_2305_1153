@@ -9,24 +9,38 @@ using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace BlImplementation;
 
+/// <summary>
+/// Represents an implementation of the ITask interface.
+/// </summary>
 internal class TaskImplementation : ITask
 {
     private DalApi.IDal _dal = DalApi.Factory.Get;
 
+    /// <summary>
+    /// Creates a new task based on the provided BO.Task object.
+    /// </summary>
+    /// <param name="boTask">The BO.Task object containing task information.</param>
+    /// <returns>The ID of the created task.</returns>
     public int Create(BO.Task boTask)
     {
         inputValidity(boTask);
 
-
-        foreach (var dependId in boTask.Dependencies!)
+        if (boTask.Dependencies != null)
         {
-            DO.Dependency dependency = new DO.Dependency()
+            foreach (var dependId in boTask.Dependencies!)
             {
-                DependentTask = boTask.Id,
-                DependsOnTask = dependId.Id
-            };
+                DO.Dependency dependency = new DO.Dependency()
+                {
+                    DependentTask = boTask.Id,
+                    DependsOnTask = dependId.Id
+                };
 
-            _dal.Dependency.Create(dependency);
+                var ret = _dal.Dependency.ReadAll(d => d.DependentTask == boTask.Id && d.DependsOnTask == dependId.Id).FirstOrDefault();
+                if (ret == null)
+                {
+                    _dal.Dependency.Create(dependency);
+                }
+            }
         }
 
         DO.Task task = new DO.Task()
@@ -37,14 +51,8 @@ internal class TaskImplementation : ITask
             createdAtDate = boTask.CreatedAtDate,
             RequiredEffortTime = boTask.RequiredEfforTime,
             Copmlexity = (DO.EngineerExperience)boTask.Complexyity!,
-            StartDate = boTask.StartDate,
-            ScheduledDate = boTask.ScheduledDate,
-            DeadlineDate = boTask.DeadLineDate,
-            CompleteDate = boTask.CompleteDate,
             Deliverables = boTask.Deliverables,
             Remarks = boTask.Remarks,
-            EngineerId = boTask.Engineer!.Id
-
         };
 
         try
@@ -57,23 +65,39 @@ internal class TaskImplementation : ITask
         }
     }
 
+    /// <summary>
+    /// Deletes a task with the specified ID.
+    /// </summary>
+    /// <param name="id">The ID of the task to be deleted.</param>
     public void Delete(int id)
     {
         var t = _dal.Task.Read(id);
         if (t == null) { throw new BO.BlDoesNotExistException($"Task with ID={id} does Not exist"); }
         var de = _dal.Dependency.ReadAll();
-        foreach( var d in de) 
+        foreach (var d in de)
         {
-            if (id == d.DependsOnTask)
-                throw new BO.BlPartOfTheTaskDepends( "there is taska that depend in this task");
+            if (id == d!.DependsOnTask)
+                throw new BO.BlPartOfTheTaskDepends("there is a task that depends on this task");
         }
         _dal.Task.Delete(id);
+        foreach (var d in de)
+        {
+            if (id == d!.DependentTask)
+                _dal.Dependency.Delete(d.Id);
+        }
     }
 
+
+    /// <summary>
+    ///  Retrieves a task with the specified ID
+    /// </summary>
+    /// <param name="id"></param>
+    /// <returns>The retrieved task as a BO.Task object, or null if the task does not exist.</returns>
+    /// <exception cref="BO.BlDoesNotExistException"></exception>
     public BO.Task? Read(int id)
     {
-       var dalTask =  _dal.Task.Read(id);
-        if(dalTask == null) { throw new BO.BlDoesNotExistException($"Task with ID={id} does Not exist"); }
+        var dalTask = _dal.Task.Read(id);
+        if (dalTask == null) { throw new BO.BlDoesNotExistException($"Task with ID={id} does Not exist"); }
         BO.Task boTask = new BO.Task()
         {
             Id = dalTask.Id,
@@ -81,29 +105,37 @@ internal class TaskImplementation : ITask
             Alias = dalTask.Alias,
             CreatedAtDate = dalTask.createdAtDate,
             Status = status(dalTask),
-            Dependencies = depe(dalTask) ,
+            Dependencies = depe(dalTask),
             RequiredEfforTime = dalTask.RequiredEffortTime,
             StartDate = dalTask.StartDate,
             ScheduledDate = dalTask.ScheduledDate,
-            ForecastDate = ofrecastDate(dalTask),
+            ForecastDate = forecastDate(dalTask),
             DeadLineDate = dalTask.DeadlineDate,
             CompleteDate = dalTask.CompleteDate,
             Deliverables = dalTask.Deliverables,
             Remarks = dalTask.Remarks,
-             Engineer = en(dalTask),
-            Complexyity = (BO.EngineerExperience)dalTask.Copmlexity!,
+            Engineer = en(dalTask),
+            Complexyity = (BO.EngineerExperience?)dalTask.Copmlexity!
 
         };
-        
+
 
         return boTask;
 
 
     }
 
+    /// <summary>
+    /// Retrieves all tasks from the data access layer and optionally applies a filter.
+    /// </summary>
+    /// <param name="filter">An optional filter function to apply to the tasks.</param>
+    /// <returns>
+    /// An IEnumerable collection of BO.Task objects representing all tasks retrieved from the data access layer.
+    /// If a filter is provided, only tasks that satisfy the filter conditions are included in the result.
+    /// </returns>
     public IEnumerable<BO.Task> ReadAll(Func<BO.Task, bool>? filter = null)
     {
-        IEnumerable<DO.Task> dalTasks = _dal.Task.ReadAll()!;
+        IEnumerable<DO.Task?> dalTasks = _dal.Task.ReadAll()!;
         IEnumerable<BO.Task> boTasks = dalTasks.Select(dalTask => new BO.Task()
         {
             Id = dalTask.Id,
@@ -111,17 +143,17 @@ internal class TaskImplementation : ITask
             Alias = dalTask.Alias,
             CreatedAtDate = dalTask.createdAtDate,
             Status = status(dalTask),
-            Dependencies = depe(dalTask) ,
+            Dependencies = depe(dalTask),
             RequiredEfforTime = dalTask.RequiredEffortTime,
             StartDate = dalTask.StartDate,
             ScheduledDate = dalTask.ScheduledDate,
-            ForecastDate = ofrecastDate(dalTask),
+            ForecastDate = forecastDate(dalTask),
             DeadLineDate = dalTask.DeadlineDate,
-            CompleteDate = dalTask.DeadlineDate,
+            CompleteDate = dalTask.CompleteDate,
             Deliverables = dalTask.Deliverables,
             Remarks = dalTask.Remarks,
-            Engineer =en(dalTask) ,
-            Complexyity = (BO.EngineerExperience)dalTask.Copmlexity!,
+            Engineer = en(dalTask),
+            Complexyity = (BO.EngineerExperience?)dalTask.Copmlexity!,
 
 
         });
@@ -133,6 +165,11 @@ internal class TaskImplementation : ITask
 
     }
 
+    /// <summary>
+    /// Updates an existing task in the data access layer based on the provided business object.
+    /// </summary>
+    /// <param name="boTask">The business object representing the task to be updated.</param>
+    /// <exception cref="BO.BlDoesNotExistException">Thrown if the task with the specified ID does not exist.</exception>
     public void Update(BO.Task boTask)
     {
         inputValidity(boTask);
@@ -160,14 +197,14 @@ internal class TaskImplementation : ITask
             Alias = boTask.Alias!,
             createdAtDate = boTask.CreatedAtDate,
             RequiredEffortTime = boTask.RequiredEfforTime,
-            Copmlexity = (DO.EngineerExperience)boTask.Complexyity!,
+            Copmlexity = (DO.EngineerExperience?)boTask.Complexyity!,
             StartDate = boTask.StartDate,
             ScheduledDate = boTask.ScheduledDate,
             DeadlineDate = boTask.DeadLineDate,
             CompleteDate = boTask.CompleteDate,
             Deliverables = boTask.Deliverables,
             Remarks = boTask.Remarks,
-            EngineerId = boTask.Engineer!.Id
+            EngineerId = boTask.Engineer != null ? boTask.Engineer.Id : null,
 
         };
 
@@ -184,25 +221,32 @@ internal class TaskImplementation : ITask
 
     }
 
+    /// <summary>
+    /// Updates the scheduled start date of a task and performs validation based on dependencies.
+    /// </summary>
+    /// <param name="id">The ID of the task to be updated.</param>
+    /// <param name="tim">The new scheduled start date for the task.</param>
+    /// <exception cref="BLTheDateIsNotGood">Thrown if the scheduled start date is not valid based on dependencies.</exception>
     public void UpdateStartTask(int id, DateTime tim)
     {
         var ta = _dal.Task.ReadAll();
         var task = _dal.Task.Read(id);
-        var dep  = _dal.Dependency.ReadAll();
-        foreach(var d in dep)
+        var dep = _dal.Dependency.ReadAll();
+       
+        foreach (var d in dep)
         {
-            if(id == d.DependsOnTask)
+            if (d.DependentTask == id)
             {
-               foreach(var t in ta)
+                foreach (var t in ta)
                 {
-                    if(t.Id== id)
+                    if (t.Id == d.DependsOnTask)
                     {
                         if (t.ScheduledDate == null)
-                            throw new BLTheDateIsNotGood("Previous tasks have not been given a start date");
-                        if (t.DeadlineDate > tim)
-                            throw new BLTheDateIsNotGood("A previous task's end date is later than the entered start date");
+                            throw new BLTheDateIsNotGood($"Previous task With ID = {t.Id} have not been given a start date");
+                        if (t.ScheduledDate + t.RequiredEffortTime > tim)
+                            throw new BLTheDateIsNotGood($"A task cannot start before the estimated end time ({t.ScheduledDate + t.RequiredEffortTime}) of the task WIt ID = {t.Id} that precedes it");
                     }
-                    
+
                 }
 
             }
@@ -210,14 +254,31 @@ internal class TaskImplementation : ITask
         _dal.Task.Update(task with { ScheduledDate = tim });
     }
 
-    static bool IsValidName(string name)
+    /// <summary>
+    /// Deletes all tasks and associated dependencies.
+    /// </summary>
+    public void DeleteAll()
     {
-        // Regular expression for a simple name validation
-        // Allows letters, spaces, and some common special characters
-        string namePattern = @"^[a-zA-Z\s\.'-]*$";
-        return Regex.IsMatch(name, namePattern);
+        _dal.Task.DeleteAll();
     }
 
+    /// <summary>
+    /// Determines whether the provided name is valid.
+    /// </summary>
+    /// <param name="name">The name to validate.</param>
+    /// <returns>
+    ///   <c>true</c> if the name is valid; otherwise, <c>false</c>.
+    /// </returns>
+    static bool IsValidName(string name)
+    {
+        return name != null && name.Length > 0;
+    }
+
+    /// <summary>
+    /// Validates the input integrity of a Task object.
+    /// </summary>
+    /// <param name="boTask">The Task object to validate.</param>
+    /// <exception cref="BO.BlinputValidity">Thrown when there is a problem with the integrity of the data.</exception>
     static public void inputValidity(BO.Task boTask)
     {
         if (!IsValidName(boTask.Alias!) || boTask.Id < 0)
@@ -226,38 +287,61 @@ internal class TaskImplementation : ITask
         }
     }
 
-     private BO.Status status(DO.Task item)
-     {
-        if(item.StartDate==null) { return BO.Status.Unscheduled; }
-        if (item.CompleteDate != null) {  return BO.Status.Done; }
-        if(item.ScheduledDate!=null && item.StartDate == null) {  return BO.Status.Scheduled; }
+    /// <summary>
+    /// Determines the status of a Task based on its properties.
+    /// </summary>
+    /// <param name="item">The Task object for which to determine the status.</param>
+    /// <returns>The status of the Task.</returns>
+    private BO.Status status(DO.Task item)
+    {
+
+        if (item.ScheduledDate == null) { return BO.Status.Unscheduled; }
+        if (item.ScheduledDate != null && item.StartDate == null) { return BO.Status.Scheduled; }
+        if (item.CompleteDate != null) { return BO.Status.Done; }
+
         else
         { return BO.Status.OnTrack; }
-     }
+    }
 
-    private DateTime? ofrecastDate(DO.Task item)
+    /// <summary>
+    /// Calculates the forecasted completion date for a Task based on its scheduled date, start date, and required effort time.
+    /// </summary>
+    /// <param name="item">The Task object for which to calculate the forecasted completion date.</param>
+    /// <returns>The forecasted completion date of the Task, or null if either the scheduled date or start date is not set.</returns>
+    private DateTime? forecastDate(DO.Task item)
     {
+        if (item.ScheduledDate == null || item.StartDate == null)
+        {
+            return null;
+        }
+
         DateTime? finish;
-        finish =(DateTime)( item.ScheduledDate > item.StartDate ?  item.ScheduledDate : item.StartDate)! ;
+        finish = (DateTime)(item.ScheduledDate > item.StartDate ? item.ScheduledDate : item.StartDate)!;
         finish = finish + item.RequiredEffortTime;
         return finish;
     }
+
+    /// <summary>
+    /// Retrieves a list of dependent tasks for a given Task.
+    /// </summary>
+    /// <param name="item">The Task object for which to retrieve dependent tasks.</param>
+    /// <returns>A list of dependent tasks represented as TaskInList objects.</returns>
 
     private List<BO.TaskInList> depe(DO.Task item)
     {
         var dep = _dal.Dependency.ReadAll();
         var ta = _dal.Task.ReadAll();
         List<BO.TaskInList> lis = new List<BO.TaskInList>();
-        foreach(var t  in dep)
+        foreach (var t in dep)
         {
-            if(t!.DependentTask==item.Id)
+            if (t!.DependentTask == item.Id)
             {
                 foreach (var a in ta)
                 {
                     if (a.Id == t.DependsOnTask)
                     {
-                        var al = item.Alias;
-                        var ds = item.Description;
+                        var al = a.Alias;
+                        var ds = a.Description;
                         var ti = status(a);
                         lis.Add(new TaskInList() { Id = (int)t.DependsOnTask!, Alias = al, Description = ds, Status = ti });
                     }
@@ -269,16 +353,28 @@ internal class TaskImplementation : ITask
 
     }
 
-    private BO.EngineerInTask en(DO.Task item)
+    /// <summary>
+    /// Retrieves an EngineerInTask object representing the engineer associated with the given Task.
+    /// </summary>
+    /// <param name="item">The Task object for which to retrieve the associated engineer.</param>
+    /// <returns>
+    /// An EngineerInTask object representing the engineer associated with the given Task,
+    /// or null if no engineer is associated.
+    /// </returns>
+    private BO.EngineerInTask? en(DO.Task item)
     {
         var theEn = item.EngineerId;
-        var eng = _dal.Engineer.ReadAll();
-        foreach(var a in eng)
+        if (theEn != null)
         {
-            if(theEn == a.Id)
+            var eng = _dal.Engineer.ReadAll();
+            foreach (var a in eng)
             {
-                return new BO.EngineerInTask() {  Id = a.Id, Name = a.Name };
+                if (theEn == a.Id)
+                {
+                    return new BO.EngineerInTask() { Id = a.Id, Name = a.Name };
+                }
             }
+
         }
 
         return null;

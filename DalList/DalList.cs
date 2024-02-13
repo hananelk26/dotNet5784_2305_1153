@@ -27,5 +27,7 @@ sealed internal class DalList : IDal
     /// Gets the task component for managing tasks.
     /// </summary>
     public ITask Task => new TaskImplementation();
+
+    public ITIme Time => new TimeImplementation();
 }
 

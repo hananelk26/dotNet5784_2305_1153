@@ -25,5 +25,7 @@ public interface IDal
     /// Gets the task component for managing tasks.
     /// </summary>
     ITask Task { get; }
+
+    ITIme Time { get; }
 }
 
