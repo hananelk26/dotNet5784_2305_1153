@@ -285,7 +285,7 @@ public class Program
             num = int.Parse(Console.ReadLine()!);
         }
 
-        BO.Task tsk = new BO.Task()
+        BO.Task tskk = new BO.Task()
         {
             Id = IdTask,
             Alias = aliasTask,
@@ -301,7 +301,7 @@ public class Program
 
 
 
-        int id = s_bl.Task!.Create(tsk);
+        int id = s_bl.Task!.Create(tskk);
         Console.WriteLine($"The ID task is:{id}");
 
     }
@@ -420,7 +420,7 @@ public class Program
             num = int.Parse(Console.ReadLine()!);
         }
 
-        BO.Task tsk = new BO.Task()
+        BO.Task tskk = new BO.Task()
         {
             Id = IdTask,
             Alias = aliasTask,
@@ -438,7 +438,7 @@ public class Program
 
 
 
-        s_bl.Task!.Update(tsk);
+        s_bl.Task!.Update(tskk);
 
     }
 
