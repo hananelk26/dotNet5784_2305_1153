@@ -35,4 +35,74 @@
     <Name>Dina Klein</Name>
     <Level>Beginner</Level>
   </Engineer>
+  <Engineer>
+    <Id>346815779</Id>
+    <Email>DaniLevi@gmail.com</Email>
+    <Cost>430</Cost>
+    <Name>Dani Levi</Name>
+    <Level>Advanced</Level>
+  </Engineer>
+  <Engineer>
+    <Id>262914708</Id>
+    <Email>EliAmar@gmail.com</Email>
+    <Cost>521</Cost>
+    <Name>Eli Amar</Name>
+    <Level>Beginner</Level>
+  </Engineer>
+  <Engineer>
+    <Id>354478041</Id>
+    <Email>YairCohen@gmail.com</Email>
+    <Cost>434</Cost>
+    <Name>Yair Cohen</Name>
+    <Level>Intermediate</Level>
+  </Engineer>
+  <Engineer>
+    <Id>237179459</Id>
+    <Email>ArielaLev@gmail.com</Email>
+    <Cost>212</Cost>
+    <Name>Ariela Lev</Name>
+    <Level>Intermediate</Level>
+  </Engineer>
+  <Engineer>
+    <Id>210940602</Id>
+    <Email>DinaKlein@gmail.com</Email>
+    <Cost>845</Cost>
+    <Name>Dina Klein</Name>
+    <Level>Advanced</Level>
+  </Engineer>
+  <Engineer>
+    <Id>241470324</Id>
+    <Email>DaniLevi@gmail.com</Email>
+    <Cost>921</Cost>
+    <Name>Dani Levi</Name>
+    <Level>Intermediate</Level>
+  </Engineer>
+  <Engineer>
+    <Id>367641117</Id>
+    <Email>EliAmar@gmail.com</Email>
+    <Cost>835</Cost>
+    <Name>Eli Amar</Name>
+    <Level>Advanced_Beginner</Level>
+  </Engineer>
+  <Engineer>
+    <Id>374335901</Id>
+    <Email>YairCohen@gmail.com</Email>
+    <Cost>688</Cost>
+    <Name>Yair Cohen</Name>
+    <Level>Advanced_Beginner</Level>
+  </Engineer>
+  <Engineer>
+    <Id>332430546</Id>
+    <Email>ArielaLev@gmail.com</Email>
+    <Cost>920</Cost>
+    <Name>Ariela Lev</Name>
+    <Level>Beginner</Level>
+  </Engineer>
+  <Engineer>
+    <Id>246795156</Id>
+    <Email>DinaKlein@gmail.com</Email>
+    <Cost>470</Cost>
+    <Name>Dina Klein</Name>
+    <Level>Advanced_Beginner</Level>
+  </Engineer>
 </ArrayOfEngineer>
