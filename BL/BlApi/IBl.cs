@@ -21,4 +21,6 @@ public interface IBl
     /// Resets all entities in the data, such as engineers, tasks, and time.
     /// </summary>
     public void ResetsAllEntitiesInTheData();
+
+    public void InitializeDB();
 }

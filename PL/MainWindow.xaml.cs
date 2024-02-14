@@ -29,6 +29,7 @@ namespace PL
 
         private void Initialization(object sender, RoutedEventArgs e)
         {
+            BlApi.IBl s_bl = BlApi.Factory.Get();
             MessageBoxResult mbResult = MessageBox.Show("Would you like to create Initial data?",
                             "warning",
                             MessageBoxButton.YesNoCancel,
@@ -36,7 +37,8 @@ namespace PL
             switch (mbResult)
             {
                 case MessageBoxResult.Yes:
-                    DalTest.Initialization.Do();
+                    //  DalTest.Initialization.Do();
+                    s_bl.InitializeDB();
                     break;
 
             }
