@@ -24,13 +24,13 @@ namespace PL.Engineer
             InitializeComponent();
             if (TheID == 0)
             {
-                CurrentEngineer = new BO.Engineer();
+                CurrentEngineer = new BO.Engineer(); // add mode
             }
             else
             {
                 try
                 {
-                    CurrentEngineer = s_bl.Engineer.Read(TheID)!;
+                    CurrentEngineer = s_bl.Engineer.Read(TheID)!; // Update mode
                 }
                 catch (Exception)
                 {
@@ -54,7 +54,11 @@ namespace PL.Engineer
             DependencyProperty.Register("CurrentEngineer", typeof(BO.Engineer), typeof(EngineerWindow), new PropertyMetadata(null));
 
 
-
+        /// <summary>
+        /// Event handler for the PreviewTextInput event of a NumericTextBox.
+        /// </summary>
+        /// <param name="sender">The object that raised the event (a TextBox).</param>
+        /// <param name="e">Event data containing the input text composition.</param>
         private void NumericTextBox_PreviewTextInput(object sender, TextCompositionEventArgs e)
         {
             if (!char.IsDigit(e.Text, 0) || (e.Text == "." && ((TextBox)sender).Text.Contains(".")))
@@ -72,15 +76,26 @@ namespace PL.Engineer
             }
         }
 
+        /// <summary>
+        /// Event handler for the AddOrUpdateButton Click event.
+        /// </summary>
+        /// <param name="sender">The object that raised the event (a Button).</param>
+        /// <param name="e">Event data.</param>
         private void AddOrUpdateButton_Click(object sender, RoutedEventArgs e)
         {
+            // Cast the sender to a Button
             Button clickedButton = (sender as Button)!;
+            // Retrieve the text content of the clicked button
             string buttonText = clickedButton.Content.ToString()!;
+
+
+            // Check if the button text is "Add"
             if (buttonText == "Add")
             {
                 try
                 {
                     s_bl.Engineer.Create(CurrentEngineer);
+                    // Display a success message
                     MessageBox.Show("The engineer was successfully added",
                                         "Adding an engineer",
                                         MessageBoxButton.OK,
@@ -98,6 +113,7 @@ namespace PL.Engineer
                 try
                 {
                     s_bl.Engineer.Update(CurrentEngineer);
+                    // Display a success message
                     MessageBox.Show("The engineer updated successfully",
                                         "Engineer update",
                                         MessageBoxButton.OK,
