@@ -3,6 +3,7 @@ namespace DalTest;
 using DalApi;
 using DO;
 using System.Security.Cryptography;
+using System.Xml.Linq;
 
 /// <summary>
 /// Class responsible for initializing the application with sample data.
@@ -15,6 +16,8 @@ public static class Initialization
     private static IDal? s_dal;
 
     private static readonly Random s_rand = new();
+
+
 
     /// <summary>
     /// Creates engineers with sample data.
@@ -49,7 +52,7 @@ public static class Initialization
 
             double _cost = (double)s_rand.Next(100,1000);
 
-            EngineerExperience _level = (EngineerExperience)s_rand.Next(0,4);
+            EngineerExperience _level = (EngineerExperience)s_rand.Next(1,5);
 
             Engineer newEng = new(_id, _email, _cost, _name, _level);
 
@@ -144,6 +147,29 @@ public static class Initialization
            // s_dalDependency!.Create(dep);
            s_dal!.Dependency.Create(dep);
         }
+    }
+
+    public static void resetDataConfig()
+    {
+        XElement? ex = null;
+
+        const string s_xml_dir = @"..\xml\";
+        string filePath = $"{s_xml_dir + "data-config"}.xml";
+        try
+        {
+            if (File.Exists(filePath))
+                ex = XElement.Load(filePath);
+
+        }
+        catch (Exception eex)
+        {
+            throw new DalXMLFileLoadCreateException($"fail to load xml file: {s_xml_dir + filePath}, {eex.Message}");
+        }
+        int num = 1;
+        ex!.Element("NextTaskId")!.Value = num.ToString();
+        ex.Element("NextDependencyId")!.Value = num.ToString();
+
+        ex.Save(filePath);
     }
 
     /// <summary>

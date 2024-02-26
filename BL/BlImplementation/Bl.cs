@@ -2,6 +2,8 @@
 
 namespace BlImplementation;
 using BlApi;
+using DO;
+using System.Xml.Linq;
 
 /// <summary>
 /// Internal class implementing the business logic layer (BL) interface.
@@ -37,5 +39,10 @@ internal class Bl : IBl
     }
 
     public void InitializeDB() => DalTest.Initialization.Do();
+
+    public void resetDataConfig()
+    {
+       DalTest.Initialization.resetDataConfig();
+    }
 
 }

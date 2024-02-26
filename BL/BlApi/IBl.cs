@@ -23,4 +23,5 @@ public interface IBl
     public void ResetsAllEntitiesInTheData();
 
     public void InitializeDB();
+    public void resetDataConfig();
 }

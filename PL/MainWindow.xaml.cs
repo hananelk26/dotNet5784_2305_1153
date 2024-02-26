@@ -17,9 +17,18 @@ namespace PL
     /// </summary>
     public partial class MainWindow : Window
     {
+        static readonly BlApi.IBl s_bl = BlApi.Factory.Get();
         public MainWindow()
         {
             InitializeComponent();
+            // Initialize MediaPlayer
+            var mediaPlayer = new MediaPlayer();
+
+            // Set the audio source
+            mediaPlayer.Open(new Uri("https://open.spotify.com/track/5zdau2dtmOUHF3CJ3odKfb?si=37770a9acea947a3"));
+
+            // Play the audio
+            mediaPlayer.Play();
         }
 
         private void EngineerListWindow(object sender, RoutedEventArgs e)
@@ -29,11 +38,11 @@ namespace PL
 
         private void Initialization(object sender, RoutedEventArgs e)
         {
-            BlApi.IBl s_bl = BlApi.Factory.Get();
+
             MessageBoxResult mbResult = MessageBox.Show("Would you like to create Initial data?",
                             "warning",
                             MessageBoxButton.YesNoCancel,
-                            MessageBoxImage.Warning);
+                            MessageBoxImage.Question);
             switch (mbResult)
             {
                 case MessageBoxResult.Yes:
@@ -42,6 +51,24 @@ namespace PL
                     break;
 
             }
+        }
+
+        private void resetAllData(object sender, RoutedEventArgs e)
+        {
+            MessageBoxResult mbResult = MessageBox.Show("Would you like to reset all data?",
+                            "warning",
+                            MessageBoxButton.YesNoCancel,
+                            MessageBoxImage.Warning);
+            switch (mbResult)
+            {
+                case MessageBoxResult.Yes:
+                    s_bl.ResetsAllEntitiesInTheData();
+                    s_bl.resetDataConfig();
+                    break;
+
+            }
+
+
         }
     }
 }
