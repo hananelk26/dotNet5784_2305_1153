@@ -33,6 +33,9 @@ internal class Bl : IBl
         _dal.Engineer.DeleteAll();
         _dal.Task.DeleteAll();
         _dal.Dependency.DeleteAll();
-        
+
     }
+
+    public void InitializeDB() => DalTest.Initialization.Do();
+
 }

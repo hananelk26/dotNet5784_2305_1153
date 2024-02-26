@@ -7,8 +7,9 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
-        <Button Content="Engineer" HorizontalAlignment="Left" Margin="31,266,0,0" VerticalAlignment="Top" Height="137" Width="317" Click="EngineerListWindow" FontSize="36"/>
-        <Button Content="INITDB" HorizontalAlignment="Left" Margin="400,266,0,0" VerticalAlignment="Top" Height="137" Width="352" FontSize="36" Click="Initialization"/>
+        <Button Content="Engineer" HorizontalAlignment="Left" Margin="31,266,0,0" VerticalAlignment="Top" Height="137" Width="224" Click="EngineerListWindow" FontSize="36"/>
+        <Button Content="INITDB" HorizontalAlignment="Left" Margin="556,266,0,0" VerticalAlignment="Top" Height="137" Width="196" FontSize="36" Click="Initialization"/>
+        <Button Content="reset" HorizontalAlignment="Left" Margin="305,266,0,0" VerticalAlignment="Top" Height="137" Width="213" FontSize="36"/>
 
     </Grid>
 </Window>
