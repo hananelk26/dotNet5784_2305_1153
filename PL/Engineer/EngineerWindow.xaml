@@ -5,8 +5,31 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PL.Engineer"
         mc:Ignorable="d"
-        Title="EngineerWindow" Height="450" Width="800">
+        Title="EngineerWindow" Background="Aqua" Width="350" Height="450" DataContext="{Binding CurrentEngineer, RelativeSource={RelativeSource Self}, Mode=TwoWay}">
     <Grid>
-        
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Label Content="ID" Grid.Column="1"  FontSize="15" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="24,21,0,0" Width="87" Height="41"/>
+        <TextBox Text="{Binding Id, Mode=TwoWay, NotifyOnValidationError=true,  ValidatesOnExceptions=true}" HorizontalAlignment="Left" MaxLength="9"  Margin="65,0,0,0" VerticalAlignment="Center" Width="103" Height="20" PreviewTextInput="NumericTextBox_PreviewTextInput"/>
+        <Label Content="Name" Grid.Row="1" Grid.Column="1" FontSize="15" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="24,21,0,0" Width="87" Height="41"/>
+        <TextBox Text = "{Binding Name, Mode=TwoWay, NotifyOnValidationError=true,  ValidatesOnExceptions=true}"  Grid.Row="1" Grid.Column="0" HorizontalAlignment="Left" Margin="65,0,0,0" VerticalAlignment="Center" Width="103" Height="20" PreviewTextInput="LetterTextBox_PreviewTextInput"/>
+        <Label Content="Email" Grid.Row="2" Grid.Column="1" FontSize="15" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="24,21,0,0" Width="87" Height="41"/>
+        <TextBox Text= "{Binding Email, Mode=TwoWay, NotifyOnValidationError=true,  ValidatesOnExceptions=true}" Grid.Row="2" Grid.Column="0" HorizontalAlignment="Left" Margin="65,0,0,0" VerticalAlignment="Center" Width="103" Height="20" />
+        <Label Content="Level" Grid.Row="3" Grid.Column="1" FontSize="15" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="24,21,0,0" Width="87" Height="41"/>
+        <ComboBox  ItemsSource="{Binding Source={StaticResource ExperienceCollectionKey}}" SelectedValue="{Binding Level, Mode=TwoWay, NotifyOnValidationError=true, 
+             ValidatesOnExceptions=true}" Grid.Row="3" Grid.Column="0" HorizontalAlignment="Left" Margin="65,0,0,0" VerticalAlignment="Center" Width="103" Height="20" />
+        <Label Content="Cost" Grid.Row="4" Grid.Column="1" FontSize="15" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="24,21,0,0" Width="87" Height="41"/>
+        <TextBox Text="{Binding Cost, Mode=TwoWay, NotifyOnValidationError=true,  ValidatesOnExceptions=true}" Grid.Row="4" Grid.Column="0" HorizontalAlignment="Left" Margin="65,0,0,0" VerticalAlignment="Center" Width="103" Height="20" PreviewTextInput="NumericTextBox_PreviewTextInput" />
+        <Button Content="{Binding Id, Mode=OneTime, Converter={StaticResource ConverIdToContentKey}}"  FontSize=" 24.27050983" Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="2" Margin="50,5,120,5" Click="AddOrUpdateButton_Click"/>
     </Grid>
 </Window>

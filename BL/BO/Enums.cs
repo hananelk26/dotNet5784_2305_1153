@@ -5,6 +5,7 @@
 /// </summary>
 public enum EngineerExperience
 {
+    None,
     /// <summary>
     /// Indicates a beginner level engineer with limited experience.
     /// </summary>

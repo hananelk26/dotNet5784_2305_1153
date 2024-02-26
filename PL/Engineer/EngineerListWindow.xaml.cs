@@ -22,8 +22,40 @@ namespace PL.Engineer
         public EngineerListWindow()
         {
             InitializeComponent();
+            EngineerList = s_bl?.Engineer.ReadAll()!;
         }
 
         static readonly BlApi.IBl s_bl = BlApi.Factory.Get();
+
+        public IEnumerable<BO.Engineer> EngineerList
+        {
+            get { return (IEnumerable<BO.Engineer>)GetValue(EngineerListProperty); }
+            set { SetValue(EngineerListProperty, value); }
+        }
+
+        public static readonly DependencyProperty EngineerListProperty =
+            DependencyProperty.Register("EngineerList", typeof(IEnumerable<BO.Engineer>), typeof(EngineerListWindow), new PropertyMetadata(null));
+
+        public BO.EngineerExperience Experience { get; set; } = BO.EngineerExperience.None;
+
+        private void EngineerExperience_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            EngineerList = (Experience == BO.EngineerExperience.None) ?
+             s_bl?.Engineer.ReadAll()! : s_bl?.Engineer.ReadAll(item => item.Level == Experience)!;
+
+        }
+
+        private void AddButton_Click(object sender, RoutedEventArgs e)
+        {
+            new EngineerWindow().ShowDialog();
+            EngineerList = s_bl?.Engineer.ReadAll()!;
+        }
+
+        private void ListViewOfEngineers_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            BO.Engineer? TheEngineer = (sender as ListView)?.SelectedItem as BO.Engineer;
+            new EngineerWindow(TheEngineer!.Id).ShowDialog();
+            EngineerList = s_bl?.Engineer.ReadAll()!;
+        }
     }
 }
