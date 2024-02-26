@@ -8,6 +8,9 @@ using System.Windows.Data;
 
 namespace PL
 {
+    /// <summary>
+    /// Converts an ID value to content for display purposes.
+    /// </summary>
     class ConvertIdToContent : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)

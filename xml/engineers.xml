@@ -3,7 +3,7 @@
   <Engineer>
     <Id>240656049</Id>
     <Email>DaniLevi@gmail.com</Email>
-    <Cost>828</Cost>
+    <Cost>1</Cost>
     <Name>Dani Levi</Name>
     <Level>Advanced_Beginner</Level>
   </Engineer>
@@ -34,5 +34,19 @@
     <Cost>470</Cost>
     <Name>Dina Klein</Name>
     <Level>Advanced_Beginner</Level>
+  </Engineer>
+  <Engineer>
+    <Id>3456456</Id>
+    <Email>rfghj@gmail.com</Email>
+    <Cost>123</Cost>
+    <Name>dfg</Name>
+    <Level>Beginner</Level>
+  </Engineer>
+  <Engineer>
+    <Id>456</Id>
+    <Email>dfg@gmail.com</Email>
+    <Cost>0</Cost>
+    <Name>dfgh</Name>
+    <Level>Beginner</Level>
   </Engineer>
 </ArrayOfEngineer>

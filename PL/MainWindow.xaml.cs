@@ -31,11 +31,21 @@ namespace PL
             mediaPlayer.Play();
         }
 
+        /// <summary>
+        /// Event handler for the EngineerListWindow button click.
+        /// </summary>
+        /// <param name="sender">The object that raised the event.</param>
+        /// <param name="e">The event data.</param>
         private void EngineerListWindow(object sender, RoutedEventArgs e)
         {
             new EngineerListWindow().Show();
         }
 
+        /// <summary>
+        /// Event handler for the Initialization button click.
+        /// </summary>
+        /// <param name="sender">The object that raised the event.</param>
+        /// <param name="e">The event data.</param>
         private void Initialization(object sender, RoutedEventArgs e)
         {
 
@@ -53,6 +63,11 @@ namespace PL
             }
         }
 
+        /// <summary>
+        /// Event handler for the resetAllData button click.
+        /// </summary>
+        /// <param name="sender">The object that raised the event.</param>
+        /// <param name="e">The event data.</param>
         private void resetAllData(object sender, RoutedEventArgs e)
         {
             MessageBoxResult mbResult = MessageBox.Show("Would you like to reset all data?",
