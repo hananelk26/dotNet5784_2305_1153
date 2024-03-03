@@ -37,6 +37,7 @@ public enum EngineerExperience
 /// </summary>
 public enum Status
 {
+    None,
     /// <summary>
     /// The task or project has not been scheduled yet.
     /// </summary>

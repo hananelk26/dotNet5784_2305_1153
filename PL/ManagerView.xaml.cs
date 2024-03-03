@@ -1,4 +1,5 @@
 ﻿using PL.Engineer;
+using PL.Task;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -81,6 +82,11 @@ namespace PL
             }
 
 
+        }
+
+        private void TaskListButton_Click(object sender, RoutedEventArgs e)
+        {
+            new TaskListWindow().Show();
         }
     }
 }

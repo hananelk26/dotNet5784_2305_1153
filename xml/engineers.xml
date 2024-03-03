@@ -1,52 +1,38 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ArrayOfEngineer>
   <Engineer>
-    <Id>240656049</Id>
+    <Id>298863856</Id>
     <Email>DaniLevi@gmail.com</Email>
-    <Cost>1</Cost>
+    <Cost>116</Cost>
     <Name>Dani Levi</Name>
-    <Level>Advanced_Beginner</Level>
+    <Level>Intermediate</Level>
   </Engineer>
   <Engineer>
-    <Id>256894867</Id>
+    <Id>245710715</Id>
     <Email>EliAmar@gmail.com</Email>
-    <Cost>864</Cost>
+    <Cost>878</Cost>
     <Name>Eli Amar</Name>
-    <Level>Advanced_Beginner</Level>
+    <Level>Intermediate</Level>
   </Engineer>
   <Engineer>
-    <Id>395700900</Id>
+    <Id>256785917</Id>
     <Email>YairCohen@gmail.com</Email>
-    <Cost>106</Cost>
+    <Cost>698</Cost>
     <Name>Yair Cohen</Name>
-    <Level>Expert</Level>
-  </Engineer>
-  <Engineer>
-    <Id>366098908</Id>
-    <Email>ArielaLev@gmail.com</Email>
-    <Cost>730</Cost>
-    <Name>Ariela Lev</Name>
     <Level>Advanced</Level>
   </Engineer>
   <Engineer>
-    <Id>328092904</Id>
+    <Id>363777036</Id>
+    <Email>ArielaLev@gmail.com</Email>
+    <Cost>889</Cost>
+    <Name>Ariela Lev</Name>
+    <Level>Expert</Level>
+  </Engineer>
+  <Engineer>
+    <Id>284387665</Id>
     <Email>DinaKlein@gmail.com</Email>
-    <Cost>470</Cost>
+    <Cost>767</Cost>
     <Name>Dina Klein</Name>
-    <Level>Advanced_Beginner</Level>
-  </Engineer>
-  <Engineer>
-    <Id>3456456</Id>
-    <Email>rfghj@gmail.com</Email>
-    <Cost>123</Cost>
-    <Name>dfg</Name>
-    <Level>Beginner</Level>
-  </Engineer>
-  <Engineer>
-    <Id>456</Id>
-    <Email>dfg@gmail.com</Email>
-    <Cost>0</Cost>
-    <Name>dfgh</Name>
-    <Level>Beginner</Level>
+    <Level>Intermediate</Level>
   </Engineer>
 </ArrayOfEngineer>
