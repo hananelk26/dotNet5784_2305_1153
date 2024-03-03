@@ -8,8 +8,11 @@
         Title="MainWindow" Height="450" Width="800" Background ="BlueViolet">
     <Grid>
         <Image Source="/image.jpg" Margin="0,0,0,69"/>
-        <!--<MediaElement LoadedBehavior="Play" Source="pack://siteoforigin:,,,/Video/Bear.wmv" />-->
-        
+        <Button Content="Manager" HorizontalAlignment="Left" Margin="74,373,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5" Width="252" Height="51" Click="Button_Click"/>
+
+        <Button Content="Engineer" HorizontalAlignment="Left" Margin="479,370,0,0" VerticalAlignment="Top" Width="233" Height="54" RenderTransformOrigin="0.747,0.433" Click="Button_Click_1"/>
+
+
 
     </Grid>
 </Window>
