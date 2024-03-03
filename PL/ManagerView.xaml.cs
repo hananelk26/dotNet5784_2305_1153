@@ -54,7 +54,6 @@ namespace PL
             switch (mbResult)
             {
                 case MessageBoxResult.Yes:
-                    //  DalTest.Initialization.Do();
                     s_bl.InitializeDB();
                     break;
 
