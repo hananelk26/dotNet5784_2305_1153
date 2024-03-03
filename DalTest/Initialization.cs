@@ -151,6 +151,9 @@ public static class Initialization
 
     public static void resetDataConfig()
     {
+        s_dal = DalApi.Factory.Get;
+        s_dal.Time.reset();
+
         XElement? ex = null;
 
         const string s_xml_dir = @"..\xml\";
@@ -177,9 +180,7 @@ public static class Initialization
     /// </summary>
     public static void Do() 
     {
-        s_dal = DalApi.Factory.Get;
-
-        s_dal.Time.reset();
+        
         createEngineers();
         createTask();
         createDependency();

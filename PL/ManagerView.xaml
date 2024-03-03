@@ -7,11 +7,11 @@
         mc:Ignorable="d"
         Title="ManagerView" Height="450" Width="800">
     <Grid>
-        
+
         <!--<MediaElement LoadedBehavior="Play" Source="pack://siteoforigin:,,,/Video/Bear.wmv" />-->
-        <Button Content="Engineer" Background="{StaticResource Brush}" HorizontalAlignment="Left" Margin="32,340,0,0" VerticalAlignment="Top" Height="69" Width="224" Click="EngineerListWindow" FontSize="36"/>
-        <Button Content="INITDB" Background="{StaticResource Brush}"  HorizontalAlignment="Left" Margin="563,340,0,0" VerticalAlignment="Top" Height="69" Width="224" FontSize="36" Click="Initialization"/>
-        <Button Content="Reset" Background="{StaticResource Brush}"  HorizontalAlignment="Left" Margin="300,340,0,0" VerticalAlignment="Top" Height="69" Width="224" FontSize="36" Click="resetAllData"/>
+        <Button Content="Engineer" Background="Turquoise" HorizontalAlignment="Left" Margin="10,168,0,0" VerticalAlignment="Top" Height="69" Width="224" Click="EngineerListWindow" FontSize="36"/>
+        <Button Content="INITDB" Background="Turquoise"  HorizontalAlignment="Left" Margin="563,340,0,0" VerticalAlignment="Top" Height="69" Width="224" FontSize="36" Click="Initialization"/>
+        <Button Content="Reset" Background="Turquoise"  HorizontalAlignment="Left" Margin="228,306,0,0" VerticalAlignment="Top" Height="68" Width="224" FontSize="36" Click="resetAllData"/>
 
 
     </Grid>
