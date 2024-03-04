@@ -29,7 +29,13 @@
         <ListView Background="Aqua"  Grid.Row="1" Margin="5" ItemsSource="{Binding EngineerList}" MouseDoubleClick="ListViewOfEngineers_MouseDoubleClick">
             <ListView.View>
                 <GridView>
-                    <GridViewColumn/>
+                    <GridViewColumn Width="100" Header="ID" DisplayMemberBinding="{Binding Id}" />
+                    <GridViewColumn Width="120"  Header="Name" DisplayMemberBinding="{Binding Name}" />
+                    <GridViewColumn Width="150"  Header="Email" DisplayMemberBinding="{Binding Email}" />
+                    <GridViewColumn Width="150" Header="Level" DisplayMemberBinding="{Binding Level}" />
+                    <GridViewColumn Width="120" Header="Cost" DisplayMemberBinding="{Binding Cost}" />
+                    <GridViewColumn Width="120" Header="Task" DisplayMemberBinding="{Binding Task}" />
+
                 </GridView>
             </ListView.View>
         </ListView>
