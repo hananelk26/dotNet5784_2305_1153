@@ -65,7 +65,7 @@ namespace PL.Task
 
         private void AddButton_Click(object sender, RoutedEventArgs e)
         {
-
+            new TaskWindow().ShowDialog();
         }
 
         private void Status_SelectionChanged(object sender, SelectionChangedEventArgs e)

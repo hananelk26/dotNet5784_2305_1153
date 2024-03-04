@@ -28,7 +28,11 @@
         <ListView Background="Aqua"  Grid.Row="1" Margin="5" ItemsSource="{Binding TaskList}" MouseDoubleClick="ListViewOfEngineers_MouseDoubleClick">
             <ListView.View>
                 <GridView>
-                    <GridViewColumn/>
+                    <GridViewColumn Width="100" Header="ID" DisplayMemberBinding="{Binding Id}" />
+                    <GridViewColumn Width="300"  Header="Description" DisplayMemberBinding="{Binding Description}" />
+                    <GridViewColumn Width="100"  Header="Alias" DisplayMemberBinding="{Binding Alias}" />
+                    <GridViewColumn Width="180" Header="Status" DisplayMemberBinding="{Binding Status}" />
+
                 </GridView>
             </ListView.View>
         </ListView>
