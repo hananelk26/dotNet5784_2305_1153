@@ -9,11 +9,13 @@
     <Grid>
 
 
-        <Button Content="Engineers" Background="Turquoise" HorizontalAlignment="Left" Margin="28,0,0,0" VerticalAlignment="Center" Height="69" Width="224" Click="EngineerListWindow" FontSize="36"/>
-        <Button Content="INITDB" Background="Turquoise"  HorizontalAlignment="Left" Margin="563,340,0,0" VerticalAlignment="Top" Height="69" Width="224" FontSize="36" Click="Initialization"/>
-        <Button Content="Reset" Background="Turquoise"  HorizontalAlignment="Center" Margin="0,259,0,0" VerticalAlignment="Top" Height="69" Width="224" FontSize="36" Click="resetAllData"/>
+        <Button Content="Engineers" Background="Turquoise" HorizontalAlignment="Left" Margin="38,77,0,0" VerticalAlignment="Top" Height="69" Width="224" Click="EngineerListWindow" FontSize="36"/>
+        <Button Content="INITDB" Background="Turquoise"  HorizontalAlignment="Left" Margin="335,340,0,0" VerticalAlignment="Top" Height="69" Width="224" FontSize="36" Click="Initialization"/>
+        <Button Content="Reset" Background="Turquoise"  HorizontalAlignment="Left" Margin="38,340,0,0" VerticalAlignment="Top" Height="69" Width="224" FontSize="36" Click="resetAllData"/>
         <Button Content="Tasks" Background="Turquoise"  HorizontalAlignment="Left" Margin="350,77,0,0" VerticalAlignment="Top" Height="69" Width="224" FontSize="36" Click="TaskListButton_Click" />
-       
+        <Button Content="Gantt Chart" Background="Turquoise"  HorizontalAlignment="Left" Margin="38,217,0,0" VerticalAlignment="Top" Height="69" Width="224" FontSize="36"  />
+        <Button Content="Creating a schedule" Background="Turquoise"  HorizontalAlignment="Left" Margin="350,217,0,0" VerticalAlignment="Top" Height="69" Width="352" FontSize="36"  />
+
 
 
     </Grid>

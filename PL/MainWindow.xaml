@@ -8,9 +8,9 @@
         Title="MainWindow" Height="450" Width="800" Background ="BlueViolet">
     <Grid>
         <Image Source="/image.jpg" Margin="0,0,0,69"/>
-        <Button Content="Manager" HorizontalAlignment="Left" Margin="13,374,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5" Width="252" Height="52" Click="Button_Click"/>
+        <Button Content="Manager" HorizontalAlignment="Left" Margin="13,369,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5" Width="252" Height="52" Click="Button_Click"/>
 
-        <Button Content="Engineer" HorizontalAlignment="Left" Margin="554,373,0,0" VerticalAlignment="Top" Width="233" Height="54" RenderTransformOrigin="0.747,0.433" Click="Button_Click_1"/>
+        <Button Content="Engineer" HorizontalAlignment="Left" Margin="541,365,0,0" VerticalAlignment="Top" Width="233" Height="54" RenderTransformOrigin="0.747,0.433" Click="Button_Click_1"/>
         <Label Content="lable" HorizontalAlignment="Center" Margin="0,374,0,0" VerticalAlignment="Top" Height="52" Width="132"/>
 
 
