@@ -10,6 +10,10 @@ public interface ITask
     /// <returns>An IEnumerable of Task objects.</returns>
     public IEnumerable<BO.Task> ReadAll(Func<BO.Task, bool>? filter = null);
 
+
+    public IEnumerable<BO.TaskInList> ReadAllTaskInList(Func<BO.Task, bool>? filter = null);
+    
+
     /// <summary>
     /// Reads a task by its unique identifier.
     /// </summary>

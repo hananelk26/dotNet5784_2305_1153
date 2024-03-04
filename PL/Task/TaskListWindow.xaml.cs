@@ -38,7 +38,7 @@ namespace PL.Task
         private void TaskExperience_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             TaskList = (Experience == BO.EngineerExperience.None) ?
-            s_bl?.Task.ReadAll()! : s_bl?.Task.ReadAll(item => item.Complexyity == Experience)!;
+            s_bl?.Task.ReadAllTaskInList()! : s_bl?.Task.ReadAllTaskInList(item => item.Complexyity == Experience)!;
         }
 
         
@@ -46,9 +46,9 @@ namespace PL.Task
         /// <summary>
         /// Gets or sets the list of engineers displayed in the EngineerListWindow.
         /// </summary>
-        public IEnumerable<BO.Task> TaskList
+        public IEnumerable<BO.TaskInList> TaskList
         {
-            get { return (IEnumerable<BO.Task>)GetValue(TaskListProperty); }
+            get { return (IEnumerable<BO.TaskInList>)GetValue(TaskListProperty); }
             set { SetValue(TaskListProperty, value); }
         }
 
@@ -56,7 +56,7 @@ namespace PL.Task
         /// Identifies the TaskList dependency property.
         /// </summary>
         public static readonly DependencyProperty TaskListProperty =
-            DependencyProperty.Register("TaskList", typeof(IEnumerable<BO.Task>), typeof(TaskListWindow), new PropertyMetadata(null));
+            DependencyProperty.Register("TaskList", typeof(IEnumerable<BO.TaskInList>), typeof(TaskListWindow), new PropertyMetadata(null));
 
         private void ListViewOfEngineers_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
@@ -71,7 +71,7 @@ namespace PL.Task
         private void Status_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             TaskList = (StatusOfTask == BO.Status.None) ?
-           s_bl?.Task.ReadAll()! : s_bl?.Task.ReadAll(item => item.Status == StatusOfTask)!;
+           s_bl?.Task.ReadAllTaskInList()! : s_bl?.Task.ReadAllTaskInList(item => item.Status == StatusOfTask)!;
         }
     }
 }

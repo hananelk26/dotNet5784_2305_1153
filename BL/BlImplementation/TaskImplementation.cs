@@ -165,6 +165,18 @@ internal class TaskImplementation : ITask
 
     }
 
+    public IEnumerable<BO.TaskInList> ReadAllTaskInList(Func<BO.Task, bool>? filter = null)
+    {
+        return ReadAll(filter).Select(item => new TaskInList()
+        {
+            Id = item.Id,
+            Description = item.Description!,
+            Alias = item.Alias!,
+            Status = item.Status,
+        });
+    }
+
+
     /// <summary>
     /// Updates an existing task in the data access layer based on the provided business object.
     /// </summary>
