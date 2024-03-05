@@ -5,8 +5,10 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PL.EngineerForEmployee"
         mc:Ignorable="d"
-        Title="MainWindowEngineer" Height="450" Width="800">
+        Title="MainWindowEngineer" Height="450" Width="800" Background ="#40E0D0">
     <Grid>
-        
+        <Button Content="current task" HorizontalAlignment="Left" Margin="551,0,0,0" VerticalAlignment="Center" Height="119" Width="148"/>
+        <Button Content="Task list" HorizontalAlignment="Left" Margin="121,0,0,0" VerticalAlignment="Center" Height="119" Width="137"/>
+
     </Grid>
 </Window>

@@ -5,8 +5,10 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PL.EngineerForEmployee"
         mc:Ignorable="d"
-        Title="CheckTheEngineer" Height="450" Width="800">
+        Title="CheckTheEngineer" Height="450" Width="800" Background ="#40E0D0">
     <Grid>
-        
+        <TextBox HorizontalAlignment="Left" Margin="155,0,0,0" TextWrapping="Wrap"  Text="{Binding EmployeeId, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Center" Width="364" Height="43" PreviewTextInput="TextBox_PreviewTextInput" />
+        <Label Content="Enter your ID" HorizontalAlignment="Left" Margin="155,110,0,0" VerticalAlignment="Top" Height="61" Width="263"/>
+        <Button Content="OK" HorizontalAlignment="Left" Margin="419,273,0,0" VerticalAlignment="Top" Width="100" Height="43" Click="ContinueButton_Click"/>
     </Grid>
 </Window>
