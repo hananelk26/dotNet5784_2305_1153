@@ -9,7 +9,7 @@
        
 
         <local:ConvertIdToContent x:Key="ConverIdToContentKey"/>
-        <local:ConvertDateForProjectToVisibility x:Key="ConvertDateForProjectToVisibilityKey"/>
+        <local:ConvertDateForProjectToVisibility x:Key="ConvertDateForProjectTovisabilityKey"/>
         <LinearGradientBrush x:Key="Brush">
             <GradientStop Color="Blue" Offset="0" />
             <GradientStop Color="Yellow" Offset="0.5" />

@@ -7,7 +7,7 @@
         
         mc:Ignorable="d"
         Title="TaskWindow" Height="450" Width="800" DataContext="{Binding RelativeSource={RelativeSource  Mode=Self}}">
-   
+
     <Grid >
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
