@@ -1,14 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ArrayOfTask xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <Task>
-    <Id>1</Id>
-    <Alias>t3</Alias>
-    <Description>Project Kickoff Meeting</Description>
-    <createdAtDate>2016-11-19T00:00:00</createdAtDate>
-    <RequiredEffortTime>P28DT19H38M</RequiredEffortTime>
-    <DeadlineDate xsi:nil="true" />
-  </Task>
-  <Task>
     <Id>2</Id>
     <Alias>t4</Alias>
     <Description>RequirZement Elicitation and Analysis</Description>
@@ -158,6 +150,14 @@
     <Description>Production Deployment</Description>
     <createdAtDate>2021-07-13T00:00:00</createdAtDate>
     <RequiredEffortTime>P16DT18H13M</RequiredEffortTime>
+    <DeadlineDate xsi:nil="true" />
+  </Task>
+  <Task>
+    <Id>1</Id>
+    <Alias>t3</Alias>
+    <Description>Project Kickoff Meeting</Description>
+    <createdAtDate>2016-11-19T00:00:00</createdAtDate>
+    <RequiredEffortTime>P28DT19H38M</RequiredEffortTime>
     <DeadlineDate xsi:nil="true" />
   </Task>
 </ArrayOfTask>

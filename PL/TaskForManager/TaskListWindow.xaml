@@ -36,6 +36,6 @@
                 </GridView>
             </ListView.View>
         </ListView>
-        <Button Content="Add" Grid.Row="1" HorizontalAlignment="Center" Height="50" Width="100" Margin="0,531,0,0" Grid.RowSpan="2" VerticalAlignment="Top" Click="AddButton_Click" />
+        <Button Visibility="{Binding DateForeProject, Converter={StaticResource ConvertDateForProjectTovisabilityKey}}" Content="Add" Grid.Row="1" HorizontalAlignment="Center" Height="50" Width="100" Margin="0,531,0,0" Grid.RowSpan="2" VerticalAlignment="Top" Click="AddButton_Click" />
     </Grid>
 </Window>

@@ -24,6 +24,15 @@ namespace PL.Task
         public TaskListWindow()
         {
             InitializeComponent();
+
+            if (s_bl.Time.StartDate() != null)
+            {
+                DateForeProject = true;
+            }
+            else
+            {
+                DateForeProject = false;
+            }
         }
 
         static readonly BlApi.IBl s_bl = BlApi.Factory.Get();
@@ -79,6 +88,15 @@ namespace PL.Task
             TaskList = s_bl?.Task.ReadAllTaskInList()!;
         }
 
-        
+        public bool DateForeProject
+        {
+            get { return (bool)GetValue(DateForeProjectProperty); }
+            set { SetValue(DateForeProjectProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for DateForeProject.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty DateForeProjectProperty =
+            DependencyProperty.Register("DateForeProject", typeof(bool), typeof(TaskWindow), new PropertyMetadata(null));
+
     }
 }
