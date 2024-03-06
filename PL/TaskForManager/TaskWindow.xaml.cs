@@ -169,4 +169,18 @@ public partial class TaskWindow : Window
     {
 
     }
+
+    private void CheckBox_Checked(object sender, RoutedEventArgs e)
+    {
+        string? alias = (sender as CheckBox)?.Content as string;
+        if (alias != null)
+        {
+            SelectedDependencies = SelectedDependencies.Select(t =>
+            {
+                if (t.Alias == alias)
+                    t.IsSelected = true;
+                return t;
+            }); // Convert the result back to a list and assign it to SelectedDependencies
+        }
+    }
 }

@@ -1,22 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ArrayOfTask xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <Task>
-    <Id>1</Id>
-    <Alias>t3</Alias>
-    <Description>Project Kickoff Meeting</Description>
-    <createdAtDate>2020-06-19T00:00:00</createdAtDate>
-    <RequiredEffortTime>PT3H39M</RequiredEffortTime>
-    <DeadlineDate xsi:nil="true" />
-  </Task>
-  <Task>
-    <Id>2</Id>
-    <Alias>t4</Alias>
-    <Description>RequirZement Elicitation and Analysis</Description>
-    <createdAtDate>2010-11-07T00:00:00</createdAtDate>
-    <RequiredEffortTime>P47DT6H38M</RequiredEffortTime>
-    <DeadlineDate xsi:nil="true" />
-  </Task>
-  <Task>
     <Id>3</Id>
     <Alias>g5</Alias>
     <Description>Feasibility Study</Description>
@@ -38,14 +22,6 @@
     <Description>System Architecture Design</Description>
     <createdAtDate>2011-08-11T00:00:00</createdAtDate>
     <RequiredEffortTime>P5DT14M</RequiredEffortTime>
-    <DeadlineDate xsi:nil="true" />
-  </Task>
-  <Task>
-    <Id>6</Id>
-    <Alias>h1</Alias>
-    <Description>Prototyping</Description>
-    <createdAtDate>2014-04-22T00:00:00</createdAtDate>
-    <RequiredEffortTime>P2DT7H17M</RequiredEffortTime>
     <DeadlineDate xsi:nil="true" />
   </Task>
   <Task>
@@ -73,14 +49,6 @@
     <DeadlineDate xsi:nil="true" />
   </Task>
   <Task>
-    <Id>10</Id>
-    <Alias>B6</Alias>
-    <Description>Initial Coding</Description>
-    <createdAtDate>2024-03-04T00:00:00</createdAtDate>
-    <RequiredEffortTime>P59DT6H36M</RequiredEffortTime>
-    <DeadlineDate xsi:nil="true" />
-  </Task>
-  <Task>
     <Id>11</Id>
     <Alias>b7</Alias>
     <Description>Unit Testing</Description>
@@ -94,22 +62,6 @@
     <Description>Integration Testing</Description>
     <createdAtDate>2008-10-09T00:00:00</createdAtDate>
     <RequiredEffortTime>P39DT22H51M</RequiredEffortTime>
-    <DeadlineDate xsi:nil="true" />
-  </Task>
-  <Task>
-    <Id>13</Id>
-    <Alias>b9</Alias>
-    <Description>User Interface (UI) Development</Description>
-    <createdAtDate>1998-08-04T00:00:00</createdAtDate>
-    <RequiredEffortTime>P40DT22H9M</RequiredEffortTime>
-    <DeadlineDate xsi:nil="true" />
-  </Task>
-  <Task>
-    <Id>14</Id>
-    <Alias>V1</Alias>
-    <Description>User Acceptance Testing (UAT) Preparation</Description>
-    <createdAtDate>2011-09-05T00:00:00</createdAtDate>
-    <RequiredEffortTime>P31DT23H35M</RequiredEffortTime>
     <DeadlineDate xsi:nil="true" />
   </Task>
   <Task>
@@ -158,6 +110,55 @@
     <Description>Production Deployment</Description>
     <createdAtDate>2006-05-28T00:00:00</createdAtDate>
     <RequiredEffortTime>P57DT20H52M</RequiredEffortTime>
+    <DeadlineDate xsi:nil="true" />
+  </Task>
+  <Task>
+    <Id>13</Id>
+    <Alias>b9</Alias>
+    <Description>User Interface (UI) Development</Description>
+    <createdAtDate>1998-08-04T00:00:00</createdAtDate>
+    <RequiredEffortTime>P40DT22H9M</RequiredEffortTime>
+    <DeadlineDate xsi:nil="true" />
+    <Deliverables>fghj</Deliverables>
+  </Task>
+  <Task>
+    <Id>6</Id>
+    <Alias>h1</Alias>
+    <Description>Prototyping</Description>
+    <createdAtDate>2014-04-22T00:00:00</createdAtDate>
+    <RequiredEffortTime>P2DT7H17M</RequiredEffortTime>
+    <DeadlineDate xsi:nil="true" />
+  </Task>
+  <Task>
+    <Id>1</Id>
+    <Alias>t3</Alias>
+    <Description>Project Kickoff Meeting</Description>
+    <createdAtDate>2020-06-19T00:00:00</createdAtDate>
+    <RequiredEffortTime>PT3H39M</RequiredEffortTime>
+    <DeadlineDate xsi:nil="true" />
+  </Task>
+  <Task>
+    <Id>2</Id>
+    <Alias>t4</Alias>
+    <Description>RequirZement Elicitation and Analysis</Description>
+    <createdAtDate>2010-11-07T00:00:00</createdAtDate>
+    <RequiredEffortTime>P47DT6H38M</RequiredEffortTime>
+    <DeadlineDate xsi:nil="true" />
+  </Task>
+  <Task>
+    <Id>10</Id>
+    <Alias>B6</Alias>
+    <Description>Initial Coding</Description>
+    <createdAtDate>2024-03-04T00:00:00</createdAtDate>
+    <RequiredEffortTime>P59DT6H36M</RequiredEffortTime>
+    <DeadlineDate xsi:nil="true" />
+  </Task>
+  <Task>
+    <Id>14</Id>
+    <Alias>V1</Alias>
+    <Description>User Acceptance Testing (UAT) Preparation</Description>
+    <createdAtDate>2011-09-05T00:00:00</createdAtDate>
+    <RequiredEffortTime>P31DT23H35M</RequiredEffortTime>
     <DeadlineDate xsi:nil="true" />
   </Task>
 </ArrayOfTask>
