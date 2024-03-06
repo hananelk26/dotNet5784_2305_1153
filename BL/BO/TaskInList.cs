@@ -26,6 +26,11 @@ public class TaskInList
     public Status? Status { get; set; }
 
     /// <summary>
+    /// help fieald for dependencies input window
+    /// </summary>
+    public bool IsSelected { get; set; } = false;
+
+    /// <summary>
     /// Returns a string that represents the current object.
     /// </summary>
     /// <returns>A string containing the task's basic details, formatted for display.</returns>

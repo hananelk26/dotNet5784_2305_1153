@@ -5,19 +5,14 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PL.Task"
         mc:Ignorable="d"
-        Title="TaskWindow" Height="450" Width="800" DataContext="{Binding CurrentTask, RelativeSource={RelativeSource Self}, Mode=TwoWay}">
-    <Grid ShowGridLines="True">
+        Title="TaskWindow" Height="450" Width="800" DataContext="{Binding RelativeSource={RelativeSource  Mode=Self}}">
+    <Grid >
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="*"/>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="*"/>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="100"/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="*"/>
@@ -29,33 +24,29 @@
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
         <Label Content="ID" HorizontalAlignment="Center" VerticalAlignment="Top" RenderTransformOrigin="9.817,1.022" Grid.Column="1" Margin="0,3,0,0" Grid.RowSpan="2"/>
-        <TextBox Text="{Binding Id, Mode=TwoWay, NotifyOnValidationError=true,  ValidatesOnExceptions=true}" HorizontalAlignment="Center" TextWrapping="Wrap" VerticalAlignment="Center" Width="120"/>
+        <TextBox IsEnabled="False" Text="{Binding CurrentTask.Id, Mode=TwoWay, NotifyOnValidationError=true,  ValidatesOnExceptions=true}" HorizontalAlignment="Center" TextWrapping="Wrap" VerticalAlignment="Center" Width="120"/>
         <Label Content="Description" HorizontalAlignment="Center" Grid.Column="1" Grid.Row="1" VerticalAlignment="Center"/>
-        <TextBox HorizontalAlignment="Center" Grid.Row="1" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Center" Width="120"/>
+        <TextBox Text="{Binding CurrentTask.Description, Mode=TwoWay, NotifyOnValidationError=true,  ValidatesOnExceptions=true}" HorizontalAlignment="Center" Grid.Row="1" TextWrapping="Wrap" VerticalAlignment="Center" Width="120"/>
         <Label Grid.Column="1" Content="Alias" HorizontalAlignment="Center" Grid.Row="2" VerticalAlignment="Center"/>
-        <TextBox HorizontalAlignment="Center" Grid.Row="2" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Center" Width="120" TextChanged="TextBox_TextChanged"/>
-        <Label Grid.Column="1" Content="Status" HorizontalAlignment="Left" Margin="189,27,0,0" Grid.Row="2" VerticalAlignment="Top" Grid.RowSpan="2"/>
-        <Label Grid.Column="1" Content="Dependencies" HorizontalAlignment="Left" Margin="235,0,0,0" Grid.Row="5" VerticalAlignment="Center"/>
-        <Label Grid.Column="1" Content="Required Effor Time" HorizontalAlignment="Left" Margin="259,0,0,0" Grid.Row="6" VerticalAlignment="Center"/>
-        <Label Grid.Column="1" Content="Deliverables" HorizontalAlignment="Left" Margin="197,31,0,0" Grid.Row="10" VerticalAlignment="Top" RenderTransformOrigin="-0.211,-0.063" Grid.RowSpan="2"/>
-        <Label Grid.Column="1" Content="Remarks" HorizontalAlignment="Left" Margin="215,29,0,0" Grid.Row="11" VerticalAlignment="Top" RenderTransformOrigin="0.088,-0.27" Grid.RowSpan="2"/>
-        <Label Grid.Column="1" Content="Complexyity" HorizontalAlignment="Left" Margin="217,31,0,0" Grid.Row="12" VerticalAlignment="Top" Grid.RowSpan="2"/>
-        <ComboBox HorizontalAlignment="Center" Margin="0,2,0,0" Grid.Row="3" VerticalAlignment="Top" Width="120"/>
-        <ListBox Grid.Row="5" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center">
+        <TextBox Text="{Binding CurrentTask.Alias, Mode=TwoWay, NotifyOnValidationError=true,  ValidatesOnExceptions=true}" HorizontalAlignment="Center" Grid.Row="2" TextWrapping="Wrap" VerticalAlignment="Center" Width="120" TextChanged="TextBox_TextChanged"/>
+        <Label Grid.Column="1" Content="Dependencies" HorizontalAlignment="Left" Margin="235,0,0,0" Grid.Row="3" VerticalAlignment="Center"/>
+        <ListBox Grid.Row="4"  Grid.ColumnSpan="2" ItemsSource="{Binding SelectedDependencies, Mode=TwoWay, NotifyOnValidationError=true,  ValidatesOnExceptions=true}" HorizontalContentAlignment="Stretch" Margin="0,10,0,29">
             <ListBox.ItemTemplate>
                 <DataTemplate>
-                    <CheckBox Content="gfd" />
+                    <CheckBox Content="{Binding Alias}" IsChecked="{Binding IsSelected, Mode=TwoWay}" />
                 </DataTemplate>
             </ListBox.ItemTemplate>
         </ListBox>
-        <StackPanel Orientation="Horizontal" Grid.Row="6" HorizontalAlignment="Center">
-            <TextBox Name="hoursTextBox" />
-            <TextBox Name="secondsTextBox" />
-            <TextBox x:Name="minutesTextBox" />
-        </StackPanel>
-        <TextBox HorizontalAlignment="Left" Margin="168,0,0,0" Grid.Row="11" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Center" Width="120"/>
-        <TextBox HorizontalAlignment="Left" Margin="168,5,0,0" Grid.Row="12" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120"/>
-        <ComboBox HorizontalAlignment="Left" Margin="168,2,0,0" Grid.Row="13" VerticalAlignment="Top" Width="120"/>
+        <Label Grid.Column="1" Content="Required Effor Time" HorizontalAlignment="Left" Margin="183,0,0,0" Grid.Row="5" VerticalAlignment="Center"/>
+        <TextBox Text="{Binding CurrentTask.RequiredEfforTime, Mode=TwoWay, NotifyOnValidationError=true,  ValidatesOnExceptions=true}"  HorizontalAlignment="Center" Margin="0,10,0,0" Grid.Row="5" TextWrapping="Wrap"  VerticalAlignment="Top" Width="120"/>
+        <Label Grid.Column="1" Content="Deliverables" HorizontalAlignment="Left" Margin="196,0,0,0" Grid.Row="6" VerticalAlignment="Center" RenderTransformOrigin="-0.211,-0.063" Height="28" />
+        <TextBox Text="{Binding CurrentTask.Deliverables, Mode=TwoWay, NotifyOnValidationError=true,  ValidatesOnExceptions=true}" HorizontalAlignment="Left" Margin="168,0,0,0" Grid.Row="6" TextWrapping="Wrap" VerticalAlignment="Center" Width="120"/>
+        <Label Grid.Row="7" Grid.Column="1" Content="Remarks" HorizontalAlignment="Left" Margin="196,0,0,0" VerticalAlignment="Center" RenderTransformOrigin="0.088,-0.27" Height="33" />
+        <TextBox Text="{Binding CurrentTask.Remarks, Mode=TwoWay, NotifyOnValidationError=true,  ValidatesOnExceptions=true}" HorizontalAlignment="Left" Margin="168,5,0,0" Grid.Row="7" TextWrapping="Wrap"  VerticalAlignment="Top" Width="120"/>
+        <Label Grid.Column="1" Content="Complexyity" HorizontalAlignment="Left" Margin="176,33,0,0" Grid.Row="7" VerticalAlignment="Top" Height="38" Grid.RowSpan="2" />
+        <ComboBox ItemsSource="{Binding Source={StaticResource ExperienceCollectionKey}}" SelectedValue="{Binding CurrentTask.Complexyity, Mode=TwoWay, NotifyOnValidationError=true, 
+             ValidatesOnExceptions=true}" HorizontalAlignment="Left" Margin="168,2,0,0" Grid.Row="8" VerticalAlignment="Top" Width="120"/>
+        <Button Content="{Binding CurrentTask.Id, Converter={StaticResource ConverIdToContentKey}}"  FontSize=" 24.27050983" Grid.Row="8" Grid.Column="0" Grid.ColumnSpan="2" Margin="264,38,264,0" Click="AddOrUpdateButton_Click" Grid.RowSpan="2"/>
     </Grid>
 
 </Window>
