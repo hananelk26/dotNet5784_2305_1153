@@ -159,4 +159,14 @@ public partial class TaskWindow : Window
         }
 
     }
+
+    private void TextBox_TextChanged_1(object sender, TextChangedEventArgs e)
+    {
+
+    }
+
+    private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+    {
+
+    }
 }
