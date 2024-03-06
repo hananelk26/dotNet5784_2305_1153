@@ -23,7 +23,7 @@ public partial class TaskWindow : Window
 
  
 
-    public TaskWindow(int TheID = 0)
+    public TaskWindow(int TheID = 0, bool currentTaskIsAssigned=false)
     {
         InitializeComponent();
         if (TheID == 0)
@@ -40,7 +40,7 @@ public partial class TaskWindow : Window
             {
                 Console.WriteLine("There is no task in the system with such an ID card");
             }
-        }
+         }
 
         CurrentTask.Dependencies ??= new List<TaskInList>();
           
@@ -54,7 +54,7 @@ public partial class TaskWindow : Window
                     t.IsSelected = true;
                 }
                 return t;
-            });
+              });
 
         if (s_bl.Time.StartDate() != null)
         {
@@ -65,11 +65,14 @@ public partial class TaskWindow : Window
             DateOfProject= false;
         }
 
-        
+        theCurrentTaskIsAssigned = currentTaskIsAssigned;
+
+
     }
 
     static readonly BlApi.IBl s_bl = BlApi.Factory.Get();
 
+    public bool theCurrentTaskIsAssigned { get; set; } 
 
     public BO.Task CurrentTask
     {

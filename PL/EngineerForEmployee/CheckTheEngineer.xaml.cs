@@ -66,7 +66,7 @@ public partial class CheckTheEngineer : Window
            var en = s_bl.Engineer.Read(int.Parse(idEngineer));
             if (en != null)
             {
-                new MainWindowEngineer().ShowDialog();
+                new MainWindowEngineer(int.Parse(idEngineer)).ShowDialog();
             }
         }
         catch (Exception ex) 

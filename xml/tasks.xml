@@ -1,14 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ArrayOfTask xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <Task>
-    <Id>3</Id>
-    <Alias>g5</Alias>
-    <Description>Feasibility Study</Description>
-    <createdAtDate>2005-08-08T00:00:00</createdAtDate>
-    <RequiredEffortTime>P53DT11H37M</RequiredEffortTime>
-    <DeadlineDate xsi:nil="true" />
-  </Task>
-  <Task>
     <Id>4</Id>
     <Alias>H5</Alias>
     <Description>Project Planning</Description>
@@ -169,6 +161,14 @@
     <Description>User Acceptance Testing (UAT) Preparation</Description>
     <createdAtDate>2011-09-05T00:00:00</createdAtDate>
     <RequiredEffortTime>P31DT23H35M</RequiredEffortTime>
+    <DeadlineDate xsi:nil="true" />
+  </Task>
+  <Task>
+    <Id>3</Id>
+    <Alias>g5</Alias>
+    <Description>Feasibility Study</Description>
+    <createdAtDate>2005-08-08T00:00:00</createdAtDate>
+    <RequiredEffortTime>P53DT11H37M</RequiredEffortTime>
     <DeadlineDate xsi:nil="true" />
   </Task>
 </ArrayOfTask>

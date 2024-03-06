@@ -80,11 +80,6 @@ class ConvertDateForProjectToIsEnabled : IValueConverter
     {
         throw new NotImplementedException();
     }
-
-   
 }
 
-class ConvertDateForProjectToIsEnabled : IValueConverter
-{
 
-}
