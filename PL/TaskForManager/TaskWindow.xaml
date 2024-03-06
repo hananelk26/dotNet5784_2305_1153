@@ -4,8 +4,12 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PL.Task"
+        
         mc:Ignorable="d"
         Title="TaskWindow" Height="450" Width="800" DataContext="{Binding RelativeSource={RelativeSource  Mode=Self}}">
+    <Window.Resources>
+      
+    </Window.Resources>
     <Grid >
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
@@ -46,7 +50,7 @@
         <Label Grid.Column="1" Content="Complexyity" HorizontalAlignment="Left" Margin="176,33,0,0" Grid.Row="7" VerticalAlignment="Top" Height="38" Grid.RowSpan="2" />
         <ComboBox ItemsSource="{Binding Source={StaticResource ExperienceCollectionKey}}" SelectedValue="{Binding CurrentTask.Complexyity, Mode=TwoWay, NotifyOnValidationError=true, 
              ValidatesOnExceptions=true}" HorizontalAlignment="Left" Margin="168,2,0,0" Grid.Row="8" VerticalAlignment="Top" Width="120"/>
-        <Button Content="{Binding CurrentTask.Id, Converter={StaticResource ConverIdToContentKey}}"  FontSize=" 24.27050983" Grid.Row="8" Grid.Column="0" Grid.ColumnSpan="2" Margin="264,38,264,0" Click="AddOrUpdateButton_Click" Grid.RowSpan="2"/>
+        <Button Visibility="{Binding DateForeProject, Converter={StaticResource ConvertDateForProjectTovisabilityKey}}"  Content="{Binding CurrentTask.Id, Converter={StaticResource ConverIdToContentKey}}"  FontSize=" 24.27050983" Grid.Row="8" Grid.Column="0" Grid.ColumnSpan="2" Margin="264,38,264,0" Click="AddOrUpdateButton_Click" Grid.RowSpan="2"/>
     </Grid>
 
 </Window>

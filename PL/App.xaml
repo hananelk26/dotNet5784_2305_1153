@@ -6,9 +6,10 @@
     <Application.Resources>
         <local:ExperienceCollection x:Key="ExperienceCollectionKey" />
         <local:StatusCollection x:Key="StatusCollectionKey" />
-
+       
 
         <local:ConvertIdToContent x:Key="ConverIdToContentKey"/>
+        <local:ConvertDateForProjectToVisibility x:Key="ConvertDateForProjectToVisibilityKey"/>
         <LinearGradientBrush x:Key="Brush">
             <GradientStop Color="Blue" Offset="0" />
             <GradientStop Color="Yellow" Offset="0.5" />
