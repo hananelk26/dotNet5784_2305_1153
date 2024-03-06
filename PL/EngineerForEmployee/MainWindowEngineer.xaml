@@ -7,8 +7,8 @@
         mc:Ignorable="d"
         Title="MainWindowEngineer" Height="450" Width="800" Background ="#40E0D0">
     <Grid>
-        <Button Content="current task" HorizontalAlignment="Left" Margin="551,0,0,0" VerticalAlignment="Center" Height="119" Width="148" Click="Button_Click"/>
-        <Button Content="Task list" HorizontalAlignment="Left" Margin="121,0,0,0" VerticalAlignment="Center" Height="119" Width="137" Click="Button_Click1"/>
+        <Button Content="current task" HorizontalAlignment="Left" Margin="551,0,0,0" VerticalAlignment="Center" Height="119" Width="148" Click="CurrentTaskButton_Click"/>
+        <Button Content="Task list" HorizontalAlignment="Left" Margin="121,0,0,0" VerticalAlignment="Center" Height="119" Width="137" Click="TaskListButton_Click"/>
 
     </Grid>
 </Window>

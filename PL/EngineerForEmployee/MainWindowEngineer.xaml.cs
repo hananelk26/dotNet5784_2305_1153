@@ -41,7 +41,7 @@ namespace PL.EngineerForEmployee
 
 
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void CurrentTaskButton_Click(object sender, RoutedEventArgs e)
         {
             try
             {
@@ -58,9 +58,9 @@ namespace PL.EngineerForEmployee
             
         }
 
-        private void Button_Click1(object sender, RoutedEventArgs e)
+        private void TaskListButton_Click(object sender, RoutedEventArgs e)
         {
-            new EngineerForEmployee.CheckTheEngineer().ShowDialog();
+           
         }
     }
 }

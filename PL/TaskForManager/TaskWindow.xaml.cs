@@ -206,10 +206,12 @@ public partial class TaskWindow : Window
     private void StartTaskButton_Click(object sender, RoutedEventArgs e)
     {
         CurrentTask.StartDate = DateTime.Now;
+        CurrentTask.Status = Status.OnTrack;
     }
 
     private void FinishTaskButton_Click(object sender, RoutedEventArgs e)
     {
         CurrentTask.CompleteDate = DateTime.Now;
+        CurrentTask.Status = BO.Status.Done;
     }
 }
