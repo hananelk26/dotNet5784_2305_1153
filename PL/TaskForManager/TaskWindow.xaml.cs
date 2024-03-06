@@ -183,4 +183,18 @@ public partial class TaskWindow : Window
             }); // Convert the result back to a list and assign it to SelectedDependencies
         }
     }
+
+    private void CheckBox_Unchecked(object sender, RoutedEventArgs e)
+    {
+        string? alias = (sender as CheckBox)?.Content as string;
+        if (alias != null)
+        {
+            SelectedDependencies = SelectedDependencies.Select(t =>
+            {
+                if (t.Alias == alias)
+                    t.IsSelected = false; 
+                return t;
+            }); // Convert the result back to a list and assign it to SelectedDependencies
+        }
+    }
 }
