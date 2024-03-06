@@ -6,6 +6,8 @@
     <Application.Resources>
         <local:ExperienceCollection x:Key="ExperienceCollectionKey" />
         <local:StatusCollection x:Key="StatusCollectionKey" />
+        <local:ConvertDateForProjectToIsEnabled x:Key="ConvertDateForProjectToIsEnabledKey" />
+        <local:ConvertDateForProjectToVisibilityFromTrueTOVisibility x:Key="ConvertDateForProjectToVisibilityFromTrueTOVisibilityKey" />
        
 
         <local:ConvertIdToContent x:Key="ConverIdToContentKey"/>

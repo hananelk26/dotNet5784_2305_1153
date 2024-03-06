@@ -58,11 +58,11 @@ public partial class TaskWindow : Window
 
         if (s_bl.Time.StartDate() != null)
         {
-            DateForeProject = true;
+            DateOfProject = true;
         }
         else
         {
-            DateForeProject= false;
+            DateOfProject= false;
         }
 
 
@@ -93,15 +93,15 @@ public partial class TaskWindow : Window
 
 
 
-    public bool DateForeProject
+    public bool DateOfProject
     {
-        get { return (bool)GetValue(DateForeProjectProperty); }
-        set { SetValue(DateForeProjectProperty, value); }
+        get { return (bool)GetValue(DateOfProjectProperty); }
+        set { SetValue(DateOfProjectProperty, value); }
     }
 
     // Using a DependencyProperty as the backing store for DateForeProject.  This enables animation, styling, binding, etc...
-    public static readonly DependencyProperty DateForeProjectProperty =
-        DependencyProperty.Register("DateForeProject", typeof(bool), typeof(TaskWindow), new PropertyMetadata(null));
+    public static readonly DependencyProperty DateOfProjectProperty =
+        DependencyProperty.Register("DateOfProject", typeof(bool), typeof(TaskWindow), new PropertyMetadata(null));
 
 
 
