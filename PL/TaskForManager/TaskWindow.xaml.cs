@@ -65,7 +65,7 @@ public partial class TaskWindow : Window
             DateOfProject= false;
         }
 
-
+        
     }
 
     static readonly BlApi.IBl s_bl = BlApi.Factory.Get();
