@@ -26,12 +26,12 @@ namespace PL.EngineerForEmployee
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            new CurrentTaskWindow().ShowDialog();
+            new ManagerView().ShowDialog();
         }
 
         private void Button_Click1(object sender, RoutedEventArgs e)
         {
-            new ListTaskWindow().ShowDialog();
+            new EngineerForEmployee.CheckTheEngineer().ShowDialog();
         }
     }
 }
