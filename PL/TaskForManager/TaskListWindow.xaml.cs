@@ -21,7 +21,7 @@ namespace PL.Task
     /// </summary>
     public partial class TaskListWindow : Window
     {
-        public TaskListWindow()
+        public TaskListWindow(int TheIdOfEngineer = 0)
         {
             InitializeComponent();
 
@@ -33,7 +33,19 @@ namespace PL.Task
             {
                 DateForeProject = false;
             }
+
+            ListTaskForSpesificEngineer = false ;
+
+            if (TheIdOfEngineer != 0)
+            {
+                var TheExperience = s_bl.Engineer.Read(TheIdOfEngineer)!.Level;
+                var tasks = s_bl.Task.ReadAllTaskInList(t => t.Complexyity <= TheExperience && t.Status == BO.Status.Scheduled &&(t.Dependencies == null || t.Dependencies.Any(x => x.Status != BO.Status.Done)) == false);
+                TaskList = tasks.ToList();
+                ListTaskForSpesificEngineer = true;
+            }
         }
+
+        public bool ListTaskForSpesificEngineer { get; set; }
 
         static readonly BlApi.IBl s_bl = BlApi.Factory.Get();
 

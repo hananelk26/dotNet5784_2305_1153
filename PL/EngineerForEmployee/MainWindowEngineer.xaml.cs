@@ -60,7 +60,9 @@ namespace PL.EngineerForEmployee
 
         private void TaskListButton_Click(object sender, RoutedEventArgs e)
         {
-           
+           new TaskListWindow(IdOfCurrentEngineer).ShowDialog();
         }
+
+       
     }
 }

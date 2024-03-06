@@ -22,7 +22,7 @@
             </Grid.ColumnDefinitions>
             <Label Content="List of Tasks" Grid.Column="0" FontSize="24" FontWeight="Bold" FontFamily="Bahnschrift Condensed" Background="#FF8F6274"  HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
             <ComboBox Background="Aqua" ItemsSource="{Binding Source={StaticResource ExperienceCollectionKey}}" SelectedValue="{Binding Experience, Mode=TwoWay}" SelectionChanged ="TaskExperience_SelectionChanged"  Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
-            <ComboBox Background="Aqua" ItemsSource="{Binding Source={StaticResource StatusCollectionKey}}" SelectedValue="{Binding StatusOfTask, Mode=TwoWay}" SelectionChanged ="Status_SelectionChanged"  Grid.Column="2" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+            <ComboBox Background="Aqua" ItemsSource="{Binding Source={StaticResource StatusCollectionKey}}"  Visibility="{Binding ListTaskForSpesificEngineer, Converter={StaticResource ConvertDateForProjectTovisabilityKey}}" SelectedValue="{Binding StatusOfTask, Mode=TwoWay}" SelectionChanged ="Status_SelectionChanged"  Grid.Column="2" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
 
         </Grid>
         <ListView Background="Aqua"  Grid.Row="1" Margin="5" ItemsSource="{Binding TaskList}" MouseDoubleClick="ListViewOfTask_MouseDoubleClick">
