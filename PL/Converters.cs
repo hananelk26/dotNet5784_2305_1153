@@ -67,7 +67,7 @@ class ConvertDateForProjectToIsEnabled : IValueConverter
 {
     public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
     {
-        MessageBox.Show($"{value is bool}");
+       
         if (value is bool boolValue)
         {
             return !boolValue;
@@ -80,4 +80,11 @@ class ConvertDateForProjectToIsEnabled : IValueConverter
     {
         throw new NotImplementedException();
     }
+
+   
+}
+
+class ConvertDateForProjectToIsEnabled : IValueConverter
+{
+
 }

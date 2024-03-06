@@ -49,14 +49,6 @@
     <DeadlineDate xsi:nil="true" />
   </Task>
   <Task>
-    <Id>12</Id>
-    <Alias>b8</Alias>
-    <Description>Integration Testing</Description>
-    <createdAtDate>2008-10-09T00:00:00</createdAtDate>
-    <RequiredEffortTime>P39DT22H51M</RequiredEffortTime>
-    <DeadlineDate xsi:nil="true" />
-  </Task>
-  <Task>
     <Id>15</Id>
     <Alias>V2</Alias>
     <Description>Beta Release</Description>
@@ -169,6 +161,14 @@
     <Description>Development Environment Setup</Description>
     <createdAtDate>2013-01-19T00:00:00</createdAtDate>
     <RequiredEffortTime>P55DT13H22M</RequiredEffortTime>
+    <DeadlineDate xsi:nil="true" />
+  </Task>
+  <Task>
+    <Id>12</Id>
+    <Alias>b8</Alias>
+    <Description>Integration Testing</Description>
+    <createdAtDate>2008-10-09T00:00:00</createdAtDate>
+    <RequiredEffortTime>P39DT22H51M</RequiredEffortTime>
     <DeadlineDate xsi:nil="true" />
   </Task>
 </ArrayOfTask>
