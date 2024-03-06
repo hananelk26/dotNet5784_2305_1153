@@ -8,7 +8,7 @@
         mc:Ignorable="d"
         Title="TaskWindow" Height="450" Width="800" DataContext="{Binding RelativeSource={RelativeSource  Mode=Self}}">
 
-    <Grid >
+    <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
             <RowDefinition Height="*"/>
@@ -63,7 +63,6 @@
         <Label Content="Complete date" HorizontalAlignment="Left" Margin="302,10,0,0" Grid.Row="6" VerticalAlignment="Top" Width="88"/>
         <DatePicker IsEnabled="False" SelectedDate="{Binding CurrentTask.CompleteDate}" HorizontalAlignment="Left" Margin="141,0,0,0" Grid.Row="6" VerticalAlignment="Center"/>
         <Label Content="Engineer" HorizontalAlignment="Left" Margin="302,10,0,0" Grid.Row="7" VerticalAlignment="Top" Width="71"/>
-        <Grid Grid.Row="7" Grid.RowSpan="2">
         <Label Grid.Column="1" Content="Create at date" Visibility="{Binding DateForeProject, Converter={StaticResource ConvertDateForProjectToVisibilityFromTrueTOVisibilityKey}}" HorizontalAlignment="Left" Margin="300,0,0,0" Grid.Row="6" VerticalAlignment="Center" RenderTransformOrigin="-0.149,0.219" Width="85" Height="28"/>
         <DatePicker SelectedDate="{Binding CurrentTask.CreatedAtDate}" Visibility="{Binding DateForeProject, Converter={StaticResource ConvertDateForProjectToVisibilityFromTrueTOVisibilityKey}}" Grid.Column="1" HorizontalAlignment="Left" Margin="80,5,0,0" Grid.Row="6" VerticalAlignment="Top" Width="120"/>
         <Label Grid.Column="1" Content="Start date" Visibility="{Binding DateForeProject, Converter={StaticResource ConvertDateForProjectToVisibilityFromTrueTOVisibilityKey}}" HorizontalAlignment="Left" Margin="303,5,0,0" Grid.Row="8" VerticalAlignment="Top" Width="65"/>
