@@ -7,7 +7,7 @@
         
         mc:Ignorable="d"
         Title="TaskWindow" Height="450" Width="800" DataContext="{Binding RelativeSource={RelativeSource  Mode=Self}}">
-    
+
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
@@ -92,9 +92,15 @@
 
             <TextBox IsEnabled="False" Text="{Binding CurrentTask.Engineer.Id}" HorizontalAlignment="Left" Margin="57,1,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="71"/>
             <TextBox IsEnabled="False" Text="{Binding CurrentTask.Engineer.Name}" HorizontalAlignment="Left" Margin="32,1,0,0" Grid.Row="1" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
-           
+
         </Grid>
-        <Button Content="{Binding CurrentTask.Id, Converter={StaticResource ConverIdToContentKey}}"  FontSize=" 24.27050983" Grid.Row="8" Grid.Column="0" Grid.ColumnSpan="2" Margin="264,38,264,0" Click="AddOrUpdateButton_Click" Grid.RowSpan="2"/>
+        <Button Content="{Binding CurrentTask.Id, Converter={StaticResource ConverIdToContentKey}}"  FontSize=" 24.27050983" Grid.Row="8" Grid.Column="1" Margin="80,38,48,0" Click="AddOrUpdateButton_Click" Grid.RowSpan="2"/>
+
+
+        <Button Content="Finish Task" HorizontalAlignment="Left" Margin="219,5,0,0" Grid.Row="9" VerticalAlignment="Top" Width="96" Visibility="{Binding theCurrentTaskIsAssigned, Converter={StaticResource ConvertDateForProjectToVisibilityFromTrueTOVisibilityKey}}" Click="FinishTaskButton_Click"/>
+        <Button Content="Start Task" HorizontalAlignment="Left" Margin="79,4,0,0" Grid.Row="9" VerticalAlignment="Top" Width="83" Visibility="{Binding theCurrentTaskIsAssigned, Converter={StaticResource ConvertDateForProjectToVisibilityFromTrueTOVisibilityKey}}" Height="24" Click="StartTaskButton_Click"/>
+
+
     </Grid>
 
 </Window>

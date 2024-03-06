@@ -200,4 +200,16 @@ public partial class TaskWindow : Window
             }); // Convert the result back to a list and assign it to SelectedDependencies
         }
     }
+
+    
+
+    private void StartTaskButton_Click(object sender, RoutedEventArgs e)
+    {
+        CurrentTask.StartDate = DateTime.Now;
+    }
+
+    private void FinishTaskButton_Click(object sender, RoutedEventArgs e)
+    {
+        CurrentTask.CompleteDate = DateTime.Now;
+    }
 }
