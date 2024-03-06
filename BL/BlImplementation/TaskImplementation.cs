@@ -186,18 +186,26 @@ internal class TaskImplementation : ITask
     {
         inputValidity(boTask);
 
+        var deps = _dal.Dependency.ReadAll();
+        if (deps != null)
+        {
+            foreach (var item in deps)
+            {
+                if (item!.DependentTask == boTask.Id)
+                {
+                    _dal.Dependency.Delete(item.Id);
+                }
+            }
+        }
+
         foreach (var dependId in boTask.Dependencies!)
         {
-            DO.Dependency dep = _dal.Dependency.ReadAll(d => d.DependsOnTask == dependId.Id && d.DependentTask == boTask.Id).FirstOrDefault()!;
-            if (dep == null)
+            DO.Dependency dependency = new DO.Dependency()
             {
-                DO.Dependency dependency = new DO.Dependency()
-                {
-                    DependentTask = boTask.Id,
-                    DependsOnTask = dependId.Id
-                };
-                _dal.Dependency.Create(dependency);
-            }
+                DependentTask = boTask.Id,
+                DependsOnTask = dependId.Id
+            };
+            _dal.Dependency.Create(dependency);
 
         }
 
@@ -244,7 +252,7 @@ internal class TaskImplementation : ITask
         var ta = _dal.Task.ReadAll();
         var task = _dal.Task.Read(id);
         var dep = _dal.Dependency.ReadAll();
-       
+
         foreach (var d in dep)
         {
             if (d.DependentTask == id)

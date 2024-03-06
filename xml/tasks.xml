@@ -41,14 +41,6 @@
     <DeadlineDate xsi:nil="true" />
   </Task>
   <Task>
-    <Id>11</Id>
-    <Alias>b7</Alias>
-    <Description>Unit Testing</Description>
-    <createdAtDate>2023-01-20T00:00:00</createdAtDate>
-    <RequiredEffortTime>P5DT4H59M</RequiredEffortTime>
-    <DeadlineDate xsi:nil="true" />
-  </Task>
-  <Task>
     <Id>15</Id>
     <Alias>V2</Alias>
     <Description>Beta Release</Description>
@@ -62,14 +54,6 @@
     <Description>UAT Execution</Description>
     <createdAtDate>2006-05-10T00:00:00</createdAtDate>
     <RequiredEffortTime>P18DT22H59M</RequiredEffortTime>
-    <DeadlineDate xsi:nil="true" />
-  </Task>
-  <Task>
-    <Id>17</Id>
-    <Alias>g2</Alias>
-    <Description>Refinement and Bug Fixing</Description>
-    <createdAtDate>2009-07-02T00:00:00</createdAtDate>
-    <RequiredEffortTime>P36DT3H59M</RequiredEffortTime>
     <DeadlineDate xsi:nil="true" />
   </Task>
   <Task>
@@ -104,14 +88,6 @@
     <RequiredEffortTime>P40DT22H9M</RequiredEffortTime>
     <DeadlineDate xsi:nil="true" />
     <Deliverables>fghj</Deliverables>
-  </Task>
-  <Task>
-    <Id>6</Id>
-    <Alias>h1</Alias>
-    <Description>Prototyping</Description>
-    <createdAtDate>2014-04-22T00:00:00</createdAtDate>
-    <RequiredEffortTime>P2DT7H17M</RequiredEffortTime>
-    <DeadlineDate xsi:nil="true" />
   </Task>
   <Task>
     <Id>1</Id>
@@ -164,11 +140,35 @@
     <DeadlineDate xsi:nil="true" />
   </Task>
   <Task>
+    <Id>11</Id>
+    <Alias>b7</Alias>
+    <Description>Unit Testing</Description>
+    <createdAtDate>2023-01-20T00:00:00</createdAtDate>
+    <RequiredEffortTime>P5DT4H59M</RequiredEffortTime>
+    <DeadlineDate xsi:nil="true" />
+  </Task>
+  <Task>
     <Id>12</Id>
     <Alias>b8</Alias>
     <Description>Integration Testing</Description>
     <createdAtDate>2008-10-09T00:00:00</createdAtDate>
     <RequiredEffortTime>P39DT22H51M</RequiredEffortTime>
+    <DeadlineDate xsi:nil="true" />
+  </Task>
+  <Task>
+    <Id>6</Id>
+    <Alias>h1</Alias>
+    <Description>Prototyping</Description>
+    <createdAtDate>2014-04-22T00:00:00</createdAtDate>
+    <RequiredEffortTime>P2DT7H17M</RequiredEffortTime>
+    <DeadlineDate xsi:nil="true" />
+  </Task>
+  <Task>
+    <Id>17</Id>
+    <Alias>g2</Alias>
+    <Description>Refinement and Bug Fixing</Description>
+    <createdAtDate>2009-07-02T00:00:00</createdAtDate>
+    <RequiredEffortTime>P36DT3H59M</RequiredEffortTime>
     <DeadlineDate xsi:nil="true" />
   </Task>
 </ArrayOfTask>
