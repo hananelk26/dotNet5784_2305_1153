@@ -80,12 +80,12 @@ public static class Initialization
         {
             int temp = s_rand.Next(0, 60 * 30 * 24 * 2);
             TimeSpan RequiredEffortTime = TimeSpan.FromMinutes(temp);
-
+            int temp2 = s_rand.Next(1, 5); 
             DateTime start = new DateTime(1995, 1, 1);
             int range = (DateTime.Today - start).Days;
             DateTime _bdt = start.AddDays(s_rand.Next(range));
 
-            Task newTask = new Task(0,name1,name2,_bdt,RequiredEffortTime);
+            Task newTask = new Task(0,name1,name2,_bdt,RequiredEffortTime,(DO.EngineerExperience)temp2);
             //s_dalTask!.Create(newTask);
             s_dal!.Task.Create(newTask);
         }

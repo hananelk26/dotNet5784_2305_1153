@@ -88,7 +88,7 @@ namespace PL
 
             }
 
-
+            isADateForProject = false;
         }
 
         private void TaskListButton_Click(object sender, RoutedEventArgs e)
