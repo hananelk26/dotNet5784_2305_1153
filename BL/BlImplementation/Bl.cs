@@ -20,7 +20,7 @@ internal class Bl : IBl
     /// <summary>
     /// Gets an instance of the task Implementation.
     /// </summary>
-    public ITask Task => new TaskImplementation();
+    public ITask Task => new TaskImplementation(this);
 
     /// <summary>
     /// Gets an instance of the time Implementation.
@@ -44,5 +44,31 @@ internal class Bl : IBl
     {
        DalTest.Initialization.resetDataConfig();
     }
+
+    public void addDay(int day)
+    {
+        s_Clock= s_Clock.AddDays(day);
+    }
+
+    public void addYear(int y)
+    {
+        s_Clock= s_Clock.AddYears(y);
+    }
+
+    public void addHour(int h)
+    {
+        s_Clock = s_Clock.AddHours(h);
+    }
+
+    public void resetClock()
+    {
+        s_Clock = DateTime.Now;
+            
+    }
+
+    private static DateTime s_Clock = DateTime.Now.Date;
+    public DateTime Clock { get { return s_Clock; } private set { s_Clock = value; } }
+
+
 
 }
