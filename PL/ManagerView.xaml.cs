@@ -26,7 +26,14 @@ namespace PL
         public ManagerView()
         {
             InitializeComponent();
-            
+            if (s_bl.Time.StartDate() == null)
+            {
+                isADateForProject = false;
+            }
+            else
+            {
+                isADateForProject = true;
+            }
            
         }
 
@@ -88,5 +95,27 @@ namespace PL
         {
             new TaskListWindow().Show();
         }
+
+        private void DateOfStartProjectDatePicker_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
+        {
+            var Date = (DateTime)((sender as DatePicker).SelectedDate);
+            s_bl.Time.SetStartDate(Date);
+            s_bl.Task.PutDatesOnAllExistingTasks(Date);
+            isADateForProject = true;
+        }
+
+
+
+        public bool isADateForProject
+        {
+            get { return (bool)GetValue(isADateForProjectProperty); }
+            set { SetValue(isADateForProjectProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for isADateForProject.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty isADateForProjectProperty =
+            DependencyProperty.Register("isADateForProject", typeof(bool), typeof(ManagerView), new PropertyMetadata(null));
+
+
     }
 }

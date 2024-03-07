@@ -249,7 +249,7 @@ internal class TaskImplementation : ITask
     /// <exception cref="BLTheDateIsNotGood">Thrown if the scheduled start date is not valid based on dependencies.</exception>
     public void UpdateStartTask(int id, DateTime tim)
     {
-        var ta = _dal.Task.ReadAll();
+        var Tasks = _dal.Task.ReadAll();
         var task = _dal.Task.Read(id);
         var dep = _dal.Dependency.ReadAll();
 
@@ -257,7 +257,7 @@ internal class TaskImplementation : ITask
         {
             if (d.DependentTask == id)
             {
-                foreach (var t in ta)
+                foreach (var t in Tasks)
                 {
                     if (t.Id == d.DependsOnTask)
                     {
@@ -273,6 +273,87 @@ internal class TaskImplementation : ITask
         }
         _dal.Task.Update(task with { ScheduledDate = tim });
     }
+
+    public void PutDatesOnAllExistingTasks(DateTime? DateOfStartProject)
+    {
+        var TasksWithoutAScheduleDate = new List<DO.Task>();
+        var taskToRemove = new List<DO.Task>();
+        var tasks = _dal.Task.ReadAll();
+        var dependencyes = _dal.Dependency.ReadAll();
+       
+
+        foreach (var task in tasks)
+        {
+            if(task.RequiredEffortTime == null)
+            {
+                throw new Exception("The time it takes to finish the task has not been updated for all tasks");
+            }
+        }
+
+        // Setting a scheduled date for all tasks that do not depend on any other task
+        foreach (var  Task in tasks)
+        {
+            bool IsTheTaskIndependentOfPreviousTasks = true;
+            foreach (var dependency in dependencyes)
+            {
+                if (dependency.DependentTask == Task.Id)
+                {
+                    IsTheTaskIndependentOfPreviousTasks = false;
+                }
+            }
+
+            if (IsTheTaskIndependentOfPreviousTasks)
+            {
+                DO.Task UpdateTask = Task with { ScheduledDate = DateOfStartProject };
+                _dal.Task.Update(UpdateTask);
+            }
+            else
+            {
+                TasksWithoutAScheduleDate.Add(Task);
+            }
+
+        }
+
+        while (TasksWithoutAScheduleDate.Any())
+        {
+            foreach(var Task in TasksWithoutAScheduleDate)
+            {
+                DateTime? Max = DateOfStartProject;
+                bool ThereAreNoPreviousTasksThatDoNotHaveAScheduleDate = true;
+
+                foreach (var Dependency in dependencyes) // Take a task from the list and check if the task has previous tasks that have not had a schedule Date updated
+                {
+                    if (Dependency.DependentTask == Task.Id)
+                    {
+                        var Tas = _dal.Task.Read((int)Dependency.DependsOnTask);//the previous task
+                        if (Tas.ScheduledDate == null)
+                        {
+                            ThereAreNoPreviousTasksThatDoNotHaveAScheduleDate = false;
+                            break;
+                        }
+                        else
+                        {
+                            Max = ((Tas.ScheduledDate + Tas.RequiredEffortTime) > Max ? (Tas.ScheduledDate + Tas.RequiredEffortTime) : Max);
+                        }
+                    }
+                }
+
+                if (ThereAreNoPreviousTasksThatDoNotHaveAScheduleDate)
+                {
+                    DO.Task UpdateTask = Task with { ScheduledDate = Max };
+                    _dal.Task.Update(UpdateTask);
+                    taskToRemove.Add(Task);
+                }
+
+            }
+            foreach (var item in taskToRemove)
+            {
+                TasksWithoutAScheduleDate.Remove(item);
+            } 
+        }
+
+    }
+
 
     /// <summary>
     /// Deletes all tasks and associated dependencies.
@@ -330,13 +411,20 @@ internal class TaskImplementation : ITask
     /// <returns>The forecasted completion date of the Task, or null if either the scheduled date or start date is not set.</returns>
     private DateTime? forecastDate(DO.Task item)
     {
-        if (item.ScheduledDate == null || item.StartDate == null)
+        if (item.ScheduledDate == null /*|| item.StartDate == null*/)
         {
             return null;
         }
 
         DateTime? finish;
-        finish = (DateTime)(item.ScheduledDate > item.StartDate ? item.ScheduledDate : item.StartDate)!;
+        if (item.StartDate != null)
+        {
+            finish = (DateTime)(item.ScheduledDate > item.StartDate ? item.ScheduledDate : item.StartDate)!;
+        }
+        else
+        {
+            finish = item.ScheduledDate;
+        }
         finish = finish + item.RequiredEffortTime;
         return finish;
     }
