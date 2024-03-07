@@ -51,4 +51,6 @@ public interface ITask
     /// Deletes all tasks.
     /// </summary>
     public void DeleteAll();
+
+    public void PutDatesOnAllExistingTasks(DateTime? DateOfStartProject);
 }

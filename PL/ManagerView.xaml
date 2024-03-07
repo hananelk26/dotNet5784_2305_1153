@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PL"
         mc:Ignorable="d"
-        Title="ManagerView" Height="450" Width="800">
+        Title="ManagerView" Height="450" Width="800" DataContext="{Binding RelativeSource={RelativeSource Mode=Self}}">
     <Grid>
 
 
@@ -14,8 +14,9 @@
         <Button Content="Reset" Background="Turquoise"  HorizontalAlignment="Left" Margin="38,340,0,0" VerticalAlignment="Top" Height="69" Width="224" FontSize="36" Click="resetAllData"/>
         <Button Content="Tasks" Background="Turquoise"  HorizontalAlignment="Left" Margin="350,77,0,0" VerticalAlignment="Top" Height="69" Width="224" FontSize="36" Click="TaskListButton_Click" />
         <Button Content="Gantt Chart" Background="Turquoise"  HorizontalAlignment="Left" Margin="38,217,0,0" VerticalAlignment="Top" Height="69" Width="224" FontSize="36"  />
-        <Button Content="Creating a schedule" Background="Turquoise"  HorizontalAlignment="Left" Margin="350,217,0,0" VerticalAlignment="Top" Height="69" Width="352" FontSize="36"  />
-
+        <DatePicker SelectedDateChanged="DateOfStartProjectDatePicker_SelectedDateChanged" IsEnabled="{Binding isADateForProject,Converter={StaticResource ConvertDateForProjectToIsEnabledKey} }"  Background="Turquoise" HorizontalAlignment="Left" Margin="350,217,0,0" VerticalAlignment="Top" Height="69" Width="254"/>
+        <!--<Button Content="Creating a schedule" Background="Turquoise"  HorizontalAlignment="Left" Margin="350,217,0,0" VerticalAlignment="Top" Height="69" Width="352" FontSize="36" Click="CreatingAScheduleButton_Click"  />-->
+        
 
 
     </Grid>

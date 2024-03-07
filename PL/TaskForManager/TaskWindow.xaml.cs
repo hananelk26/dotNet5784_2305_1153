@@ -29,6 +29,7 @@ public partial class TaskWindow : Window
         if (TheID == 0)
         {
             CurrentTask = new BO.Task(); // add mode
+            CurrentTask.CreatedAtDate = DateTime.Now;
         }
         else
         {
@@ -72,7 +73,19 @@ public partial class TaskWindow : Window
 
     static readonly BlApi.IBl s_bl = BlApi.Factory.Get();
 
-    public bool theCurrentTaskIsAssigned { get; set; } 
+
+
+    public bool theCurrentTaskIsAssigned
+    {
+        get { return (bool)GetValue(theCurrentTaskIsAssignedProperty); }
+        set { SetValue(theCurrentTaskIsAssignedProperty, value); }
+    }
+
+    // Using a DependencyProperty as the backing store for theCurrentTaskIsAssigned.  This enables animation, styling, binding, etc...
+    public static readonly DependencyProperty theCurrentTaskIsAssignedProperty =
+        DependencyProperty.Register("theCurrentTaskIsAssigned", typeof(bool), typeof(TaskWindow), new PropertyMetadata(null));
+
+
 
     public BO.Task CurrentTask
     {
@@ -207,11 +220,41 @@ public partial class TaskWindow : Window
     {
         CurrentTask.StartDate = DateTime.Now;
         CurrentTask.Status = Status.OnTrack;
+        try
+        {
+            s_bl.Task.Update(CurrentTask);
+            // Display a success message
+            MessageBox.Show("The task started successfully",
+                                "task update",
+                                MessageBoxButton.OK,
+                                MessageBoxImage.Information);
+            this.Close();
+        }
+        catch (Exception)
+        {
+            MessageBox.Show("This task does not appear in the system", "Error adding an task", MessageBoxButton.OK, MessageBoxImage.Error);
+            Console.WriteLine("This task does not appear in the system.");
+        }
     }
 
     private void FinishTaskButton_Click(object sender, RoutedEventArgs e)
     {
         CurrentTask.CompleteDate = DateTime.Now;
         CurrentTask.Status = BO.Status.Done;
+        try
+        {
+            s_bl.Task.Update(CurrentTask);
+            // Display a success message
+            MessageBox.Show("The task complete successfully",
+                                "task update",
+                                MessageBoxButton.OK,
+                                MessageBoxImage.Information);
+            this.Close();
+        }
+        catch (Exception)
+        {
+            MessageBox.Show("This task does not appear in the system", "Error adding an task", MessageBoxButton.OK, MessageBoxImage.Error);
+            Console.WriteLine("This task does not appear in the system.");
+        }
     }
 }

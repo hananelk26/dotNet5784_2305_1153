@@ -34,18 +34,29 @@ namespace PL.Task
                 DateForeProject = false;
             }
 
-            ListTaskForSpesificEngineer = false ;
+            ListTaskForSpesificEngineer = false;
 
             if (TheIdOfEngineer != 0)
             {
                 var TheExperience = s_bl.Engineer.Read(TheIdOfEngineer)!.Level;
-                var tasks = s_bl.Task.ReadAllTaskInList(t => t.Complexyity <= TheExperience && t.Status == BO.Status.Scheduled &&(t.Dependencies == null || t.Dependencies.Any(x => x.Status != BO.Status.Done)) == false);
+                var tasks = s_bl.Task.ReadAllTaskInList(t => t.Complexyity <= TheExperience && t.Status == BO.Status.Scheduled && (t.Dependencies == null || t.Dependencies.Any(x => x.Status != BO.Status.Done)) == false);
                 TaskList = tasks.ToList();
                 ListTaskForSpesificEngineer = true;
             }
+
+            IdOfTheEngineer = TheIdOfEngineer;
         }
 
-        public bool ListTaskForSpesificEngineer { get; set; }
+        static int IdOfTheEngineer;
+
+        public bool ListTaskForSpesificEngineer
+        {
+            get { return (bool)GetValue(ListTaskForSpesificEngineerProperty); }
+            set { SetValue(ListTaskForSpesificEngineerProperty, value); }
+        }
+
+        public static readonly DependencyProperty ListTaskForSpesificEngineerProperty =
+            DependencyProperty.Register("ListTaskForSpesificEngineer", typeof(bool), typeof(TaskListWindow), new PropertyMetadata(null));
 
         static readonly BlApi.IBl s_bl = BlApi.Factory.Get();
 
@@ -58,14 +69,20 @@ namespace PL.Task
 
         private void TaskExperience_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            TaskList = (Experience == BO.EngineerExperience.None) ?
-            s_bl?.Task.ReadAllTaskInList()! : s_bl?.Task.ReadAllTaskInList(item => item.Complexyity == Experience)!;
+            if (!ListTaskForSpesificEngineer)
+            {
+                         TaskList = (Experience == BO.EngineerExperience.None) ?
+               s_bl?.Task.ReadAllTaskInList()! : s_bl?.Task.ReadAllTaskInList(item => item.Complexyity == Experience)!;
+            }
         }
 
         private void Status_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            TaskList = (StatusOfTask == BO.Status.None) ?
-           s_bl?.Task.ReadAllTaskInList()! : s_bl?.Task.ReadAllTaskInList(item => item.Status == StatusOfTask)!;
+            if (!ListTaskForSpesificEngineer) 
+            {
+                        TaskList = (StatusOfTask == BO.Status.None) ?
+                s_bl?.Task.ReadAllTaskInList()! : s_bl?.Task.ReadAllTaskInList(item => item.Status == StatusOfTask)!;
+            }
         }
 
 
@@ -88,16 +105,56 @@ namespace PL.Task
         // mode of update
         private void ListViewOfTask_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            BO.TaskInList? TheTask = (sender as ListView)?.SelectedItem as BO.TaskInList;
-            new TaskWindow(TheTask!.Id).ShowDialog();
-            TaskList = s_bl?.Task.ReadAllTaskInList()!;
+            if (!ListTaskForSpesificEngineer)
+            {
+                BO.TaskInList? TheTask = (sender as ListView)?.SelectedItem as BO.TaskInList;
+                new TaskWindow(TheTask!.Id).ShowDialog();
+                TaskList = s_bl?.Task.ReadAllTaskInList()!;
+            }
+            else
+            {
+                try
+                {
+                    var currentEngineer = s_bl.Engineer.Read(IdOfTheEngineer);
+                    if (currentEngineer!.Task == null)// check that there is no  task that assigned to engineer and not completed
+                    {
+                        BO.TaskInList? TheTask = (sender as ListView)?.SelectedItem as BO.TaskInList;
+                        var TaskOfEngineer = s_bl.Task.Read(TheTask!.Id);
+                        TaskOfEngineer!.Engineer = new EngineerInTask()
+                        {
+                            Id = IdOfTheEngineer,
+                            Name = s_bl.Engineer.Read(IdOfTheEngineer)!.Name
+                        };
+
+                        s_bl.Task.Update(TaskOfEngineer);
+                        // Display a success message
+                        MessageBox.Show("The task was successfully assigned",
+                                            "task assignment",
+                                            MessageBoxButton.OK,
+                                            MessageBoxImage.Information);
+                    }
+                    else
+                    {
+                        throw new Exception("The engineer cannot select a task because he is assigned a task that has not yet been completed");
+                    }
+                    this.Close();
+                }
+                catch (Exception)
+                {
+                    MessageBox.Show("This task does not appear in the system", "Error adding an task", MessageBoxButton.OK, MessageBoxImage.Error);
+                    Console.WriteLine("This task does not appear in the system.");
+                }
+            }
         }
 
         // mode of adding
         private void AddButton_Click(object sender, RoutedEventArgs e)
         {
-            new TaskWindow().ShowDialog();
-            TaskList = s_bl?.Task.ReadAllTaskInList()!;
+            if (!ListTaskForSpesificEngineer && !DateForeProject)
+            {
+                new TaskWindow().ShowDialog();
+                TaskList = s_bl?.Task.ReadAllTaskInList()!;
+            }
         }
 
         public bool DateForeProject
