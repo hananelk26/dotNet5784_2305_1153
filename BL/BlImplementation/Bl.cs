@@ -20,7 +20,7 @@ internal class Bl : IBl
     /// <summary>
     /// Gets an instance of the task Implementation.
     /// </summary>
-    public ITask Task => new TaskImplementation(this);
+    public ITask Task => new TaskImplementation();
 
     /// <summary>
     /// Gets an instance of the time Implementation.

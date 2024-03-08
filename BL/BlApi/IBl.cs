@@ -17,7 +17,7 @@ public interface IBl
     /// </summary>
     public ITime Time { get; }
 
-    public IMainClock MainClock {  get; }
+    public IMainClock MainClock { get;  }
 
     /// <summary>
     /// Resets all entities in the data, such as engineers, tasks, and time.
