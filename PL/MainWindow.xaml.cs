@@ -17,20 +17,19 @@ namespace PL
             CustomDateTime = s_bl.MainClock.GetMainClock();
         }
 
-        private DateTime? _customDateTime;
+
 
         public DateTime? CustomDateTime
         {
-            get { return _customDateTime; }
-            set
-            {
-                if (_customDateTime != value)
-                {
-                    _customDateTime = value;
-                    OnPropertyChanged(nameof(CustomDateTime));
-                }
-            }
+            get { return (DateTime?)GetValue(CustomDateTimeProperty); }
+            set { SetValue(CustomDateTimeProperty, value); }
         }
+
+        // Using a DependencyProperty as the backing store for CustomDateTime.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty CustomDateTimeProperty =
+            DependencyProperty.Register("CustomDateTime", typeof(DateTime?), typeof(MainWindow), new PropertyMetadata(null));
+
+
 
         private void OnPropertyChanged(string propertyName)
         {

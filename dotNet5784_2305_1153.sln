@@ -19,7 +19,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "xml", "xml", "{40B5F6AB-CE5
 		xml\data-config.xml = xml\data-config.xml
 		xml\dependencys.xml = xml\dependencys.xml
 		xml\engineers.xml = xml\engineers.xml
-		BL\BlApi\IBl.cs = BL\BlApi\IBl.cs
 		xml\tasks.xml = xml\tasks.xml
 	EndProjectSection
 EndProject
