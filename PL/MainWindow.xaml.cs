@@ -1,41 +1,62 @@
-﻿using PL.Engineer;
-using System.Text;
-using PL.EngineerForEmployee;
+﻿using PL.EngineerForEmployee;
+using System;
+using System.ComponentModel;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
-using Microsoft.VisualBasic;
 
 namespace PL
 {
-    /// <summary>
-    /// Interaction logic for MainWindow.xaml
-    /// </summary>
-    public partial class MainWindow : Window
+    public partial class MainWindow : Window, INotifyPropertyChanged
     {
         static readonly BlApi.IBl s_bl = BlApi.Factory.Get();
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
         public MainWindow()
         {
             InitializeComponent();
-           
+            CustomDateTime = s_bl.Clock;
+        }
+
+        private DateTime _customDateTime;
+
+        public DateTime CustomDateTime
+        {
+            get { return _customDateTime; }
+            set
+            {
+                if (_customDateTime != value)
+                {
+                    _customDateTime = value;
+                    OnPropertyChanged(nameof(CustomDateTime));
+                }
+            }
+        }
+
+        private void OnPropertyChanged(string propertyName)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             new ManagerView().ShowDialog();
-
         }
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
-
             new CheckTheEngineer().ShowDialog();
+        }
+
+        private void Button_Click_2(object sender, RoutedEventArgs e)
+        {
+            s_bl.addYear(1);
+            CustomDateTime = s_bl.Clock;
+        }
+
+        private void Button_Click_3(object sender, RoutedEventArgs e)
+        {
+            s_bl.addDay(1);
+            CustomDateTime = s_bl.Clock;
         }
     }
 }

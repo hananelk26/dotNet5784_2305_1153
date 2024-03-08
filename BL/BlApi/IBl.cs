@@ -24,4 +24,15 @@ public interface IBl
 
     public void InitializeDB();
     public void resetDataConfig();
+
+
+    #region
+
+    public DateTime Clock { get; }
+    public void addDay(int day);
+    public void addYear(int y);
+    public void addHour(int h);
+    public void resetClock();
+
+    #endregion
 }

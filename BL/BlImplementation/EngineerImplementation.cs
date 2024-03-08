@@ -11,6 +11,9 @@ internal class EngineerImplementation : IEngineer
     /// </summary>
     private DalApi.IDal _dal = DalApi.Factory.Get;
 
+   
+
+
     /// <summary>
     /// Creates a new engineer in the system.
     /// </summary>

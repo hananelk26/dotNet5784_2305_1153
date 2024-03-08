@@ -16,6 +16,9 @@ internal class TaskImplementation : ITask
 {
     private DalApi.IDal _dal = DalApi.Factory.Get;
 
+    private readonly IBl _bl;
+    internal TaskImplementation(IBl bl) => _bl = bl;
+
     /// <summary>
     /// Creates a new task based on the provided BO.Task object.
     /// </summary>
