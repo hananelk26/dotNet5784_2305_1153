@@ -27,5 +27,7 @@ public interface IDal
     ITask Task { get; }
 
     ITIme Time { get; }
+
+    IMainClock MainClock { get; }
 }
 

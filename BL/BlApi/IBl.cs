@@ -1,7 +1,7 @@
 ﻿namespace BlApi;
 
 public interface IBl
-{
+{ 
     /// <summary>
     /// Gets an instance of the engineer interface.
     /// </summary>
@@ -17,6 +17,8 @@ public interface IBl
     /// </summary>
     public ITime Time { get; }
 
+    public IMainClock MainClock {  get; }
+
     /// <summary>
     /// Resets all entities in the data, such as engineers, tasks, and time.
     /// </summary>
@@ -25,14 +27,4 @@ public interface IBl
     public void InitializeDB();
     public void resetDataConfig();
 
-
-    #region
-
-    public DateTime Clock { get; }
-    public void addDay(int day);
-    public void addYear(int y);
-    public void addHour(int h);
-    public void resetClock();
-
-    #endregion
 }

@@ -27,6 +27,9 @@ internal class Bl : IBl
     /// </summary>
     public ITime Time => new TimeImplementation();
 
+
+    public IMainClock MainClock => new MainClockImplementation();
+
     /// <summary>
     /// Resets all entities in the data, such as engineers, tasks, and dependencies.
     /// </summary>
@@ -44,31 +47,5 @@ internal class Bl : IBl
     {
        DalTest.Initialization.resetDataConfig();
     }
-
-    public void addDay(int day)
-    {
-        s_Clock= s_Clock.AddDays(day);
-    }
-
-    public void addYear(int y)
-    {
-        s_Clock= s_Clock.AddYears(y);
-    }
-
-    public void addHour(int h)
-    {
-        s_Clock = s_Clock.AddHours(h);
-    }
-
-    public void resetClock()
-    {
-        s_Clock = DateTime.Now;
-            
-    }
-
-    private static DateTime s_Clock = DateTime.Now.Date;
-    public DateTime Clock { get { return s_Clock; } private set { s_Clock = value; } }
-
-
 
 }

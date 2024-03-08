@@ -15,5 +15,7 @@ sealed internal class DalXml : IDal
     public ITask Task =>  new TaskImplementation();
 
     public ITIme Time => new TimeImplementation();
+
+    public IMainClock MainClock => new MainClockImplementation();
 }
 
