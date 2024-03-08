@@ -13,6 +13,8 @@ internal static class DataSource
 
         internal static DateTime? StartDate = null;
 
+        internal static DateTime? StartDateOfMainClock = null;
+
     }
 
 

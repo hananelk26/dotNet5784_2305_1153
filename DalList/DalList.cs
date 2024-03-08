@@ -29,5 +29,7 @@ sealed internal class DalList : IDal
     public ITask Task => new TaskImplementation();
 
     public ITIme Time => new TimeImplementation();
+
+    public IMainClock MainClock => new MainClockImplementation();
 }
 

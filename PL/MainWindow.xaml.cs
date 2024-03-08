@@ -14,12 +14,12 @@ namespace PL
         public MainWindow()
         {
             InitializeComponent();
-            CustomDateTime = s_bl.Clock;
+            CustomDateTime = s_bl.MainClock.GetMainClock();
         }
 
-        private DateTime _customDateTime;
+        private DateTime? _customDateTime;
 
-        public DateTime CustomDateTime
+        public DateTime? CustomDateTime
         {
             get { return _customDateTime; }
             set
@@ -47,16 +47,22 @@ namespace PL
             new CheckTheEngineer().ShowDialog();
         }
 
-        private void Button_Click_2(object sender, RoutedEventArgs e)
+        private void AddYearButton_Click(object sender, RoutedEventArgs e)
         {
-            s_bl.addYear(1);
-            CustomDateTime = s_bl.Clock;
+            s_bl.MainClock.addYear(1);
+            CustomDateTime = s_bl.MainClock.GetMainClock();
         }
 
-        private void Button_Click_3(object sender, RoutedEventArgs e)
+        private void AddDayButton_Click(object sender, RoutedEventArgs e)
         {
-            s_bl.addDay(1);
-            CustomDateTime = s_bl.Clock;
+            s_bl.MainClock.addDay(1);
+            CustomDateTime = s_bl.MainClock.GetMainClock();
+        }
+
+        private void ReseteButton_Click(object sender, RoutedEventArgs e)
+        {
+            s_bl.MainClock.reset();
+            CustomDateTime = s_bl.MainClock.GetMainClock();
         }
     }
 }

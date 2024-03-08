@@ -29,7 +29,7 @@ public partial class TaskWindow : Window
         if (TheID == 0)
         {
             CurrentTask = new BO.Task(); // add mode
-            CurrentTask.CreatedAtDate = DateTime.Now;
+            CurrentTask.CreatedAtDate =(DateTime) s_bl.MainClock.GetMainClock();
         }
         else
         {

@@ -15,9 +15,10 @@
         <Button Content="Manager" HorizontalAlignment="Left" Margin="50,274,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5" Width="252" Height="52" Click="Button_Click"/>
 
         <Button Content="Engineer" HorizontalAlignment="Left" Margin="517,279,0,0" VerticalAlignment="Top" Width="233" Height="54" RenderTransformOrigin="0.747,0.433" Click="Button_Click_1"/>
-        <Button Content="Add Year" HorizontalAlignment="Left" Margin="400,154,0,0" VerticalAlignment="Top" Width="96" Height="54" RenderTransformOrigin="0.747,0.433" Click="Button_Click_2"/>
-        <Button Content="Add Day" HorizontalAlignment="Left" Margin="264,154,0,0" VerticalAlignment="Top" Width="96" Height="54" RenderTransformOrigin="0.747,0.433" Click="Button_Click_3"/>
+        <Button Content="Add Year" HorizontalAlignment="Left" Margin="429,154,0,0" VerticalAlignment="Top" Width="96" Height="54" RenderTransformOrigin="0.747,0.433" Click="AddYearButton_Click"/>
+        <Button Content="Add Day" HorizontalAlignment="Left" Margin="227,154,0,0" VerticalAlignment="Top" Width="96" Height="54" RenderTransformOrigin="0.747,0.433" Click="AddDayButton_Click"/>
         <Label Content="{Binding CustomDateTime, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type local:MainWindow}}}" HorizontalAlignment="Left" Margin="264,51,0,0" VerticalAlignment="Top" Height="103" Width="237"/>
+        <Button Content="Resete clock" HorizontalAlignment="Left" Margin="340,162,0,0" VerticalAlignment="Top" Height="38" Click="ReseteButton_Click"/>
 
 
 
