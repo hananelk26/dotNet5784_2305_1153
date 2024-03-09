@@ -49,13 +49,15 @@ namespace PL
 
         private void AddYearButton_Click(object sender, RoutedEventArgs e)
         {
-            s_bl.MainClock.addYear(1);
+            int y = 1;
+            s_bl.MainClock.addYear(y);
             CustomDateTime = s_bl.MainClock.GetMainClock();
         }
 
         private void AddDayButton_Click(object sender, RoutedEventArgs e)
         {
-            s_bl.MainClock.addDay(1);
+            int d=1;
+            s_bl.MainClock.addDay(d);
             CustomDateTime = s_bl.MainClock.GetMainClock();
         }
 
