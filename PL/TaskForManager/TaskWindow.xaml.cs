@@ -218,7 +218,7 @@ public partial class TaskWindow : Window
 
     private void StartTaskButton_Click(object sender, RoutedEventArgs e)
     {
-        CurrentTask.StartDate = DateTime.Now;
+        CurrentTask.StartDate = s_bl.MainClock.GetMainClock();
         CurrentTask.Status = Status.OnTrack;
         try
         {
@@ -239,7 +239,7 @@ public partial class TaskWindow : Window
 
     private void FinishTaskButton_Click(object sender, RoutedEventArgs e)
     {
-        CurrentTask.CompleteDate = DateTime.Now;
+        CurrentTask.CompleteDate = s_bl.MainClock.GetMainClock();
         CurrentTask.Status = BO.Status.Done;
         try
         {

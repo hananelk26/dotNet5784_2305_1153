@@ -40,7 +40,7 @@ internal class MainClockImplementation : IMainClock
     {
         DateTime temp = (DateTime)GetMainClock();
         temp = (DateTime)temp;
-        temp.AddDays(day);
+        temp = temp.AddDays(day);
         SetMainClock(temp);
 
     }
@@ -49,7 +49,7 @@ internal class MainClockImplementation : IMainClock
     {
         DateTime temp = (DateTime)GetMainClock();
         temp = (DateTime)temp;
-        temp.AddYears(y);
+        temp = temp.AddYears(y);
         SetMainClock(temp);
     }
 
@@ -57,7 +57,7 @@ internal class MainClockImplementation : IMainClock
     {
         DateTime temp = (DateTime)GetMainClock();
         temp = (DateTime)temp;
-        temp.AddHours(h);
+        temp = temp.AddHours(h);
         SetMainClock(temp);
     }
 }
