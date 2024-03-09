@@ -356,6 +356,25 @@ internal class TaskImplementation : ITask
 
     }
 
+    public DateTime? EndDateOfProject(DateTime? DateOfStartProject)
+    {
+        var tasks = _dal.Task.ReadAll();
+        DateTime? Max = DateOfStartProject;
+        DateTime? Temp;
+        foreach (var Task in tasks)
+        {
+            Temp = Task!.ScheduledDate + Task.RequiredEffortTime;
+            if (Temp > Max)
+            {
+                Max = Temp;
+            }
+
+        }
+
+        return Max;
+
+    }
+
 
     /// <summary>
     /// Deletes all tasks and associated dependencies.

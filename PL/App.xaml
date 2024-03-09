@@ -6,17 +6,21 @@
     <Application.Resources>
         <local:ExperienceCollection x:Key="ExperienceCollectionKey" />
         <local:StatusCollection x:Key="StatusCollectionKey" />
+        <local:ConvertIdToContent x:Key="ConverIdToContentKey"/>
         <local:ConvertDateForProjectToIsEnabled x:Key="ConvertDateForProjectToIsEnabledKey" />
         <local:ConvertDateForProjectToVisibilityFromTrueTOVisibility x:Key="ConvertDateForProjectToVisibilityFromTrueTOVisibilityKey" />
-       
-
-        <local:ConvertIdToContent x:Key="ConverIdToContentKey"/>
         <local:ConvertDateForProjectToVisibility x:Key="ConvertDateForProjectTovisabilityKey"/>
+        
+        <local:ConvertDateToWidth x:Key="ConvertDateToWidthKey"/>
+        <local:ConvertDateToMargin x:Key="ConvertDateToMarginKey"/>
+        <local:ConvertStatusToColor x:Key="ConvertStatusToColorKey"/>
+        
         <LinearGradientBrush x:Key="Brush">
             <GradientStop Color="Blue" Offset="0" />
             <GradientStop Color="Yellow" Offset="0.5" />
             <GradientStop Color="Red" Offset="1" />
         </LinearGradientBrush>
+        
     </Application.Resources>
 </Application>
     

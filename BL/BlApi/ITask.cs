@@ -53,4 +53,6 @@ public interface ITask
     public void DeleteAll();
 
     public void PutDatesOnAllExistingTasks(DateTime? DateOfStartProject);
+
+    public DateTime? EndDateOfProject(DateTime? DateOfStartProject);
 }

@@ -116,6 +116,9 @@ namespace PL
         public static readonly DependencyProperty isADateForProjectProperty =
             DependencyProperty.Register("isADateForProject", typeof(bool), typeof(ManagerView), new PropertyMetadata(null));
 
-
+        private void GantButton_Click(object sender, RoutedEventArgs e)
+        {
+            new GanttWindow().Show();
+        }
     }
 }
