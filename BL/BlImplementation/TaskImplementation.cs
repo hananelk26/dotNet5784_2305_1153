@@ -27,23 +27,7 @@ internal class TaskImplementation : ITask
     {
         inputValidity(boTask);
 
-        if (boTask.Dependencies != null)
-        {
-            foreach (var dependId in boTask.Dependencies!)
-            {
-                DO.Dependency dependency = new DO.Dependency()
-                {
-                    DependentTask = boTask.Id,
-                    DependsOnTask = dependId.Id
-                };
-
-                var ret = _dal.Dependency.ReadAll(d => d.DependentTask == boTask.Id && d.DependsOnTask == dependId.Id).FirstOrDefault();
-                if (ret == null)
-                {
-                    _dal.Dependency.Create(dependency);
-                }
-            }
-        }
+       
 
         DO.Task task = new DO.Task()
         {
@@ -57,9 +41,48 @@ internal class TaskImplementation : ITask
             Remarks = boTask.Remarks,
         };
 
+
+
         try
         {
-            return _dal.Task.Create(task);
+            var newId= _dal.Task.Create(task);
+
+
+            if (boTask.Dependencies != null)
+            {
+                foreach (var dependId in boTask.Dependencies)
+                {
+                    DO.Dependency dependency = new DO.Dependency()
+                    {
+                        DependentTask = newId,
+                        DependsOnTask = dependId.Id
+                    };
+
+                    var ret = _dal.Dependency.ReadAll(d => d.DependentTask == newId && d.DependsOnTask == dependId.Id).FirstOrDefault();
+                    if (ret == null)
+                    {
+                        _dal.Dependency.Create(dependency);
+                    }
+                }
+            }
+            if (boTask.Dependencies != null)
+            {
+                foreach (var dependId in boTask.Dependencies)
+                {
+                    DO.Dependency dependency = new DO.Dependency()
+                    {
+                        DependentTask = newId,
+                        DependsOnTask = dependId.Id
+                    };
+
+                    var ret = _dal.Dependency.ReadAll(d => d.DependentTask == newId && d.DependsOnTask == dependId.Id).FirstOrDefault();
+                    if (ret == null)
+                    {
+                        _dal.Dependency.Create(dependency);
+                    }
+                }
+            }
+            return newId;
         }
         catch (DO.DalAlreadyExistsException ex)
         {

@@ -11,6 +11,15 @@
     <DeadlineDate xsi:nil="true" />
   </Task>
   <Task>
+    <Id>2</Id>
+    <Alias>t4</Alias>
+    <Description>RequirZement Elicitation and Analysis</Description>
+    <createdAtDate>2024-03-09T00:00:00</createdAtDate>
+    <RequiredEffortTime>P7DT52M</RequiredEffortTime>
+    <Copmlexity>Advanced_Beginner</Copmlexity>
+    <DeadlineDate xsi:nil="true" />
+  </Task>
+  <Task>
     <Id>3</Id>
     <Alias>g5</Alias>
     <Description>Feasibility Study</Description>
@@ -38,6 +47,15 @@
     <RequiredEffortTime>P56DT6H16M</RequiredEffortTime>
     <Copmlexity>Advanced_Beginner</Copmlexity>
     <ScheduledDate>2024-03-09T00:00:00</ScheduledDate>
+    <DeadlineDate xsi:nil="true" />
+  </Task>
+  <Task>
+    <Id>6</Id>
+    <Alias>h1</Alias>
+    <Description>Prototyping</Description>
+    <createdAtDate>2024-03-09T00:00:00</createdAtDate>
+    <RequiredEffortTime>P15DT15H39M</RequiredEffortTime>
+    <Copmlexity>Beginner</Copmlexity>
     <DeadlineDate xsi:nil="true" />
   </Task>
   <Task>
@@ -71,13 +89,30 @@
     <DeadlineDate xsi:nil="true" />
   </Task>
   <Task>
+    <Id>13</Id>
+    <Alias>b9</Alias>
+    <Description>User Interface (UI) Development</Description>
+    <createdAtDate>2024-03-09T00:00:00</createdAtDate>
+    <RequiredEffortTime>P43DT18H40M</RequiredEffortTime>
+    <Copmlexity>Intermediate</Copmlexity>
+    <DeadlineDate xsi:nil="true" />
+  </Task>
+  <Task>
+    <Id>14</Id>
+    <Alias>V1</Alias>
+    <Description>User Acceptance Testing (UAT) Preparation</Description>
+    <createdAtDate>2024-03-09T00:00:00</createdAtDate>
+    <RequiredEffortTime>P26DT13H48M</RequiredEffortTime>
+    <Copmlexity>Advanced_Beginner</Copmlexity>
+    <DeadlineDate xsi:nil="true" />
+  </Task>
+  <Task>
     <Id>15</Id>
     <Alias>V2</Alias>
     <Description>Beta Release</Description>
     <createdAtDate>2024-03-09T00:00:00</createdAtDate>
     <RequiredEffortTime>P18DT9H25M</RequiredEffortTime>
     <Copmlexity>Advanced_Beginner</Copmlexity>
-    <ScheduledDate>2024-03-09T00:00:00</ScheduledDate>
     <DeadlineDate xsi:nil="true" />
   </Task>
   <Task>
