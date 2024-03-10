@@ -5,13 +5,13 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PL.Task"
         mc:Ignorable="d"
-        Title="TaskListWindow" Height="450" Width="800" DataContext= "{Binding RelativeSource={RelativeSource Mode=Self}}">
+        Title="TaskListWindow" Top="30" Background="BurlyWood" Height="610" Width="800" DataContext= "{Binding RelativeSource={RelativeSource Mode=Self}}">
     <!--external-->
-    <Grid ShowGridLines="True">
+    <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="40*"/>
-            <RowDefinition Height="500*"/>
-            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="40"/>
+            <RowDefinition Height="500"/>
+            <RowDefinition Height="60"/>
         </Grid.RowDefinitions>
         <!--Internal, Upper Grid-->
         <Grid ShowGridLines="True" HorizontalAlignment="Stretch" Height="auto" Grid.Row="0" VerticalAlignment="Stretch" Width="auto">
@@ -36,6 +36,6 @@
                 </GridView>
             </ListView.View>
         </ListView>
-        <Button Visibility="{Binding DateForeProject, Converter={StaticResource ConvertDateForProjectTovisabilityKey}}" Content="Add" Grid.Row="1" HorizontalAlignment="Center" Height="50" Width="100" Margin="0,531,0,0" Grid.RowSpan="2" VerticalAlignment="Top" Click="AddButton_Click" />
+        <Button Grid.Row="2" Visibility="{Binding DateForeProject, Converter={StaticResource ConvertDateForProjectTovisabilityKey}}" Content="Add" Click="AddButton_Click" Margin="65,0,65,30" RenderTransformOrigin="0.5,0.24" />
     </Grid>
 </Window>

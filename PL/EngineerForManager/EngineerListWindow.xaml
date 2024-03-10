@@ -7,7 +7,7 @@
         xmlns:local="clr-namespace:PL.Engineer"
         WindowStartupLocation="Manual" Top="0"
         mc:Ignorable="d"
-        Title="EngineerListWindow" Height="700" Width="800" Background="BlueViolet" DataContext="{Binding RelativeSource={RelativeSource Mode=Self}}">
+        Title="EngineerListWindow" Height="700" Width="800" Background="BurlyWood" DataContext="{Binding RelativeSource={RelativeSource Mode=Self}}">
 
     <!--external-->
     <Grid ShowGridLines="True">

@@ -4,35 +4,35 @@
     <Id>1</Id>
     <Alias>t3</Alias>
     <Description>Project Kickoff Meeting</Description>
-    <createdAtDate>2024-09-03T00:00:00</createdAtDate>
-    <RequiredEffortTime>P21DT13H58M</RequiredEffortTime>
-    <Copmlexity>Advanced</Copmlexity>
+    <createdAtDate>2024-03-10T00:00:00</createdAtDate>
+    <RequiredEffortTime>P54DT22H30M</RequiredEffortTime>
+    <Copmlexity>Intermediate</Copmlexity>
     <DeadlineDate xsi:nil="true" />
   </Task>
   <Task>
     <Id>2</Id>
     <Alias>t4</Alias>
     <Description>RequirZement Elicitation and Analysis</Description>
-    <createdAtDate>2024-09-03T00:00:00</createdAtDate>
-    <RequiredEffortTime>P35DT17H24M</RequiredEffortTime>
-    <Copmlexity>Intermediate</Copmlexity>
+    <createdAtDate>2024-03-10T00:00:00</createdAtDate>
+    <RequiredEffortTime>P46DT12H37M</RequiredEffortTime>
+    <Copmlexity>Beginner</Copmlexity>
     <DeadlineDate xsi:nil="true" />
   </Task>
   <Task>
     <Id>3</Id>
     <Alias>g5</Alias>
     <Description>Feasibility Study</Description>
-    <createdAtDate>2024-09-03T00:00:00</createdAtDate>
-    <RequiredEffortTime>P2DT12H46M</RequiredEffortTime>
-    <Copmlexity>Advanced</Copmlexity>
+    <createdAtDate>2024-03-10T00:00:00</createdAtDate>
+    <RequiredEffortTime>P2DT11H33M</RequiredEffortTime>
+    <Copmlexity>Beginner</Copmlexity>
     <DeadlineDate xsi:nil="true" />
   </Task>
   <Task>
     <Id>4</Id>
     <Alias>H5</Alias>
     <Description>Project Planning</Description>
-    <createdAtDate>2024-09-03T00:00:00</createdAtDate>
-    <RequiredEffortTime>P43DT17H22M</RequiredEffortTime>
+    <createdAtDate>2024-03-10T00:00:00</createdAtDate>
+    <RequiredEffortTime>P11DT10H25M</RequiredEffortTime>
     <Copmlexity>Intermediate</Copmlexity>
     <DeadlineDate xsi:nil="true" />
   </Task>
@@ -40,8 +40,8 @@
     <Id>5</Id>
     <Alias>h8</Alias>
     <Description>System Architecture Design</Description>
-    <createdAtDate>2024-09-03T00:00:00</createdAtDate>
-    <RequiredEffortTime>P32DT20H17M</RequiredEffortTime>
+    <createdAtDate>2024-03-10T00:00:00</createdAtDate>
+    <RequiredEffortTime>P22DT18H40M</RequiredEffortTime>
     <Copmlexity>Advanced_Beginner</Copmlexity>
     <DeadlineDate xsi:nil="true" />
   </Task>
@@ -49,17 +49,17 @@
     <Id>6</Id>
     <Alias>h1</Alias>
     <Description>Prototyping</Description>
-    <createdAtDate>2024-09-03T00:00:00</createdAtDate>
-    <RequiredEffortTime>P53DT21H25M</RequiredEffortTime>
-    <Copmlexity>Advanced_Beginner</Copmlexity>
+    <createdAtDate>2024-03-10T00:00:00</createdAtDate>
+    <RequiredEffortTime>P53DT6H33M</RequiredEffortTime>
+    <Copmlexity>Beginner</Copmlexity>
     <DeadlineDate xsi:nil="true" />
   </Task>
   <Task>
     <Id>7</Id>
     <Alias>B3</Alias>
     <Description>Database Design</Description>
-    <createdAtDate>2024-09-03T00:00:00</createdAtDate>
-    <RequiredEffortTime>P54DT1M</RequiredEffortTime>
+    <createdAtDate>2024-03-10T00:00:00</createdAtDate>
+    <RequiredEffortTime>P14DT17M</RequiredEffortTime>
     <Copmlexity>Beginner</Copmlexity>
     <DeadlineDate xsi:nil="true" />
   </Task>
@@ -67,26 +67,26 @@
     <Id>8</Id>
     <Alias>b4</Alias>
     <Description>Development Environment Setup</Description>
-    <createdAtDate>2024-09-03T00:00:00</createdAtDate>
-    <RequiredEffortTime>P59DT15H4M</RequiredEffortTime>
-    <Copmlexity>Advanced_Beginner</Copmlexity>
+    <createdAtDate>2024-03-10T00:00:00</createdAtDate>
+    <RequiredEffortTime>P27DT18H48M</RequiredEffortTime>
+    <Copmlexity>Intermediate</Copmlexity>
     <DeadlineDate xsi:nil="true" />
   </Task>
   <Task>
     <Id>9</Id>
     <Alias>b5</Alias>
     <Description>Development Environment Setup</Description>
-    <createdAtDate>2024-09-03T00:00:00</createdAtDate>
-    <RequiredEffortTime>P58DT8H44M</RequiredEffortTime>
-    <Copmlexity>Advanced_Beginner</Copmlexity>
+    <createdAtDate>2024-03-10T00:00:00</createdAtDate>
+    <RequiredEffortTime>P18DT19H38M</RequiredEffortTime>
+    <Copmlexity>Beginner</Copmlexity>
     <DeadlineDate xsi:nil="true" />
   </Task>
   <Task>
     <Id>10</Id>
     <Alias>B6</Alias>
     <Description>Initial Coding</Description>
-    <createdAtDate>2024-09-03T00:00:00</createdAtDate>
-    <RequiredEffortTime>P18DT20H9M</RequiredEffortTime>
+    <createdAtDate>2024-03-10T00:00:00</createdAtDate>
+    <RequiredEffortTime>P53DT18H9M</RequiredEffortTime>
     <Copmlexity>Intermediate</Copmlexity>
     <DeadlineDate xsi:nil="true" />
   </Task>
@@ -94,17 +94,17 @@
     <Id>11</Id>
     <Alias>b7</Alias>
     <Description>Unit Testing</Description>
-    <createdAtDate>2024-09-03T00:00:00</createdAtDate>
-    <RequiredEffortTime>P7DT6H39M</RequiredEffortTime>
-    <Copmlexity>Intermediate</Copmlexity>
+    <createdAtDate>2024-03-10T00:00:00</createdAtDate>
+    <RequiredEffortTime>P31DT22H29M</RequiredEffortTime>
+    <Copmlexity>Advanced</Copmlexity>
     <DeadlineDate xsi:nil="true" />
   </Task>
   <Task>
     <Id>12</Id>
     <Alias>b8</Alias>
     <Description>Integration Testing</Description>
-    <createdAtDate>2024-09-03T00:00:00</createdAtDate>
-    <RequiredEffortTime>P5DT20H52M</RequiredEffortTime>
+    <createdAtDate>2024-03-10T00:00:00</createdAtDate>
+    <RequiredEffortTime>P11DT21H41M</RequiredEffortTime>
     <Copmlexity>Beginner</Copmlexity>
     <DeadlineDate xsi:nil="true" />
   </Task>
@@ -112,18 +112,27 @@
     <Id>13</Id>
     <Alias>b9</Alias>
     <Description>User Interface (UI) Development</Description>
-    <createdAtDate>2024-09-03T00:00:00</createdAtDate>
-    <RequiredEffortTime>P10DT23H29M</RequiredEffortTime>
-    <Copmlexity>Intermediate</Copmlexity>
+    <createdAtDate>2024-03-10T00:00:00</createdAtDate>
+    <RequiredEffortTime>P58DT22H52M</RequiredEffortTime>
+    <Copmlexity>Advanced_Beginner</Copmlexity>
     <DeadlineDate xsi:nil="true" />
   </Task>
   <Task>
     <Id>14</Id>
     <Alias>V1</Alias>
     <Description>User Acceptance Testing (UAT) Preparation</Description>
-    <createdAtDate>2024-09-03T00:00:00</createdAtDate>
-    <RequiredEffortTime>P45DT8H29M</RequiredEffortTime>
-    <Copmlexity>Advanced</Copmlexity>
+    <createdAtDate>2024-03-10T00:00:00</createdAtDate>
+    <RequiredEffortTime>P40DT10H45M</RequiredEffortTime>
+    <Copmlexity>Beginner</Copmlexity>
+    <DeadlineDate xsi:nil="true" />
+  </Task>
+  <Task>
+    <Id>15</Id>
+    <Alias>V2</Alias>
+    <Description>Beta Release</Description>
+    <createdAtDate>2024-03-10T00:00:00</createdAtDate>
+    <RequiredEffortTime>P25DT15H</RequiredEffortTime>
+    <Copmlexity>Intermediate</Copmlexity>
     <DeadlineDate xsi:nil="true" />
   </Task>
   <Task>
@@ -139,8 +148,8 @@
     <Id>16</Id>
     <Alias>g1</Alias>
     <Description>UAT Execution</Description>
-    <createdAtDate>2024-09-03T00:00:00</createdAtDate>
-    <RequiredEffortTime>P24DT17H46M</RequiredEffortTime>
+    <createdAtDate>2024-03-10T00:00:00</createdAtDate>
+    <RequiredEffortTime>P58DT23H10M</RequiredEffortTime>
     <Copmlexity>Beginner</Copmlexity>
     <DeadlineDate xsi:nil="true" />
   </Task>
@@ -148,17 +157,17 @@
     <Id>17</Id>
     <Alias>g2</Alias>
     <Description>Refinement and Bug Fixing</Description>
-    <createdAtDate>2024-09-03T00:00:00</createdAtDate>
-    <RequiredEffortTime>P50DT3H22M</RequiredEffortTime>
-    <Copmlexity>Advanced</Copmlexity>
+    <createdAtDate>2024-03-10T00:00:00</createdAtDate>
+    <RequiredEffortTime>P23DT22H27M</RequiredEffortTime>
+    <Copmlexity>Intermediate</Copmlexity>
     <DeadlineDate xsi:nil="true" />
   </Task>
   <Task>
     <Id>18</Id>
     <Alias>g3</Alias>
     <Description>Documentation Update</Description>
-    <createdAtDate>2024-09-03T00:00:00</createdAtDate>
-    <RequiredEffortTime>P51DT21H7M</RequiredEffortTime>
+    <createdAtDate>2024-03-10T00:00:00</createdAtDate>
+    <RequiredEffortTime>P54DT12H9M</RequiredEffortTime>
     <Copmlexity>Intermediate</Copmlexity>
     <DeadlineDate xsi:nil="true" />
   </Task>
@@ -166,27 +175,18 @@
     <Id>19</Id>
     <Alias>g4</Alias>
     <Description>Deployment Planning</Description>
-    <createdAtDate>2024-09-03T00:00:00</createdAtDate>
-    <RequiredEffortTime>P17DT10H3M</RequiredEffortTime>
-    <Copmlexity>Beginner</Copmlexity>
+    <createdAtDate>2024-03-10T00:00:00</createdAtDate>
+    <RequiredEffortTime>P1DT3H47M</RequiredEffortTime>
+    <Copmlexity>Advanced</Copmlexity>
     <DeadlineDate xsi:nil="true" />
   </Task>
   <Task>
     <Id>20</Id>
     <Alias>g6</Alias>
     <Description>Production Deployment</Description>
-    <createdAtDate>2024-09-03T00:00:00</createdAtDate>
-    <RequiredEffortTime>P57DT11H37M</RequiredEffortTime>
-    <Copmlexity>Beginner</Copmlexity>
-    <DeadlineDate xsi:nil="true" />
-  </Task>
-  <Task>
-    <Id>21</Id>
-    <Alias>noam</Alias>
-    <Description>noam</Description>
-    <createdAtDate>2024-09-03T00:00:00</createdAtDate>
-    <RequiredEffortTime>P7D</RequiredEffortTime>
-    <Copmlexity>Advanced_Beginner</Copmlexity>
+    <createdAtDate>2024-03-10T00:00:00</createdAtDate>
+    <RequiredEffortTime>P49DT11H23M</RequiredEffortTime>
+    <Copmlexity>Intermediate</Copmlexity>
     <DeadlineDate xsi:nil="true" />
   </Task>
 </ArrayOfTask>
