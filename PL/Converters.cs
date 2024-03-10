@@ -98,6 +98,7 @@ class ConvertDateToWidth : IValueConverter
             catch (Exception e)
             {
                 MessageBox.Show(e.Message);
+               
                 return 0;
 
             }
