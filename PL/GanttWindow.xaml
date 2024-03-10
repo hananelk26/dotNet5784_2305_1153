@@ -5,28 +5,42 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PL"
         mc:Ignorable="d"
-        Title="GanttWindow" Height="650" Width="1000"
+        Title="GanttWindow" Height="650" Width="1000" Top="0" Background="Beige"
         DataContext="{Binding RelativeSource={RelativeSource Mode=Self}}">
-    <Grid>
-        <TextBlock Text="Chart" Margin="21,19,713,0" VerticalAlignment="Top" Height="31" />
+    <Grid >
 
-        <Grid>
+        <Grid.RowDefinitions >
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="20"/>
+        </Grid.RowDefinitions>
 
-            <ListBox ItemsSource="{Binding TaskList}" Margin="0,66,0,0">
+        <Grid Grid.Row="0" Margin="0,10,0,24">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="433*"/>
+                <ColumnDefinition Width="567*"/>
+            </Grid.ColumnDefinitions>
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <TextBlock Text="Chart of tasks (To see task details please stand on the rectangle that represents the task)" FontSize="20" Grid.Row="0" Margin="0,-8,0,-3" HorizontalAlignment="Center" Grid.ColumnSpan="2" Grid.RowSpan="2" />
+            <TextBlock Text="{Binding StartDateOfProject , StringFormat={}{0:d/M/yyyy}}" Width="70" FontSize="15" HorizontalAlignment="Left" Margin="10,10,0,-24" Grid.Row="1" />
+            <TextBlock Text="{Binding EndDateOfProject , StringFormat={}{0:d/M/yyyy}}" Width="70" FontSize="15" HorizontalAlignment="Left" Margin="485,10,0,-23" Grid.Row="1" Grid.Column="1"/>
+
+
+
+        </Grid>
+
+        <Grid Grid.Row="1">
+
+            <ListBox ItemsSource="{Binding TaskList}" Background="LightBlue"  PreviewMouseWheel="ListBox_PreviewMouseWheel" Margin="0,0,0,0">
                 <ListBox.ItemTemplate>
                     <DataTemplate>
                         <Grid>
-
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="Auto" />
-                                <ColumnDefinition Width="*" />
-                            </Grid.ColumnDefinitions>
-
-                            <!-- Task ID -->
-                            <TextBlock Grid.Column="0" Text="{Binding Alias}" Width="70" Margin="0,0,5,0" VerticalAlignment="Center" />
-
                             <!-- Task duration represented by Border -->
-                            <Border Grid.Column="1" BorderBrush="Black" BorderThickness="1"
+                            <Border BorderBrush="Black" BorderThickness="1"
                             Width="{Binding Converter={StaticResource ConvertDateToWidthKey}}"
                             Margin="{Binding Converter={StaticResource ConvertDateToMarginKey}}"
                             Height="25">
@@ -44,7 +58,7 @@
                                         <TextBlock Text="Task Description: " FontWeight="Bold"/>
                                         <TextBlock Text="{Binding Description}"/>
                                         <TextBlock Text="Task Complexity: " FontWeight="Bold"/>
-                                        <TextBlock Text="{Binding Complexity}"/>
+                                        <TextBlock Text="{Binding Complexyity}"/>
                                         <TextBlock Text="Task Deliverables: " FontWeight="Bold"/>
                                         <TextBlock Text="{Binding Deliverables}"/>
                                         <TextBlock Text="ScheduledDate: " FontWeight="Bold"/>
@@ -52,7 +66,7 @@
                                         <TextBlock Text="Task ForecastDate: " FontWeight="Bold"/>
                                         <TextBlock Text="{Binding ForecastDate}"/>
                                         <TextBlock Text="Task RequiredEffortTime: " FontWeight="Bold"/>
-                                        <TextBlock Text="{Binding RequiredEffortTime}"/>
+                                        <TextBlock Text="{Binding RequiredEfforTime}"/>
                                         <TextBlock Text="Task Status: " FontWeight="Bold"/>
                                         <TextBlock Text="{Binding Status}"/>
                                         <TextBlock Text="Task Remarks: " FontWeight="Bold"/>
@@ -84,35 +98,24 @@
 
         </Grid>
 
-        <Grid>
-            <Rectangle Fill="White" Width="383" Height="19" Margin="0,0,535,10" HorizontalAlignment="Right" VerticalAlignment="Bottom" Opacity="0.8"
-               RadiusX="9" RadiusY="9">
-            </Rectangle>
-        </Grid>
-        
-        <Grid>
-            <!-- Black circle -->
 
-            <!-- Colored circle -->
-            <Ellipse Width="10" Height="10" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,699,12" Fill="#5353ec"/>
-        </Grid>
-        <Grid>
-            <!-- Black circle -->
 
-            <!-- Colored circle -->
-            <Ellipse Width="10" Height="10" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,612,12" Fill="#808080"/>
-        </Grid>
-        <Grid>
-            <!-- Black circle -->
-
-            <!-- Colored circle -->
-            <Ellipse Width="10" Height="10" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,552,12" Fill="#e6e619"/>
+        <Grid Grid.Row="2">
+            <TextBlock  HorizontalAlignment="Right"  Margin="0,0,741,-4" FontSize="15" FontWeight="SemiBold"  TextWrapping="Wrap" Text="Scheduled" VerticalAlignment="Bottom" Height="24" Width="65" />
+            <Ellipse Width="18" Height="18" HorizontalAlignment="Left" VerticalAlignment="Center"  Fill="#5353ec" RenderTransformOrigin="0.683,0.561" Margin="259,0,0,0"/>
         </Grid>
 
-      
-        <TextBlock  HorizontalAlignment="Right"  Margin="0,0,766,10" FontSize="10"  FontWeight="SemiBold" TextWrapping="Wrap" Text="Scheduled" VerticalAlignment="Bottom" Height="15" Width="65"/>
-        <TextBlock  HorizontalAlignment="Right"  Margin="0,0,691,10" FontSize="10" FontWeight="SemiBold"  TextWrapping="Wrap" Text="On Track" VerticalAlignment="Bottom" Height="15" Width="65"/>
-        <TextBlock  HorizontalAlignment="Right"  Margin="0,0,528,10" FontSize="10" FontWeight="SemiBold"  TextWrapping="Wrap" Text="Done" VerticalAlignment="Bottom" Height="15" Width="65"/>
+        <Grid Grid.Row="2">
+
+            <TextBlock  HorizontalAlignment="Left"  Margin="317,0,0,0" FontSize="15"  FontWeight="SemiBold" TextWrapping="Wrap" Text="On Track" VerticalAlignment="Top" Height="28" Width="65"/>
+            <Ellipse Width="18" Height="18" HorizontalAlignment="Left" VerticalAlignment="Center"  Fill="#808080" RenderTransformOrigin="0.278,0.435" Margin="382,0,0,0"/>
+        </Grid>
+
+        <Grid Grid.Row="2">
+            <Ellipse Width="18" Height="18" HorizontalAlignment="Left" VerticalAlignment="Center" Fill="#e6e619" RenderTransformOrigin="-0.333,0.246" Margin="472,0,0,0"/>
+            <TextBlock  HorizontalAlignment="Left"  Margin="431,0,0,0" FontSize="15" FontWeight="SemiBold"  TextWrapping="Wrap" Text="Done" />
+        </Grid>
+
     </Grid>
 
 

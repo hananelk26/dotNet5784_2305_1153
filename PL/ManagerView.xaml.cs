@@ -22,7 +22,6 @@ namespace PL
     /// </summary>
     public partial class ManagerView : Window
     {
-        static readonly BlApi.IBl s_bl = BlApi.Factory.Get();
         public ManagerView()
         {
             InitializeComponent();
@@ -36,6 +35,8 @@ namespace PL
             }
            
         }
+
+        static readonly BlApi.IBl s_bl = BlApi.Factory.Get();
 
         /// <summary>
         /// Event handler for the EngineerListWindow button click.

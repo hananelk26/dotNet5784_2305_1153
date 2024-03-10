@@ -9,6 +9,7 @@ using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
+using System.Windows.Media.Animation;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
@@ -27,7 +28,7 @@ public partial class GanttWindow : Window
         TaskList = s_bl.Task.ReadAll()
                    .OrderBy(task => task.ScheduledDate)
                    .ThenBy(task => task.Id);
-                 
+
 
     }
 
@@ -73,6 +74,54 @@ public partial class GanttWindow : Window
     // Using a DependencyProperty as the backing store for TaskList.  This enables animation, styling, binding, etc...
     public static readonly DependencyProperty TaskListProperty =
         DependencyProperty.Register("TaskList", typeof(IEnumerable<BO.Task>), typeof(GanttWindow), new PropertyMetadata(null));
+
+    private void ListBox_PreviewMouseWheel(object sender, System.Windows.Input.MouseWheelEventArgs e)
+    {
+        if (sender is ListBox listBox)
+        {
+            // Get the ScrollViewer within the ListBox
+            ScrollViewer scrollViewer = GetScrollViewer(listBox);
+
+            if (scrollViewer != null)
+            {
+                double delta = e.Delta;
+                double scrollSpeed = 50.0; // Adjust the scroll speed as needed
+
+                // Calculate the new offset based on the direction of the mouse wheel
+                double newOffset = scrollViewer.VerticalOffset - (delta / scrollSpeed);
+
+                // Ensure the new offset is within bounds
+                newOffset = Math.Max(0, Math.Min(newOffset, scrollViewer.ScrollableHeight));
+
+                // Set the new vertical offset directly without animation
+                scrollViewer.ScrollToVerticalOffset(newOffset);
+
+                e.Handled = true;
+            }
+        }
+    }
+
+    private ScrollViewer GetScrollViewer(DependencyObject depObj)
+    {
+        if (depObj is ScrollViewer viewer)
+        {
+            return viewer;
+        }
+
+        for (int i = 0; i < VisualTreeHelper.GetChildrenCount(depObj); i++)
+        {
+            DependencyObject child = VisualTreeHelper.GetChild(depObj, i);
+
+            ScrollViewer childViewer = GetScrollViewer(child);
+            if (childViewer != null)
+            {
+                return childViewer;
+            }
+        }
+
+        return null;
+    }
+
 
 
 }

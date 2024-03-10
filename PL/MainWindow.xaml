@@ -5,13 +5,13 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PL"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800" Background ="#40E0D0">
+        Title="MainWindow" Height="450" Width="800" Top="100" Left="100" Background ="BurlyWood">
     <Grid>
 
         <!--
         <Image Source="/image.jpg" Margin="0,0,0,69"/> 
         -->
-
+        <!--<Image Source="/Image1.jpg" Margin="530,32,32,214" />-->
         <Button Content="Manager" HorizontalAlignment="Left" Margin="50,274,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5" Width="252" Height="52" Click="Button_Click"/>
 
         <Button Content="Engineer" HorizontalAlignment="Left" Margin="517,279,0,0" VerticalAlignment="Top" Width="233" Height="54" RenderTransformOrigin="0.747,0.433" Click="Button_Click_1"/>

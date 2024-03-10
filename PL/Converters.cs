@@ -126,7 +126,7 @@ class ConvertDateToMargin : IValueConverter
     {
         if (value is BO.Task task)
         {
-            DateTime StartDateOfCurrentTask = (DateTime)task.ScheduledDate!; //get the task duration
+            DateTime ScheduledDateOfCurrentTask = (DateTime)task.ScheduledDate!; //get the task duration
 
             TimeSpan allProjectDuration;
             DateTime startDateOfProject;
@@ -145,7 +145,7 @@ class ConvertDateToMargin : IValueConverter
 
             }
 
-            return new Thickness((((TimeSpan)(StartDateOfCurrentTask - startDateOfProject) / allProjectDuration) * 1000), 0, 0, 0); //return the task margin
+            return new Thickness((((TimeSpan)(ScheduledDateOfCurrentTask - startDateOfProject) / allProjectDuration) * 1000), 0, 0, 0); //return the task margin
         }
         return 0;
     }
