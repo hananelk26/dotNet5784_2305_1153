@@ -16,9 +16,9 @@ internal class MainClockImplementation : IMainClock
         _dal.MainClock.addDay(day);
     }
 
-    public void addHour(int h)
+    public void addMonth(int m)
     {
-        _dal.MainClock.addHour(h);
+        _dal.MainClock.addMonth(m);
     }
 
     public void addYear(int y)

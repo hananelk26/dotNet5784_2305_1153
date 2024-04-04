@@ -65,5 +65,11 @@ namespace PL
             s_bl.MainClock.reset();
             CustomDateTime = s_bl.MainClock.GetMainClock();
         }
+
+        private void addMonth_Click(object sender, RoutedEventArgs e)
+        {
+            s_bl.MainClock.addMonth(1);
+            CustomDateTime = s_bl.MainClock.GetMainClock();
+        }
     }
 }

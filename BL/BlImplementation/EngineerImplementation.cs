@@ -76,9 +76,8 @@ internal class EngineerImplementation : IEngineer
             // Handle the case where the engineer does not exist
             throw new BO.BlDoesNotExistException($"Engineer with ID={id} does Not exist");
 
-        if (condition(doEngineer))
+        if (condition(doEngineer))// The engineer is currently working on a task.
         {
-            // Check if the engineer is currently performing a task
             var ret = _dal.Task.ReadAll().Where(t => t!.EngineerId != null && t.EngineerId == doEngineer.Id && t.CompleteDate == null).FirstOrDefault();
             int IdOfTask = ret!.Id;
             string AliasOfTask = ret!.Alias;
@@ -131,10 +130,11 @@ internal class EngineerImplementation : IEngineer
                    Level = (BO.EngineerExperience)item.Level,
                    Task = new BO.TaskInEngineer()
                    {
-                       Id = _dal.Task.ReadAll().Where(t => t?.EngineerId == item.Id && t.CompleteDate == null).FirstOrDefault()!.Id,
-                       Alias = _dal.Task.ReadAll().Where(t => t?.EngineerId == item.Id && t.CompleteDate == null).FirstOrDefault()!.Alias
+                       Id = _dal.Task.ReadAll().Where(t =>t!.EngineerId!= null && t?.EngineerId == item.Id && t.CompleteDate == null).FirstOrDefault()!.Id,
+                       Alias = _dal.Task.ReadAll().Where(t => t!.EngineerId != null && t?.EngineerId == item.Id && t.CompleteDate == null).FirstOrDefault()!.Alias
                    }
                }
+
                : new BO.Engineer
                {
                    Id = item.Id,
@@ -163,7 +163,7 @@ internal class EngineerImplementation : IEngineer
         {
             if (doEng.Level > (DO.EngineerExperience)item.Level)
             {
-                throw new BO.BlinputValidity("There is a problem with the integrity of the level of the engineer");
+                throw new BO.BlinputValidity("An engineer's level cannot decrease");
             }
         }
 

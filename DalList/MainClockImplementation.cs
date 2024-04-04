@@ -26,19 +26,22 @@ internal class MainClockImplementation : IMainClock
 
     public void addDay(int day)
     {
-       DateTime temp = (DateTime)( DataSource.Config.StartDateOfMainClock);
-       temp.AddDays(day);
+        DateTime temp = (DateTime)(DataSource.Config.StartDateOfMainClock);
+        temp = temp.AddDays(day);
+        DataSource.Config.StartDateOfMainClock = temp;
     }
 
     public void addYear(int y)
     {
         DateTime temp = (DateTime)(DataSource.Config.StartDateOfMainClock);
-        temp.AddYears(y);
+        temp = temp.AddYears(y);
+        DataSource.Config.StartDateOfMainClock = temp;
     }
 
-    public void addHour(int h)
+    public void addMonth(int m)
     {
         DateTime temp = (DateTime)(DataSource.Config.StartDateOfMainClock);
-        temp.AddHours(h);
+        temp = temp.AddMonths(m);
+        DataSource.Config.StartDateOfMainClock = temp;
     }
 }

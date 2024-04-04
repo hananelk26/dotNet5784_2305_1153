@@ -65,6 +65,7 @@ internal class TaskImplementation : ITask
                     }
                 }
             }
+            
             return newId;
         }
         catch (DO.DalAlreadyExistsException ex)
@@ -348,7 +349,7 @@ internal class TaskImplementation : ITask
 
                 if (ThereAreNoPreviousTasksThatDoNotHaveAScheduleDate)
                 {
-                    DO.Task UpdateTask = Task with { ScheduledDate = Max };
+                    DO.Task UpdateTask = Task with { ScheduledDate = Max };//Starts at the estimated time when all previous tasks have already finished
                     _dal.Task.Update(UpdateTask);
                     taskToRemove.Add(Task);
                 }

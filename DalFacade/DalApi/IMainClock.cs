@@ -19,6 +19,6 @@ public interface IMainClock
 
     public void addYear(int y);
 
-    public void addHour(int h);
+    public void addMonth(int m);
 
 }
