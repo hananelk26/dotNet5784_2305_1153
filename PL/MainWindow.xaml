@@ -5,7 +5,19 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PL"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800" Top="100" Left="100" Background ="BurlyWood">
+        Title="MainWindow" Height="450" Width="800" Top="100" Left="100" Background ="BurlyWood" DataContext="{Binding RelativeSource={RelativeSource Mode=Self}}">
+
+    <Window.Resources>
+        <Style TargetType = "Button">
+            <Style.Triggers>
+                <Trigger Property = "IsMouseOver" Value = "True">
+                    <Setter Property = "Foreground" Value = "Blue" />
+                    <Setter Property="FontSize"  Value="18" />
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+    </Window.Resources>
+
     <Grid>
 
         <!--
@@ -15,10 +27,19 @@
         <Button Content="Manager" HorizontalAlignment="Left" Margin="50,274,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5" Width="252" Height="52" Click="Button_Click"/>
 
         <Button Content="Engineer" HorizontalAlignment="Left" Margin="517,279,0,0" VerticalAlignment="Top" Width="233" Height="54" RenderTransformOrigin="0.747,0.433" Click="Button_Click_1"/>
-        <Button Content="Add Year" HorizontalAlignment="Left" Margin="429,154,0,0" VerticalAlignment="Top" Width="96" Height="54" RenderTransformOrigin="0.747,0.433" Click="AddYearButton_Click"/>
-        <Button Content="Add Day" HorizontalAlignment="Left" Margin="227,154,0,0" VerticalAlignment="Top" Width="96" Height="54" RenderTransformOrigin="0.747,0.433" Click="AddDayButton_Click"/>
-        <DatePicker SelectedDate="{Binding CustomDateTime, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type local:MainWindow}}}" IsEnabled="False" HorizontalAlignment="Left" Margin="275,120,0,0" VerticalAlignment="Top" Height="34" Width="226"/>
-        <Button Content="Resete clock" HorizontalAlignment="Left" Margin="340,162,0,0" VerticalAlignment="Top" Height="38" Click="ReseteButton_Click"/>
+        <Button Content="Add Year" HorizontalAlignment="Left" Margin="465,154,0,0" VerticalAlignment="Top" Width="143" Height="54" RenderTransformOrigin="0.747,0.433" Click="AddYearButton_Click"/>
+        <Button Content="Add Day" HorizontalAlignment="Left" Margin="134,154,0,0" VerticalAlignment="Top" Width="147" Height="54" RenderTransformOrigin="0.747,0.433" Click="AddDayButton_Click"/>
+        <Button Content="Resete clock"  HorizontalAlignment="Left" Margin="306,162,0,0" VerticalAlignment="Top" Height="38" Click="ReseteButton_Click" Width="130"/>
+        <TextBlock FontSize="20" HorizontalAlignment="Center" Margin="0,119,0,0" TextWrapping="Wrap" Text="{Binding CustomDateTime, StringFormat='dd MMMM yyyy'}" VerticalAlignment="Top" Height="53" Width="160">
+            <TextBlock.Foreground>
+                <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
+                    <GradientStop Color="DarkBlue" Offset="0"/>
+                    <GradientStop Color="DarkBlue" Offset="1"/>
+                </LinearGradientBrush>
+            </TextBlock.Foreground>
+
+        </TextBlock>
+        <Button Content="Add Month" HorizontalAlignment="Left" Margin="306,217,0,0" VerticalAlignment="Top" Width="134" Height="37" Click="addMonth_Click"/>
 
 
 

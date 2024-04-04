@@ -65,23 +65,7 @@ internal class TaskImplementation : ITask
                     }
                 }
             }
-            if (boTask.Dependencies != null)
-            {
-                foreach (var dependId in boTask.Dependencies)
-                {
-                    DO.Dependency dependency = new DO.Dependency()
-                    {
-                        DependentTask = newId,
-                        DependsOnTask = dependId.Id
-                    };
-
-                    var ret = _dal.Dependency.ReadAll(d => d.DependentTask == newId && d.DependsOnTask == dependId.Id).FirstOrDefault();
-                    if (ret == null)
-                    {
-                        _dal.Dependency.Create(dependency);
-                    }
-                }
-            }
+            
             return newId;
         }
         catch (DO.DalAlreadyExistsException ex)
@@ -365,7 +349,7 @@ internal class TaskImplementation : ITask
 
                 if (ThereAreNoPreviousTasksThatDoNotHaveAScheduleDate)
                 {
-                    DO.Task UpdateTask = Task with { ScheduledDate = Max };
+                    DO.Task UpdateTask = Task with { ScheduledDate = Max };//Starts at the estimated time when all previous tasks have already finished
                     _dal.Task.Update(UpdateTask);
                     taskToRemove.Add(Task);
                 }

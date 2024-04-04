@@ -53,11 +53,11 @@ internal class MainClockImplementation : IMainClock
         SetMainClock(temp);
     }
 
-    public void addHour(int h)
+    public void addMonth(int m)
     {
         DateTime temp = (DateTime)GetMainClock();
         temp = (DateTime)temp;
-        temp = temp.AddHours(h);
+        temp = temp.AddMonths(m);   
         SetMainClock(temp);
     }
 }
