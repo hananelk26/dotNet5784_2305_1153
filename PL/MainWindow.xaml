@@ -5,13 +5,13 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PL"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800" Top="100" Left="100" Background ="BurlyWood" DataContext="{Binding RelativeSource={RelativeSource Mode=Self}}">
+        Title="MainWindow" Height="450" Width="800" Top="100" Left="100" Background ="BurlyWood" DataContext="{Binding RelativeSource={RelativeSource Mode=Self}}" Icon="https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcQKy7jv4844402FDPBmtfNl0wMfGpskFJ7ocDlRUu2FVYY14kZry8KxVdmB9WJ9">
 
     <Grid>
 
-        <!--
-        <Image Source="/image.jpg" Margin="0,0,0,69"/> 
-        -->
+        
+        <Image Source="https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcS46wX8BhFUuPw_CXbQI6o7CVSpkgtPAUGIEQr3Cw4S9ryo1Kb81JQKHT1OHPaR" Margin="0,0,0,-5"/> 
+        
         <!--<Image Source="/Image1.jpg" Margin="530,32,32,214" />-->
         <Button Content="Manager" HorizontalAlignment="Left" Margin="50,274,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5" Width="252" Height="52" Click="Button_Click"/>
 
@@ -31,8 +31,43 @@
         <Button Content="Add Month" HorizontalAlignment="Left" Margin="306,217,0,0" VerticalAlignment="Top" Width="134" Height="37" Click="addMonth_Click"/>
 
 
+        <Image Source="https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcR0EnwMY0zeuRPtfKOB3tY32yNLrb39NAE5p6ROFRVuO2edNkJ7wSXUJVkWYNE0"  Margin="10,5,660,304">
+            <Image.RenderTransform>
+                <TranslateTransform X="0" Y="0"/>
+            </Image.RenderTransform>
+            <Image.Triggers>
+                <EventTrigger RoutedEvent="Loaded">
+                    <BeginStoryboard>
+                        <Storyboard RepeatBehavior="Forever">
+                            <DoubleAnimation Storyboard.TargetProperty="RenderTransform.(TranslateTransform.X)"
+                                             From="0" To="5" Duration="0:0:5" AutoReverse="True"/>
+                            <DoubleAnimation Storyboard.TargetProperty="RenderTransform.(TranslateTransform.Y)"
+                                             From="0" To="170" Duration="0:0:5" AutoReverse="True"/>
+                        </Storyboard>
+                    </BeginStoryboard>
+                </EventTrigger>
+            </Image.Triggers>
+        </Image>
 
-
+        <Image Source="https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcR0EnwMY0zeuRPtfKOB3tY32yNLrb39NAE5p6ROFRVuO2edNkJ7wSXUJVkWYNE0"  Margin="663,4,7,305">
+            <Image.RenderTransform>
+                <TranslateTransform X="0" Y="0"/>
+            </Image.RenderTransform>
+            <Image.Triggers>
+                <EventTrigger RoutedEvent="Loaded">
+                    <BeginStoryboard>
+                        <Storyboard RepeatBehavior="Forever">
+                            <DoubleAnimation Storyboard.TargetProperty="RenderTransform.(TranslateTransform.X)"
+                                      From="0" To="5" Duration="0:0:5" AutoReverse="True"/>
+                            <DoubleAnimation Storyboard.TargetProperty="RenderTransform.(TranslateTransform.Y)"
+                                      From="0" To="170" Duration="0:0:5" AutoReverse="True"/>
+                        </Storyboard>
+                    </BeginStoryboard>
+                </EventTrigger>
+            </Image.Triggers>
+        </Image>
 
     </Grid>
+
+
 </Window>

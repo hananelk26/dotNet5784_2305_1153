@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:PL"
         mc:Ignorable="d"
         Title="GanttWindow" Height="650" Width="1000" Top="0" Background="Beige"
-        DataContext="{Binding RelativeSource={RelativeSource Mode=Self}}">
+        DataContext="{Binding RelativeSource={RelativeSource Mode=Self}}" Icon="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT1jFgF6dlNoJpPDa7kKis30CnJhJo4UkVUUDln6p1__C9jWllu3h3xRPRSpjx7">
     <Grid >
 
         <Grid.RowDefinitions >

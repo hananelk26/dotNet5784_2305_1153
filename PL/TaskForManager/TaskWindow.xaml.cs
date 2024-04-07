@@ -21,15 +21,15 @@ namespace PL.Task;
 public partial class TaskWindow : Window
 {
 
- 
 
-    public TaskWindow(int TheID = 0, bool currentTaskIsAssigned=false)
+
+    public TaskWindow(int TheID = 0, bool currentTaskIsAssigned = false)
     {
         InitializeComponent();
         if (TheID == 0)
         {
             CurrentTask = new BO.Task(); // add mode
-            CurrentTask.CreatedAtDate =(DateTime) s_bl.MainClock.GetMainClock();
+            CurrentTask.CreatedAtDate = (DateTime)s_bl.MainClock.GetMainClock();
         }
         else
         {
@@ -41,10 +41,10 @@ public partial class TaskWindow : Window
             {
                 Console.WriteLine("There is no task in the system with such an ID card");
             }
-         }
+        }
 
         CurrentTask.Dependencies ??= new List<TaskInList>();
-          
+
         // mark our dependencies
         SelectedDependencies = s_bl.Task.ReadAllTaskInList()
             .Select(t =>
@@ -55,7 +55,7 @@ public partial class TaskWindow : Window
                     t.IsSelected = true;
                 }
                 return t;
-              });
+            });
         SelectedDependencies = SelectedDependencies.Where(task => task.Id != TheID);// In the situation of updating a task, you need to make sure that the task you want to update does not appear in the dependent list.
 
         if (s_bl.Time.StartDate() != null)
@@ -64,7 +64,7 @@ public partial class TaskWindow : Window
         }
         else
         {
-            DateOfProject= false;
+            DateOfProject = false;
         }
 
         theCurrentTaskIsAssigned = currentTaskIsAssigned;
@@ -144,8 +144,11 @@ public partial class TaskWindow : Window
         // Retrieve the text content of the clicked button
         string buttonText = clickedButton.Content.ToString()!;
 
-        CurrentTask.Dependencies = SelectedDependencies.Where(t => t.IsSelected == true).ToList();
+        //if (s_bl.IsCircularDependency(SelectedDependencies.Where(t => t.IsSelected == true).ToList(),) == false)
+        //{
+        //}
 
+            CurrentTask.Dependencies = SelectedDependencies.Where(t => t.IsSelected == true).ToList();
 
         // Check if the button text is "Add"
         if (buttonText == "Add")
@@ -214,13 +217,13 @@ public partial class TaskWindow : Window
             SelectedDependencies = SelectedDependencies.Select(t =>
             {
                 if (t.Alias == alias)
-                    t.IsSelected = false; 
+                    t.IsSelected = false;
                 return t;
             }); // Convert the result back to a list and assign it to SelectedDependencies
         }
     }
 
-    
+
 
     private void StartTaskButton_Click(object sender, RoutedEventArgs e)
     {

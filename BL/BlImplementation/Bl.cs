@@ -2,7 +2,9 @@
 
 namespace BlImplementation;
 using BlApi;
+using BO;
 using DO;
+using System.Collections.Generic;
 using System.Xml.Linq;
 
 /// <summary>
@@ -50,4 +52,8 @@ internal class Bl : IBl
         
     }
 
+    public bool IsCircularDependency(List<TaskInList> dependencyes, int IdOfDependentTask)
+    {
+        throw new NotImplementedException();
+    }
 }

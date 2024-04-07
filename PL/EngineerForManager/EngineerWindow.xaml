@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PL.Engineer"
         mc:Ignorable="d"
-        Title="EngineerWindow" Background="Aqua" Width="350" Height="450" DataContext="{Binding CurrentEngineer, RelativeSource={RelativeSource Self}, Mode=TwoWay}">
+        Title="EngineerWindow" Background="Aqua" Width="350" Height="450" DataContext="{Binding CurrentEngineer, RelativeSource={RelativeSource Self}, Mode=TwoWay}" Icon="https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcTzfBWtoMqHuikjG8kUQdExImtRYqAmazJrYJpEKWHwIahrf8YxjJ1blh3Bipba">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>

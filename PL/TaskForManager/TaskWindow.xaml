@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:PL.Task"
         
         mc:Ignorable="d"
-        Title="TaskWindow" Background="Aqua" Height="450" Width="800" DataContext="{Binding RelativeSource={RelativeSource  Mode=Self}}">
+        Title="TaskWindow" Background="Aqua" Height="450" Width="800" DataContext="{Binding RelativeSource={RelativeSource  Mode=Self}}" Icon="https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcQJeWFeuU-X1W7lEcMrlGJoRXYoq2tD90VGieuqQB55op0aOFsRiJZtbeTTmU2q">
 
     <Grid>
         <Grid.RowDefinitions>

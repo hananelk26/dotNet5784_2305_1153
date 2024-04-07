@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PL.EngineerForEmployee"
         mc:Ignorable="d"
-        Title="MainWindowEngineer" Background="Bisque" Height="450" Width="800" >
+        Title="MainWindowEngineer" Background="Bisque" Height="450" Width="800" Icon="https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcTzfBWtoMqHuikjG8kUQdExImtRYqAmazJrYJpEKWHwIahrf8YxjJ1blh3Bipba" >
     <Grid>
         <Button Content="current task" HorizontalAlignment="Left" Margin="551,0,0,0" VerticalAlignment="Center" Height="119" Width="148" Click="CurrentTaskButton_Click"/>
         <Button Content="Task list" HorizontalAlignment="Left" Margin="121,0,0,0" VerticalAlignment="Center" Height="119" Width="137" Click="TaskListButton_Click"/>

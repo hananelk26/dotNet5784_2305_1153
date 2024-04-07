@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PL.EngineerForEmployee"
         mc:Ignorable="d"
-        Title="CheckTheEngineer" Height="200" Width="411" Background ="Bisque" Top="150">
+        Title="CheckTheEngineer" Height="200" Width="411" Background ="Bisque" Top="150" Icon="https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcTzfBWtoMqHuikjG8kUQdExImtRYqAmazJrYJpEKWHwIahrf8YxjJ1blh3Bipba">
     <Grid >
         <TextBox HorizontalAlignment="Left" Margin="165,61,0,0" TextWrapping="Wrap"  Text="{Binding EmployeeId, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" Width="193" Height="18" PreviewTextInput="TextBox_PreviewTextInput" />
         <Label Content="Enter your ID" HorizontalAlignment="Left" Margin="206,22,0,0" VerticalAlignment="Top" Height="34" Width="168"/>

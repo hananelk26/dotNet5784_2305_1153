@@ -5,17 +5,31 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PL"
         mc:Ignorable="d"
-        Title="ManagerView" Background="Bisque"  Height="450" Width="800" Left="100" Top="100" DataContext="{Binding RelativeSource={RelativeSource Mode=Self}}">
+        Title="ManagerView" Background="Bisque"  Height="450" Width="800" Left="100" Top="100" DataContext="{Binding RelativeSource={RelativeSource Mode=Self}}" Icon="https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcSBJPt-ot_p52MhyGhepYJHKCl2OU7CsFuMZIkU399g0DPePSvVxLOGlskBSc-Y">
+
+    <Window.Resources>
+        <Style TargetType="Label">
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding isADateForProject}" Value="True">
+                    <Setter Property="Foreground" Value="Brown"/>
+                </DataTrigger>
+                <DataTrigger Binding="{Binding isADateForProject}" Value="False">
+                    <Setter Property="Foreground" Value="Blue"/>
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
+    </Window.Resources>
+
     <Grid>
 
-
-        <Button Content="Engineers" Background="Turquoise" HorizontalAlignment="Left" Margin="88,115,0,0" VerticalAlignment="Top" Height="69" Width="224" Click="EngineerListWindow" FontSize="36"/>
+         <Button Content="Engineers" Background="Turquoise" HorizontalAlignment="Left" Margin="87,142,0,0" VerticalAlignment="Top" Height="69" Width="224" Click="EngineerListWindow" FontSize="36"/>
         <Button Content="INITDB" IsEnabled="{Binding isResetButtonHasBeenPressed}" Background="Turquoise"  HorizontalAlignment="Left" Margin="26,355,0,0" VerticalAlignment="Top" Height="47" Width="133" FontSize="36" Click="Initialization"/>
         <Button Content="Reset" Background="Turquoise"  HorizontalAlignment="Left" Margin="627,355,0,0" VerticalAlignment="Top" Height="47" Width="126" FontSize="36" Click="resetAllData"/>
-        <Button Content="Tasks" Background="Turquoise"  HorizontalAlignment="Left" Margin="465,115,0,0" VerticalAlignment="Top" Height="70" Width="224" FontSize="36" Click="TaskListButton_Click" />
-        <Button Content="Gantt Chart" IsEnabled="{Binding isADateForProject}" Background="Turquoise"  HorizontalAlignment="Left" Margin="283,203,0,0" VerticalAlignment="Top" Height="69" Width="224" FontSize="36" Click="GantButton_Click"  />
-        <DatePicker SelectedDateChanged="DateOfStartProjectDatePicker_SelectedDateChanged" IsEnabled="{Binding isADateForProject,Converter={StaticResource ConvertDateForProjectToIsEnabledKey} }" SelectedDate="{Binding DateOfProject}"  Background="#FF4050E0" HorizontalAlignment="Left" Margin="251,43,0,0" VerticalAlignment="Top" Height="26" Width="288"/>
-        <Label Content="Enter a date for the start of the project" Background="Turquoise"  HorizontalAlignment="Left" Margin="251,69,0,0" VerticalAlignment="Top" Width="288"/>
+        <Button Content="Tasks" Background="Turquoise"  HorizontalAlignment="Left" Margin="466,139,0,0" VerticalAlignment="Top" Height="70" Width="224" FontSize="36" Click="TaskListButton_Click" />
+        <Button Content="Gantt Chart" IsEnabled="{Binding isADateForProject}" Background="Turquoise"  HorizontalAlignment="Left" Margin="279,242,0,0" VerticalAlignment="Top" Height="69" Width="224" FontSize="36" Click="GantButton_Click"  />
+        <DatePicker SelectedDateChanged="DateOfStartProjectDatePicker_SelectedDateChanged" IsEnabled="{Binding isADateForProject,Converter={StaticResource ConvertDateForProjectToIsEnabledKey} }" SelectedDate="{Binding DateOfProject}"  Background="#FF4050E0" HorizontalAlignment="Left" Margin="252,67,0,0" VerticalAlignment="Top" Height="26" Width="288"/>
+        <Label Content="Enter a date for the start of the project" Background="Turquoise"  HorizontalAlignment="Left" Margin="251,93,0,0" VerticalAlignment="Top" Width="288"/>
+        <Label Content="Admin screen" FontFamily="Blackadder ITC" FontSize="50" HorizontalContentAlignment="Center" HorizontalAlignment="Left" Margin="215,348,0,0" VerticalAlignment="Top" Height="64" Width="351"/>
         <!--<Button Content="Creating a schedule" Background="Turquoise"  HorizontalAlignment="Left" Margin="350,217,0,0" VerticalAlignment="Top" Height="69" Width="352" FontSize="36" Click="CreatingAScheduleButton_Click"  />-->
 
 

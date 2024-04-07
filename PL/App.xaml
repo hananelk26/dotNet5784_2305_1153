@@ -21,11 +21,26 @@
             <GradientStop Color="Red" Offset="1" />
         </LinearGradientBrush>
 
-        <Style TargetType = "Button">
+        <Style TargetType="Button">
+            <Setter Property="Foreground" Value="Black" />
+            <Setter Property="FontSize" Value="14" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="{TemplateBinding Background}"
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                CornerRadius="30">
+                            <ContentPresenter HorizontalAlignment="Center"
+                                              VerticalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
             <Style.Triggers>
-                <Trigger Property = "IsMouseOver" Value = "True">
-                    <Setter Property = "Foreground" Value = "Blue" />
-                    <Setter Property="FontSize"  Value="18" />
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Foreground" Value="Blue" />
+                    <Setter Property="FontSize" Value="18" />
                 </Trigger>
             </Style.Triggers>
         </Style>
