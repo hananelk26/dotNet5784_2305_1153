@@ -26,3 +26,7 @@ The project deals with task management, maintains a list of engineers and a list
 - Use of ControlTemplate (centers - 1 point) The APP file is used regarding the style of the button control whose edges will be rounded.
 - Significant use of transformations (centers - 1 point) In the animation that is in the main window, transformation is used so that the image floats on the screen.
 - Graphics (shape) (centers - 1 point) The Gantt chart is used, the tasks are represented by rectangles.
+
+- ## Demo
+
+https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcR0EnwMY0zeuRPtfKOB3tY32yNLrb39NAE5p6ROFRVuO2edNkJ7wSXUJVkWYNE0
