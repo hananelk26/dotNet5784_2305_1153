@@ -23,8 +23,6 @@ namespace PL.Task
     {
         public TaskListWindow(int TheIdOfEngineer = 0)
         {
-            InitializeComponent();
-
             if (s_bl.Time.StartDate() != null)
             {
                 DateForeProject = true;
@@ -33,13 +31,14 @@ namespace PL.Task
             {
                 DateForeProject = false;
             }
+            InitializeComponent();
 
             ListTaskForSpesificEngineer = false;
 
             if (TheIdOfEngineer != 0)
             {
                 var TheExperience = s_bl.Engineer.Read(TheIdOfEngineer)!.Level;
-                var tasks = s_bl.Task.ReadAllTaskInList(t => t.Complexyity <= TheExperience && t.Status == BO.Status.Scheduled && (t.Dependencies == null || t.Dependencies.Any(x => x.Status != BO.Status.Done)) == false);
+                var tasks = s_bl.Task.ReadAllTaskInList(t => t.Complexyity <= TheExperience && t.Status == BO.Status.Scheduled && (t.Dependencies == null || t.Dependencies.Any(x => x.Status != BO.Status.Done) == false));
                 TaskList = tasks.ToList();
                 ListTaskForSpesificEngineer = true;
             }
@@ -71,17 +70,17 @@ namespace PL.Task
         {
             if (!ListTaskForSpesificEngineer)
             {
-                         TaskList = (Experience == BO.EngineerExperience.None) ?
-               s_bl?.Task.ReadAllTaskInList()! : s_bl?.Task.ReadAllTaskInList(item => item.Complexyity == Experience)!;
+                TaskList = (Experience == BO.EngineerExperience.None) ?
+      s_bl?.Task.ReadAllTaskInList()! : s_bl?.Task.ReadAllTaskInList(item => item.Complexyity == Experience)!;
             }
         }
 
         private void Status_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            if (!ListTaskForSpesificEngineer) 
+            if (!ListTaskForSpesificEngineer)
             {
-                        TaskList = (StatusOfTask == BO.Status.None) ?
-                s_bl?.Task.ReadAllTaskInList()! : s_bl?.Task.ReadAllTaskInList(item => item.Status == StatusOfTask)!;
+                TaskList = (StatusOfTask == BO.Status.None) ?
+        s_bl?.Task.ReadAllTaskInList()! : s_bl?.Task.ReadAllTaskInList(item => item.Status == StatusOfTask)!;
             }
         }
 
@@ -115,8 +114,16 @@ namespace PL.Task
             {
                 try
                 {
+
+                    var task = s_bl.Task.ReadAll(t => t.Status == Status.Scheduled && t.Engineer != null && t.Engineer.Id == IdOfTheEngineer).FirstOrDefault();
+                    if (task != null) // In the event that a task that has not yet started is listed under the engineer's name, then the task is removed from that engineer because he wants to take another task
+                    {
+                        task.Engineer = null;
+                        s_bl.Task.Update(task);
+                    }
+
                     var currentEngineer = s_bl.Engineer.Read(IdOfTheEngineer);
-                    if (currentEngineer!.Task == null)// check that there is no  task that assigned to engineer and not completed
+                    if (currentEngineer!.Task == null || (s_bl.Task.Read(currentEngineer.Task!.Id)!).Status != Status.OnTrack)// check that there is no  task that assigned to engineer and not completed
                     {
                         BO.TaskInList? TheTask = (sender as ListView)?.SelectedItem as BO.TaskInList;
                         var TaskOfEngineer = s_bl.Task.Read(TheTask!.Id);
@@ -139,10 +146,9 @@ namespace PL.Task
                     }
                     this.Close();
                 }
-                catch (Exception)
+                catch (Exception ex)
                 {
-                    MessageBox.Show("This task does not appear in the system", "Error adding an task", MessageBoxButton.OK, MessageBoxImage.Error);
-                    Console.WriteLine("This task does not appear in the system.");
+                    MessageBox.Show(ex.Message, "Error assigning a task", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
             }
         }

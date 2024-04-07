@@ -31,5 +31,7 @@ sealed internal class DalList : IDal
     public ITIme Time => new TimeImplementation();
 
     public IMainClock MainClock => new MainClockImplementation();
+
+    public IResetDataConfig ResetDataConfig => new ResetDataConfigImplamantation();
 }
 

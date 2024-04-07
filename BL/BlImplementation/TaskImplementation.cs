@@ -25,8 +25,15 @@ internal class TaskImplementation : ITask
     /// <returns>The ID of the created task.</returns>
     public int Create(BO.Task boTask)
     {
-        inputValidity(boTask);
 
+        try
+        {
+            inputValidity(boTask);
+        }
+        catch (Exception)
+        {
+            throw new Exception("There is a problem with the integrity of the data");
+        }
        
 
         DO.Task task = new DO.Task()
@@ -193,7 +200,14 @@ internal class TaskImplementation : ITask
     /// <exception cref="BO.BlDoesNotExistException">Thrown if the task with the specified ID does not exist.</exception>
     public void Update(BO.Task boTask)
     {
-        inputValidity(boTask);
+        try
+        {
+            inputValidity(boTask);
+        }
+        catch (Exception)
+        {
+            throw new Exception("There is a problem with the integrity of the data");
+        }
 
         var deps = _dal.Dependency.ReadAll();
         if (deps != null)

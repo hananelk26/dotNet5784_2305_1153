@@ -21,8 +21,15 @@ internal class EngineerImplementation : IEngineer
     /// <returns>The unique identifier of the newly created engineer.</returns>
     public int Create(BO.Engineer boEngineer)
     {
-        // Validate the input before creating a new engineer
-        inputValidity(boEngineer);
+        try
+        {
+            // Validate the input before creating a new engineer
+            inputValidity(boEngineer);
+        }
+        catch (Exception)
+        {
+            throw new Exception("There is a problem with the integrity of the data");
+        }
 
         // Convert BO.Engineer to DO.Engineer and create the engineer in the data access layer
         DO.Engineer doEngineer = new DO.Engineer(boEngineer.Id, boEngineer.Email, boEngineer.Cost, boEngineer.Name, (DO.EngineerExperience)boEngineer.Level);
@@ -155,7 +162,14 @@ internal class EngineerImplementation : IEngineer
     /// <exception cref="BO.BlDoesNotExistException">Thrown if the engineer with the specified ID does not exist.</exception>
     public void Update(BO.Engineer item)
     {
-        inputValidity(item);
+        try
+        {
+            inputValidity(item);
+        }
+        catch (Exception)
+        {
+            throw new Exception("There is a problem with the integrity of the data");
+        }
 
         DO.Engineer? doEng = _dal.Engineer.Read(item.Id);
 
@@ -244,7 +258,7 @@ internal class EngineerImplementation : IEngineer
     /// <exception cref="BO.BlinputValidity">Thrown if there is a problem with the integrity of the data.</exception>
     static public void inputValidity(BO.Engineer boEng)
     {
-        if (!IsValidEmail(boEng.Email) || !IsValidName(boEng.Name) || boEng.Cost < 0 || boEng.Id < 0)
+        if (!IsValidEmail(boEng.Email) || !IsValidName(boEng.Name) || boEng.Cost < 0 || boEng.Id < 0 || boEng.Id < 100000000)
         {
             throw new BO.BlinputValidity("There is a problem with the integrity of the data");
         }

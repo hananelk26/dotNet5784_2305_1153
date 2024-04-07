@@ -17,5 +17,7 @@ sealed internal class DalXml : IDal
     public ITIme Time => new TimeImplementation();
 
     public IMainClock MainClock => new MainClockImplementation();
+
+    public IResetDataConfig ResetDataConfig => new ResetDataConfigImplamantation();
 }
 

@@ -13,7 +13,13 @@ internal static class DataSource
 
         internal static DateTime? StartDate = null;
 
-        internal static DateTime? StartDateOfMainClock = null;
+        internal static DateTime? StartDateOfMainClock = DateTime.Now;
+
+        internal static void ResetID()
+        { 
+            nextTaskId = 0;
+            nextDependencyId = 0;
+        }
 
     }
 

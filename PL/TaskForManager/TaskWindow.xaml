@@ -28,54 +28,49 @@
         <Label Content="ID" HorizontalAlignment="Left" VerticalAlignment="Top" RenderTransformOrigin="9.817,1.022" Grid.Column="1" Margin="332,10,0,0"/>
         <TextBox IsEnabled="False" Text="{Binding CurrentTask.Id, Mode=TwoWay, NotifyOnValidationError=true,  ValidatesOnExceptions=true}" HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Center" Width="120" Grid.Column="1" Margin="80,0,0,0"/>
         <Label Content="Description" HorizontalAlignment="Left" Grid.Column="1" Grid.Row="1" VerticalAlignment="Center" Margin="300,0,0,0"/>
-        <TextBox Text="{Binding CurrentTask.Description, Mode=TwoWay, NotifyOnValidationError=true,  ValidatesOnExceptions=true}"  IsEnabled="{Binding DateOfProject,Converter={StaticResource ConvertDateForProjectToIsEnabledKey}}" HorizontalAlignment="Left" Grid.Row="1" TextWrapping="Wrap" VerticalAlignment="Center" Width="120" Grid.Column="1" Margin="80,0,0,0"/>
+        <TextBox Text="{Binding CurrentTask.Description, Mode=TwoWay, NotifyOnValidationError=true,  ValidatesOnExceptions=true}"  IsEnabled="{Binding DateOfProject,Converter={StaticResource ConvertDateForProjectToIsEnabledKey}}" HorizontalAlignment="Left" Grid.Row="1" TextWrapping="Wrap" VerticalAlignment="Center" Width="277" Grid.Column="1" Margin="23,0,0,0" Height="39"/>
         <Label Grid.Column="1" Content="Alias" HorizontalAlignment="Left" Grid.Row="2" VerticalAlignment="Top" Margin="300,9,0,0" Width="54"/>
-        <TextBox Text="{Binding CurrentTask.Alias, Mode=TwoWay, NotifyOnValidationError=true,  ValidatesOnExceptions=true}"  IsEnabled="{Binding DateOfProject,Converter={StaticResource ConvertDateForProjectToIsEnabledKey}}" HorizontalAlignment="Left" Grid.Row="2" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" TextChanged="TextBox_TextChanged" Grid.Column="1" Margin="80,9,0,0"/>
-        
+        <TextBox Text="{Binding CurrentTask.Alias, Mode=TwoWay, NotifyOnValidationError=true,  ValidatesOnExceptions=true}"  IsEnabled="{Binding DateOfProject,Converter={StaticResource ConvertDateForProjectToIsEnabledKey}}" HorizontalAlignment="Left" Grid.Row="2" TextWrapping="Wrap" VerticalAlignment="Top" Width="264" TextChanged="TextBox_TextChanged" Grid.Column="1" Margin="27,9,0,0"/>
+
         <Label Content="Dependencies" HorizontalAlignment="Center" Margin="0,5,0,0" VerticalAlignment="Top"/>
         <ListBox Grid.Row="1" Grid.RowSpan="4" ItemsSource="{Binding SelectedDependencies, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" HorizontalContentAlignment="Stretch" Margin="0,10,0,0">
             <ListBox.ItemTemplate>
                 <DataTemplate >
-                    <CheckBox  IsChecked="{Binding IsSelected, Mode=TwoWay}" Content="{Binding Alias}" Checked="CheckBox_Checked" Unchecked="CheckBox_Unchecked" IsEnabled="{Binding DateOfProject,Converter={StaticResource ConvertDateForProjectToIsEnabledKey}}" />
+                    <!--In the listBox are all the tasks, each task is represented by a checkBox, the isChecked attribute causes that in the case of displaying a task that already has dependencies, then each task that the current task depends on will be checked, in addition, any change of box marking will cause the SelectedDependencies list in the backend code that holds all The tasks will update the isSelected of that task to true.-->
+                    <CheckBox  IsChecked="{Binding IsSelected, Mode=TwoWay}" Content="{Binding Alias}" Checked="CheckBox_Checked" Unchecked="CheckBox_Unchecked" IsEnabled="{Binding DataContext.DateOfProject, RelativeSource={RelativeSource AncestorType=ListBox}, Converter={StaticResource ConvertDateForProjectToIsEnabledKey}}"/>
                 </DataTemplate>
             </ListBox.ItemTemplate>
         </ListBox>
 
-
         <Label Grid.Column="1" Content="Required Effor Time" HorizontalAlignment="Left" Margin="270,32,0,0" Grid.Row="2" VerticalAlignment="Top" Grid.RowSpan="2"/>
-        <TextBox Text="{Binding CurrentTask.RequiredEfforTime, Mode=TwoWay, NotifyOnValidationError=true,  ValidatesOnExceptions=true}"  IsEnabled="{Binding DateOfProject,Converter={StaticResource ConvertDateForProjectToIsEnabledKey}}" HorizontalAlignment="Left" Margin="80,0,0,0" Grid.Row="3" TextWrapping="Wrap"  VerticalAlignment="Center" Width="120" Grid.Column="1" TextChanged="TextBox_TextChanged_1"/>
+        <TextBox Text="{Binding CurrentTask.RequiredEfforTime, Mode=TwoWay, NotifyOnValidationError=true,  ValidatesOnExceptions=true}"  IsEnabled="{Binding DateOfProject,Converter={StaticResource ConvertDateForProjectToIsEnabledKey}}" HorizontalAlignment="Left" Margin="63,0,0,0" Grid.Row="3" TextWrapping="Wrap"  VerticalAlignment="Center" Width="180" Grid.Column="1" TextChanged="TextBox_TextChanged_1" Height="25"/>
         <Label Grid.Column="1" Content="Deliverables" HorizontalAlignment="Left" Margin="305,7,0,0" Grid.Row="4" VerticalAlignment="Top" RenderTransformOrigin="-0.211,-0.063" Height="28" />
-        <TextBox Text="{Binding CurrentTask.Deliverables, Mode=TwoWay, NotifyOnValidationError=true,  ValidatesOnExceptions=true}"  HorizontalAlignment="Left" Margin="80,10,0,0" Grid.Row="4" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Grid.Column="1"/>
+        <TextBox Text="{Binding CurrentTask.Deliverables, Mode=TwoWay, NotifyOnValidationError=true,  ValidatesOnExceptions=true}"  HorizontalAlignment="Left" Margin="28,10,0,0" Grid.Row="4" TextWrapping="Wrap" VerticalAlignment="Top" Width="275" Grid.Column="1"/>
         <Label Grid.Row="4" Grid.Column="1" Content="Remarks" HorizontalAlignment="Left" Margin="315,26,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.088,-0.27" Height="33" />
-        <TextBox Text="{Binding CurrentTask.Remarks, Mode=TwoWay, NotifyOnValidationError=true,  ValidatesOnExceptions=true}" HorizontalAlignment="Left" Margin="80,34,0,0" Grid.Row="4" TextWrapping="Wrap"  VerticalAlignment="Top" Width="120" Grid.Column="1"/>
+        <TextBox Text="{Binding CurrentTask.Remarks, Mode=TwoWay, NotifyOnValidationError=true,  ValidatesOnExceptions=true}" HorizontalAlignment="Left" Margin="25,34,0,0" Grid.Row="4" TextWrapping="Wrap"  VerticalAlignment="Top" Width="277" Grid.Column="1" Height="28"/>
         <Label Grid.Column="1" Content="Complexyity" HorizontalAlignment="Left" Margin="305,61,0,0" Grid.Row="4" VerticalAlignment="Top" Height="38" />
         <ComboBox ItemsSource="{Binding Source={StaticResource ExperienceCollectionKey}}"  IsEnabled="{Binding DateOfProject,Converter={StaticResource ConvertDateForProjectToIsEnabledKey}}" SelectedValue="{Binding CurrentTask.Complexyity, Mode=TwoWay, NotifyOnValidationError=true, 
-             ValidatesOnExceptions=true}" HorizontalAlignment="Left" Margin="80,63,0,0" Grid.Row="4" VerticalAlignment="Top" Width="120" Grid.Column="1" SelectionChanged="ComboBox_SelectionChanged"/>
+             ValidatesOnExceptions=true}" HorizontalAlignment="Left" Margin="83,72,0,0" Grid.Row="4" VerticalAlignment="Top" Width="120" Grid.Column="1"/>
 
         <Label Content="Status" Grid.Column="1" Visibility="{Binding DateOfProject, Converter={StaticResource ConvertDateForProjectToVisibilityFromTrueTOVisibilityKey}}"  HorizontalAlignment="Left" Margin="297,0,0,0" Grid.Row="5" VerticalAlignment="Center" Height="30"/>
         <ComboBox IsEnabled="False" Visibility="{Binding DateOfProject, Converter={StaticResource ConvertDateForProjectToVisibilityFromTrueTOVisibilityKey}}" ItemsSource="{Binding Source={StaticResource StatusCollectionKey}}" SelectedValue="{Binding CurrentTask.Status, Mode=TwoWay, NotifyOnValidationError=true, 
              ValidatesOnExceptions=true}" Grid.Column="1" HorizontalAlignment="Left" Height="24" Margin="80,6,0,0" Grid.Row="5" VerticalAlignment="Top" Width="120"/>
+
         <Label Grid.Column="1" Content="Create at date" Visibility="{Binding DateOfProject, Converter={StaticResource ConvertDateForProjectToVisibilityFromTrueTOVisibilityKey}}" HorizontalAlignment="Left" Margin="300,0,0,0" Grid.Row="6" VerticalAlignment="Center" RenderTransformOrigin="-0.149,0.219" Width="85" Height="28"/>
         <DatePicker IsEnabled="False" SelectedDate="{Binding CurrentTask.CreatedAtDate}" Visibility="{Binding DateOfProject, Converter={StaticResource ConvertDateForProjectToVisibilityFromTrueTOVisibilityKey}}" Grid.Column="1" HorizontalAlignment="Left" Margin="80,5,0,0" Grid.Row="6" VerticalAlignment="Top" Width="120"/>
+
         <Label Grid.Column="1" Content="Start date" Visibility="{Binding DateOfProject, Converter={StaticResource ConvertDateForProjectToVisibilityFromTrueTOVisibilityKey}}" HorizontalAlignment="Left" Margin="303,5,0,0" Grid.Row="8" VerticalAlignment="Top" Width="65"/>
         <DatePicker IsEnabled="False" SelectedDate="{Binding CurrentTask.StartDate}" Visibility="{Binding DateOfProject, Converter={StaticResource ConvertDateForProjectToVisibilityFromTrueTOVisibilityKey}}" Grid.Column="1" HorizontalAlignment="Left" Margin="80,0,0,0" Grid.Row="8" VerticalAlignment="Center" Width="120" RenderTransformOrigin="0.439,2.07"/>
+
         <Label Grid.Column="1" Content="ScheduleDate" Visibility="{Binding DateOfProject, Converter={StaticResource ConvertDateForProjectToVisibilityFromTrueTOVisibilityKey}}" HorizontalAlignment="Left" Margin="305,0,0,0" Grid.Row="7" VerticalAlignment="Center"/>
         <DatePicker IsEnabled="False" SelectedDate="{Binding CurrentTask.ScheduledDate}" Visibility="{Binding DateOfProject, Converter={StaticResource ConvertDateForProjectToVisibilityFromTrueTOVisibilityKey}}" Grid.Column="1" HorizontalAlignment="Left" Margin="80,4,0,0" Grid.Row="7" VerticalAlignment="Top" Width="120"/>
-        <Label Content="Fore cast date" Visibility="{Binding DateOfProject, Converter={StaticResource ConvertDateForProjectToVisibilityFromTrueTOVisibilityKey}}" HorizontalAlignment="Left" Margin="312,7,0,0" Grid.Row="5" VerticalAlignment="Top" Width="88"/>
-        <DatePicker IsEnabled="False" SelectedDate="{Binding CurrentTask.ForecastDate}" Visibility="{Binding DateOfProject, Converter={StaticResource ConvertDateForProjectToVisibilityFromTrueTOVisibilityKey}}" HorizontalAlignment="Left" Margin="141,0,0,0" Grid.Row="5" VerticalAlignment="Center"/>
+
         <Label Content="Complete date" Visibility="{Binding DateOfProject, Converter={StaticResource ConvertDateForProjectToVisibilityFromTrueTOVisibilityKey}}" HorizontalAlignment="Left" Margin="302,10,0,0" Grid.Row="6" VerticalAlignment="Top" Width="88"/>
         <DatePicker IsEnabled="False" SelectedDate="{Binding CurrentTask.CompleteDate}" Visibility="{Binding DateOfProject, Converter={StaticResource ConvertDateForProjectToVisibilityFromTrueTOVisibilityKey}}" HorizontalAlignment="Left" Margin="141,0,0,0" Grid.Row="6" VerticalAlignment="Center"/>
-        <Label Content="Engineer" Visibility="{Binding DateOfProject, Converter={StaticResource ConvertDateForProjectToVisibilityFromTrueTOVisibilityKey}}" HorizontalAlignment="Left" Margin="302,10,0,0" Grid.Row="7" VerticalAlignment="Top" Width="71"/>
-        <Label Grid.Column="1" Content="Create at date" Visibility="{Binding DateOfProject, Converter={StaticResource ConvertDateForProjectToVisibilityFromTrueTOVisibilityKey}}" HorizontalAlignment="Left" Margin="300,0,0,0" Grid.Row="6" VerticalAlignment="Center" RenderTransformOrigin="-0.149,0.219" Width="85" Height="28"/>
-        <DatePicker IsEnabled="False" SelectedDate="{Binding CurrentTask.CreatedAtDate}" Visibility="{Binding DateOfProject, Converter={StaticResource ConvertDateForProjectToVisibilityFromTrueTOVisibilityKey}}" Grid.Column="1" HorizontalAlignment="Left" Margin="80,5,0,0" Grid.Row="6" VerticalAlignment="Top" Width="120"/>
-        <Label Grid.Column="1" Content="Start date"  Visibility="{Binding DateOfProject, Converter={StaticResource ConvertDateForProjectToVisibilityFromTrueTOVisibilityKey}}" HorizontalAlignment="Left" Margin="303,5,0,0" Grid.Row="8" VerticalAlignment="Top" Width="65"/>
-        <DatePicker IsEnabled="False" SelectedDate="{Binding CurrentTask.StartDate}" Visibility="{Binding DateOfProject, Converter={StaticResource ConvertDateForProjectToVisibilityFromTrueTOVisibilityKey}}" Grid.Column="1" HorizontalAlignment="Left" Margin="80,0,0,0" Grid.Row="8" VerticalAlignment="Center" Width="120" RenderTransformOrigin="0.439,2.07"/>
-        <Label Grid.Column="1" Content="ScheduleDate" Visibility="{Binding DateOfProject, Converter={StaticResource ConvertDateForProjectToVisibilityFromTrueTOVisibilityKey}}" HorizontalAlignment="Left" Margin="305,0,0,0" Grid.Row="7" VerticalAlignment="Center"/>
-        <DatePicker IsEnabled="False" SelectedDate="{Binding CurrentTask.ScheduledDate}" Visibility="{Binding DateOfProject, Converter={StaticResource ConvertDateForProjectToVisibilityFromTrueTOVisibilityKey}}" Grid.Column="1" HorizontalAlignment="Left" Margin="80,4,0,0" Grid.Row="7" VerticalAlignment="Top" Width="120"/>
+
         <Label Content="Fore cast date" Visibility="{Binding DateOfProject, Converter={StaticResource ConvertDateForProjectToVisibilityFromTrueTOVisibilityKey}}" HorizontalAlignment="Left" Margin="312,7,0,0" Grid.Row="5" VerticalAlignment="Top" Width="88"/>
         <DatePicker IsEnabled="False" SelectedDate="{Binding CurrentTask.ForecastDate}" Visibility="{Binding DateOfProject, Converter={StaticResource ConvertDateForProjectToVisibilityFromTrueTOVisibilityKey}}" HorizontalAlignment="Left" Margin="141,0,0,0" Grid.Row="5" VerticalAlignment="Center"/>
-        <Label Content="Complete date"  Visibility="{Binding DateOfProject, Converter={StaticResource ConvertDateForProjectToVisibilityFromTrueTOVisibilityKey}}" HorizontalAlignment="Left" Margin="302,10,0,0" Grid.Row="6" VerticalAlignment="Top" Width="88"/>
-        <DatePicker IsEnabled="False" SelectedDate="{Binding CurrentTask.CompleteDate}" Visibility="{Binding DateOfProject, Converter={StaticResource ConvertDateForProjectToVisibilityFromTrueTOVisibilityKey}}" HorizontalAlignment="Left" Margin="141,0,0,0" Grid.Row="6" VerticalAlignment="Center"/>
+
         <Label Content="Engineer" Visibility="{Binding DateOfProject, Converter={StaticResource ConvertDateForProjectToVisibilityFromTrueTOVisibilityKey}}" HorizontalAlignment="Left" Margin="302,10,0,0" Grid.Row="7" VerticalAlignment="Top" Width="71"/>
         <Grid Grid.Row="7" IsEnabled="False" Grid.RowSpan="2" Visibility="{Binding DateOfProject, Converter={StaticResource ConvertDateForProjectToVisibilityFromTrueTOVisibilityKey}}">
             <Grid.RowDefinitions>
@@ -91,15 +86,12 @@
             <TextBox IsEnabled="False" Text="{Binding CurrentTask.Engineer.Id}" HorizontalAlignment="Left" Margin="57,1,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="71"/>
             <TextBox IsEnabled="False" Text="{Binding CurrentTask.Engineer.Name}" HorizontalAlignment="Left" Margin="32,1,0,0" Grid.Row="1" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
 
-            <TextBox IsEnabled="False" Text="{Binding CurrentTask.Engineer.Id}" HorizontalAlignment="Left" Margin="57,1,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="71"/>
-            <TextBox IsEnabled="False" Text="{Binding CurrentTask.Engineer.Name}" HorizontalAlignment="Left" Margin="32,1,0,0" Grid.Row="1" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
-
         </Grid>
         <Button Content="{Binding CurrentTask.Id, Converter={StaticResource ConverIdToContentKey}}"  FontSize=" 24.27050983" Grid.Row="8" Grid.Column="1" Margin="80,38,48,0" Click="AddOrUpdateButton_Click" Grid.RowSpan="2"/>
 
 
-        <Button Content="Finish Task" HorizontalAlignment="Left" Margin="219,5,0,0" Grid.Row="9" VerticalAlignment="Top" Width="96" Visibility="{Binding theCurrentTaskIsAssigned, Converter={StaticResource ConvertDateForProjectToVisibilityFromTrueTOVisibilityKey}}" Click="FinishTaskButton_Click"/>
-        <Button Content="Start Task" HorizontalAlignment="Left" Margin="79,4,0,0" Grid.Row="9" VerticalAlignment="Top" Width="83" Visibility="{Binding theCurrentTaskIsAssigned, Converter={StaticResource ConvertDateForProjectToVisibilityFromTrueTOVisibilityKey}}" Height="24" Click="StartTaskButton_Click"/>
+        <Button Content="Finish Task" IsEnabled="{Binding TheStartDateButtonHasBeenPressed}" HorizontalAlignment="Left" Margin="219,5,0,0" Grid.Row="9" VerticalAlignment="Top" Width="96" Visibility="{Binding theCurrentTaskIsAssigned, Converter={StaticResource ConvertDateForProjectToVisibilityFromTrueTOVisibilityKey}}" Click="FinishTaskButton_Click"/>
+        <Button Content="Start Task" IsEnabled="{Binding TheStartDateButtonHasBeenPressed,Converter={StaticResource ConvertDateForProjectToIsEnabledKey}}" HorizontalAlignment="Left" Margin="79,4,0,0" Grid.Row="9" VerticalAlignment="Top" Width="83" Visibility="{Binding theCurrentTaskIsAssigned, Converter={StaticResource ConvertDateForProjectToVisibilityFromTrueTOVisibilityKey}}" Height="24" Click="StartTaskButton_Click"/>
 
 
     </Grid>

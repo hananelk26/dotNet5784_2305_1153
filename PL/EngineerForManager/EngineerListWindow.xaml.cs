@@ -84,5 +84,7 @@ namespace PL.Engineer
             new EngineerWindow(TheEngineer!.Id).ShowDialog();
             EngineerList = s_bl?.Engineer.ReadAll()!;
         }
+
+
     }
 }

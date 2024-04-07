@@ -15,6 +15,7 @@ namespace PL
         {
             InitializeComponent();
             CustomDateTime = s_bl.MainClock.GetMainClock();
+           
         }
 
 
@@ -71,5 +72,6 @@ namespace PL
             s_bl.MainClock.addMonth(1);
             CustomDateTime = s_bl.MainClock.GetMainClock();
         }
+        
     }
 }

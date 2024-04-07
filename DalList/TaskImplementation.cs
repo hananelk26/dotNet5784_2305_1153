@@ -69,7 +69,7 @@ internal class TaskImplementation : ITask
     public IEnumerable<Task> ReadAll(Func<Task, bool>? filter)
     {
         if (filter == null)
-            return DataSource.Tasks.Select(item => item);
+            return DataSource.Tasks.Select(item => item).ToList();
         else
             return DataSource.Tasks.Where(filter);
     }
