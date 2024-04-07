@@ -1,204 +1,205 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ArrayOfTask xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <Task>
-    <Id>1</Id>
-    <Alias>t3</Alias>
-    <Description>Project Kickoff Meeting</Description>
-    <createdAtDate>2025-03-17T00:00:00</createdAtDate>
-    <RequiredEffortTime>P23DT1H6M</RequiredEffortTime>
-    <Copmlexity>Advanced_Beginner</Copmlexity>
-    <ScheduledDate>2024-04-11T00:00:00</ScheduledDate>
-    <DeadlineDate xsi:nil="true" />
-  </Task>
-  <Task>
-    <Id>3</Id>
-    <Alias>g5</Alias>
-    <Description>Feasibility Study</Description>
-    <createdAtDate>2025-03-17T00:00:00</createdAtDate>
-    <RequiredEffortTime>P38DT3H4M</RequiredEffortTime>
-    <Copmlexity>Advanced_Beginner</Copmlexity>
-    <ScheduledDate>2024-04-11T00:00:00</ScheduledDate>
-    <DeadlineDate xsi:nil="true" />
-  </Task>
-  <Task>
-    <Id>4</Id>
-    <Alias>H5</Alias>
-    <Description>Project Planning</Description>
-    <createdAtDate>2025-03-17T00:00:00</createdAtDate>
-    <RequiredEffortTime>P36DT19H11M</RequiredEffortTime>
-    <Copmlexity>Intermediate</Copmlexity>
-    <ScheduledDate>2024-04-11T00:00:00</ScheduledDate>
-    <DeadlineDate xsi:nil="true" />
-  </Task>
-  <Task>
-    <Id>5</Id>
-    <Alias>h8</Alias>
-    <Description>System Architecture Design</Description>
-    <createdAtDate>2025-03-17T00:00:00</createdAtDate>
-    <RequiredEffortTime>P39DT14H40M</RequiredEffortTime>
-    <Copmlexity>Intermediate</Copmlexity>
-    <ScheduledDate>2024-04-11T00:00:00</ScheduledDate>
-    <DeadlineDate xsi:nil="true" />
-  </Task>
-  <Task>
-    <Id>7</Id>
-    <Alias>B3</Alias>
-    <Description>Database Design</Description>
-    <createdAtDate>2025-03-17T00:00:00</createdAtDate>
-    <RequiredEffortTime>P19DT14H11M</RequiredEffortTime>
-    <Copmlexity>Advanced</Copmlexity>
-    <ScheduledDate>2024-04-11T00:00:00</ScheduledDate>
-    <DeadlineDate xsi:nil="true" />
-  </Task>
-  <Task>
-    <Id>9</Id>
-    <Alias>b5</Alias>
-    <Description>Development Environment Setup</Description>
-    <createdAtDate>2025-03-17T00:00:00</createdAtDate>
-    <RequiredEffortTime>P30DT20H31M</RequiredEffortTime>
-    <Copmlexity>Intermediate</Copmlexity>
-    <ScheduledDate>2024-04-11T00:00:00</ScheduledDate>
-    <DeadlineDate xsi:nil="true" />
-  </Task>
-  <Task>
-    <Id>10</Id>
-    <Alias>B6</Alias>
-    <Description>Initial Coding</Description>
-    <createdAtDate>2025-03-17T00:00:00</createdAtDate>
-    <RequiredEffortTime>P56DT5H48M</RequiredEffortTime>
-    <Copmlexity>Advanced_Beginner</Copmlexity>
-    <ScheduledDate>2024-04-11T00:00:00</ScheduledDate>
-    <DeadlineDate xsi:nil="true" />
-  </Task>
-  <Task>
-    <Id>15</Id>
-    <Alias>V2</Alias>
-    <Description>Beta Release</Description>
-    <createdAtDate>2025-03-17T00:00:00</createdAtDate>
-    <RequiredEffortTime>P54DT14H46M</RequiredEffortTime>
-    <Copmlexity>Beginner</Copmlexity>
-    <ScheduledDate>2024-04-11T00:00:00</ScheduledDate>
-    <DeadlineDate xsi:nil="true" />
-  </Task>
-  <Task>
-    <Id>17</Id>
-    <Alias>g2</Alias>
-    <Description>Refinement and Bug Fixing</Description>
-    <createdAtDate>2025-03-17T00:00:00</createdAtDate>
-    <RequiredEffortTime>P42DT5H45M</RequiredEffortTime>
-    <Copmlexity>Beginner</Copmlexity>
-    <ScheduledDate>2024-04-11T00:00:00</ScheduledDate>
-    <DeadlineDate xsi:nil="true" />
-  </Task>
-  <Task>
-    <Id>18</Id>
-    <Alias>g3</Alias>
-    <Description>Documentation Update</Description>
-    <createdAtDate>2025-03-17T00:00:00</createdAtDate>
-    <RequiredEffortTime>PT17H49M</RequiredEffortTime>
-    <Copmlexity>Beginner</Copmlexity>
-    <ScheduledDate>2024-04-11T00:00:00</ScheduledDate>
-    <DeadlineDate xsi:nil="true" />
-  </Task>
-  <Task>
-    <Id>19</Id>
-    <Alias>g4</Alias>
-    <Description>Deployment Planning</Description>
-    <createdAtDate>2025-03-17T00:00:00</createdAtDate>
-    <RequiredEffortTime>P45DT8H36M</RequiredEffortTime>
-    <Copmlexity>Intermediate</Copmlexity>
-    <ScheduledDate>2024-04-11T00:00:00</ScheduledDate>
-    <DeadlineDate xsi:nil="true" />
-  </Task>
-  <Task>
     <Id>2</Id>
-    <Alias>t4</Alias>
-    <Description>RequirZement Elicitation and Analysis</Description>
-    <createdAtDate>2025-03-17T00:00:00</createdAtDate>
-    <RequiredEffortTime>P19DT7H17M</RequiredEffortTime>
-    <Copmlexity>Advanced</Copmlexity>
-    <ScheduledDate>2024-05-04T01:06:00</ScheduledDate>
+    <Alias>Design Conceptualization</Alias>
+    <Description>Thinking about the design of the specifications and features of the electric vehicle</Description>
+    <createdAtDate>2027-07-07T00:00:00</createdAtDate>
+    <RequiredEffortTime>P29DT15H19M</RequiredEffortTime>
+    <Copmlexity>Beginner</Copmlexity>
+    <ScheduledDate>2024-05-31T18:15:00</ScheduledDate>
     <DeadlineDate xsi:nil="true" />
   </Task>
   <Task>
     <Id>6</Id>
-    <Alias>h1</Alias>
-    <Description>Prototyping</Description>
-    <createdAtDate>2025-03-17T00:00:00</createdAtDate>
-    <RequiredEffortTime>P31DT21H7M</RequiredEffortTime>
-    <Copmlexity>Beginner</Copmlexity>
-    <ScheduledDate>2024-05-23T08:23:00</ScheduledDate>
+    <Alias>Safety Regulations Compliance</Alias>
+    <Description> Ensuring the vehicle complies with safety regulations and standards set by relevant authorities.</Description>
+    <createdAtDate>2027-07-07T00:00:00</createdAtDate>
+    <RequiredEffortTime>P57DT22H4M</RequiredEffortTime>
+    <Copmlexity>Intermediate</Copmlexity>
+    <ScheduledDate>2024-06-30T09:34:00</ScheduledDate>
     <DeadlineDate xsi:nil="true" />
   </Task>
   <Task>
-    <Id>8</Id>
-    <Alias>b4</Alias>
-    <Description>Development Environment Setup</Description>
-    <createdAtDate>2025-03-17T00:00:00</createdAtDate>
-    <RequiredEffortTime>P56DT13H33M</RequiredEffortTime>
-    <Copmlexity>Advanced_Beginner</Copmlexity>
-    <ScheduledDate>2024-06-24T05:30:00</ScheduledDate>
+    <Id>9</Id>
+    <Alias>Supply Chain Management </Alias>
+    <Description>Establishing and managing the supply chain for sourcing components and materials required for vehicle production.</Description>
+    <createdAtDate>2027-07-07T00:00:00</createdAtDate>
+    <RequiredEffortTime>P30DT12H2M</RequiredEffortTime>
+    <Copmlexity>Intermediate</Copmlexity>
+    <ScheduledDate>2024-05-31T18:15:00</ScheduledDate>
     <DeadlineDate xsi:nil="true" />
   </Task>
   <Task>
-    <Id>11</Id>
-    <Alias>b7</Alias>
-    <Description>Unit Testing</Description>
-    <createdAtDate>2025-03-17T00:00:00</createdAtDate>
-    <RequiredEffortTime>P29DT12H46M</RequiredEffortTime>
-    <Copmlexity>Advanced_Beginner</Copmlexity>
-    <ScheduledDate>2024-08-19T19:03:00</ScheduledDate>
-    <DeadlineDate xsi:nil="true" />
-  </Task>
-  <Task>
-    <Id>12</Id>
-    <Alias>b8</Alias>
-    <Description>Integration Testing</Description>
-    <createdAtDate>2025-03-17T00:00:00</createdAtDate>
-    <RequiredEffortTime>P22DT19H50M</RequiredEffortTime>
+    <Id>15</Id>
+    <Alias>Interior Design and Comfort</Alias>
+    <Description>Designing and integrating interior features for comfort, aesthetics, and functionality. </Description>
+    <createdAtDate>2027-07-07T00:00:00</createdAtDate>
+    <RequiredEffortTime>P38DT21H9M</RequiredEffortTime>
     <Copmlexity>Advanced</Copmlexity>
-    <ScheduledDate>2024-09-18T07:49:00</ScheduledDate>
-    <DeadlineDate xsi:nil="true" />
-  </Task>
-  <Task>
-    <Id>13</Id>
-    <Alias>b9</Alias>
-    <Description>User Interface (UI) Development</Description>
-    <createdAtDate>2025-03-17T00:00:00</createdAtDate>
-    <RequiredEffortTime>P54DT9H42M</RequiredEffortTime>
-    <Copmlexity>Intermediate</Copmlexity>
-    <ScheduledDate>2024-10-11T03:39:00</ScheduledDate>
-    <DeadlineDate xsi:nil="true" />
-  </Task>
-  <Task>
-    <Id>14</Id>
-    <Alias>V1</Alias>
-    <Description>User Acceptance Testing (UAT) Preparation</Description>
-    <createdAtDate>2025-03-17T00:00:00</createdAtDate>
-    <RequiredEffortTime>P14DT5H25M</RequiredEffortTime>
-    <Copmlexity>Intermediate</Copmlexity>
-    <ScheduledDate>2024-12-04T13:21:00</ScheduledDate>
+    <ScheduledDate>2024-08-27T07:38:00</ScheduledDate>
     <DeadlineDate xsi:nil="true" />
   </Task>
   <Task>
     <Id>16</Id>
-    <Alias>g1</Alias>
-    <Description>UAT Execution</Description>
-    <createdAtDate>2025-03-17T00:00:00</createdAtDate>
-    <RequiredEffortTime>P33DT3H21M</RequiredEffortTime>
+    <Alias>Exterior Styling </Alias>
+    <Description>Styling and designing the exterior of the vehicle for aesthetics</Description>
+    <createdAtDate>2027-07-07T00:00:00</createdAtDate>
+    <RequiredEffortTime>P22DT23H40M</RequiredEffortTime>
+    <Copmlexity>Advanced_Beginner</Copmlexity>
+    <ScheduledDate>2024-08-27T07:38:00</ScheduledDate>
+    <DeadlineDate xsi:nil="true" />
+  </Task>
+  <Task>
+    <Id>18</Id>
+    <Alias>Marketing and Branding</Alias>
+    <Description> Developing marketing strategies and branding initiatives to promote the electric vehicle and attract consumers.</Description>
+    <createdAtDate>2027-07-07T00:00:00</createdAtDate>
+    <RequiredEffortTime>P21DT14H30M</RequiredEffortTime>
     <Copmlexity>Intermediate</Copmlexity>
-    <ScheduledDate>2024-06-06T05:48:00</ScheduledDate>
+    <ScheduledDate>2024-09-19T07:18:00</ScheduledDate>
+    <DeadlineDate xsi:nil="true" />
+  </Task>
+  <Task>
+    <Id>3</Id>
+    <Alias>Battery Development</Alias>
+    <Description>Research, development, and testing of high-performance batteries tailored for electric vehicles.</Description>
+    <createdAtDate>2027-07-07T00:00:00</createdAtDate>
+    <RequiredEffortTime>P24DT7H13M</RequiredEffortTime>
+    <Copmlexity>Intermediate</Copmlexity>
+    <ScheduledDate>2024-08-27T07:38:00</ScheduledDate>
+    <DeadlineDate xsi:nil="true" />
+  </Task>
+  <Task>
+    <Id>4</Id>
+    <Alias>Chassis Engineering</Alias>
+    <Description>Designing and engineering the vehicle's chassis for structural integrity, safety, and weight distribution</Description>
+    <createdAtDate>2027-07-07T00:00:00</createdAtDate>
+    <RequiredEffortTime>P37DT14H50M</RequiredEffortTime>
+    <Copmlexity>Beginner</Copmlexity>
+    <ScheduledDate>2024-08-27T07:38:00</ScheduledDate>
+    <DeadlineDate xsi:nil="true" />
+  </Task>
+  <Task>
+    <Id>5</Id>
+    <Alias>Electric Motor Development</Alias>
+    <Description> Research, development, and testing of efficient electric motors for propulsion.</Description>
+    <createdAtDate>2027-07-07T00:00:00</createdAtDate>
+    <RequiredEffortTime>P20DT9H27M</RequiredEffortTime>
+    <Copmlexity>Intermediate</Copmlexity>
+    <ScheduledDate>2024-09-20T14:51:00</ScheduledDate>
+    <DeadlineDate xsi:nil="true" />
+  </Task>
+  <Task>
+    <Id>7</Id>
+    <Alias>Prototype Fabrication</Alias>
+    <Description>Building prototype vehicles based on the conceptual designs for testing and validation.</Description>
+    <createdAtDate>2027-07-07T00:00:00</createdAtDate>
+    <RequiredEffortTime>P10DT17H35M</RequiredEffortTime>
+    <Copmlexity>Intermediate</Copmlexity>
+    <ScheduledDate>2024-10-11T00:18:00</ScheduledDate>
+    <DeadlineDate xsi:nil="true" />
+  </Task>
+  <Task>
+    <Id>8</Id>
+    <Alias>Software Integration</Alias>
+    <Description>Developing and integrating software systems for vehicle control, monitoring, and user interface.</Description>
+    <createdAtDate>2027-07-07T00:00:00</createdAtDate>
+    <RequiredEffortTime>P35DT18H31M</RequiredEffortTime>
+    <Copmlexity>Advanced_Beginner</Copmlexity>
+    <ScheduledDate>2024-10-11T00:18:00</ScheduledDate>
+    <DeadlineDate xsi:nil="true" />
+  </Task>
+  <Task>
+    <Id>10</Id>
+    <Alias>Assembly Line Setup</Alias>
+    <Description>Planning and setting up assembly lines for efficient production of electric vehicles.</Description>
+    <createdAtDate>2027-07-07T00:00:00</createdAtDate>
+    <RequiredEffortTime>P53DT23H37M</RequiredEffortTime>
+    <Copmlexity>Intermediate</Copmlexity>
+    <ScheduledDate>2024-10-21T17:53:00</ScheduledDate>
+    <DeadlineDate xsi:nil="true" />
+  </Task>
+  <Task>
+    <Id>12</Id>
+    <Alias>Quality Control Implementation</Alias>
+    <Description> Implementing quality control measures to ensure every vehicle meets performance and safety standards.</Description>
+    <createdAtDate>2027-07-07T00:00:00</createdAtDate>
+    <RequiredEffortTime>P21DT14H20M</RequiredEffortTime>
+    <Copmlexity>Advanced_Beginner</Copmlexity>
+    <ScheduledDate>2024-12-14T17:30:00</ScheduledDate>
+    <DeadlineDate xsi:nil="true" />
+  </Task>
+  <Task>
+    <Id>13</Id>
+    <Alias>Testing and Validation</Alias>
+    <Description> Conducting rigorous testing and validation procedures on prototype vehicles to ensure reliability and performance.</Description>
+    <createdAtDate>2027-07-07T00:00:00</createdAtDate>
+    <RequiredEffortTime>P17DT9H55M</RequiredEffortTime>
+    <Copmlexity>Intermediate</Copmlexity>
+    <ScheduledDate>2024-10-21T17:53:00</ScheduledDate>
+    <DeadlineDate xsi:nil="true" />
+  </Task>
+  <Task>
+    <Id>14</Id>
+    <Alias>Manufacturing Optimization</Alias>
+    <Description>Identifying and implementing strategies to optimize manufacturing processes for increased efficiency and cost-effectiveness. </Description>
+    <createdAtDate>2027-07-07T00:00:00</createdAtDate>
+    <RequiredEffortTime>P27DT3H26M</RequiredEffortTime>
+    <Copmlexity>Advanced_Beginner</Copmlexity>
+    <ScheduledDate>2024-12-14T17:30:00</ScheduledDate>
+    <DeadlineDate xsi:nil="true" />
+  </Task>
+  <Task>
+    <Id>17</Id>
+    <Alias>Logistics Planning</Alias>
+    <Description>Planning and organizing logistics for transportation of components, assembly, and distribution of finished vehicles.</Description>
+    <createdAtDate>2027-07-07T00:00:00</createdAtDate>
+    <RequiredEffortTime>P18DT3H20M</RequiredEffortTime>
+    <Copmlexity>Beginner</Copmlexity>
+    <ScheduledDate>2024-12-14T17:30:00</ScheduledDate>
+    <DeadlineDate xsi:nil="true" />
+  </Task>
+  <Task>
+    <Id>19</Id>
+    <Alias>Regulatory Approval</Alias>
+    <Description>Obtaining necessary approvals and certifications from regulatory bodies for the production and sale of electric vehicles.</Description>
+    <createdAtDate>2027-07-07T00:00:00</createdAtDate>
+    <RequiredEffortTime>P27DT24M</RequiredEffortTime>
+    <Copmlexity>Beginner</Copmlexity>
+    <ScheduledDate>2025-01-05T07:50:00</ScheduledDate>
     <DeadlineDate xsi:nil="true" />
   </Task>
   <Task>
     <Id>20</Id>
-    <Alias>g6</Alias>
-    <Description>Production Deployment</Description>
-    <createdAtDate>2025-03-17T00:00:00</createdAtDate>
-    <RequiredEffortTime>P50DT13H55M</RequiredEffortTime>
-    <Copmlexity>Advanced</Copmlexity>
-    <ScheduledDate>2024-08-19T19:03:00</ScheduledDate>
+    <Alias>Customer Support Setup</Alias>
+    <Description>Establishing customer support systems for addressing inquiries, feedback, and after-sales services.</Description>
+    <createdAtDate>2027-07-07T00:00:00</createdAtDate>
+    <RequiredEffortTime>P52DT4H32M</RequiredEffortTime>
+    <Copmlexity>Intermediate</Copmlexity>
+    <ScheduledDate>2025-01-01T20:50:00</ScheduledDate>
     <DeadlineDate xsi:nil="true" />
-    <EngineerId>330606184</EngineerId>
+  </Task>
+  <Task>
+    <Id>11</Id>
+    <Alias>Technology Assessment</Alias>
+    <Description>Evaluating available technologies and components</Description>
+    <createdAtDate>2027-07-07T00:00:00</createdAtDate>
+    <RequiredEffortTime>P17DT1H25M</RequiredEffortTime>
+    <Copmlexity>Intermediate</Copmlexity>
+    <ScheduledDate>2024-05-02T00:00:00</ScheduledDate>
+    <DeadlineDate xsi:nil="true" />
+  </Task>
+  <Task>
+    <Id>1</Id>
+    <Alias>Market Research</Alias>
+    <Description>Gathering and analyzing data on consumer preferences</Description>
+    <createdAtDate>2027-07-07T00:00:00</createdAtDate>
+    <RequiredEffortTime>P29DT18H15M</RequiredEffortTime>
+    <Copmlexity>Beginner</Copmlexity>
+    <StartDate>2027-07-07T00:00:00</StartDate>
+    <ScheduledDate>2024-05-02T00:00:00</ScheduledDate>
+    <DeadlineDate xsi:nil="true" />
+    <EngineerId>371252045</EngineerId>
   </Task>
 </ArrayOfTask>

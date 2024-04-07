@@ -56,6 +56,7 @@ public partial class TaskWindow : Window
                 }
                 return t;
               });
+        SelectedDependencies = SelectedDependencies.Where(task => task.Id != TheID);// In the situation of updating a task, you need to make sure that the task you want to update does not appear in the dependent list.
 
         if (s_bl.Time.StartDate() != null)
         {
@@ -68,7 +69,17 @@ public partial class TaskWindow : Window
 
         theCurrentTaskIsAssigned = currentTaskIsAssigned;
 
-
+        if (currentTaskIsAssigned)
+        {
+            if (CurrentTask.Status == BO.Status.Scheduled)
+            {
+                TheStartDateButtonHasBeenPressed = false;
+            }
+            else
+            {
+                TheStartDateButtonHasBeenPressed = true;
+            }
+        }
     }
 
     static readonly BlApi.IBl s_bl = BlApi.Factory.Get();
@@ -181,11 +192,6 @@ public partial class TaskWindow : Window
 
     }
 
-    private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
-    {
-
-    }
-
     private void CheckBox_Checked(object sender, RoutedEventArgs e)
     {
         string? alias = (sender as CheckBox)?.Content as string;
@@ -257,4 +263,18 @@ public partial class TaskWindow : Window
             Console.WriteLine("This task does not appear in the system.");
         }
     }
+
+
+
+    public bool TheStartDateButtonHasBeenPressed
+    {
+        get { return (bool)GetValue(TheStartDateButtonHasBeenPressedProperty); }
+        set { SetValue(TheStartDateButtonHasBeenPressedProperty, value); }
+    }
+
+    // Using a DependencyProperty as the backing store for TheStartDateButtonHasBeenPressed.  This enables animation, styling, binding, etc...
+    public static readonly DependencyProperty TheStartDateButtonHasBeenPressedProperty =
+        DependencyProperty.Register("TheStartDateButtonHasBeenPressed", typeof(bool), typeof(TaskWindow), new PropertyMetadata(null));
+
+
 }

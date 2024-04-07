@@ -28,14 +28,20 @@
         <ListView Background="Aqua"  Grid.Row="1" Margin="5" ItemsSource="{Binding TaskList}" MouseDoubleClick="ListViewOfTask_MouseDoubleClick">
             <ListView.View>
                 <GridView>
-                    <GridViewColumn Width="100" Header="ID" DisplayMemberBinding="{Binding Id}" />
-                    <GridViewColumn Width="300"  Header="Description" DisplayMemberBinding="{Binding Description}" />
-                    <GridViewColumn Width="100"  Header="Alias" DisplayMemberBinding="{Binding Alias}" />
-                    <GridViewColumn Width="180" Header="Status" DisplayMemberBinding="{Binding Status}" />
-
+                    <GridViewColumn Width="40" Header="ID" DisplayMemberBinding="{Binding Id}" />
+                    <GridViewColumn Width="200" Header="Alias" DisplayMemberBinding="{Binding Alias}" />
+                    <GridViewColumn Width="350" Header="Description">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding Description}" TextWrapping="Wrap"/>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+             
+                    <GridViewColumn Width="130" Header="Status" DisplayMemberBinding="{Binding Status}" />
                 </GridView>
             </ListView.View>
         </ListView>
-        <Button Grid.Row="2" Visibility="{Binding DateForeProject, Converter={StaticResource ConvertDateForProjectTovisabilityKey}}" Content="Add" Click="AddButton_Click" Margin="65,0,65,30" RenderTransformOrigin="0.5,0.24" />
+        <Button Content="Add" Grid.Row="2" Visibility="{Binding DateForeProject, Converter={StaticResource ConvertDateForProjectTovisabilityKey}}"  Click="AddButton_Click" Margin="65,0,65,30" RenderTransformOrigin="0.5,0.24" />
     </Grid>
 </Window>

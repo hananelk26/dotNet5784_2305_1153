@@ -29,5 +29,7 @@ public interface IDal
     ITIme Time { get; }
 
     IMainClock MainClock { get; }
+
+    IResetDataConfig ResetDataConfig { get; }
 }
 

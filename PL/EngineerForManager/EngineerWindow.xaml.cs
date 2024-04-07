@@ -37,6 +37,8 @@ namespace PL.Engineer
                     Console.WriteLine("There is no engineer in the system with such an ID card");
                 }
             }
+
+           
         }
 
         static readonly BlApi.IBl s_bl = BlApi.Factory.Get();
@@ -120,13 +122,13 @@ namespace PL.Engineer
                                         MessageBoxImage.Information);
                     this.Close();
                 }
-                catch (Exception)
+                catch (Exception ex)
                 {
-                    MessageBox.Show("This engineer does not appear in the system", "Error adding an engineer", MessageBoxButton.OK, MessageBoxImage.Error);
-                    Console.WriteLine("This engineer does not appear in the system.");
+                    MessageBox.Show(ex.Message, "Error updating engineer", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
             }
         }
+
     }
 
 }

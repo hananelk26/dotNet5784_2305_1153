@@ -45,7 +45,9 @@ internal class Bl : IBl
 
     public void resetDataConfig()
     {
-       DalTest.Initialization.resetDataConfig();
+        _dal.Time.reset();
+        _dal.ResetDataConfig.resetDataConfig();
+        
     }
 
 }
