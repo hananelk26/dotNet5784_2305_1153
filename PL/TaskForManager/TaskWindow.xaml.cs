@@ -181,10 +181,9 @@ public partial class TaskWindow : Window
                                     MessageBoxImage.Information);
                 this.Close();
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 MessageBox.Show("This task does not appear in the system", "Error adding an task", MessageBoxButton.OK, MessageBoxImage.Error);
-                Console.WriteLine("This task does not appear in the system.");
             }
         }
 
@@ -242,7 +241,6 @@ public partial class TaskWindow : Window
         catch (Exception)
         {
             MessageBox.Show("This task does not appear in the system", "Error adding an task", MessageBoxButton.OK, MessageBoxImage.Error);
-            Console.WriteLine("This task does not appear in the system.");
         }
     }
 
@@ -263,7 +261,6 @@ public partial class TaskWindow : Window
         catch (Exception)
         {
             MessageBox.Show("This task does not appear in the system", "Error adding an task", MessageBoxButton.OK, MessageBoxImage.Error);
-            Console.WriteLine("This task does not appear in the system.");
         }
     }
 

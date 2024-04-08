@@ -17,8 +17,8 @@ internal static class DataSource
 
         internal static void ResetID()
         { 
-            nextTaskId = 0;
-            nextDependencyId = 0;
+            nextTaskId = 1;
+            nextDependencyId = 1;
         }
 
     }

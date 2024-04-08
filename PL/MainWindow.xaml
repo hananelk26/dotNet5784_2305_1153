@@ -31,7 +31,7 @@
         <Button Content="Add Month" HorizontalAlignment="Left" Margin="306,217,0,0" VerticalAlignment="Top" Width="134" Height="37" Click="addMonth_Click"/>
 
 
-        <Image Source="https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcR0EnwMY0zeuRPtfKOB3tY32yNLrb39NAE5p6ROFRVuO2edNkJ7wSXUJVkWYNE0"  Margin="10,5,660,304">
+        <Image Source="https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcR0EnwMY0zeuRPtfKOB3tY32yNLrb39NAE5p6ROFRVuO2edNkJ7wSXUJVkWYNE0"  Margin="0,5,670,304">
             <Image.RenderTransform>
                 <TranslateTransform X="0" Y="0"/>
             </Image.RenderTransform>

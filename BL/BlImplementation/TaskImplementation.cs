@@ -209,15 +209,12 @@ internal class TaskImplementation : ITask
             throw new Exception("There is a problem with the integrity of the data");
         }
 
-        var deps = _dal.Dependency.ReadAll();
+        var deps = _dal.Dependency.ReadAll(item => item!.DependentTask == boTask.Id).ToList();
         if (deps != null)
         {
             foreach (var item in deps)
             {
-                if (item!.DependentTask == boTask.Id)
-                {
-                    _dal.Dependency.Delete(item.Id);
-                }
+                    _dal.Dependency.Delete(item!.Id);
             }
         }
 
